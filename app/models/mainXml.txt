@@ -1,0 +1,113 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/view_principal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:weightSum="10"
+    tools:context="com.example.deboxionapp.MainActivity" >
+    
+    <LinearLayout
+     android:id="@+id/losTabs"
+     android:layout_width="fill_parent"
+     android:layout_height="wrap_content"
+     android:layout_weight="8">
+     
+	 	<TabHost android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+        android:layout_weight="8"
+	    android:id="@+id/tabHost">
+    
+	    <TabWidget
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:id="@android:id/tabs" />
+	    
+	     	<FrameLayout
+	     	android:layout_width="fill_parent"
+	    	android:layout_height="fill_parent"
+	    	android:id="@android:id/tabcontent">
+	    	
+    				<LinearLayout
+    				android:layout_width="fill_parent"
+		    		android:layout_height="fill_parent"
+		    		android:id="@+id/tab1"
+		    		android:orientation="vertical">  
+    				</LinearLayout>
+    
+			     <LinearLayout
+			     android:layout_width="fill_parent"
+			     android:layout_height="fill_parent"
+			     android:id="@+id/tab2"
+			     android:orientation="vertical">
+    
+  
+   				</LinearLayout>
+    
+   				<LinearLayout
+			    android:layout_width="fill_parent"
+			    android:layout_height="fill_parent"
+			    android:id="@+id/tab3"
+			    android:orientation="vertical">
+  
+   				</LinearLayout>
+   				
+   		</FrameLayout>  
+   		  
+   	</TabHost>
+   	</LinearLayout>
+   	<LinearLayout
+     android:id="@+id/LinearBottom"
+     android:layout_width="fill_parent"
+     android:layout_height="50sp"
+     android:orientation="vertical"
+	 android:layout_alignParentBottom="true"
+     android:layout_weight="2">
+		<LinearLayout
+		    android:id="@+id/elBottom"
+		    android:layout_below="@+id/losTabs"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:background="#00bcd4" 
+		    android:orientation="horizontal"
+		    android:divider="?android:listDivider"
+    		android:dividerPadding="2.5dp"
+    		android:showDividers="middle"
+		     
+       		android:scaleType="fitCenter">
+			
+			<ImageButton 
+			android:id="@+id/saveButton" 
+			android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" 
+	        android:layout_weight="3"
+	        android:layout_gravity="center"
+	        android:gravity="center"
+	        android:src="@drawable/favorito"
+	        android:background="#00bcd4"    
+	        android:scaleType="fitCenter" />
+	
+	    	<ImageButton 
+	    	android:id="@+id/cancelButton" 
+	    	android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" 
+	        android:layout_weight="3"        
+	        android:src="@drawable/setting"
+	        android:background="#00bcd4" 
+	        android:layout_gravity="center"
+	        android:gravity="center"
+	        android:scaleType="fitCenter"/>
+	
+			<ImageButton
+		    android:id="@+id/imageButton1"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+        	android:background="#00bcd4" 
+        	android:layout_gravity="center"
+        	android:gravity="center"
+		    android:src="@drawable/abc_ic_menu_share_holo_dark"
+	        android:layout_weight="1" />
+					
+		</LinearLayout>
+	</LinearLayout>   	
+</RelativeLayout>

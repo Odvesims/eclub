@@ -1,0 +1,13 @@
+document.getElementById('lineasrep').innerHTML=" ";
+<%if @errormsg == "0" %>
+	$("<%= escape_javascript(render "aclvventas") %>").appendTo("#lineasrep");
+	var tipo = "<%= t(:advertencia) %>";
+	var mensaje = "<%= @msgcorrecto %>";
+	errorDialog(tipo, mensaje)
+	$("#desactivar").attr("disabled", "disabled").off('click')
+<%else%>
+	var tipo = "<%= t(:advertencia) %>";
+	var mensaje = "<%= @errormsg %>";
+	errorDialog(tipo, mensaje)
+<%end%>
+
