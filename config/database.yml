@@ -7,13 +7,13 @@
 development:
   adapter: postgresql
   #database: basehat20
-  database: d3j0g11r9i3f6h
+  #database: d3j0g11r9i3f6h
   #pool: 5
   #timeout: 5000
-  host: ec2-107-20-244-39.compute-1.amazonaws.com
+  #host: ec2-107-20-244-39.compute-1.amazonaws.com
   #host: 200.168.10.154
-  username: cmigkkmpabxeti
-  password: epQLa_NOXCVvVentowcCWPkLVi
+  #username: cmigkkmpabxeti
+  #password: epQLa_NOXCVvVentowcCWPkLVi
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
