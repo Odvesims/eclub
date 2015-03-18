@@ -1,0 +1,7 @@
+"C:/Program Files/Heroku/ruby-1.9.3/bin/ruby.exe" extconf.rb
+creating Makefile
+
+make
+generating generator-i386-mingw32.def
+/bin/sh: C:/Program: No such file or directory
+make: *** [generator-i386-mingw32.def] Error 127
