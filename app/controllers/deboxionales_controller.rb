@@ -43,7 +43,7 @@ class DeboxionalesController < ActionController::Base
 	end
 	if deboxionales == nil
 		hash = [[[]]]
-	else	
+	else		
 		hash = [
 			deboxionales.each do |deb|
 				{"id" => "#{deb.id}",
@@ -53,15 +53,17 @@ class DeboxionalesController < ActionController::Base
 				"cita" => "#{deb.cita}",
 				"cuerpo" => "#{deb.cuerpo}",
 				"autor" => "#{deb.autor}",
-				"dia" => "#{deb.dia}"}
+				"dia" => "#{deb.dia}",
+				"anio" => "#{deb.anio}",
+				"fecha" => "#{deb.fecha}"}
 		end
-		]
+		]	
+		puts hash.to_s
+		#puts hash.to_a.to_s.gsub("#<Deboxional", "{").gsub(">", "}")
+		#response = Net::HTTP.get_response(URI.parse($usaGovURI))
+		#data = response.body
+		JSON.parse([hash.to_a.to_s.gsub("#<Deboxional", "{").gsub(">", "}")].to_json)
+	 
+		render :text => JSON.parse([hash.to_a.to_s.gsub("#<Deboxional", "{").gsub(">", "}")].to_json)
 	end
-	
-    #response = Net::HTTP.get_response(URI.parse($usaGovURI))
-    #data = response.body
-    JSON.parse([hash].to_json)
- 
-    render :text => JSON.parse([hash].to_json)
-  end
 end
