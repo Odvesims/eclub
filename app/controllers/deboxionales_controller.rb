@@ -62,9 +62,9 @@ class DeboxionalesController < ActionController::Base
 		#puts hash.to_a.to_s.gsub("#<Deboxional", "{").gsub(">", "}")
 		#response = Net::HTTP.get_response(URI.parse($usaGovURI))
 		#data = response.body
-		JSON.parse(["Deboxionales:"+hash.to_a.to_s.gsub("#<Deboxional", "{").gsub(">", "}")].to_json)
+		JSON.parse([hash.to_a.to_s.gsub("#<Deboxional", "{").gsub(">", "}")].to_json)
 	 
-		render :text => JSON.parse(["Deboxionales:"+hash.to_a.to_s.gsub("#<Deboxional", "{").gsub(">", "}")].to_json)
+		render :text => JSON.parse([hash.to_a.to_s.gsub("#<Deboxional", "{").gsub(">", "}")].to_json)
 	end
   end
 end
