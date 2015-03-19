@@ -66,4 +66,5 @@ class DeboxionalesController < ActionController::Base
 	 
 		render :text => JSON.parse([hash.to_a.to_s.gsub("#<Deboxional", "{").gsub(">", "}")].to_json)
 	end
+  end
 end
