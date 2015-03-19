@@ -63,7 +63,7 @@ class DeboxionalesController < ActionController::Base
 						year = year.to_i + 1
 					end
 				else
-					if dia_.to_i == 365
+					if dia.to_i == 365
 						dia = 0;
 						year = year.to_i + 1
 					end
