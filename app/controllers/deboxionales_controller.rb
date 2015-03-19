@@ -7,29 +7,24 @@ class DeboxionalesController < ActionController::Base
   respond_to :json
  
   def index
-	deboxionales = Deboxional.all	
-	
-	hash = [
-		deboxionales.each do |deb|
-			{"id" => "#{deb.id}",
-			"fecha_dia" => "#{deb.fecha_dia}",
-			"titulo" => "#{deb.titulo}",
-			"versiculo" => "#{deb.versiculo}",
-			"cita" => "#{deb.cita}",
-			"cuerpo" => "#{deb.cuerpo}",
-			"autor" => "#{deb.autor}",
-			"dia" => "#{deb.dia}",
-			"anio" => "#{deb.anio}",
-			"fecha" => "#{deb.fecha}"}
-	end
-	]	
-	puts hash.to_s
-	#puts hash.to_a.to_s.gsub("#<Deboxional", "{").gsub(">", "}")
-    #response = Net::HTTP.get_response(URI.parse($usaGovURI))
-    #data = response.body
-    JSON.parse([hash.to_a.to_s.gsub("#<Deboxional", "{").gsub(">", "}")].to_json)
- 
-    render :text => JSON.parse([hash.to_a.to_s.gsub("#<Deboxional", "{").gsub(">", "}")].to_json)
+	deboxionales = Deboxional.all
+		el_jason = Array.new
+		deboxionales.each do |deb|	
+			hash = {}
+			hash["id"] = deb.id	
+			hash["fecha_dia"] = deb.fecha_dia
+			hash["titulo"] = deb.titulo
+			hash["versiculo"] = deb.versiculo
+			hash["cita"] = deb.cita
+			hash["cuerpo"] = deb.cuerpo
+			hash["autor"] = deb.autor
+			hash["dia"] = deb.dia
+			hash["anio"] = deb.anio
+			hash["fecha"] = deb.fecha
+			el_jason.push(hash)
+		end
+    JSON.generate([el_jason]) 
+    render :text => JSON.generate([el_jason])
   end
   
   def show
@@ -41,32 +36,29 @@ class DeboxionalesController < ActionController::Base
 	else	
 		deboxionales = Deboxional.all
 	end
-	if deboxionales == nil
+	
+	el_jason = Array.new
+	
+	if deboxionales == nil	
 		hash = [[[]]]
+		el_jason.push(hash)
 	else
-		
-		deboxionales.each do |deb|		
-		       hash = {:id => "#{deb.id}",
-				"fecha_dia" => "#{deb.fecha_dia}",
-				"titulo" => "#{deb.titulo}",
-				"versiculo" => "#{deb.versiculo}",
-				"cita" => "#{deb.cita}",
-				"cuerpo" => "#{deb.cuerpo}",
-				"autor" => "#{deb.autor}",
-				"dia" => "#{deb.dia}",
-				"anio" => "#{deb.anio}",
-				"fecha" => "#{deb.fecha}"}
+		deboxionales.each do |deb|	
+			hash = {}
+			hash["id"] = deb.id	
+			hash["fecha_dia"] = deb.fecha_dia
+			hash["titulo"] = deb.titulo
+			hash["versiculo"] = deb.versiculo
+			hash["cita"] = deb.cita
+			hash["cuerpo"] = deb.cuerpo
+			hash["autor"] = deb.autor
+			hash["dia"] = deb.dia
+			hash["anio"] = deb.anio
+			hash["fecha"] = deb.fecha
+			el_jason.push(hash)
 		end
-		puts hash.to_s
-		el_json = JSON ['test' => 20, 'id' => 1, 'dia' => 20]
-		#puts hash.to_a.to_s.gsub("#<Deboxional", "{").gsub(">", "}")
-		#response = Net::HTTP.get_response(URI.parse($usaGovURI))
-		#data = response.body
-		#JSON.parse(hash.to_json)
-		my_hash = hash
-		JSON.generate(hash)
-	 
-		render :text => JSON.generate(hash)
 	end
+    JSON.generate([el_jason]) 
+    render :text => JSON.generate([el_jason])
   end
 end
