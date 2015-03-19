@@ -23,8 +23,8 @@ class DeboxionalesController < ActionController::Base
 			hash["fecha"] = deb.fecha
 			el_jason.push(hash)
 		end
-    JSON.generate([el_jason]) 
-    render :text => JSON.generate([el_jason])
+    JSON.generate(el_jason) 
+    render :text => JSON.generate(el_jason)
   end
   
   def show
@@ -58,7 +58,7 @@ class DeboxionalesController < ActionController::Base
 			el_jason.push(hash)
 		end
 	end
-    JSON.generate([el_jason]) 
-    render :text => JSON.generate([el_jason])
+    JSON.generate(el_jason) 
+    render :text => JSON.generate(el_jason)
   end
 end
