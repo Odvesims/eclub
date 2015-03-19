@@ -7,7 +7,8 @@ class DeboxionalesController < ActionController::Base
   respond_to :json
  
   def index
-	deboxionales = Deboxional.all
+	deboxionales = Deboxional.all	
+	
 	hash = [
 		deboxionales.each do |deb|
 			{"id" => "#{deb.id}",
@@ -21,13 +22,14 @@ class DeboxionalesController < ActionController::Base
 			"anio" => "#{deb.anio}",
 			"fecha" => "#{deb.fecha}"}
 	end
-	]
-	
+	]	
+	puts hash.to_s
+	#puts hash.to_a.to_s.gsub("#<Deboxional", "{").gsub(">", "}")
     #response = Net::HTTP.get_response(URI.parse($usaGovURI))
     #data = response.body
-    JSON.parse([hash].to_json)
+    JSON.parse([hash.to_a.to_s.gsub("#<Deboxional", "{").gsub(">", "}")].to_json)
  
-    render :text => JSON.parse([hash].to_json)
+    render :text => JSON.parse([hash.to_a.to_s.gsub("#<Deboxional", "{").gsub(">", "}")].to_json)
   end
   
   def show
