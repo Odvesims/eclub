@@ -53,13 +53,13 @@ class DeboxionalesController < ActionController::Base
 	def show
 		dia = params[:dia].to_i
 		year = params[:year]
-		cantidad = params[:cantidad]	
+		configuraciones = Configuracione.first	
 		if dia > 0	
-			if cantidad == "todos"
+			if configuraciones.modalidad == "anual"
 				deboxionales = Deboxional.where("dia > #{dia} AND anio = '#{year}'").all
-			elsif cantidad == "semanal"
+			elsif configuraciones.modalidad == "semanal"
 				deboxionales = Deboxional.where("dia >= #{dia}  AND dia <= #{dia} + 7 AND anio = '#{year}'").all
-			elsif cantidad == "uno"
+			elsif configuraciones.modalidad == "uno"
 				deboxionales = Deboxional.where("dia = #{dia} AND anio = '#{year}'").all
 			end
 		else	
