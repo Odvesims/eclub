@@ -12,3 +12,21 @@ hash = [
 			"fecha" => "#{deb.fecha}"}
 	end
 	]	
+	
+	
+	//NEW HASH
+	
+	hash = '[' + '[' + '[' + '{'
+	deboxionales.each do |deb|
+		hash += '"' + "id" + '"' +  " : "  + '"' + "#{deb.id}" + '"' + "," + 
+				'"' + "fecha_dia" + '"' +  " : "  + '"' + "#{deb.fecha_dia}" + '"' + "," + 
+				'"' + "titulo" + '"' +  " : "  + '"' + "#{deb.titulo}" + '"' + "," + 
+				'"' + "versiculo" + '"' +  " : "  + '"' + "#{deb.versiculo}" + '"' + "," +  
+				'"' + "cita" + '"' +  " : "  + '"' + "#{deb.cita}" + '"' + "," +  
+				'"' + "cuerpo" + '"' +  " : "  + '"' + "#{deb.cuerpo}" + '"' + "," + 
+				'"' + "autor" + '"' +  " : "  + '"' + "#{deb.autor}" + '"' + "," +  
+				'"' + "dia" + '"' +  " : "  + '"' + "#{deb.dia}" + '"' + "," + 
+				'"' + "anio" + '"' +  " : "  + '"' + "#{deb.anio}" + '"' + "," + 
+				'"' + "fecha" + '"' +  " : "  + '"' + "#{deb.fecha}" + '"' + '}' 		
+	end
+	hash+= ']' + ']' + ']'
