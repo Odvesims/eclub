@@ -1,7 +1,149 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>DeboxionApp</title>
+	<style>
+		#ulMenu
+		{
+			width: 100%;
+			background: #2980b9;
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			top: 0px;
+			left: 0px;
+			right: 0px;
+			align: center;
+		}
+		#liMenu
+		{		
+			margin: 0;
+			padding: 0;
+			top: 0px;
+			left: 0px;
+			right: 0px;
+		}
+		#bmenu
+		{
+			position: relative;
+			vertical-align: top;
+			width: 10%;
+			height: 60px;
+			padding: 0;
+			font-size: 15px;
+			color: white;
+			text-align: center;
+			text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+			background: #2980b9;
+			border: 0;
+			border-left: 1px solid #2475ab;
+			border-bottom: 2px solid #2475ab;
+			cursor: pointer;
+			-webkit-box-shadow: inset 0 -2px #2475ab;
+			box-shadow: inset 0 -2px #2475ab;
+		}
+		#bmenu:hover
+		{
+			background: #3283C1;
+		}
+		#elspan
+		{
+			position: relative;
+			vertical-align: top;
+			width: 200px;
+			background: #2980b9;
+			border: 0;
+			display: none;
+		}
+		.inputs 
+		{
+			-webkit-border-radius: 3px;
+			-moz-border-radius: 3px;
+			-ms-border-radius: 3px;
+			-o-border-radius: 3px;
+			border-radius: 3px;
+			-webkit-box-shadow: 0 1px 0 #FFF, 0 -2px 5px rgba(0, 0, 0, 0.08) inset;
+			-moz-box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0, 0, 0, 0.08) inset;
+			-ms-box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0, 0, 0, 0.08) inset;
+			-o-box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0, 0, 0, 0.08) inset;
+			box-shadow: 0 1px 0 #FFF, 0 -2px 5px rgba(0, 0, 0, 0.08) inset;
+			-webkit-transition: all 0.5s ease;
+			-moz-transition: all 0.5s ease;
+			-ms-transition: all 0.5s ease;
+			-o-transition: all 0.5s ease;
+			transition: all 0.5s ease;
+			background: #EAE7E7;
+			border: 1px solid #C8C8C8;
+			color: #777;
+			font: 13px Helvetica, Arial, sans-serif;
+			margin: 0 0 10px;
+			padding: 15px 10px 15px 40px;
+			width: 270px;
+		}
+		.inputs:focus 
+		{
+			-webkit-box-shadow: 0 0 2px #ED1C24 inset;
+			-moz-box-shadow: 0 0 2px #ed1c24 inset;
+			-ms-box-shadow: 0 0 2px #ed1c24 inset;
+			-o-box-shadow: 0 0 2px #ed1c24 inset;
+			box-shadow: 0 0 2px #ED1C24 inset;
+			background-color: #FFF;
+			border: 1px solid #ED1C24;
+			outline: none;
+		}
+		.button_buscar
+		{
+			margin-top: 0px;
+		}
+		.btn_facebook
+		{
+			opacity: 0.7;
+			width: 10%;
+		}
+		.btn_facebook:hover
+		{
+			opacity: 1.0;
+			cursor: pointer;
+		}
+	</style>
+	<%= hidden_field_tag :muestralo, "no", :id=> "muestralo" %>
+	<div>
+		<ul id = "ulMenu">		
+			<li id = "liMenu">
+				<button id = "bmenu", onclick= "window.location = '<%= deboxionalesformularios_path() %>'">Deboxionales</button
+				><button id = "bmenu", onclick= "window.location = '<%= configuraciones_path() %>'">Configuración</button
+				><table border = 0, style = "width: 22.5%; display: inline-table; vertical-align: bottom">
+					<thead>
+						<tr></tr>
+					</thead>
+				</table
+				><table border = 0, style = "width: 46.5%; display: inline-table;border-left: 1px solid #2475ab;border-right: 1px solid #2475ab;">
+					<thead>
+						<tr></tr>
+					</thead>
+				</table
+				><button id = "bmenu", style = "visibility: hidden; border-left: 0px;border-right: 1px solid #2475ab">Sign In</button>
+			</li>
+		</ul>
+	</div>
+
+	<script>
+		function muestra_buscar()
+		{
+			var muestra = document.getElementById("muestralo").value;
+			if(muestra == "no")
+			{
+				$(document.getElementById("column_btnbuscar").style.visibility="visible");
+				$(document.getElementById("busqueda").style.width="250px");
+				document.getElementById("muestralo").value = "si";
+			}
+		}
+		function oculta_buscar()
+		{
+			$(document.getElementById("column_btnbuscar").style.visibility="hidden");
+			$(document.getElementById("busqueda").style.width="0px");
+			document.getElementById("muestralo").value = "no";
+		}
+	</script>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -9,6 +151,3 @@
 <body>
 
 <%= yield %>
-
-</body>
-</html>

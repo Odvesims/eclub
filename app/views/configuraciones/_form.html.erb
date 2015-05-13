@@ -1,0 +1,41 @@
+	<script>
+		$(function() {
+		$( "#tabs" ).tabs();
+		});
+		$(function() {
+		$( "button" ).button(); 
+		});
+	</script>
+
+<%= form_for(@config) do |f| %>
+	<% if @config.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@config.errors.count, "errore") %>: No se pudo guardar</h2>
+				<ul>
+					<% @config.errors.full_messages.each do |msg| %>
+						<li><%= msg %></li>
+					<% end %>
+				</ul>
+		</div>
+	<% end %>
+	<div id="tabs", class = "ui-widget-content", style = "border: 0px;width: 80%; font-size: 14px; margin-right: 0px">
+		<ul>
+			<li><a href="#tabs-a">Configuraciones</a></li>
+		</ul>
+		<div id="tabs-a">
+			<table border = "0">
+				<thead>
+					<tr>
+						<td style = "width: 120px;">Modalidad</td>
+						<td><%= f.text_field :modalidad, :size => 35 %></td>
+					</tr>
+					<tr>
+						<td style = "width: 120px;">Año</td>
+						<td><%= f.text_field :deboxional_year, :size => 5 %></td>
+					</tr>
+				</thead>
+			</table>
+			<button id="button" style = "font-size: 14px;" onclick="window.location = <%= f.submit%> <%= t(:guardar) %></button>	
+		</div>
+	</div>
+<% end %>

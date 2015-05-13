@@ -1,16 +1,19 @@
-<button id="buscar" onclick="window.location = '<%= deboxionalesformularios_path %>';" class="ui-state-default ui-corner-all" title= "Volver"> <span class="ui-icon ui-icon-circle-zoomout"></button> 
-<button id="previo"  onclick="window.location = '<%= edit_deboxionalesformulario_path(@deboxional,:donde => 'prev') %>';" class="ui-state-default ui-corner-all" title= "Anterior"> <span class="ui-icon ui-icon-arrowthick-1-w"></button> 
-<button id="siguiente"  onclick="window.location = '<%= edit_deboxionalesformulario_path(@deboxional,:donde => 'next')%>';" class="ui-state-default ui-corner-all" title= "Siguiente"> <span class="ui-icon ui-icon-arrowthick-1-e"></button> 
-<button id="nuevo"  onclick="window.location = '<%= new_deboxionalesformulario_path %>';" class="ui-state-default ui-corner-all" title="Nuevo"> <span class="ui-icon ui-icon-plusthick"></button>   
-<%= render 'form' %>
-<button id="buscar" onclick="window.location = '<%= deboxionalesformularios_path %>';" class="ui-state-default ui-corner-all" title= "Volver"> <span class="ui-icon ui-icon-circle-zoomout"></button> 
-<button id="previo"  onclick="window.location = '<%= edit_deboxionalesformulario_path(@deboxional,:donde => 'prev') %>';" class="ui-state-default ui-corner-all" title= "Anterior"> <span class="ui-icon ui-icon-arrowthick-1-w"></button> 
-<button id="siguiente"  onclick="window.location = '<%= edit_deboxionalesformulario_path(@deboxional,:donde => 'next')%>';" class="ui-state-default ui-corner-all" title= "Siguiente"> <span class="ui-icon ui-icon-arrowthick-1-e"></button> 
-<button id="nuevo"  onclick="window.location = '<%= new_deboxionalesformulario_path %>';" class="ui-state-default ui-corner-all" title="Nuevo"> <span class="ui-icon ui-icon-plusthick"></button>  
-<br> 
- <br>
- <div class = "ui-widget-header">
- </div>
-<br>
-<br>
+<body>
+	<br>
+	<button id="buscar" style="font-size: 15px;" onclick="window.location = '<%= deboxionalesformularios_path %>';" class="ui-state-default ui-corner-all" title= "Volver">⌂</button> 
+	<button id="previo" style="font-size: 15px;" onclick="window.location = '<%= edit_deboxionalesformulario_path(@deboxional,:donde => 'prev') %>';" class="ui-state-default ui-corner-all" title= "Anterior">←</button> 
+	<button id="siguiente" style="font-size: 15px;" onclick="window.location = '<%= edit_deboxionalesformulario_path(@deboxional,:donde => 'next')%>';" class="ui-state-default ui-corner-all" title= "Siguiente">→</button> 
+	<button id="nuevo" style="font-size: 15px;" onclick="window.location = '<%= new_deboxionalesformulario_path %>';" class="ui-state-default ui-corner-all" title="Nuevo">+</button>   
+	<%= render 'form' %>
+	<button id="buscar" style="font-size: 15px;" onclick="window.location = '<%= deboxionalesformularios_path %>';" class="ui-state-default ui-corner-all" title= "Volver">⌂</button> 
+	<button id="previo" style="font-size: 15px;" onclick="window.location = '<%= edit_deboxionalesformulario_path(@deboxional,:donde => 'prev') %>';" class="ui-state-default ui-corner-all" title= "Anterior">←</button> 
+	<button id="siguiente" style="font-size: 15px;" onclick="window.location = '<%= edit_deboxionalesformulario_path(@deboxional,:donde => 'next')%>';" class="ui-state-default ui-corner-all" title= "Siguiente">→</button> 
+	<button id="nuevo" style="font-size: 15px;" onclick="window.location = '<%= new_deboxionalesformulario_path %>';" class="ui-state-default ui-corner-all" title="Nuevo">+</button>  
+	<br> 
+	 <br>
+	 <div class = "ui-widget-header">
+	 </div>
+	<br>
+	<br>
+</body>
 

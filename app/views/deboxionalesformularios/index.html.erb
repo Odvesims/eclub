@@ -1,69 +1,71 @@
-<script>
-	$(function() 
-	{
-		$( "#tabs" ).tabs();
-	});
-	$(function() 
-	{
-		$( "buttona" ).button(
-		{
-			icons: 
+		<script>
+			$(function() 
 			{
-				primary: "ui-icon-plus"
-			},
-		});
-	});
-	function nuevo()
-	{
-		window.location = '<%= new_deboxionalesformulario_path() %>';
-	};
-</script>
+				$( "#tabs" ).tabs();
+			});
+			$(function() 
+			{
+				$( "buttona" ).button(
+				{
+					icons: 
+					{
+						primary: "ui-icon-plus"
+					},
+				});
+			});
+			function nuevo()
+			{
+				window.location = '<%= new_deboxionalesformulario_path() %>';
+			};
+		</script>
 
-<script>
-	$(function cambia_indice()
-	{
-		var dataString = 'model='+'deboxionales'+'&mes='+'Enero';  
-			document.getElementById('los_deboxionales').innerHTML=" ";
-			$.ajax(
-			{  
-			type: "GET",  
-			url: "/deboxionalesformularios/show",  
-			data: dataString  
-			}); 							  
-			return false;
-	})
-</script>
-<div>
-	<div id="tabs" class = "ui-widget ui-widget-content",  style = "margin-top: 1em;border: 0px;width: 55%; font-size: 14px; margin-right: 3px">
-		<ul>
-			<li><a href="#tabs-a">Deboxionales</a></li>
-		</ul>
-		<div id="tabs-a">
-			<buttona style = "font-size: 12px", onclick="nuevo()">Nuevo</buttona>	
-			<br>
-			<br><%=  render "pagination" %>	
-			<%= hidden_field_tag(:el_indice, 1, :id=> "el_indice") %>
-			<table border = 0 id="tableindex">
-				<thead>
-					<tr>
-						<td class = "ui-widget-header", colspan = "2", style= "font-size: 20px;"><%= label_tag(:el_mes, "", :id=>"el_mes") %></td>
-					</tr>
-					<tr class = "ui-widget-header", style "border: 1px solid #CCCCCC;">
-						<th style = "width: 30px">Día</th>
-						<th style = "width: 340px">Título</th>
-						<th style = "width: 300px">Fecha</th>
-					</tr> 
-				</thead>
-			</table>
-			<table id = "los_deboxionales"></table>
-			<table>
-				<thead>
-					<tr>
-						<td class = "ui-widget-header", colspan = "3", style = "width: 670px; height: 15px;"></td>
-					</tr>
-				</thead>
-			</table>	
-			<%=  render "pagination" %>				
+		<script>
+			$(function cambia_indice()
+			{
+				var dataString = 'model='+'deboxionales'+'&mes='+'Enero';  
+					document.getElementById('los_deboxionales').innerHTML=" ";
+					$.ajax(
+					{  
+					type: "GET",  
+					url: "/deboxionalesformularios/show",  
+					data: dataString  
+					}); 							  
+					return false;
+			})
+		</script>
+		<div>
+			<div id="tabs" class = "ui-widget ui-widget-content",  style = "border: 0px;width: 55%; font-size: 14px; margin-right: 3px">
+				<ul>
+					<li><a href="#tabs-a">Deboxionales</a></li>
+				</ul>
+				<div id="tabs-a">
+					<buttona style = "font-size: 12px", onclick="nuevo()">Nuevo</buttona>	
+					<br>
+					<br><%=  render "pagination" %>	
+					<%= hidden_field_tag(:el_indice, 1, :id=> "el_indice") %>
+					<table border = 0 id="tableindex">
+						<thead>
+							<tr>
+								<td class = "ui-widget-header", colspan = "2", style= "font-size: 20px;"><%= label_tag(:el_mes, "", :id=>"el_mes") %></td>
+							</tr>
+							<tr class = "ui-widget-header", style "border: 1px solid #CCCCCC;">
+								<th style = "width: 30px">Día</th>
+								<th style = "width: 340px">Título</th>
+								<th style = "width: 300px">Fecha</th>
+							</tr> 
+						</thead>
+					</table>
+					<table id = "los_deboxionales"></table>
+					<table>
+						<thead>
+							<tr>
+								<td class = "ui-widget-header", colspan = "3", style = "width: 670px; height: 15px;"></td>
+							</tr>
+						</thead>
+					</table>	
+					<%=  render "pagination" %>				
+				</div>
+			</div>
 		</div>
-	</div>
-</div>
+	</body>
+</html>
