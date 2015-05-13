@@ -13,13 +13,13 @@ gem 'will_paginate'
 group :assets do
   #gem 'therubyracer'
   #gem 'sass-rails'
-  gem 'coffee-rails'
-  gem 'uglifier'
+  #gem 'coffee-rails'
 end
 
 group :production do
   gem 'pg'
   gem 'rails_12factor'
+  gem 'uglifier'
 end
 
 gem 'jquery-rails'
