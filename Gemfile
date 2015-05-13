@@ -14,7 +14,7 @@ group :assets do
   #gem 'therubyracer'
   #gem 'sass-rails'
   #gem 'coffee-rails'
-  gem 'uglifier'
+  #gem 'uglifier'
 end
 
 group :production do
