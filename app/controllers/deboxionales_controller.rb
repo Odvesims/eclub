@@ -12,7 +12,7 @@ class DeboxionalesController < ActionController::Base
 		if configuraciones.modalidad == "anual"
 			semana = Date.today.strftime("%U").to_i
 			puts semana.to_s
-			deboxionales = Deboxionale.where("anio = '2016'").all
+			deboxionales = Deboxionale.where("anio = '#{year}'").all
 		elsif configuraciones.modalidad == "semanal"
 			deboxionales = Deboxionale.where("dia >= #{dia}  AND dia <= #{dia} + 7 AND anio = '#{year}'").all
 		elsif configuraciones.modalidad == "diario"
