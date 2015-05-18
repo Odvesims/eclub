@@ -9,24 +9,31 @@ class DeboxionalesController < ActionController::Base
 		dia = Date.today.yday
 		year = Date.today.year.to_s
 		configuraciones = Configuracione.first	
-		if dia > 0	
-			if configuraciones.modalidad == "anual"
-				deboxionales = Deboxionale.where("anio = '#{year}'").all
-			elsif configuraciones.modalidad == "semanal"
-				deboxionales = Deboxionale.where("dia >= #{dia}  AND dia <= #{dia} + 7 AND anio = '#{year}'").all
-			elsif configuraciones.modalidad == "diario"
-				deboxionales = Deboxionale.where("dia = #{dia} AND anio = '#{year}'").all
-			end
-		else	
-			deboxionales = Deboxionale.all
+		if configuraciones.modalidad == "anual"
+			semana = Date.today.strftime("%U").to_i
+			puts semana.to_s
+			deboxionales = Deboxionale.where("anio = '2016'").all
+		elsif configuraciones.modalidad == "semanal"
+			deboxionales = Deboxionale.where("dia >= #{dia}  AND dia <= #{dia} + 7 AND anio = '#{year}'").all
+		elsif configuraciones.modalidad == "diario"
+			deboxionales = Deboxionale.where("dia = #{dia} AND anio = '#{year}'").all
 		end
 		
 		el_jason = Array.new
 		
-		if deboxionales == nil	
-			hash = [[[]]]
-			el_jason.push(hash)
+		if deboxionales.count == 0	
+			controles = {}
+			controles["valid"] = "false"
+			controles["year"] = year.to_i
+			deboxionales_arr = Array.new
+			hash = {}
+			deboxionales_arr.push(hash)
+			controles["deboxionales"] = deboxionales_arr
 		else
+			controles = {}
+			controles["valid"] = "true"
+			controles["year"] = year.to_i
+			deboxionales_arr = Array.new
 			deboxionales.each do |deb|	
 				hash = {}
 				hash["id"] = deb.id	
@@ -37,13 +44,15 @@ class DeboxionalesController < ActionController::Base
 				hash["cuerpo"] = deb.cuerpo
 				hash["autor"] = deb.autor
 				hash["dia"] = deb.dia
-				hash["anio"] = deb.anio
+				hash["anio"] = deb.anio.to_i
 				hash["fecha"] = deb.fecha
-				el_jason.push(hash)
+				deboxionales_arr.push(hash)
 			end
+			controles["deboxionales"] = deboxionales_arr
 		end
-		JSON.generate(el_jason) 
-		render :text => JSON.generate(el_jason)
+		el_jason.push(controles)
+		JSON.generate(controles) 
+		render :text => JSON.generate(controles)
 	end
   
 	def show
