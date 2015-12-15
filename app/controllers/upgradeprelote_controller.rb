@@ -19,9 +19,7 @@ class UpgradepreloteController < ActionController::Base
                                 hash = {}
                                 hash["id"] = prelote.id
                                 hash["version_actual"] = prelote.version_actual.to_s
-                                hash["url_actual"] = prelote.url_actual
                                 hash["version_anterior"] = prelote.version_anterior.to_s
-                                hash["url_anterior"] = prelote.url_anterior
                                 hash["comentarios"] = prelote.comentarios
                                 prelote_arr.push(hash)
                         controles["prelote"] = prelote_arr
@@ -43,9 +41,7 @@ class UpgradepreloteController < ActionController::Base
                         hash = {}
                         hash["id"] = prelote.id
                         hash["version_actual"] = prelote.version_actual.to_s
-                        hash["url_actual"] = prelote.url_actual
                         hash["version_anterior"] = prelote.version_anterior.to_s
-                        hash["url_anterior"] = prelote.url_anterior
                         hash["comentarios"] = deb.comentarios
                         el_jason.push(hash)
 
