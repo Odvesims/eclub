@@ -5,18 +5,31 @@
 #   gem 'sqlite3'
 
 development:
-  adapter: postgresql
+  #adapter: postgresql
   #database: basehat20
-  database: d93qqiu8kd0d0k
+  #database: d93qqiu8kd0d0k
   #database: DeboxionDB
   #pool: 5
   #timeout: 5000
-  host: ec2-23-23-215-150.compute-1.amazonaws.com
+  #host: ec2-23-23-215-150.compute-1.amazonaws.com
   #host: localhost
   #username: postgres
   #password: 123456
-  username: clsszvwngsmmpa
-  password: uXAvZQ73xnit76HkElqRg5suAI
+  #username: clsszvwngsmmpa
+  #password: uXAvZQ73xnit76HkElqRg5suAI
+  
+  adapter: mysql2
+  #database: basehat20
+  database: domin1_DeboxionDB
+  #pool: 5
+  #timeout: 5000
+  host: 186.120.170.39
+  #host: localhost
+  #username: postgres
+  #password: 123456
+  username: Deboxion
+  password: devocion2013
+  
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
