@@ -6,9 +6,9 @@ require 'date'
 class DeboxionalesController < ActionController::Base 
   respond_to :json 
 	def index
-		dia = Date.today.yday
-		year = Date.today.year.to_s
 		configuraciones = Configuracione.first	
+		dia = Date.today.yday
+		year = configuraciones.deboxional_year
 		if configuraciones.modalidad == "anual"
 			semana = Date.today.strftime("%U").to_i
 			puts semana.to_s

@@ -6,9 +6,9 @@ gem 'mysql2'
 
 gem 'activerecord-mysql2-adapter'
 
-gem 'mysql'
+#gem 'mysql'
 
-gem 'activerecord-mysql-adapter'
+#gem 'activerecord-mysql-adapter'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
