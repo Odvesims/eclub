@@ -19,16 +19,11 @@ development:
   #password: uXAvZQ73xnit76HkElqRg5suAI
   
   adapter: mysql2
-  #database: basehat20
   database: domin1_DeboxionDB
-  #pool: 5
-  #timeout: 5000
   host: 186.120.170.39
-  #host: localhost
-  #username: postgres
-  #password: 123456
   username: Deboxion
   password: devocion2013
+  port: 3306
   
 
 # Warning: The database defined as "test" will be erased and
