@@ -1,9 +1,10 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.21'
-gem 'mysql'
+
 gem 'mysql2'
 
+gem 'activerecord-mysql2-adapter'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
