@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.21'
+gem 'mysql'
+gem 'mysql2'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -38,3 +40,4 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+
