@@ -4,7 +4,7 @@ gem 'rails', '3.2.21'
 
 gem 'mysql2'
 
-gem 'activerecord-mysql2-adapter'
+#gem 'activerecord-mysql2-adapter'
 
 #gem 'mysql'
 
