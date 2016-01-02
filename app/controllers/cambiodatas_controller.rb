@@ -3,7 +3,7 @@ require 'json'
 require 'net/http'
 require 'date'
  
-class CambioDatasController < ActionController::Base 
+class CambiodatasController < ActionController::Base 
   respond_to :json 
 	def index
 		cambio_data = Cambiodata.first	
