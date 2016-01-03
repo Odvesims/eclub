@@ -14,6 +14,7 @@ class CambiodatasController < ActionController::Base
 		deboxionales_arr = Array.new
 		hash = {}
 		hash["cambio_data"] = cambio_data.si_no	
+		hash["version"] = cambio_data.version_data
 		deboxionales_arr.push(hash)
 		controles["cambio_data"] = deboxionales_arr
 		el_jason.push(controles)
@@ -27,6 +28,7 @@ class CambiodatasController < ActionController::Base
 		
 		hash = {}
 		hash["cambio_data"] = cambio_data.si_no
+		hash["version"] = cambio_data.version_data
 		el_jason.push(hash)
 		JSON.generate(el_jason) 
 		render :text => JSON.generate(el_jason)
