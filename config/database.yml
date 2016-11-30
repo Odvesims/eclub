@@ -5,25 +5,18 @@
 #   gem 'sqlite3'
 
 development:
-  #adapter: postgresql
-  #database: basehat20
-  #database: d93qqiu8kd0d0k
-  #database: DeboxionDB
-  #pool: 5
-  #timeout: 5000
-  #host: ec2-23-23-215-150.compute-1.amazonaws.com
+  adapter: postgresql
+  #database: DBCareo
   #host: localhost
   #username: postgres
   #password: 123456
-  #username: clsszvwngsmmpa
-  #password: uXAvZQ73xnit76HkElqRg5suAI
   
-  adapter: mysql2
-  database: domin1_DeboxionDB
-  host: 192.254.185.54
-  username: Deboxion
-  password: devocion2013
-  port: 3306
+  database: d93qqiu8kd0d0k
+  pool: 5
+  timeout: 5000
+  host: ec2-23-23-215-150.compute-1.amazonaws.com
+  username: clsszvwngsmmpa
+  password: uXAvZQ73xnit76HkElqRg5suAI
   
 
 # Warning: The database defined as "test" will be erased and

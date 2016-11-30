@@ -9,14 +9,25 @@ class DeboxionalesController < ActionController::Base
 		configuraciones = Configuracione.first	
 		dia = Date.today.yday
 		year = configuraciones.deboxional_year
+		dia = params[:dia]
+		idioma = params[:idioma]
+		year = params[:year]
+		if dia == nil 
+			dia = Date.today.yday
+		end
+		if year == nil
+			year = Date.today.year.to_s
+		end
+		if idioma == nil
+			idioma = 'es'
+		end
 		if configuraciones.modalidad == "anual"
 			semana = Date.today.strftime("%U").to_i
-			puts semana.to_s
-			deboxionales = Deboxionale.where("anio = '#{year}'").all
+			deboxionales = Deboxionale.where("anio = '#{year}' AND idioma = '#{idioma}'").all
 		elsif configuraciones.modalidad == "semanal"
-			deboxionales = Deboxionale.where("dia >= #{dia}  AND dia <= #{dia} + 7 AND anio = '#{year}'").all
+			deboxionales = Deboxionale.where("dia >= #{dia}  AND dia <= #{dia} + 7 AND anio = '#{year}' AND idioma = '#{idioma}'").all
 		elsif configuraciones.modalidad == "diario"
-			deboxionales = Deboxionale.where("dia = #{dia} AND anio = '#{year}'").all
+			deboxionales = Deboxionale.where("dia = #{dia} AND anio = '#{year}' AND idioma = '#{idioma}'").all
 		end
 		
 		el_jason = Array.new
@@ -56,8 +67,12 @@ class DeboxionalesController < ActionController::Base
 	end
   
 	def show
+		year = ''
+		year = params[:year]
+		if year == '' || year == nil
+			year = Date.today.year.to_s
+		end
 		dia = Date.today.yday
-		year = Date.today.year.to_s
 		configuraciones = Configuracione.first	
 		if dia > 0	
 			if configuraciones.modalidad == "anual"

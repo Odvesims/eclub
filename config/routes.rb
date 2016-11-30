@@ -4,5 +4,6 @@ DeboxionApp::Application.routes.draw do
 	resources :cambiodatas
 	resources :deboxionalesformularios
 	resources :configuraciones
+	resources :preguntas
 	match '/Prelote.update', to: 'upgradeprelote#index'
 end

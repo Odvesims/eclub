@@ -22,8 +22,6 @@ GEM
       activesupport (= 3.2.21)
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
-    activerecord-mysql2-adapter (0.0.3)
-      mysql2
     activeresource (3.2.21)
       activemodel (= 3.2.21)
       activesupport (= 3.2.21)
@@ -98,7 +96,6 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  activerecord-mysql2-adapter
   jquery-rails
   mysql2
   pg

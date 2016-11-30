@@ -1,0 +1,249 @@
+		<script>
+			$(function() 
+			{
+				$( "#tabs" ).tabs();
+			});
+			$(function() 
+			{
+				$( "#tabsa" ).tabs();
+			});
+			$(function() 
+			{
+				$( "#tabsb" ).tabs();
+			});
+			$(function() 
+			{
+				$( "buttona" ).button()
+			});
+			function nuevo()
+			{
+				window.location = '<%= new_pregunta_path() %>';
+			};
+		</script>
+		<style>
+			.text_area_font
+			{
+				font-size: 35px;
+				text-align: justify;
+				text-justify: inter-word;
+			}
+			.text_area_font_respuesta
+			{
+				font-size: 35px;
+				text-align: justify;
+				text-justify: inter-word;
+				color: white;
+			}
+		</style>
+		<%= hidden_field_tag(:pausa, "1", :id=> "pausa") %>
+		<%= hidden_field_tag(:temporizador_id, "1", :id=> "temporizador_id") %>
+		<div style = "width: 69%; height: 70%; position: fixed; top: 0; left: 0;">
+			<fieldset class = "ui-widget-content", style = "padding: 0; height: 700px; width: 1400px">
+				<table border = 0 id="tableindex">
+					<thead>
+						<tr>
+							<td colspan = 1, style = "width: 1400px; font-size: 40px; text-align: left;", class ="ui-widget-header">Preguntas</td>
+						</tr>
+						<tr>
+							<td><buttona onclick="despliega_pregunta()">Buscar Pregunta</button></td>
+						</tr>
+						<tr style = "font-size: 30px">
+							<td><b><%= text_area_tag(:pregunta, "", {:id=> "pregunta", cols: "35", rows: "5", :class => "text_area_font" }) %></td>
+						</tr>
+						<tr colspan = 2>
+							<td valign = "top">Cita: <%= text_field_tag(:cita, "", :id=> "cita", :class=> "text_area_font") %> <buttona id = "button_revela_respuesta", disabled= true, onclick="revelar()">Revelar Respuesta</button></td>
+						</tr>
+						<tr id = "fila_respuesta">
+							<table>
+								<thead>
+									<tr style = "font-size: 30px">
+										<td><b><%= text_area_tag(:respuesta, "", {:id=> "respuesta", cols: "35", rows: "4", :class => "text_area_font_respuesta" }) %></td>
+									</tr>
+									<tr>
+										<td><button class = "aceptarButton", disabled= true, style = "width: 180px;font-size: 30px;", id = "btncorrecto", onclick="correcto()">Correcto</button>
+										&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
+										&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
+										<button class= "cancelButton", disabled= true, style="width: 180px; font-size: 30px;", id="btnincorrecto", onclick="incorrecto()">Incorrecto</button></td>
+									</tr>
+								<thead>
+							</table>
+						</tr>
+					</thead>
+				</table>		
+			</fieldset>		
+		</div>
+		<div style = "width: 30%; height: 50%; position: fixed; top: 0; right: 0">
+			<fieldset class = "ui-widget-content", style = "padding: 0; height: 400px;">
+				<%= hidden_field_tag(:el_indice, 1, :id=> "el_indice") %>				
+				<table border = 0, style = "width: 100%, padding: 0; font-size: 40px">
+					<thead>
+						<tr>
+							<td colspan = 3, style = "width: 550px; font-size: 40px; text-align: center;", class ="ui-widget-header">Puntuaciones</td>
+						</tr>
+						<tr>
+							<% if @equipo_a.activo == TRUE %>
+								<td id = "a_nombre", style = "background-color: blue; width: 200px;"><b><%= @equipo_a.nombre %> - </b></td>
+								<td id = "a_puntos", style = "background-color: blue; text-align: right;"><%= @equipo_a.puntuacion %></td>
+							<% else %>
+								<td id = "a_nombre", style = "width: 200px;"><b><%= @equipo_a.nombre %> - </b></td>
+								<td id = "a_puntos", style = "text-align: right;"><%= @equipo_a.puntuacion %></td>
+							<% end %>
+						</tr>
+						<tr>
+							<% if @equipo_b.activo == TRUE %>
+								<td id = "b_nombre", style = "background-color: blue; width: 200px;"><b><%= @equipo_b.nombre %> - </b></td>
+								<td id = "b_puntos", style = "background-color: blue; text-align: right;"><%= @equipo_b.puntuacion %></td>
+							<% else %>
+								<td id = "b_nombre", style = "width: 200px;"><b><%= @equipo_b.nombre %> - </b></td>
+								<td id = "b_puntos", style = "text-align: right;"><%= @equipo_b.puntuacion %></td>
+							<% end %>
+						</tr>
+					</thead>
+				</table>		
+			</fieldset>
+		</div>
+		<div style = "width: 30%; height: 45%; position: fixed; bottom: 0; right: 0;">
+			<fieldset class = "ui-widget-content", style = "padding: 0; height: 280px;">
+				<%= hidden_field_tag(:el_indice, 1, :id=> "el_indice") %>
+				<table border = 0, style = "height: 100%">
+					<thead>
+						<tr>
+							<td colspan = 3, style = "width: 550px; font-size: 40px; text-align: center;", class ="ui-widget-header">Contador</td>
+						</tr>
+						<tr>
+							<td style = "width: 200px; text-align: center"><span id="time", style = "font-size: 50px">00:20</span></td>
+							<td>
+								<table style = "font-size: 20px; text-align: center;">
+									<thead>
+										<tr>
+											<td><button id = "btnTimer", style = "font-size: 20px; text-align: center; width: 100px;", onclick="start()">Iniciar</button></td>
+										</tr>
+										<tr>
+											<td><button id = "btnPausa", disabled = true, style = "text-align: center; height: 50px; width: 50px;", onclick="pause_resume()">&#10074&#10074</button></td>
+										</tr>
+										<tr>
+											<td><button id = "btnReset", disabled = true, style = "font-size: 20px; text-align: center; width: 100px;", onclick="reset()">Reiniciar</button></td>
+										</tr>
+									</thead>
+								</table>
+							</td>
+						</tr>
+					</thead>
+				</table>	
+			</fieldset>
+		</div>
+	</body>
+</html>
+<script>
+	function startTimer(duration, display) 
+	{
+		var timer = duration, minutes, seconds;
+		var intervalId = setInterval(function () 
+		{
+			minutes = parseInt(timer / 60, 10);
+			seconds = parseInt(timer % 60, 10);
+			minutes = minutes < 10 ? "0" + minutes : minutes;
+			seconds = seconds < 10 ? "0" + seconds : seconds;
+
+			display.textContent = minutes + ":" + seconds;
+
+			if (--timer < 0) 
+			{
+				clearInterval(intervalId);
+			}
+		}, 1000);
+		var dataString = 'tipo=temporizador'+'&idtempo='+intervalId;  
+		$.ajax(
+		{	  
+			type: "GET",  
+			url: "/preguntas/show",  
+			data: dataString  
+		});	
+	}
+
+	function start()
+	{
+        var display = document.getElementById('time');
+		var twentySeconds = 19 * 1;
+		startTimer(twentySeconds, display);
+		document.getElementById('btnTimer').disabled=true;
+		document.getElementById('btnReset').disabled=false;
+		document.getElementById('btnPausa').disabled=false;
+	};
+	function reset()
+	{
+        var display = document.getElementById('time');
+		display.innerHTML="00:20"
+		var intervalId = document.getElementById("temporizador_id").value;	
+		clearInterval(intervalId);
+		document.getElementById("temporizador_id").value = "1";
+		document.getElementById("pausa").value = "1";
+		document.getElementById('btnPausa').innerHTML = "&#10074&#10074"
+		document.getElementById('btnTimer').disabled=false;
+		document.getElementById('btnReset').disabled=true;
+		document.getElementById('btnPausa').disabled=true;
+		
+	}
+	function pause_resume()
+	{
+		var tiempo;
+		var segundos;
+		var pausa = document.getElementById("pausa").value;
+		if(pausa == "1")
+		{		
+			var intervalId = document.getElementById("temporizador_id").value;	
+			document.getElementById('btnPausa').innerHTML = "&#9658"	
+			document.getElementById('pausa').value = '0';	
+			clearInterval(intervalId);
+		}
+		else
+		{
+			tiempo = document.getElementById('time').innerHTML;
+			tiempo = tiempo.split(":");
+			segundos = tiempo[1] - 1;
+			var secondsLeft = segundos * 1;	
+			var display = document.getElementById('time');
+			startTimer(secondsLeft, display);
+			document.getElementById('pausa').value = '1';
+			document.getElementById('btnPausa').innerHTML = "&#10074&#10074"
+		}
+	}
+	function despliega_pregunta()
+	{
+		var dataString = 'tipo=despliega';  
+		$.ajax(
+		{	  
+			type: "GET",  
+			url: "/preguntas/show",  
+			data: dataString  
+		}); 
+	}
+	function revelar()
+	{
+		clearInterval(document.getElementById("temporizador_id").value);
+		document.getElementById('btnTimer').disabled=false;
+		document.getElementById('respuesta').style.color="black";
+		document.getElementById('btncorrecto').disabled=false;
+		document.getElementById('btnincorrecto').disabled=false;
+	}
+	function correcto()
+	{
+		var dataString = 'tipo=correcto';  
+		$.ajax(
+		{	  
+			type: "GET",  
+			url: "/preguntas/show",  
+			data: dataString  
+		});	
+	}
+	function incorrecto()
+	{
+		var dataString = 'tipo=incorrecto';  
+		$.ajax(
+		{	  
+			type: "GET",  
+			url: "/preguntas/show",  
+			data: dataString  
+		});	
+	}
+</script>

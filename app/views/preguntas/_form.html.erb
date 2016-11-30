@@ -1,0 +1,49 @@
+	<script>
+		$(function() {
+		$( "#tabs" ).tabs();
+		});
+		$(function() {
+		$( "button" ).button(); 
+		});
+	</script>
+
+<%= form_for(@pregunta) do |f| %>
+	<% if @pregunta.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@pregunta.errors.count, "errore") %>: No se pudo guardar</h2>
+				<ul>
+					<% @pregunta.errors.full_messages.each do |msg| %>
+						<li><%= msg %></li>
+					<% end %>
+				</ul>
+		</div>
+	<% end %>
+	<div id="tabs", class = "ui-widget-content", style = "border: 0px;width: 80%; font-size: 14px; margin-right: 0px">
+		<ul>
+			<li><a href="#tabs-a">Pregunta</a></li>
+		</ul>
+		<div id="tabs-a">
+			<table border = "0">
+				<thead>
+					<tr>
+						<td style = "width: 120px;">Pregunta</td>
+						<td><%= f.text_field :pregunta, :size => 100 %></td>
+					</tr>
+					<tr>
+						<td style = "width: 120px;">Respuesta</td>
+						<td><%= f.text_field :respuesta, :size => 100 %></td>
+					</tr>
+					<tr>
+						<td style = "width: 120px;">Cita</td>
+						<% if @pregunta.new_record? %>
+							<td><%= f.text_field :cita, :value=> "1ro Reyes 1:", :size => 100 %></td>
+						<% else %>
+							<td><%= f.text_field :cita, :size => 100 %></td>
+						<% end %>
+					</tr>
+				</thead>
+			</table>
+			<button id="button" style = "font-size: 14px;" onclick="window.location = <%= f.submit%> <%= t(:guardar) %></button>	
+		</div>
+	</div>
+<% end %>
