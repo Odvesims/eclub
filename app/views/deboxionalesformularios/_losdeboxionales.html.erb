@@ -1,7 +1,0 @@
-<% @deboxionales.each do |deboxional| %>
-	<tr>
-		<td style = "width: 30px"><%= deboxional.dia %></td>
-		<td style = "width: 340px"><%= link_to deboxional.titulo, edit_deboxionalesformulario_path(deboxional) %></td>
-		<td style = "width: 300px"><%= deboxional.fecha_dia %> <%= deboxional.anio %></td>
-	</tr>
-<% end %>	

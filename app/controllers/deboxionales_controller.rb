@@ -6,7 +6,82 @@ require 'date'
 class DeboxionalesController < ActionController::Base 
   respond_to :json 
 	def index
-		configuraciones = Configuracione.first	
+		el_jason = Array.new		
+		begin
+			configuraciones = Configuracione.first	
+			dia = Date.today.yday
+			year = configuraciones.deboxional_year
+			dia = params[:dia]
+			idioma = params[:idioma]
+			year = params[:year]
+			if dia == nil 
+				dia = Date.today.yday
+			end
+			if year == nil
+				year = Date.today.year.to_s
+			end
+			if idioma == nil
+				idioma = 'es'
+			end
+			if configuraciones.modalidad == "anual"
+				semana = Date.today.strftime("%U").to_i
+				deboxionales = Deboxionale.where("anio = '#{year}' AND idioma = '#{idioma}'").all
+			elsif configuraciones.modalidad == "semanal"
+				deboxionales = Deboxionale.where("dia >= #{dia}  AND dia <= #{dia} + 7 AND anio = '#{year}' AND idioma = '#{idioma}'").all
+			elsif configuraciones.modalidad == "diario"
+				deboxionales = Deboxionale.where("dia = #{dia} AND anio = '#{year}' AND idioma = '#{idioma}'").all
+			end
+						
+			if deboxionales.count == 0	
+				controles = {}
+				controles["valid"] = false
+				controles["response_code"] = 404
+				controles["year"] = year.to_i
+				controles["idioma"] = idioma
+				#deboxionales_arr = Array.new
+				#hash = {}
+				#deboxionales_arr.push(hash)
+				#controles["deboxionales"] = deboxionales_arr
+			else
+				controles = {}
+				controles["valid"] = true
+				controles["response_code"] = 200
+				controles["year"] = year.to_i
+				controles["idioma"] = idioma
+				deboxionales_arr = Array.new
+				deboxionales.each do |deb|	
+					hash = {}
+					hash["id"] = deb.id	
+					hash["fecha_dia"] = deb.fecha_dia
+					hash["titulo"] = deb.titulo
+					hash["versiculo"] = deb.versiculo
+					hash["cita"] = deb.cita
+					hash["cuerpo"] = deb.cuerpo
+					hash["autor"] = deb.autor
+					hash["dia"] = deb.dia
+					hash["anio"] = deb.anio.to_i
+					hash["fecha"] = deb.fecha
+					hash["idioma"] = deb.idioma
+					deboxionales_arr.push(hash)
+				end
+				controles["deboxionales"] = deboxionales_arr
+			end
+			el_jason.push(controles)
+			JSON.generate(controles) 
+			render :text => JSON.generate(controles)
+		rescue
+			controles = {}
+			controles["valid"] = false
+			controles["response_code"] = 500
+			controles["year"] = year.to_i
+			controles["idioma"] = idioma
+			el_jason.push(controles)
+			JSON.generate(controles) 
+			render :text => JSON.generate(controles)
+		end
+	end
+  
+	def show	
 		dia = Date.today.yday
 		year = configuraciones.deboxional_year
 		dia = params[:dia]
@@ -21,58 +96,6 @@ class DeboxionalesController < ActionController::Base
 		if idioma == nil
 			idioma = 'es'
 		end
-		if configuraciones.modalidad == "anual"
-			semana = Date.today.strftime("%U").to_i
-			deboxionales = Deboxionale.where("anio = '#{year}' AND idioma = '#{idioma}'").all
-		elsif configuraciones.modalidad == "semanal"
-			deboxionales = Deboxionale.where("dia >= #{dia}  AND dia <= #{dia} + 7 AND anio = '#{year}' AND idioma = '#{idioma}'").all
-		elsif configuraciones.modalidad == "diario"
-			deboxionales = Deboxionale.where("dia = #{dia} AND anio = '#{year}' AND idioma = '#{idioma}'").all
-		end
-		
-		el_jason = Array.new
-		
-		if deboxionales.count == 0	
-			controles = {}
-			controles["valid"] = "false"
-			controles["year"] = year.to_i
-			deboxionales_arr = Array.new
-			hash = {}
-			deboxionales_arr.push(hash)
-			controles["deboxionales"] = deboxionales_arr
-		else
-			controles = {}
-			controles["valid"] = "true"
-			controles["year"] = year.to_i
-			deboxionales_arr = Array.new
-			deboxionales.each do |deb|	
-				hash = {}
-				hash["id"] = deb.id	
-				hash["fecha_dia"] = deb.fecha_dia
-				hash["titulo"] = deb.titulo
-				hash["versiculo"] = deb.versiculo
-				hash["cita"] = deb.cita
-				hash["cuerpo"] = deb.cuerpo
-				hash["autor"] = deb.autor
-				hash["dia"] = deb.dia
-				hash["anio"] = deb.anio.to_i
-				hash["fecha"] = deb.fecha
-				deboxionales_arr.push(hash)
-			end
-			controles["deboxionales"] = deboxionales_arr
-		end
-		el_jason.push(controles)
-		JSON.generate(controles) 
-		render :text => JSON.generate(controles)
-	end
-  
-	def show
-		year = ''
-		year = params[:year]
-		if year == '' || year == nil
-			year = Date.today.year.to_s
-		end
-		dia = Date.today.yday
 		configuraciones = Configuracione.first	
 		if dia > 0	
 			if configuraciones.modalidad == "anual"
@@ -104,6 +127,7 @@ class DeboxionalesController < ActionController::Base
 				hash["dia"] = deb.dia
 				hash["anio"] = deb.anio
 				hash["fecha"] = deb.fecha
+				hash["idioma"] = deb.idioma
 				el_jason.push(hash)
 			end
 		end
