@@ -60,7 +60,7 @@ class DeboxionalesController < ActionController::Base
 					hash["autor"] = deb.autor
 					hash["dia"] = deb.dia
 					hash["anio"] = deb.anio.to_i
-					#hash["fecha"] = deb.fecha
+					hash["fecha"] = deb.fecha
 					hash["idioma"] = deb.idioma
 					deboxionales_arr.push(hash)
 				end
