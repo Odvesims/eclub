@@ -34,7 +34,7 @@ class DeboxionalesController < ActionController::Base
 						
 			if deboxionales.count == 0	
 				controles = {}
-				controles["valid"] = false
+				#controles["valid"] = false
 				controles["response_code"] = 404
 				controles["year"] = year.to_i
 				controles["idioma"] = idioma
@@ -44,7 +44,7 @@ class DeboxionalesController < ActionController::Base
 				#controles["deboxionales"] = deboxionales_arr
 			else
 				controles = {}
-				controles["valid"] = true
+				#controles["valid"] = true
 				controles["response_code"] = 200
 				controles["year"] = year.to_i
 				controles["idioma"] = idioma
@@ -71,7 +71,7 @@ class DeboxionalesController < ActionController::Base
 			render :text => JSON.generate(controles)
 		rescue
 			controles = {}
-			controles["valid"] = false
+			#controles["valid"] = false
 			controles["response_code"] = 500
 			controles["year"] = year.to_i
 			controles["idioma"] = idioma
