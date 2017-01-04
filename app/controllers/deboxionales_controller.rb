@@ -35,9 +35,9 @@ class DeboxionalesController < ActionController::Base
 			if deboxionales.count == 0	
 				controles = {}
 				controles["valid"] = false
-				controles["response_code"] = 404
+				controles["code"] = 404
 				controles["year"] = year.to_i
-				controles["idioma"] = idioma
+				controles["language"] = idioma
 				#deboxionales_arr = Array.new
 				#hash = {}
 				#deboxionales_arr.push(hash)
@@ -45,9 +45,9 @@ class DeboxionalesController < ActionController::Base
 			else
 				controles = {}
 				controles["valid"] = true
-				controles["response_code"] = 200
+				controles["code"] = 200
 				controles["year"] = year.to_i
-				controles["idioma"] = idioma
+				controles["language"] = idioma
 				deboxionales_arr = Array.new
 				deboxionales.each do |deb|	
 					hash = {}
@@ -72,9 +72,9 @@ class DeboxionalesController < ActionController::Base
 		rescue
 			controles = {}
 			controles["valid"] = false
-			controles["response_code"] = 500
+			controles["code"] = 500
 			controles["year"] = year.to_i
-			controles["idioma"] = idioma
+			controles["language"] = idioma
 			el_jason.push(controles)
 			JSON.generate(controles) 
 			render :text => JSON.generate(controles)
