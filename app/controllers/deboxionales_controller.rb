@@ -31,13 +31,14 @@ class DeboxionalesController < ActionController::Base
 			elsif configuraciones.modalidad == "diario"
 				deboxionales = Deboxionale.where("dia = #{dia} AND anio = '#{year}' AND idioma = '#{idioma}'").all
 			end
-						
+			data_version = Cambiodata.first			
 			if deboxionales.count == 0	
 				controles = {}
 				controles["valid"] = false
 				controles["code"] = 404
 				controles["year"] = year.to_i
 				controles["language"] = idioma
+				controles["version"] = data_version.version_data
 				#deboxionales_arr = Array.new
 				#hash = {}
 				#deboxionales_arr.push(hash)
@@ -48,6 +49,7 @@ class DeboxionalesController < ActionController::Base
 				controles["code"] = 200
 				controles["year"] = year.to_i
 				controles["language"] = idioma
+				controles["version"] = data_version.version_data
 				deboxionales_arr = Array.new
 				deboxionales.each do |deb|	
 					hash = {}
@@ -75,6 +77,7 @@ class DeboxionalesController < ActionController::Base
 			controles["code"] = 500
 			controles["year"] = year.to_i
 			controles["language"] = idioma
+			controles["version"] = data_version.version_data
 			el_jason.push(controles)
 			JSON.generate(controles) 
 			render :text => JSON.generate(controles)
