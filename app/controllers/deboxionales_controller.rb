@@ -35,7 +35,7 @@ class DeboxionalesController < ActionController::Base
 			if deboxionales.count == 0	
 				controles = {}
 				controles["valid"] = false
-				controles["code"] = 404
+				controles["code"] = 250
 				controles["year"] = year.to_i
 				controles["language"] = idioma
 				controles["version"] = data_version.version_data
