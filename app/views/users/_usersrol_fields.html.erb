@@ -1,0 +1,15 @@
+<div class = "nested-fields">
+	<div class="col-md-8 text-left">
+		<div class = "form-group">
+			<%= label_tag :rol, t(:rol), :class=> "control-label col-sm-1" %>
+			<div class="col-sm-4">
+				<%= f.select :rol_id, options_from_collection_for_select(@roles, :id, :descripcion), {}, {:class=> "form-control"} %>
+			</div>
+			<div class = "form-group">
+				<div class = "col-sm-1">
+					<%= link_to_remove_association "<span class = 'glyphicon glyphicon-remove'></span>".html_safe, f, class: 'btn btn-danger btn-sm' %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

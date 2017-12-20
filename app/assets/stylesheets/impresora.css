@@ -1,0 +1,13 @@
+<style>
+ul#nav {margin: 0 0 0 200px; border: 0px;}
+ul.drop a { display:block; color: #ffffff; font-family: Verdana; font-size: 14px; text-decoration: none;}
+ul.drop { display: block; width: 100%; height: 100%; list-style: none; margin: 0; padding: 0; background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#000000), to(#333333)); color: #ffffff;}
+ul.drop ul {list-style: none; margin: 0; padding: 0;background: #000000; color: #ffffff;}
+ul.drop { position: relative; z-index: 597; float: right; }
+ul.drop li { float: left; line-height: 1.3em; vertical-align: middle; zoom: 1; padding: 5px 11px; }
+ul.drop li.hover, ul.drop li:hover { position: relative; z-index: 599; cursor: default; background: #666666 }
+ul.drop ul { visibility: hidden; position: absolute; top: 100%; left: 0; z-index: 598; width: 195px; background: #555;}
+ul.drop ul li { float: none; }
+ul.drop ul ul { top: -2px; left: 100%; }
+ul.drop li:hover > ul { visibility: visible }
+</style>

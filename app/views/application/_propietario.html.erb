@@ -1,0 +1,14 @@
+		
+		<% if @propietario_existe == nil %>
+				<td><%= %>Propietario:</td>
+				<td><%= text_field_tag(:propietario_cod, "", :id => "propietario_cod", :size => 10, :onchange=>"validacodpro(this,'" + action_name+ "','" + controller_name + "')") %>
+					<%= hidden_field_tag(:propietario_id, "", :id => "propietario_id", :size => 10) %>
+					<%= image_tag "SearchIcon2.png", :onclick=>"selectModel('propietario','mopropietario','"+ controller_name + "')", :height =>'20', :width => '20', :title=>"Buscar propietario", :class=> "pin_image" %></td>
+					<td colspan="5"><span id="divcltenom" > </span></td>
+		<% else %>
+				<td><%=  %>Propietario:</td>
+				<td><%= text_field_tag(:propietario_cod, @propietario_existe.codigo, :id => "propi_cod", :size => 10, :onchange=>"validacodpro(this,'" + action_name+ "','" + controller_name + "')") %>
+					<%= hidden_field_tag(:propietario_id, @propietario_existe.id, :id => "propi_id", :size => 10) %>
+					<%= image_tag "SearchIcon2.png", :onclick=>"selectModel('propietario','mopropietario','"+ controller_name + "')", :height =>'20', :width => '20', :title=>"Buscar cliente", :class=> "pin_image" %></td>
+				<td colspan="5"><b><span id="divcltenom" > <%= @propietario_existe.nombre %></span></b></td>
+		<%end%>

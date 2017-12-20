@@ -1,0 +1,21 @@
+<%if @user.multiples_divems == true%>
+	<% @zmulti_divem = Vusersdivem.where("user_id = #{@user.id}").all %>
+	<li class="dropdown">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class = "glyphicon glyphicon-transfer"></span><%= t(:cambiar_divem) %><span class="caret"></span></a>
+		<ul class="dropdown-menu">
+			<% @zmulti_divem.each do |d| %>
+				<% if d.divem_id == @user.usersdefault.divem_id %>
+					<li style = "background-color: #5bc0de"><a href="/selectdivems/<%= d.divem_id %>"><%= d.divem_id %> - <%= d.descripcion %></a></li>
+				<% else %>
+					<li><a href="/selectdivems/<%= d.divem_id %>"><%= d.divem_id %> - <%= d.descripcion %></a></li>
+				<% end %>
+			<% end %>
+		</ul>
+	</li>
+<% end %>
+<script>	
+	function cambiarDivem(elObj) 
+	{	window.location = "/selectdivems/"+elObj.value;			
+		return true;
+	};
+</script>

@@ -1,0 +1,27 @@
+<% if @function == "borrardivem" %>
+	<script>$(errorDialog("Aviso", "El acceso a este Divem ha sido eliminado");)</script>
+<% else %>
+	<p id="notice"><%= notice %></p>
+
+	<p>
+	  <b>Setma-Id:</b>
+	  <%= @usersdefault.setma_id %>
+	</p>
+
+	<p>
+	  <b>Divems-Id:</b>
+	  <%= @usersdefault.divem_id %>
+	</p>
+
+	<p>
+	  <b>Caja-Id:</b>
+	  <%= @usersdefault.caja_id %>
+	</p>
+
+	<%= link_to 'Editar', edit_usersdefault_path(@usersdefault) %> |
+	<%= link_to 'Atras', usersdefaults_path %>
+<% end %>
+
+
+
+

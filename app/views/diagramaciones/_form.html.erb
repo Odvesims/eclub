@@ -1,0 +1,83 @@
+<%= form_for @deboxional, :html => {:class=> "form-horizontal" } do |f| %>
+	<%= hidden_field_tag(:formu_controller, "deboxionals", :id=> "formu_controller") %>
+	<% if @deboxional.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@deboxional.errors.count, "errore") %>: No se pudo guardar</h2>
+			<ul>
+				<% @deboxional.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %> 
+	<h2><%= t(:deboxional) %></h2></legend>
+	<ul class="nav nav-tabs">
+		<li class="active"><a data-toggle="tab" href="#menu1"><%= t(:datos) %></a></li>
+	</ul>	
+	<div class= "tab-content">
+		<div id="menu1" class="tab-pane fade in active">
+		<br>
+			<div class = "form-group">
+				<div class="col-md-12 text-left">
+					<div class = "form-group">
+						<%= label_tag :lyear, t(:year), :class=> "control-label col-sm-1" %>
+						<div class="col-sm-2">
+							<%= f.select :anio , options_for_select([["2018", "2018"], ["2017", "2017"], ["2016", "2016"]]), {:tabindex => 1}, {:class=> "form-control"} %>
+						</div>
+					</div>
+					<div class = "form-group">
+						<%= label_tag :lfecha, t(:fecha), :class=> "control-label col-sm-1" %>
+						<div class="col-sm-3">
+							<span class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+								<%= f.text_field(:fecha, :class => "form-control", :size => 15, :id => "datepicker")%>
+								<div class="input-group-addon">
+									<span class="glyphicon glyphicon-th"></span>
+								</div>						
+							</span>
+						</div>
+					</div>
+					<div class = "form-group">
+						<%= label_tag :ltitulo, t(:titulo), :class=> "control-label col-sm-1" %>
+						<div class="col-sm-8">
+							<%= f.text_field :titulo, {:tabindex => 3, :class=> "form-control"} %>
+						</div>
+					</div>
+					<div class = "form-group">
+						<%= label_tag :lversiculo, t(:versiculo), :class=> "control-label col-sm-1" %>
+						<div class="col-sm-8">
+							<%= f.text_area :versiculo, rows: 4, class:"form-control", tabindex: 4, placeholder: "«En el principio creó Dios los cielos y la tierra»." %>
+						</div>
+					</div>
+					<div class = "form-group">
+						<%= label_tag :lcita, t(:cita), :class=> "control-label col-sm-1" %>
+						<div class="col-sm-3">
+							<%= f.text_field :cita, {:tabindex => 5, :class=> "form-control", placeholder: "(Génesis 1:1)"} %>
+						</div>
+					</div>
+					<div class = "form-group">
+						<%= label_tag :lcuerpo, t(:cuerpo), :class=> "control-label col-sm-1" %>
+						<div class="col-sm-8">
+							<%= f.text_area :cuerpo, rows: 30, class:"form-control", tabindex: 6 %>
+						</div>
+					</div>
+					<div class = "form-group">
+						<%= label_tag :lautor, t(:autor), :class=> "control-label col-sm-1" %>
+						<div class="col-sm-4">
+							<%= f.text_field :autor, {:tabindex => 7, :class=> "form-control"} %>
+						</div>
+					</div> 
+					<div class = "form-group">
+						<%= label_tag :lidioma, t(:idioma), :class=> "control-label col-sm-1" %>
+						<div class="col-sm-2">
+							<%= f.select :idioma , options_for_select([["Español", "es"], ["English", "en"]]), {:tabindex => 8}, {:class=> "form-control"} %>
+						</div>
+					</div>
+					<br>
+					<br>
+				</div>				
+			</div>
+		</div>
+	</div>
+	<div class = "row text-center"><%= submit_tag t(:guardar), :class=> "btn btn-lg btn-success" %></div>
+<% end %>
+<br>	

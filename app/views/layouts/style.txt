@@ -1,0 +1,37 @@
+<style>
+	.navbar-default{
+		color: #FFFFFF;
+	}
+	.navbar-default .navbar-nav > .active > a,
+	.navbar-default .navbar-nav > .active > a:focus {
+		color: #ffffff;
+		background-color: #55AAAA;
+	}
+	.navbar-default .navbar-nav > .open > a,
+	.navbar-default .navbar-nav > .open > a:focus {
+		color: #ffffff;
+		background-color: #55AAAA;
+	}
+	.navbar-default .navbar-nav > .dropdown > a .caret {
+		border-top-color: #ffffff;
+		border-bottom-color: #ffffff;
+	}
+	.navbar-default .navbar-nav > .dropdown > a:focus .caret {
+		border-top-color: #D9F0F4;
+		border-bottom-color: #D9F0F4;
+	}
+	.navbar-default .navbar-nav > .open > a .caret,
+	.navbar-default .navbar-nav > .open > a:focus .caret {
+		border-top-color: #D9F0F4;
+		border-bottom-color: #D9F0F4;
+	}
+	.navbar-default .navbar-toggle {
+		border-color: #D9F0F4;
+	}
+	.navbar-default .navbar-toggle:focus {
+		background-color: #55AAAA;
+	}
+	.navbar-default .navbar-toggle .icon-bar {
+		background-color: #ffffff;
+	}
+</style>

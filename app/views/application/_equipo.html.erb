@@ -1,0 +1,13 @@
+<% if @equipo_existe == nil %>
+	<td><%= %>Equipo:</td>
+	<td><%= text_field_tag(:equipo_cod, "", :id => "equipo_cod", :size => 10, :onchange=>"validacodeq(this)") %>
+	<%= hidden_field_tag(:equipo_id, "", :id => "equipo_id", :size => 10, :onchange=>"validacodeq(this)") %>
+	<%= image_tag "SearchIcon2.png", :onclick=>"selectModel('equipo','buequipo','"+ controller_name + "')", :height =>'20', :width => '20', :title=>"Buscar Equipo", :class=> "pin_image" %></td>
+	<td><span id="divequiponom"></span></td>
+<% else %>
+	<td><%= %>Equipo:</td>
+	<td><%= text_field_tag(:equipo_cod, @equipo_existe.codigo, :id => "equipo_cod", :size => 10, :onchange=>"validacodeq(this)") %>
+	<%= hidden_field_tag(:equipo_id, @equipo_existe.id, :id => "equipo_id", :size => 10, :onchange=>"validacodeq(this)") %>
+	<%= image_tag "SearchIcon2.png", :onclick=>"selectModel('equipo','buequipo','"+ controller_name + "')", :height =>'20', :width => '20', :title=>"Buscar Equipo", :class=> "pin_image" %></td>
+	<td><b><span id="divequiponom"><%= @equipo_existe.descripcion %></span></b></td>
+<%end%> 

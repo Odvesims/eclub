@@ -1,0 +1,14 @@
+<%= render 'form' %>
+
+<div style= "margin-left: 55px">
+ <button  id="button" onclick="window.location = '<%= userconf_path %>';" class="ui-state-default ui-corner-all" title="Volver a Buscar"><span class="ui-icon ui-icon-circle-zoomout"></button> 
+ <button id="button"  onclick="history.back()";"class="ui-state-default ui-corner-all" title="Volver"><span class="ui-icon ui-icon-arrowreturnthick-1-w"></button>  
+
+ <script>	 $( "button" ).button(); </script>
+</div>
+
+<!-- %= link_to "<button>Add</button>".html_safe, usersdefaults_path, :id=>"open-contacts-dialog-btn", :class=>"inbox-sf-add-btn tip" % -->
+
+
+
+

@@ -1,0 +1,151 @@
+<%= form_for(@user, :id=> "form_user", :html=>{:id=>"form_user"}) do |f| %>
+	<% if @user.errors.any? %>
+		<div class="error_messages">
+			<h2>Form is invalid</h2>
+			<ul>
+				<% for message in @user.errors.full_messages %>
+					<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<fieldset class = "ui-widget ui-widget-content", style= "width: 40em">
+	<div id="tabs" class = "ui-widget ui-widget-content",  style = "border: 0px;width: 40em;font-size: 14px; margin-top: 1em;margin-right: 3px">
+		<ul>
+			<li><a href="#tabs-1"><%= t(:datos_usuario) %></a></li>
+		</ul>	
+		<div id="tabs-1">
+			<table>
+				<thead>
+					<% if @user.new_record? %>
+						<tr>
+							<td><%= t(:user) %></td>
+							<td><%= f.text_field :login, :size=> 10 %></td>
+						</tr>
+					<% else %>
+						<tr>
+							<td><%= t(:user) %></td>
+							<td><%= @user.login %></td>
+							<%= f.hidden_field :login %>
+						</tr>
+					<% end %>
+					<tr>
+						<td><%= t(:nombre) %></td>
+						<td><%= f.text_field :name %></td>
+					</tr>
+					<tr>
+						<td><%= t(:email) %></td>
+						<td><%= f.text_field :email %></td>
+					</tr>	
+					<tr>
+						<td><%= t(:imei) %></td>
+						<td><%= f.text_field :imei %></td>
+					</tr>
+					<tr id = "cambiael">
+						<td><%= t(:cambiar_pass) %>?</td>
+						<td><%= f.check_box :cambiar, :id=> "cambiar", :onchange => "presenta()" %></td>
+					</tr>
+				</thead>
+			</table>
+			<span id = "lospasswords">
+				<table>
+					<thead>
+						<tr>
+							<td><%= t(:clave) %></td>
+							<td><%= f.password_field :password, :id=> "password", :size=> 8 %></td>
+						</tr>
+						<tr>
+							<td><%= t(:clave) %> <%= t(:confirma) %></td>
+							<td><%= f.password_field :password_confirmation, :id=> "password_confirma",  :size=> 8 %></td>
+						</tr>
+					</thead>
+				</table>
+			</span>
+			<% if not @user.new_record? %>
+				<script>
+						$(document.getElementById('lospasswords').style.display = "none");
+						$(document.getElementById('cambiar').checked = false)
+				</script>
+			<% else %>
+				<script>
+						$(document.getElementById('lospasswords').style.display = "block");
+						$(document.getElementById('cambiael').style.display = "none")
+				</script>			
+			<% end %>
+			<% @idiomas = Idioma.all %>
+			<table>
+				<thead>
+					<tr>
+						<td><%= t(:elmenu) %></td>
+						<td><%= f.select :menu_cod, options_for_select([['MENUFINANCIERO','MENUFINANCIERO'],['MENUINMOBILIA', 'MENUINMOBILIA'],['MENUSIMCARD','MENUSIMCARD']], @user.menu_cod) %></td>
+						<td style = "width: 50px;"></td>
+						<td><%= t(:idioma) %></td>
+						<td><%= f.select :idioma_isocod2, options_from_collection_for_select(@idiomas, :cod_iso2, :descripcion, @user.idioma_isocod2) %></td>
+					</tr>
+					<tr id = "multi_cons">
+						<td><%= t(:multi_divems) %>?</td>
+						<td><%= f.check_box :multiples_divems, :id=> "multiples_divems" %></td>
+					</tr>
+				</thead>
+			</table>
+		</div>
+			
+	
+		<script>
+			$(function() {
+				$( "#tabsd" ).tabs();
+			});
+			$(function() {
+				$( "#tabs" ).tabs();
+			});
+		</script>
+		<% if current_user.admin == true %>
+			<div id="tabsd" class = "ui-widget ui-widget-content",  style = "border: 0px;width: 40em;font-size: 14px; margin-right: 3px">
+				<ul>
+					<li><a href="#tabsd-1"><%= t(:roles) %></a></li>
+				</ul>	
+				<div id="tabsd-1">			
+					<%= f.fields_for :usersrol do |ff| %>
+						<ol>
+							<table>
+								<thead>
+									<tr>
+										<td><%= render 'usersrol_fields', :f => ff %></td>
+									</tr>
+								</thead>
+							</table>
+						</ol>
+					<% end %>
+					<div id = "roldetalle"></div>
+					<%= link_to_add_association t(:agregar_roles), f, :usersrol, 'data-association-insertion-node' => "#roldetalle", 'data-association-insertion-method' => "append" %>
+				</div>
+			</div>
+		<% end %>	
+		<script>
+			function guardar()
+			{
+				document.getElementById("form_user").submit();
+			};
+		</script>   
+	
+		<% if @user.new_record? %>
+			<button id="btnguardar", type="button", onclick="guardar()", style="visibility: visible"><%= t(:crear) %></button>
+		<% else %>
+			<button id="btnguardar", type="button", onclick="guardar()", style="visibility: visible"><%= t(:guardar) %></button>
+		<% end %>
+	</fieldset>
+	</div>
+<% end %>
+<script>
+	function presenta()
+	{
+		if(document.getElementById('cambiar').checked==true)
+		{
+			$(document.getElementById('lospasswords').style.display = "block")
+		}
+		else
+		{
+			$(document.getElementById('lospasswords').style.display = "none")
+		}
+	}
+</script>

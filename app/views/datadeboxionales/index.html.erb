@@ -1,0 +1,47 @@
+<script>
+	function nuevo()
+	{
+		window.location = '<%= new_datadeboxional_path() %>';
+	};
+</script>
+<div class= "tab-content">
+	<ul class="nav nav-tabs">
+		<li><h3><%= t(:deboxionales) %></h3></li>
+	</ul>
+	<div id="tabs-a">
+		<br>
+		<table width = "100%">
+			<tr>
+				<td class = "col-xs-50"><%#= render "search"%></td>
+				<td valign = "top" class = "col-xs-50", style="text-align: right;"><div><button type = "button" class="btn btn-primary", onclick="nuevo()"><span class = "glyphicon glyphicon-plus"></span> <%= t(:nuevo) %></button></div></td>
+			</tr>
+		</table>		
+		<br>
+		<%#= will_paginate %>				
+		<div class = "table-responsive">		
+			<table class= "table-striped table-hover" width="100%">
+					<tr>
+						<th>Año</th>
+						<th>Fecha</th>
+						<th>Título</th>
+						<th>Autor</th>
+						<th></th>
+					</tr>	  
+					<tbody>
+						<% @deboxionals.each do |deboxional| %>
+							<tr>
+								<td><%= deboxional.anio %></td>
+								<td><%= deboxional.fecha_dia %></td>
+								<td><%= link_to deboxional.titulo, edit_datadeboxional_path(deboxional)%></td>
+								<td><%= deboxional.autor %></td>
+								<td><%= link_to '<i class="glyphicon glyphicon-remove"></i>'.html_safe, deboxional, method: :delete, data: { confirm: 'Está seguro?' } %></td>
+							</tr>	
+						<% end %>
+					</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<br>
+<br>
+<br>

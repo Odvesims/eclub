@@ -1,0 +1,166 @@
+<% @divems_cat = Divemscategoria.all %>
+<div class = "nested-fields"> 
+	<% los_divems = Hash.new %>
+	<% i = 0 %>
+	<% @divems_cat.each do |d| %>
+	<% table_name = "tabla_divems" + d.id.to_s %>
+	<% contador_name = "ContadorFila" + d.id.to_s %>
+	<% x = 1 %>
+		<fieldset>
+			<table id = <%= table_name %> >
+				<tr>
+					<td colspan = "3"><h3><b><%= d.descripcion %></h2></td>
+				</tr>
+					<% @divems = ActiveRecord::Base.connection.execute("SELECT u.divem_id, u.user_id, d.descripcion, d.divemscategoria_id FROM users_divems u, divems d WHERE u.user_id = #{current_user.id} AND d.id = u.divem_id AND d.divemscategoria_id = #{d.id}") %>
+					<% @divems.each do |a| %>
+						<% row_name = "Fila_" + d.descripcion + x.to_s %>
+						<tr id = <%= row_name %>>
+							<td><%= label_tag "Divem" %> : </td>
+							<td><%= text_field_tag :el_divem, a["descripcion"], :disabled=> true, :name=> "users_divems"+"["+a["divem_id"]+ "]" %></td>
+							<% los_divems.store(i.to_s.gsub(/\"/, '\''), a["divem_id"].gsub(/\"/, '\'') ) %>
+							<%= hidden_field_tag :divem_id, a[:divem_id], :name=> "los_divems", :value=> los_divems %>
+							<%= hidden_field_tag :divem_length, a[:divem_id], :name=> "divem_length", :value=> i %>
+							<td><button type = "button" onclick="eliminarDivemExiste(this, '<%= a["divem_id"] %>', '<%= table_name %>', '<%= row_name %>')">x</button></td>
+							<% i += 1 %>
+							<% x += 1 %>
+						</td>
+					<% end %>
+					<tr id = <%= contador_name %> >
+						<td><%= hidden_field_tag :divemCount, x, :id=> "Contador" + d.descripcion %></td>
+					</tr>
+			</table>
+			<table>				
+				<tr>
+					<td><button type = "button" onclick="addDivem('<%= d.id %>', document.getElementById('Contador' + '<%= d.descripcion %>').value, '<%= d.descripcion %>')">Añadir</button></td>
+				</tr>
+			</table>
+		</fieldset>
+	<% end %>
+</div>
+<div id="dialog-confirm" title="Quitar Divem?">
+</div>
+<script>
+	function addDivem(category, count, descripcion)
+	{
+		var DivemFila = document.createElement('tr');
+		var colLabel = document.createElement('td');	
+		var colSelDivem = document.createElement('td');	
+		var colBorrar = document.createElement('td');
+		
+		var divemActivo = category
+		var SelectDivem = document.createElement('select');
+		var BorrarDivem = document.createElement('button');
+		BorrarDivem.type = "button"
+		BorrarDivem.className = "buttona"
+		<% losDivems = Divem.all %>
+		<% losDivems.each do |b| %>
+			if(divemActivo == '<%= b.divemscategoria_id %>')
+			{
+				SelectDivem.innerHTML += "<option value = <%= b.id %> > <%= b.descripcion %></option>";					
+			}
+		<% end %>
+		colLabel.innerHTML = '<span>' + "Divem" + '</span>'
+		
+		SelectDivem.onchange = function()
+							   {
+									onChangeSelect(this, SelectDivem.value, category, count);
+							   }
+		
+		colLabel.id = "ColumnaLabel_" + descripcion + count
+		colSelDivem.id = "ColumnaSelectDivem_" + descripcion + count
+		colBorrar.id = "ColumnaBorrar_" + descripcion + count
+		DivemFila.id = "Fila_" + descripcion + count
+		SelectDivem.id = "Divem_" + descripcion + count
+		var elId = "Divem_" + descripcion + count;
+		BorrarDivem.id = "DivemBorrar_" + descripcion + count
+		BorrarDivem.innerHTML = "x"
+		BorrarDivem.className = "buttonadd";
+		BorrarDivem.onclick= function()
+							 {
+								 //$(this).remove();
+								eliminarDivem('tabla_divems' + category, "Fila_" + descripcion + count)
+							 }
+		
+		document.getElementById('tabla_divems' + category).appendChild(DivemFila);
+		document.getElementById("Fila_" + descripcion + count).appendChild(colLabel);
+		document.getElementById("Fila_" + descripcion + count).appendChild(colSelDivem);
+		document.getElementById("Fila_" + descripcion + count).appendChild(colBorrar);
+		
+		document.getElementById("ColumnaSelectDivem_" + descripcion + count).appendChild(SelectDivem);
+		document.getElementById("ColumnaBorrar_" + descripcion + count).appendChild(BorrarDivem);
+		document.getElementById('Contador' + descripcion).value = parseInt(document.getElementById('Contador' + descripcion).value) + 1
+		if(category == 1)
+		{
+			categoria = "financieras"
+		}
+		else if(category == 2)
+		{
+			categoria = "inmobiliarias"
+		}
+		else
+		{
+			categoria = "simcards"
+		}
+		SelectDivem.name += "users_divems"+"["+categoria+"]"+"["+document.getElementById(elId).value+"]"
+	}
+	function eliminarDivem(tabla_id, fila_id)
+	{
+		document.getElementById(tabla_id).removeChild(document.getElementById(fila_id));
+	}
+	function eliminarDivemExiste(e, divem_id, tabla_id, fila_id)
+	{
+		userId = '<%= params[:id] %>'
+		currentUserId = '<%= current_user.id %>'
+		var currentRow = $(e.id).closest('tr');
+		if(divem_id == '<%= current_user.default_divem %>' && userId == currentUserId)
+		{
+			errorDialog("Aviso", "No puede eliminar su propio Divem activo.");
+		}	
+		else
+		{
+			$( "#dialog-confirm" ).text("Seguro que desea eliminar el acceso a este Divem para este usuario?");
+			$( "#dialog-confirm" ).dialog(
+			{
+				resizable: false,
+				height: 210,
+				width: 355,
+				modal: true,
+				buttons: 
+				{
+					"Si": function() 
+					{
+						dataString = 'execfunction=borrardivem&divem_id=' + divem_id + '&user_id=' + '<%= params[:id] %>';
+						$.ajax(
+						{  
+							type: "GET",  
+							url: "/usersdefaults/show",
+							data: dataString  
+						}); 
+						$( this ).dialog( "close" );
+						document.getElementById(fila_id).innerHTML="";
+					},
+					"No": function() 
+					{
+						$( this ).dialog( "close" );
+					}
+				}
+			});
+		}
+	}
+	function onChangeSelect(elSelect, divem_id, category, count)
+	{
+		if(category == 1)
+		{
+			categoria = "financieras"
+		}
+		else if(category == 2)
+		{
+			categoria = "inmobiliarias"
+		}
+		else
+		{
+			categoria = "simcards"
+		}
+		elSelect.name = "users_divems"+"["+categoria+"]"+"["+divem_id+"]"
+	}
+</script>

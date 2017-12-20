@@ -1,0 +1,119 @@
+<p id="notice"><%= notice %></p>
+<%= form_for(@userconf, :url=> usersdefault_path) do |f| %>
+  <% if @userconf.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@userconf.errors.count, "error") %> -No se pudo Guardar:</h2>
+
+      <ul>
+      <% @userconf.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+<fieldset  style= "font-size: 14px", "margin-right:75px; margin-left:75px;", class="ui-widget ui-widget-content">
+<legend><h2> Usuarios</tr></h2></legend>
+<table class = "tabla", style = "margin-top: 10px; margin-left: 5px">
+  
+  <tr>			
+     <td style = "width: 50px"class="field">
+       <%= f.label "login:" %>	
+	   <td><%= @userconf.login %></td>
+
+	</td>
+  </tr>
+  
+  <tr>
+    <td class="field">
+     <%= f.label "name:" %>
+	 <td><%= @userconf.name %></td>
+	</td>
+  </tr>
+  
+  <tr>
+	<td class="field">
+     <%= f.label "email:" %>
+	 <td><%= @userconf.email %></td>
+	
+	</td>
+  </tr>
+</table>
+   
+	    <script>
+			$(function() {
+			$( "#tabsd" ).tabs();
+			});
+		</script>
+	
+	<div id="tabsd">
+		<% elDivem = Divem.where("id = #{current_user.default_divem}").first %>
+		<ul>
+			<li><a href="#tabsd-1">Generales</a></li>
+			<li><a href="#tabsd-2">Division de empresas</a></li>
+			<li><a href="#tabsd-3">Set de maestros</a></li>
+			<% if elDivem.divemscategoria_id == 1 %>
+				<li><a href="#tabsd-4">Tipos de Documentos</a></li>
+				<li><a href="#tabsd-5">Preferencia de Prestamos</a></li>
+			<% end %>
+		</ul>
+	
+		<div id="tabsd-1">
+			
+			<%= f.fields_for :usersdefault do |ff| %>
+				<table>
+					<tr>
+						<td><%= render 'usersdefault_fields', :f => ff %></td>
+					</tr>
+				</table>
+			<% end %>
+	
+		</div>
+	
+		<div id="tabsd-2">			
+			<%= render 'usersdivem_fields' %></td>
+		</div>
+		<% @agregar = '<button class="ui-state-default ui-corner-all">Añadir</button>'.html_safe %>
+		<div id="tabsd-3">
+				<%= f.fields_for :userssetma do |fa| %>
+					<table>
+						<tr>
+							<td><%= render 'userssetma_fields', :f => fa %></td>
+						</tr>
+					</table>
+				<% end %>
+				<div id = "setmagregar"></div>			
+				<%= link_to_add_association @agregar, f, :userssetma, 'data-association-insertion-node' => "#setmagregar", 'data-association-insertion-method' => "append" %>
+			</div>
+			<% if elDivem.divemscategoria_id == 1 %>
+				<div id="tabsd-4">
+					<%= f.fields_for :userstipodocu do |fa| %>
+						<table>
+							<tr>
+								<td><%= render 'userstipodocu_fields', :f => fa %></td>
+							</tr>
+						</table>
+					<% end %>
+					<div id = "docusagregar"></div>
+					<%= link_to_add_association @agregar, f, :userstipodocu, 'data-association-insertion-node' => "#docusagregar", 'data-association-insertion-method' => "append" %>
+				</div>
+				<div id="tabsd-5">				
+					<%= f.fields_for :usersdefpre do |fa| %>
+						<table>
+							<tr>
+								<td><%= render 'usersdefpre_fields', :f => fa %></td>
+							</tr>
+						</table>
+					<% end %>
+					<div id = "presagregar"></div>
+					<%= link_to_add_association @agregar, f, :usersdefpre, 'data-association-insertion-node' => "#presagregar", 'data-association-insertion-method' => "append" %>
+				</div>		
+			<% end %>
+		</div>				
+	  <div class="actions">
+	  <%= f.submit "Guardar"%>
+	  </div>
+	  </fieldset>
+	 <% end %>
+ 
+<br> 

@@ -1,0 +1,10 @@
+<div class = "nested-fields"> 
+	<table>
+    	<tr>
+			<td><%= f.label :setma_id%></td>
+			<td><%= f.collection_select(:setma_id, @setmas, :id, :descripcion)%></td>
+			<%@eliminar=  '<span class="ui-icon ui-icon-closethick" title="Eliminar" >Eliminar'.html_safe %>
+			<td style="padding-left: 27px"><%= link_to_remove_association @eliminar, f %></td>
+		</tr>
+	</table>
+</div>

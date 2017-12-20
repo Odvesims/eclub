@@ -1,0 +1,8 @@
+<% if signed_in? %>
+	<span style = "border-width: 1px;">
+		<%#= menu_landscape(@user.menu_cod, @user.id, @user.admin, @menuitem) %>
+	</span>
+<% else %>
+    <%= link_to "Iniciar Sesion", signin_path, class: "btn btn-large btn-primary" %>
+<% end %>	
+

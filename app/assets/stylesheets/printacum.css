@@ -1,0 +1,43 @@
+<style>
+@page 
+{
+size: 4in 6in;
+}
+#header, #nav, #barra .noprint, #buttons
+{
+display: none;
+}
+.breakhere 
+{
+margin-top: 0px;
+page-break-before: always;
+}
+.noprint
+{
+display: none;
+}
+table
+{
+border-collapse:collapse;
+}
+.datos
+{
+display: block;
+font-size: 16px;
+margin: 0px;
+padding-top: 0px;
+padding-bottom: 0px;
+}
+.nombreempresa
+{
+font-size: 20px;
+}
+.cabezera
+{
+font-size: 16px;
+}
+.tablacum
+{
+font-size: 16px;
+}
+</style>

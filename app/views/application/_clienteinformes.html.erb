@@ -1,0 +1,6 @@
+				<td><%= %>Cliente:</td>
+				<td><%= text_field_tag(:cliente_cod, "", :id => "cliente_cod", :size => 10, :onchange=>"validacodcteinformes(this,'" + action_name+ "','" + controller_name + "')") %>
+					<%= hidden_field_tag(:cliente_id, "", :id => "cliente_id", :size => 10) %>
+					<%= image_tag "SearchIcon2.png", :onclick=>"selectModel('cliente','ccclienteinforme','"+ controller_name + "')", :height =>'20', :width => '20', :title=>"Buscar cliente", :class=> "pin_image" %></td>
+				<td colspan="5"><span id="divcltenom" > </span></td> 
+				

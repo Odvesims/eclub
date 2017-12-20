@@ -1,0 +1,272 @@
+es:	  
+  will_paginate:
+    previous_label: Anterior
+    page_gap: ...
+    next_label: Siguiente
+  si: Si
+  no: No
+  confirmar_anular: Confirmación
+  anulado_exitoso: Aviso
+  ya_anulado: Aviso
+  anular_abortado: Advertencia
+  anular_msg_1: Confirma que desea anular este préstamo?
+  anular_msg_2: El préstamo fue anulado exitosamente.
+  anular_msg_3: Este préstamo ya había sido anulado.
+  anular_msg_4: El préstamo no fue anulado.
+  buscar_vendedor: Buscar Vendedor
+  buscar_cliente: Buscar Cliente
+  numero: Número
+  extension: Extensión
+  empresa: Proveedor
+  usuario: Usuario
+  al: Al
+  add: Añadir
+  activo_inactivo: Activo/Inactivo
+  analisis_sald_fech_venc: Análisis de Saldos Por Fecha de Vencimiento
+  analisis_sald_deta_doc: Análisis de Saldos Por Detalle de Documento
+  aplicaciones_documentos: Aplicaciones Por Documento
+  buscar: Buscar
+  cada: Cada
+  codigo: Codigo
+  comuniquese: Comuniquese con su administrador de sistemas para obtener el acceso deseado.
+  doc_mora_aplicada: Documentos Con Mora Aplicada	
+  doc_cuotas_montos_venc: Documentos con Cuotas y Montos Vencidos 
+  denegado: Accesos Denegado
+  notificaciones: Notificaciones
+  bruto: Bruto
+  caja: Caja
+  calcular: Calcular
+  calcula_intere: Calcular interes
+  calcula_mora: Calcular mora
+  ciudad: Ciudad
+  clave: Clave
+  clave_confirmacion: Clave Confirmacion
+  nueva_clave: Nueva Contrasena
+  cliente: Cliente
+  cobros: Cobros
+  comentario: Comentario
+  compania: Compania
+  confirma: Confirma
+  confirmacion: Confirmacion
+  consultar: Consultar
+  contado: Contado
+  contrasena: Contraseña
+  crear: Crear
+  creado: Creado
+  credito: Credito
+  cuotas_mora: Cuotas con Mora
+  datos_generales: Datos generales 
+  datos_contactos: Datos de contactos   
+  debito: Debito
+  descuento: Descuento
+  descripcion: Descripcion
+  desde: Desde
+  dia: Dia
+  dias: Dias
+  dias_credito: Dias de Credito
+  dias_gracia_mora: Dias gracia mora
+  division: Division
+  domingo: Domingo
+  efecto_doc_creditos: Efecto de Un Documento Tipo Credito
+  ejecuta: Ejecuta
+  eliminar: Eliminar
+  email: Correo elecrtronico
+  enviar: Enviar
+  envia_por: Enviado Por
+  espere: Por favor, espere...
+  estado: Estado
+  etiqueta: Etiqueta
+  ext: Extencion telefonica 
+  familia: Familia
+  fact_servicios_simcard: Facturacion de Servicios de Simcard
+  fecha: Fecha
+  foto: Foto
+  forma_pago: Forma de Pago
+  grande: Grande
+  grupo: Grupo
+  preferencias: Preferencias
+  guardar: Guardar
+  hasta: A
+  hasta_fecha: Hasta la Fecha
+  hora: Hora
+  id: ID
+  imprimir: Imprimir
+  inactivo: Inactivo
+  info_rol: Informacion del rol
+  inicio: Inicio
+  intere: Interes
+  jueves: Jueves
+  limite_credito: Limite de Credito
+  list_vendedores: Listado de vendedores 
+  list_recibos_ingresos: Listando Los Recibos de Ingresos
+  list_trans_tipo_credito: Listado de Transacciones Tipo Credito
+  list_clientes: Listado de Clientes
+  list_trans_simcard: Listado de Transacciones de Simcards 
+  list_serv_simcard: Listado de Servicios Simcard
+  list_simcard: Listado de Simcards 
+  list_comp_telefonicas: Listado de Compañias Telefonicas
+  list_bancas: Listdo De Bancas	
+  list_trans_inmo: Listado de Transacciones de Inmobiliaria
+  list_serv: Listado de Servicios 
+  list_propiedades: Listadoe Propiedades 
+  list_propietarios: Listado Propietarios
+  login: Login
+  lunes: Lunes
+  martes: Martes
+  mensaje: Mensaje
+  mensajes: Mensajes
+  mensajesleidos: Mensajes Leidos
+  mensajesneviados: Envia mensjaes
+  mensajesnuevo: Mensajes Nuevos
+  mensaje_eliminar: ¿Esta seguro de que desea eliminar esto?
+  mensaje_enviado: Mensaje enviado
+  miercoles: Miercoles
+  monto: Monto
+  monto_cuota: Monto de cuota
+  monto_capital: Monto del capital
+  monto_interes: Monto del interes
+  monto_total: Monto Total
+  monto_venta: Monto Venta
+  motivo: Motivo
+  neta: Neta
+  no_archivo_selec: Ningun archivo seleccionado
+  no: No
+  nocero: El ID debe ser valido
+  nombre: Nombre
+  nom_rol: Nombre del Rol
+  no_encontrado_user: Usuario no Encontrado
+  nuevo: Nuevo
+  nuevos: Nuevos
+  numabreviado: N°
+  numdoc: No. de documento
+  numero: Numero
+  numero_prestamo: Numero de prestamo
+  opcion: Opcion
+  orden: Orden
+  ordena_por: Ordenado por
+  origen: Origen
+  pagare_prestamo: Pagare de Un Prestamo
+  pagos: Pagos 
+  para: a
+  peque: Pequeno
+  porc_mora: Porciento mora
+  porc_descuento: Porciento de descuento
+  prestamos: Prestamos
+  preferido: Preferido
+  procesando: En proceso, por favor espere
+  proceso_calculos_interes: Proceso de Calculos de Interes
+  proceso_calculos_moras: Proceso de Calculo de Moras
+  proveedor: Proveedor 
+  provincia_estado: Provincia/Estado
+  puedeempezar: Puede empezar a usar las opciones del menu
+  elmenu: Menu
+  registro_cliente: Registro de cientes
+  reg_existe: Editar Registro Existente
+  reg_nuevo: Nuevo Registro para Insertar
+  relacion_cuentos_cobrar: Relacion de Cuentas Por Cobrar 
+  relacion_prest_cred_aplic: Relacion de Prestamos y Creidtos Aplicados 
+  reporta: Reporta
+  reporte: Reporte
+  reporte_estado_cuenta: Reporte de Estado de Cuenta
+  reporte_trans_Clientes: Reporte de Transacciones de Clientes
+  reporte_list_ingresos: Reporte de Listado de Ingresos
+  reporte_list_doc: Reporte de Listado de Documentos
+  reporte_doc_nopago: Reporte de Documentos No Pago
+  reporte_balance_clientes: Reporte de Balance de Clientes  
+  reporte_trans_caja: Reporte de Transacciones de Caja 
+  reporte_trans_inmo_clien: Reporte de Transacciones inmobiliarias de Clientes 
+  rol: Rol
+  roles: Roles
+  sabado: Sabado
+  saldo_capital: Saldo del capital
+  salir: Salir
+  si: Si
+  siguiente: Seguiente
+  simulador_prestamos: Simulador de Prestamos
+  telefono: Telefono
+  tipo_fiscal: Tipo fiscal
+  tipo_printer: Tipo de printer
+  tipo_documento: Tipo de documento
+  todas: Todas
+  todos: Todos
+  total: Total
+  user: Usuario
+  usuarios: Usuarios
+  vendedor: Vendedor
+  viernes: viernes
+  volver: Volver
+  volver_buscar: Volver a buscar
+  password_invalido: La clave introducida  es invalida.
+  idioma: Idioma
+  tema: Tema
+  perfil: Perfil
+  aceptar: Aceptar
+  cancelar: Cancelar
+  cambiar_idioma: Cambiar Idioma
+  advertencia: Advertencia
+  erroradver: Alerta!
+  error: Error
+  pais: Pais
+  responder: Responder
+  iniciar: Entrar
+  configuracion: Configuracion
+  menu:
+    mensajes: Mensajes
+    informes: Informes
+    reportes: Reportes
+    configurar: Configurar
+    opcion: Opciones
+    procesos: Procesos
+    mantenimientos: Mantenimientos
+    configuracion: Configuracion
+    seguridad: Seguridad
+    users: Usuarios
+    roles: Roles
+    usersdefaults: Preferencias de Usuarios
+  number:
+    currency:
+      format:
+        delimiter: ! ','
+        format: ! '%u%n'
+        precision: 2
+        separator: .
+        significant: false
+        strip_insignificant_zeros: false
+        unit: $
+    format:
+      delimiter: ! ','
+      precision: 2
+      separator: .
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: ! '%n %u'
+        units:
+          billion: mil millones
+          million: millón
+          quadrillion: mil billones
+          thousand: mil
+          trillion: billón
+          unit: ''
+      format:
+        delimiter: ! ','
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: ! '%n %u'
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ! ','
+    precision:
+      format:
+        delimiter: ! ','

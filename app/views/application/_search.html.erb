@@ -1,0 +1,30 @@
+<%= form_tag(@controler, :method=> "get") do %>
+	<span class= "col-xs-3"><%= text_field_tag(:searchfield, @searchfield, :id => "searchfield", :class=> "form-control" )%></span>
+	<button id="buttonsearch" class="btn btn-info"><span class="glyphicon glyphicon-search"></span> <%= t(:buscar) %></button>
+	<button id="avanzbutton" onclick="despAvanzada()" type="button" class="btn btn-default"><span class="glyphicon glyphicon-filter"></span></button>
+	<div id="divavanzada" style="display:none">
+		<%= display_search(@srchmodel, @srchcolumns_hash) %>  
+	</div>
+<% end %>	
+	
+<script>
+	function despAvanzada()
+	{
+		var xdisplay = document.getElementById('divavanzada').style.display;
+		if (xdisplay == 'none'){
+			document.getElementById('divavanzada').style.display= "block";
+			document.getElementById('searchfield').hidden= "hidden";
+			document.getElementById('searchfield').value= "";
+			document.getElementById('avanzbutton').text='<%= t(:basica)%>';
+		} else{
+			document.getElementById('divavanzada').style.display= "none";
+			$( "#searchfield" ).removeAttr( "hidden" );
+			document.getElementById('avanzbutton').text='<%= t(:avanzada)%>';
+		}
+	};	
+	$('.datepicker').datepicker({
+		format: 'dd/mm/yyyy',
+	});
+</script>
+
+

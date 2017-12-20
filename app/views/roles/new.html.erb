@@ -1,0 +1,9 @@
+<h1></h1>
+
+<%= render 'form' %>
+<buttonback onclick="history.back()"; class="ui-state-default ui-corner-all" title="Volver Atras"><span class="ui-icon ui-icon-arrowreturnthick-1-w"></buttonback>
+<button  id="button" onclick="window.location = '<%= roles_path %>';" class="ui-state-default ui-corner-all" title="Volver a Buscar"><span class="ui-icon ui-icon-circle-zoomout"></button>
+ <script> $( "button" ).button(); 
+          $( "buttonback" ).button();
+ </script>
+

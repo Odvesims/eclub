@@ -1,0 +1,16 @@
+<div class = "nested-fields">
+	<table>
+		<tr>		
+			<td><%= f.label :setma_id%></td>
+			<td><%= f.collection_select(:setma_id, @setmas, :id, :descripcion) %></td>	
+		</tr>
+		<tr>
+			<td><%= f.label :divem_id%></td>
+			<td><%= f.collection_select(:divem_id, @divems_all, :id, :descripcion) %></td>	
+		</tr>
+		<tr>
+			<td><%= f.label :caja_id%></td>
+			<td><%= f.collection_select(:caja_id, @cajas, :id, :descripcion) %></td>	
+		</tr>
+	</table>
+</div>

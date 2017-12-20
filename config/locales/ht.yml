@@ -1,0 +1,603 @@
+ht:
+  usuario: Itilizatè
+  terminal: Terminal
+  terminales: Terminales
+  neto: Net
+  payout: Payout
+  tickets_gan: Win. Tckts.
+  jugadas: Bets
+  notificaciones: Notifications
+  terminal_cambio: Terminal Assignment was succesful
+  asignar: Assign
+  abriendo: opening
+  cerrando: closing
+  rep_descuadre: POS Lavant dezekilib Rapò 
+  cant_min: Minimòm kantite lajan aktivite
+  rep_apostado: Rapò parye a
+  rep_actividad: Rapò Aktivite
+  resultados: Rezilta
+  juego: Jwèt
+  valor: Valè
+  cant_apuestas: Kantite parye a
+  mostrar_debajo: Montre anba a papòt sèlman?
+  monto_tickets: Kantite tikè
+  monto_resumen: Kantite Rezime
+  abrecierra_recarga: Louvri/fèmen Komèsyal rcharj
+  loterias_cierre: Fèmti Tan Lotri
+  loterias_cierre: Fèmti Tan Lotri
+  venta_recargas: Rechaje Vann
+  confirma_premios: Konfime Prim?
+  modo_calculo: Mode Kalkil
+  monto_exento: Kantite lajan Exempt
+  absoluto: Absoli
+  acumulativo: Kimilatif
+  cambiar_pass: Chanje Modpas
+  abrev: Abreviyasyon ki
+  abrir: Open
+  acceder: Log in
+  acepta_ventalocal: Enfòmasyon sou bèt kay lokal yo
+  aceptcxc: Aksepte nan CxC
+  aciertos_producs: Frape Pwodwi
+  actcoma: Pèmèt Konpayi
+  actdesactauto: Opsyon yo ki ap pèmèt/enfim Vann Bank(Auto)
+  actdesactmanual: Opsyon yo ki ap pèmèt/enfim Vann Bank(Manyèl)
+  activo: Aktif
+  actpega3: Aktif Pega3
+  actualizar: Mizajou
+  acumres: Akimile Rezime
+  agregar: Add
+  anterior: Previous
+  anular: Ano
+  anulartransrecargas: Tranzaksyon Recharge Anile
+  anuladobanca: Nulled pa Bank
+  anulaticket: Anile Biyè
+  anula_central: Anile pa Santral la
+  anula_por: Pa Avyon
+  anula_servidor: Anile pa sèvè
+  asigna: Mandatè
+  asigna_balventa: Bay Balans pou Komèsyal
+  asigna_clavevta: Bay kle nan Komèsyal
+  asunto: Nimewo
+  añadir: Add
+  bal1: Rezime 1
+  bal2: Rezime 2
+  bal_actual: Balans aktyèl
+  banca: Pwen nan Vann
+  bancas: Pwen nan Vann
+  bangetdat: Enfòmasyon Jeneral Bank
+  bienvenida: Byenveni nan
+  borra_ventat: Efase vant tikè
+  buscar: Search
+  busca_avanzada: Advanced Search
+  busca_por: Search
+  clave_actual: Current Password
+  cant_num: Kantite pwoblèm
+  carat_final: Karaktè final
+  carat_inicia: Main karaktè
+  cerrar: Fèmen
+  cierraventa: Fèmen Komèsyal
+  cerrar_venta: Fèmen Komèsyal
+  clave: Kle
+  clave: Kle
+  clave_aciertos: Kle
+  clave_confirmacion: Konfime modpas
+  clave_local: Enpòtan yo nan lokal
+  clavtalocal: Kle Komèsyal lokal
+  nueva_clave: Contraseña Nueva
+  codigo: Kòd
+  cod_opcion: Kòd opsyon
+  comen1: Kòmantè
+  comen2: Kòmantè
+  coment: Kòmantè
+  comision: Komisyon
+  comision_gana: Touche Komisyon
+  compania: Konpayi
+  compania_activa: Aktif
+  comple_long: Full Length
+  compra: Achte
+  compras_dets: Shopping Detaye
+  compras_resume: Shopping Nutshell
+  conectadas: Konekte
+  conectaronhoy: Yo te konekte jodi a
+  conectaydesconecta: Yo dekonekte ak ki konekte
+  conector: Connector
+  conec_final: Connector fen
+  config_banca: Mete Bank
+  confirma: Konfime
+  confirmacion: Konfimasyon
+  confirma_contrasena: Konfime Modpas
+  confirmar_numeros: Konfime Numbers
+  consorcios: Konsòsyòm
+  consultar: Konsilte
+  consulta_numero: Tcheke Nimewo
+  contrasena: Modpas
+  controlarnumeros: Tcheke Nimewo
+  controller: Controller
+  con_bal: Ak balans
+  crear: Kreye
+  credito: Kredi
+  cuantos_dias: Anpil jou
+  datoslot: Done lotri
+  datos_banca: Done Bank
+  datos_consorcio: Done Consortium
+  datos_grupo: Done Gwoup
+  datos_loteria: Done Lotri
+  datos_rifero: Sipèvizè Done
+  datos_usuario: Done Itilizatè
+  debito: Debi
+  definirreprecargas: Defini Rapò Rcharj
+  descripcion: Deskripsyon
+  desde: Soti nan
+  desplega_por: S'étandr Pa
+  desplegando: Deplwaye
+  despuesneto: Apre rezilta a nèt
+  despuesventa: Apre Vann
+  detalles: Detay
+  detalles: Detay
+  dia: Jou
+  dias: Jou
+  digiserial: Antre nan SERI
+  digitado: Digitate
+  digita_resventa: Chif Komèsyal Rezime
+  digiteserial: Antre nan Seri
+  direccion: Adrès
+  domingo: Dimanch
+  ejecuta:  Kouri
+  eliminar: Retire
+  eliminar: Retire
+  email: Imèl
+  ent_prove: Antite Founisè
+  ent_proves: Antite Founisè
+  enviados: Voye
+  enviar: Voye
+  envia_por: Soumèt pa
+  espere: Tanpri, tann...
+  esp_ticketven: Rete tann Vann Tikè
+  estadobanca: Eta Bank
+  estadopago: Ki dènye nouvèl Peman
+  estatus: Ki dènye nouvèl
+  estatus: Ki dènye nouvèl
+  etiqueta: Tag
+  fecha: Dat li te
+  fecha: Dat li te
+  fecha_futura: Futura Yo Vann an Detay Dat
+  fecha_vence: Maturity Dat
+  global: Global
+  grande: Gwo
+  premios_grava: Prizes Taxes
+  recargas_repventas: Rapò Rcharj
+  gravamen_repventas: Rapò Lien
+  recargas_gan_perd: Recharges nan rapò manm
+  premios_grava: Taksasyon nan Prim
+  preferencias: Preferences
+  gravamen_venta: Lien Vann
+  grava_premios: Gravel Prim
+  grava_venta: Gravel Vann
+  grupo: Gwoup
+  grupos: Gwoup
+  guardar: Sove
+  hasta: Up
+  hello_flash: Hi flash!
+  hello_world: Alo Mondyal
+  hora: Tan
+  hora: Tan
+  horacierra: Fèmti tan
+  horacierra_local: Lokal Tan Fèmen
+  horacierra_online: Sou entènèt Tan Fèmti
+  hoynocon: Jodi a yo pa te konekte
+  id: ID
+  impd: Enprime ak D
+  impdoscols: Enprime sou de kolòn
+  impm: Enprime ak M
+  impnosindex: Nimewo Enprime Catalogue
+  imprime_entrada: Ak anpwent x Tcheke
+  imprime_ronda: Ak anpwent x Round
+  impte: Enprime ak T / E
+  inclubancs: Gen ladan Bank ?
+  info_rol: Enfòmasyon Sou Wòl
+  inicio: Inisyasyon
+  jueves: Jedi
+  jugada: Deplase Kalite
+  leidos: Li
+  limgana: Limite ranport
+  lim_local: Limite lokal
+  lim_online: Limite sou entènèt
+  linea: Liy
+  lista_por: Lis
+  listventas: Komèsyal Lis
+  lista_terminales: Terminal's Report
+  list_usuarios: Lis Itilizatè yo
+  local: Lokal
+  localtarde: Apremidi lokal
+  localtiempo: Lokal yo Tan
+  login: Login
+  longitud: Longè
+  long_partes: Pati longè
+  lotdesde: Soti Nan Lotri
+  loteria: Lotri
+  loterias: Lotri
+  loterias_cierre: Fèmti Tan Lotri
+  lothasta: Lotri
+  lotparams: Paramèt lotri
+  lotparams_haiti: Paramèt Lotri (Ayiti)
+  lotrebote: Lotri rebondisman
+  lotnocero: Pou yo travay sou "genyen Numbers" lotri a pa ka zewo
+  lunes: Lendi
+  manda_local: Voye Ticketlokal
+  martes: Madi
+  mensaje: Mesaj
+  mensajes: Posts
+  mensajes: Posts
+  mensajesleidos: Li Posts
+  mensajesneviados: Voye
+  mensajesnuevo: New Posts
+  mensaje_numgana: Nimewo sa yo genyen yo te an fèt kòrèkteman
+  miercoles: Mèkredi
+  modo_despliegue: Montre Mode
+  modo_premio: Prim Mode
+  monitoreo: Siveyans Komèsyal
+  monitoreobancas: Pwen nan Vann Siveyans
+  monto: Kantite lajan
+  monto: Kantite lajan
+  montoacu: Akimile Kantite lajan
+  monto_ingresa: Kantite lajan Login
+  noconectadas: Pa konekte
+  noencontroreg: NON DOSYE YO JWENN
+  nombre: Non
+  nom_rol: Non wòl
+  nopagado.: Ki poko peye
+  noprocesado: Untried
+  noreporta: Pa gen renouvèlman medikaman lavant rapò
+  nuevo: New
+  nuevos: New
+  numero: Nimewo
+  numero_ruta: Route Number
+  numganadores: Genyen Numbers
+  numdoc: Nimewo Dokiman
+  numletra: Numletra
+  numrefe: Nimewo Referans
+  numticket: Nimewo Ticket
+  num_gana: Genyen Numbers (Ayiti)
+  online: Sou entènèt
+  online: Sou entènèt
+  opcion1: 1 - Sou nan vann
+  opcion2: 2 - Pèmèt a pa gen okenn BAND
+  opcion: Opsyon
+  opcionactdesact1: 1 - Pa gen Recharge Vann
+  opcionactdesact2: 2 - Pèmèt pa Santral
+  opcionactdesact3: 3 - Aktive pa Sipèvizè
+  opcionactdesact4: 4 - Son pou Bank
+  opcionactdesact5: 5 - Aktive pa Gwoup
+  opcionactdesact6: 6 - Pou yon Gwoup
+  opcionactdesact7: 7 - Pou yon Sipèvizè
+  opcion_activadesactiva: Opsyon yo ki ap pèmèt / enfim
+  orden: Lòd
+  ordena_por: Klase dapre
+  organiza: Òganize ?
+  orig_compara: Sous Konparezon
+  padre_id: Papa_ID
+  pagado: Peye
+  pagar: Peye
+  paga_punto: Peye x Point
+  paga_ticket: Peye Ticket
+  para: Pou
+  pasa_mins: Minit sot pase yo
+  peque: Ti
+  porc_acum: Akimile Pousantaj
+  porc_gana: Genyen pousan
+  porencima: Pi wo pase
+  porgana: Fè
+  por_entrada: Pou chak antre
+  precio_punto: Pri pou chak Point
+  prefe_usuarios: Itilizatè Preferences
+  primera: Premye
+  procesado: Akize
+  procesadotiempo: Trete nan tan
+  procesado_enlinea: Processing sou entènèt
+  procesado_local: Processing lokal
+  procesando: Processing. Tanpri, tann
+  proc_ventavieja: Trete vant fin vye granmoun
+  producto: Pwodwi
+  productos: Pwodui
+  productos_aciertos: Frape Pwodwi
+  products_padre: Papa Pwodwi
+  puedeempezar: Ou ka kòmanse jwenn aksè nan opsyon ki disponib sou menu an
+  elmenu: Menu
+  puntos_min: Pwen minimòm
+  puntos: Pwen
+  reboteparams: Paramèt detant
+  recargas: Rcharje
+  refrescar_cada: Rafrechi chak
+  regcompracomi: Achte ak Enskripsyon Komite
+  reglas: Règ
+  reg_existe: Ki deja egziste Dosye Edit
+  reg_nuevo: Antre yon Dosye New
+  reg_productos: Pwodwi Enskripsyon
+  reg_product_padre: Papa Pwodwi Enskripsyon
+  repnumganadores: Winning Numbers Report
+  renumpaletri: Repete Nimewo Pale / Trick
+  reporeticketsprem: Biyè aspè pou prim
+  reporta: Rapò
+  reporte: Rapò
+  reprebote: Detant Rapò
+  reprecargas: Rapò rcharj
+  repticksanula: Rapò Biyè Anile
+  repventas: Komèsyal Rapò rcharj
+  rifero: Sipèvizè
+  riferos: Sipèvizè
+  roles: Wòl
+  sabado: Samdi
+  salir: Kite
+  secuencia: Sekans
+  segs: Segonn
+  segunda: Dezyèm
+  siguiente: Apre
+  sist_prueba: Sistèm Egzamen
+  tarde: Apremidi
+  telefono: Telefòn
+  tercera: Twazyèm
+  ticket: Tikè
+  tickets: Biyè
+  ticketspagar: Biyè yo peye
+  ticketstodos: Tout Biyè
+  tiempo_bancascon: Pwen tan nan lavant
+  tipodoc: Dokiman Kalite
+  tipo_doc: Dokiman Kalite
+  tipo_printer: Kalite printer
+  todalocal: Tout Lokal
+  todas: Tout
+  todos: Tout
+  todos: Tout
+  total_entradas:
+  trabaja_red: Ap travay sou Wouj
+  transa: Transa
+  transaccno: Tranzaksyon No
+  ultimonumero: Dènye Nimewo
+  unacolum: Nan yon Kolòn
+  una_condicion: Yon Kondisyon
+  usa_serial: Lè l sèvi avèk Seri an
+  user: Itilizatè
+  userventa: Vann D '
+  usuarios: Itilizatè yo
+  valor_invalido: Valab Valè
+  valor_max: Maksimòm Valè
+  valor_min_ticket: Minimòm Valè Ticket
+  venp3c: Pega3 Combo Vann
+  venp3l: Pega3 Vann lineyè
+  venpal: Vann Pale
+  venqui: Vann Quinielas
+  ventastardes: Komèsyal Reta
+  ventas_dets: Komèsyal Detaye
+  ventas_recabcas: Komèsyal rcharj Kolekte Pa Bank
+  ventas_recacodigo: Komèsyal rcharj Kolekte Pa Kòt
+  ventas_resume: Rezime Komèsyal
+  venta_sobre: Ide sou vant
+  ventri: Triple Vann
+  viernes: Vandredi
+  volver: Retounen
+  volver_buscar: Retounen nan Search
+  vpnclient: VPN Kliyan 
+  yaanulado: Deja Anile
+  resumen_lot: Rezime pa Lotri
+  venta: Vann
+  consulta_vtanumero: Tcheke Komèsyal Nimewo
+  monitoreo: Siveyans Komèsyal
+  detalles_jugada: Detay Pwogrè
+  limite: Limite
+  apostado: Mwen Parye
+  disponible: Disponib
+  tickets_porbanca: Tikè pou Bank
+  total_puntos: Pwen Total
+  detalles_ticket: Tikè Detay
+  acumres: Akimile Rezime
+  acumdets: Akimile Detaye
+  limite: Limite
+  apostado: Mwen Parye
+  disponible: Disponib
+  tickets_porbanca: Tikè pou Bank
+  total_puntos: Pwen Total
+  detalles_ticket: Detay pou Tikè
+  acumres: Akimile lavant Nutshell
+  acumdets: Detaye Komèsyal akimile
+  repacumres: Akimile lavant Rezime pa
+  repacumdets: Kenbe pou Komèsyal Detaye
+  repacum: Akimile Komèsyal Global Rapò 
+  total_ventas: Total Komèsyal
+  menos_sacaron: Kantite yo Vann
+  pagado: Peye
+  total_sacaron: Pran Kantite
+  mas_grava: Plis Lien
+  ganancia: Akeri
+  perdida: Pèt
+  menos_porcventa: Mwens % Vann
+  porc_vtarecarga: Komèsyal rcharj (%)
+  resultado_final: Rezilta
+  neta: Filè
+  bruta: Brit
+  pierde_gana: Akeri/Pèt
+  monto_venta: Kantite yo vann
+  monto_sacado: Pran Kantite
+  impuestos: Taksasyon
+  porc_vta: Komèsyal (%)
+  por_banca: Pa Pwen Vann an
+  por_rifero: Pa sipèvizè
+  por_grupo: Pa gwoup
+  por_fecha: Anvan Dat
+  por_loteria: Pou Lotri
+  lista_vtasde: Lis nan lavant
+  impresoen: Enprime sou
+  vendido: Vann
+  venta_neta: Filè Komèsyal
+  venta_bruta: Vann Brit
+  ventade: Total Komèsyal
+  nocero: ID DWE VALAB
+  rebotado: Mwen Rebondi
+  rebotar: Yon Tès
+  numabreviado: N°
+  control_numero: Nimewo kontwòl
+  reg_consorcio: Dosye Corporation
+  mensaje_eliminar: Asire w ke ou vle efase?
+  reg_productos_padre: Papa Pwodwi Enskripsyon  
+  reg_producto: Pwodwi Enskripsyon
+  inactivo: Inaktif
+  agregar_roles: Add Wòl
+  nivel_proceso: Nivo pwosesis
+  ultimo_mov: Dènye mouvman
+  hora_ultvta: Dènye sale
+  hora_entrada: Tan Tcheke
+  hora_entrada_tarde: Kòmanse anreta Tan
+  cant_tickets: Biyè Total
+  consulta_banca: Tcheke Bank
+  actualiza_cada: Chak Refresh
+  desconectaron: Yo te Dekonekte
+  nohanconectado: Pa gen Konekte
+  tipo_vta: Kalite Vann
+  imprimir: Ekri an lèt detache
+  si: Wi
+  no: Pa gen
+  letra: Lèt
+  anulado: Anile ?
+  tipo_doc: Doc. Kalite
+  vtaticket_banca: Biyè Komèsyal pou chak Bank
+  monto_total: Kantite lajan yo
+  venta_numer: Bank
+  enviado_a: Voye bay
+  mensaje_enviado: Mesaj Voye
+  online_local: O/L
+  fechanulado: Dat Anile
+  ticket_total: Biyè Total
+  asignado: Asiyen nan
+  no_encontrado_user: Pa gen divinò yo te jwenn
+  sacado: Won
+  premios: Prim
+  monto_jugado: Kantite lajan yo te jwe
+  monto_ganado: Kantite lajan Earned
+  detalles_ganancia: Salè Detay
+  reversar_anular: Anile retounen Ticket la 
+  reversar: Retounen Anile
+  gran_total: Grand Total
+  clave_actual: Kle Aktyèl
+  vend: Vann
+  password_invalido: Modpas se Valab
+  idioma: Lang
+  tema: Tèm
+  perfil: Profile
+  aceptar: Akspete
+  cancelar: Anile
+  cambiar_idioma: Chanjman Lang
+  repticketsvend: Rapo of Biyè Vann
+  repventardes: Brut Lavant an Reta
+  advertencia: Avètisman
+  erroradver: Avètisman!
+  error: Erè
+  pais: Peyi
+  usa_barcode: Sèvi ak Bar-Code
+  lleva_logo: Pran Logo
+  selec_linea: Chwazi yon liy
+  responder: Rèponse
+  mensaje: Post
+  hora_cerrada: Fèmen Nan
+  loterias_cerradas: Lotri Fèmen
+  tiempoconectada: Minit yo konsidere yon Bank kòm dekonekte
+  opcioneskey: Opsyon kle konfimasyon
+  copiar_desde: Kopi Nan
+  copiar_hacia: Kopye bay sa a
+  iniciar: Siyen Nan
+  borra_ctrlnum: Retire Nimewo Kontwòl la
+  borra_parametros: Klè Paramèt Lotri
+  copia_parametros: Kopi Paramèt Lotri
+  remover: Retire Kontwòl
+  remover_param: Retire Parameters
+  quitar_control: Retire Kontwòl
+  quitar_parametro: Retire Parameters
+  el_solo: Se sèlman sa a
+  el_dependientes: Sa a ak depandan
+  dependientes: Se sèlman Depandan 
+  configuracion: Settings  
+  menu:
+    opcioneskey: Opsyon ak kle Konfimasyon
+    otrosmantenimientos: Gen Lòt Ki
+    monitoreo: Siveyans
+    monitorsrch: Siveyans Komèsyal
+    cambiarclaveventa: Change Terminal Password
+    asignarterminales: Set Banks to Terminal
+    bancasconectadas: Konekte Ban
+    consultatickets: Tcheke Ticket
+    hsendresults: Send Results Report
+    consultanumero: Tcheke Nimewo
+    mensajes: Posts
+    informes: Rapò
+    repticketsprems: Biyè Gayan
+    repacumres: Akimile Rezime
+    repacumdets: Akimile Detaye
+    replistavtas: Komèsyal Lis
+    reptickanulados: Biyè Anile
+    reprebote: Detant Rapò
+    listausuarios: Lis Itilizatè Yo
+    procesos: Pwosesis
+    numganadores: Genyen Numbers
+    pagartickets: Peye Ticket
+    anulartickets: Komèsyal Aswè Kri
+    ventastardesinproc: Brut Lavant an Reta
+    repventardes: Brut Lavant an Reta
+    ventascierre: Fèmen Komèsyal
+    reversaranular: Tikè Unbypass
+    clavevtalocales: Kle Sale Lokal
+    mantenimientos: Antretyen
+    loterias: Lotri
+    grupos: Gwoup
+    riferos: Sipèvizè Bank
+    bancas: Bankè
+    loteriasparams: Paramèt Lotri
+    rebotelotparams: Detant Paramèt
+    userventas: Komèsyal Itilizatè Yo
+    ctrlnumeros: Kontwòl de numero
+    bancasgendats: Detay Bankè Jeneral
+    loteriascierre: Ora Syèr
+    configurabancas: Mete Bankè
+    opcionacdesauto: Aktive/Koupe Vant (Manyèl)
+    opcionacdesmanual: Aktive/Koupe Vant (Otomatik)
+    recargas: Rcharje
+    registrocompras: Acha dosye ak komisyon
+    activar: Aktive
+    activarcompanias: Pèmèt Konpayi
+    opcionacdes: Baskil/Disoud Rcharje
+    blcedispactuales: Balans Ki Disponib
+    informesrec: Rapò
+    repventasrecargas: Komèsyal Rcharj
+    repacumbcas: Lavant Kimilatif pou Ban
+    repacumprods: Lavant Kimilatif pou Kòd
+    repbcaespecificas: Lòd Espesifik Ban
+    caventasrecargas: Louvri/fèmen Recharge sale
+    anulartrsrecargas: Anile Tranzaksyon
+    aclvventas: Bay Modpas pou sale
+    adefreprecargas: Defini chaje rapò
+    recargastransas: Bay balans lavant
+    digitar: Digitate
+    ventasresumes: Digitar Resumen Ventas Diarias
+    bancasdigitar: Registrar Banca
+    hentidadproves: Antite Founisè
+    modopremios: Mòd prim
+    productospadres: Pwodwi Papa
+    productos: Pwodui
+    productosaciertos: Pwodwi Siksè
+    productosparams: Paramèt Lotri
+    hrepacumres: Akimile Rezime
+    hrepacumdets: Akimile Detaye
+    hreplistavtas: Komèsyal Lis
+    hrebotelotparams: Detant Paramèt
+    leepremios: Genyen Numbers
+    hmonitorsrch: Siveyans Komèsyal
+    hreprebote: Detant Rapò
+    hctrlnumeros: Kontwòl de numero
+    emisiones: Emisyon
+    configuracion: Konfigirasyon
+    consorcios: Konsòsyòm
+    seguridad: Sekirite
+    users: Itilizatè yo
+    roles: Wòl
+    hborraparametros: Retire Paramèt
+    hcopiaparametros: Paramèt Kopi
+    hborractrlnumero: Retire Nimewo Kontwòl la
+    listaterminales: Terminal's Report
+    userslotdefaults: Itilizatè Preferences

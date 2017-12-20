@@ -1,0 +1,45 @@
+<script>
+	$(function() 
+	{
+		$( "#tabs" ).tabs();
+	});
+	$(function() 
+	{
+		$( "buttona" ).button(
+		{
+			icons: 
+			{
+				primary: "ui-icon-plus"
+			},
+		});
+	});
+	function nuevo()
+	{
+		window.location = '<%= new_divem_path() %>';
+	};
+</script> 
+<br>
+<div  id="tabs" class = "ui-widget ui-widget-content",  style = "width: 50%; font-size: 14px; margin-right: 0px; margin-left: 0px ">
+	<ul>
+		<li><a href="#tabs-a">Preferencias de Usuarios</a></li>
+	</ul>
+	<br>
+	<div id="tabs-a">
+		<div style = "font-size: 14px; width: 100%; margin-left: 0px; margin-top: 15px", class = "ui-widget ui-widget-content">
+			<table> 
+				<tr class="ui-widget-header">
+					<th style = "width: 10em">Login</th>
+					<th style = "width: 30em">Nombre</th>
+					<th style = "width: 30em">Email</th>
+				</tr>
+				<% @userconfs.each do |userconf| %>
+					<tr>
+						<td><%= userconf.login%></td>
+						<td><%= link_to userconf.name, edit_usersdefault_path(userconf) %></td>
+						<td><%= userconf.email %></td>
+					</tr>
+				<% end %>
+			</table>
+		</div>
+	</div>
+</div>

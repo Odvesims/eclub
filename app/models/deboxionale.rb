@@ -1,6 +1,6 @@
 class Deboxionale < ActiveRecord::Base
 	default_scope order: 'id'   
-	attr_accessible :id, :fecha, :fecha_dia, :titulo, :versiculo, :cuerpo, :autor, :dia, :anio, :cita
+	attr_accessible :id, :fecha, :fecha_dia, :titulo, :versiculo, :cuerpo, :autor, :dia, :anio, :cita, :idioma
 	self.table_name = "deboxionales"  
 		
 	def next(id) 

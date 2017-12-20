@@ -1,0 +1,71 @@
+<%= form_for @user, :html => {:class=> "form-horizontal" } do |f| %>
+	<%= hidden_field_tag(:formu_controller, "deboxionals", :id=> "formu_controller") %>
+	<% if @user.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@user.errors.count, "errore") %>: No se pudo guardar</h2>
+			<ul>
+				<% @user.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %> 
+	<h2><%= t(:user) %></h2></legend>
+	<ul class="nav nav-tabs">
+		<li class="active"><a data-toggle="tab" href="#menu1"><%= t(:datos) %></a></li>
+	</ul>	
+	<div class= "tab-content">
+		<div id="menu1" class="tab-pane fade in active">
+		<br>
+			<div class = "form-group">
+				<div class="col-md-12 text-left">
+					<div class = "form-group">
+						<%= label_tag :llogin, t(:login), :class=> "control-label col-sm-1" %>
+						<div class="col-sm-2">
+							<%= f.text_field :login, {:tabindex => 1, :class=> "form-control"} %>
+						</div>
+					</div>
+					<div class = "form-group">
+						<%= label_tag :lname, t(:name), :class=> "control-label col-sm-1" %>
+						<div class="col-sm-4">
+							<%= f.text_field :name, {:tabindex => 2, :class=> "form-control"} %>
+						</div>
+					</div>
+					<div class = "form-group">
+						<%= label_tag :lemail, "Email", :class=> "control-label col-sm-1" %>
+						<div class="col-sm-3">
+							<%= f.text_field :email, {:tabindex => 3, :class=> "form-control"} %>
+						</div>
+					</div> 
+					<div class = "form-group">
+						<%= label_tag :lpassword, t(:password), :class=> "control-label col-sm-1" %>
+						<div class="col-sm-2">
+							<%= f.password_field :password, {:tabindex => 3, :class=> "form-control"} %>
+						</div>
+					</div> 	
+					<div class = "form-group">
+						<%= label_tag :lpassword2, t(:confirma), :class=> "control-label col-sm-1" %>
+						<div class="col-sm-2">
+							<%= f.password_field :password_confirmation, {:tabindex => 4, :class=> "form-control"} %>
+						</div>
+					</div> 			
+					<%= link_to_add_association t(:agregar), f, :usersrol, class: 'btn btn-primary', 'data-association-insertion-node' => "#rolesagregar", 'data-association-insertion-method' => "append" %>
+					<div>
+						<%= f.fields_for :usersrol do |fc| %>
+							<%= render 'usersrol_fields', :f => fc %>		
+						<% end %>
+						<div id  = "rolesagregar"></div>
+					</div>
+					<%= f.hidden_field :menu_cod, :value=> "DEBOXIONALMENU" %>
+					<%= f.hidden_field :idioma_isocod2, :value=> "es" %>
+					<%= f.hidden_field :idioma_id, :value=> 1 %>
+					<%= f.hidden_field :estatus, :value=> 'A' %>
+					<br>
+					<br>
+				</div>				
+			</div>
+		</div>	
+	</div>
+	<div class = "row text-center"><%= submit_tag t(:guardar), :class=> "btn btn-lg btn-success" %></div>
+<% end %>
+<br>	

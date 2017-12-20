@@ -1,0 +1,50 @@
+<meta name="viewport" content= "user-scalable=0">
+<% provide(:title, 'About Us') %>
+<%@user = current_user%>
+<h1><%=@user.name%></h1>
+<p>
+<table>
+  <thead>
+  <tr>
+    <td>
+	  <table style="width:75px;text-align: center;top:0px;"> 
+	  <thead>
+	    <tr><td style = "text-align: center;"><%=link_to(image_tag('preferencias.png', :height =>'60', :width => '60', :valign=>"middle", :class=>"pin_image", :title=>t(:preferencias)), usersidioma_path(@user), :class => 'quick')%></td>
+		<tr><td style = "font-size: 14px"><b><%=link_to(t(:preferencias), usersidioma_path(@user), :class => 'quick', :style=> "text-decoration: none; color: black;")%></b></td>
+		</tr>
+	  </thead>
+	  </table>
+	</td>
+	<td>
+	  <table style="width:75px;text-align: center;top:0px;"> 
+	  <thead>
+	    <tr><td style = "text-align: center;"><%=link_to(image_tag('perfil.png', :height =>'60', :width => '60', :valign=>"middle", :class=>"pin_image", :title=>t(:perfil)), usersperfil_path(@user), :class => 'quick')%></td>
+		<tr><td style = "font-size: 14px"><b><%=link_to(t(:perfil), usersperfil_path(@user), :class => 'quick', :style=> "text-decoration: none; color: black;")%></b></td>
+		</tr>
+	  </thead>
+	  </table>
+	</td>
+  </tr>
+    <tr>
+    <td>
+	  <table style="width:75px;text-align: center;top:0px;"> 
+	  <thead>
+	    <tr><td style = "text-align: center;"><%=link_to(image_tag('password.png', :height =>'60', :width => '60', :valign=>"middle", :class=>"pin_image", :title=>t(:contrasena)), userspasswd_path(@user), :class => 'quick')%></td>
+		<tr><td style = "font-size: 14px"><b><%=link_to(t(:contrasena), userspasswd_path(@user), :class => 'quick', :style=> "text-decoration: none; color: black;")%></b></td>
+		</tr>
+	  </thead>
+	  </table>
+	</td>
+	<td>
+	  <table style="width:75px;text-align: center;top:0px;"> 
+	  <thead>
+	    <tr><td style = "text-align: center;"><%=link_to(image_tag('cerrarsesion.png', :height =>'60', :width => '60', :valign=>"middle", :class=>"pin_image", :title=>t(:salir)), signout_path, method: "delete" , :class => 'quick')%></td>
+		<tr><td style = "font-size: 14px"><b><%=link_to(t(:salir), signout_path, method: "delete" , :class => 'quick', :style=> "text-decoration: none; color: black;")%></b></td>
+		</tr>
+	  </thead>
+	  </table>
+	</td>
+  </tr>
+  </thead> 
+<table>
+</p>

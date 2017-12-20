@@ -1,0 +1,22 @@
+<div class="nested-fields"> 
+	<table>
+	<thead>
+		<tr class ="dadcontrolador">
+		  
+			<td class ="tdcontroller"><%= f.text_field :controller, {:class =>"editcontroller", :onchange=>"selectModel('buscanomrol', this)",:size => 20 }  %></td>
+			<td><%= image_tag "SearchIcon2.png", :onclick=>"selectModel('buscarol', this)", :height =>'20', :width => '20', :title=>"Buscar", :valign=>"middle", :class=>"pin_image" %></td>
+			<td class ="tdmenunom" style = "width: 175px"><div id="divcltenom"></div></td>
+			<td style="width: 75px; text-align: center"><%= f.check_box :acceder %></td>
+			<td style="width: 80px; text-align: center"><%= f.check_box :crear %></td>
+			<td style="width: 80px; text-align: center"><%= f.check_box :consultar %></td>
+			<td style="width: 80px; text-align: center"><%= f.check_box :actualizar %></td>
+			<td style="width: 70px; text-align: center"><%= f.check_box :eliminar %> </td>
+			<%@eliminar=  '<span class="ui-icon ui-icon-closethick" title="Eliminar" >Eliminar'.html_safe %>
+			<td><%= link_to_remove_association @eliminar, f %></td>
+		</tr>
+	</thead>
+	</table>
+
+
+</div>
+

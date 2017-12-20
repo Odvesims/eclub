@@ -1,0 +1,160 @@
+<table class= "table-striped table-hover" width="100%">
+	<%if @pfuncion=='busimcard'%>
+		<tr>
+			<th><%= t(:codigo) %></th>
+			<th><%= t(:numero_cuenta) %></th>
+			<th><%= t(:estado) %></th>
+		</tr>
+	<%else%>  
+		<tr>
+			<th><%= t(:codigo) %></th>
+			<th><%= t(:nombre) %></th>
+			<th><%= t(:estado) %></th>
+		</tr>
+	<%end%>	
+	<% if @pfuncion == 'ccvendedor' %>
+		<% @modeldets.each do |det| %>
+			<tr onclick="takeGeneric ('<%= det.id %>','<%= det.codigo %>','<%= det.nombre%>','vendedor')">
+				<td><%= det.codigo %></td>
+				<td><%= det.nombre %></td>
+				<td><%= det.estatus %></td>
+			</tr>
+		<% end %>
+	<% elsif @pfuncion == 'mopropietario'  %>
+		<% @modeldets.each do |det| %>
+			<tr onclick="takeGeneric ('<%= det.id %>','<%= det.codigo %>','<%= det.nombre%>','propietario')">
+				<td><%= det.codigo %></td>
+				<td><%= det.nombre %></td>
+				<td><%= det.estatus %></td>
+			</tr>
+		<% end %>
+	<% elsif @pfuncion == 'busimcard'  %>
+		<% @modeldets.each do |det| %>
+			<tr onclick="takeGeneric ('<%= det.id %>','<%= det.codigo %>','<%= det.nombre%>','simcard')">
+				<td><%= det.codigo %></td>
+				<td><%= det.numero_cuenta %></td>
+				<td><%= det.estatus %></td>
+			</tr>
+		<% end %>
+	<% elsif @pfuncion == 'busconcepto'  %>
+		<% @modeldets.each do |det| %>
+			<tr onclick="takeGeneric ('<%= det.id %>','<%= det.codigo %>','<%= det.descripcion%>','concepto','<%=@id_cod%>','<%=@pformu%>')">
+				<td><%= det.codigo %></td>
+				<td><%= det.descripcion %></td>
+				<td><%= det.estatus %></td>
+			</tr>
+		<% end %>
+	<% elsif @pfuncion == 'busconceptota'  %>
+		<% @modeldets.each do |det| %>
+			<tr onclick="takeGeneric ('<%= det.id %>','<%= det.codigo %>','<%= det.descripcion%>','tallerconcepto','<%=@id_cod%>','<%=@pformu%>')">
+				<td><%= det.codigo %></td>
+				<td><%= det.descripcion %></td>
+				<td><%= det.estatus %></td>
+			</tr>
+		<% end %>
+		
+	<% elsif @pfuncion == 'bugrupo'  %>
+		<% @modeldets.each do |det| %>
+			<tr onclick="takeGeneric ('<%= det.id %>','<%= det.codigo %>','<%= det.descripcion%>','grupo','','<%=@pformu%>')">
+				<td><%= det.codigo %></td>
+				<td><%= det.descripcion %></td>
+				<td><%= det.estatus %></td>
+			</tr>
+		<% end %>
+
+	<% elsif @pfuncion == 'bubanca' or @pfuncion == 'bu2banca' %>
+		<% if @pfuncion == 'bu2banca' %>
+			<% @pformu='serial'%>
+		<% end %>
+		<% @modeldets.each do |det| %>
+			<tr onclick="takeGeneric ('<%= det.id %>','<%= det.codigo %>','<%= det.nombre%>','banca','','<%=@pformu%>')">
+				<td><%= det.codigo %></td>
+				<td><%= det.nombre %></td>
+				<td><%= det.estatus %></td>
+			</tr>
+		<% end %>
+
+	<% elsif @pfuncion == 'buequipo'  %>
+		<% @modeldets.each do |det| %>
+			<tr onclick="takeGeneric ('<%= det.id %>','<%= det.codigo %>','<%= det.descripcion%>','equipo')">
+				<td><%= det.codigo %></td>
+				<td><%= det.descripcion %></td>
+				<td><%= det.estatus %></td>
+			</tr>
+		<% end %>
+
+	<% elsif @pfuncion == 'consultapor'  %>
+		<% if @buscarpor == 'cliente' %>	
+			<% @modeldets.each do |det| %>
+				<tr onclick="takeGeneric('<%= det.id %>','<%= det.codigo %>','<%= det.nombre_cliente %>', 'cliente')">
+					<td><%= det.codigo %></td>
+					<td><%= det.nombre_cliente %></td>
+					<td><%= det.estatus %></td>
+				</tr>	
+			<% end %>
+		<% end %>
+		<% if @buscarpor == 'vendedor' %>
+			<% @modeldets.each do |det| %>
+				<tr onclick="takeGeneric ('<%= det.id %>','<%= det.codigo %>','<%= det.nombre%>','vendedor')">
+					<td><%= det.codigo %></td>
+					<td><%= det.nombre %></td>
+					<td><%= det.estatus %></td>
+				</tr>
+			<% end %>
+		<% end %>			
+		<% if @buscarpor == 'propietario' %>
+				<% @modeldets.each do |det| %>
+					<tr onclick="takeGeneric ('<%= det.id %>','<%= det.codigo %>','<%= det.nombre%>','propietario')">
+						<td><%= det.codigo %></td>
+						<td><%= det.nombre %></td>
+						<td><%= det.estatus %></td>
+					</tr>
+				<% end %>
+		<% end %>
+		<% if @buscarpor == 'banca' %>
+				<% @modeldets.each do |det| %>
+					<tr onclick="takeGeneric ('<%= det.id %>','<%= det.codigo %>','<%= det.nombre%>','banca')">
+						<td><%= det.codigo %></td>
+						<td><%= det.nombre %></td>
+						<td><%= det.estatus %></td>
+					</tr>
+				<% end %>
+		<% end %>
+		<% if @buscarpor == 'equipo' %>
+				<% @modeldets.each do |det| %>
+					<tr onclick="takeGeneric ('<%= det.id %>','<%= det.codigo %>','<%= det.descripcion%>','equipo')">
+						<td><%= det.codigo %></td>
+						<td><%= det.descripcion %></td>
+						<td><%= det.estatus %></td>
+					</tr>
+				<% end %>
+		<% end %>
+		<% if @buscarpor == 'simcard' %>
+				<% @modeldets.each do |det| %>
+					<tr onclick="takeGeneric ('<%= det.id %>','<%= det.codigo %>','<%= det.numero_cuenta%>','simcard')">
+						<td><%= det.codigo %></td>
+						<td><%= det.numero_cuenta %></td>
+						<td><%= det.estatus %></td>
+					</tr>
+				<% end %>
+		<% end %>
+		<% if @buscarpor == 'concepto' %>
+				<% @modeldets.each do |det| %>
+					<tr onclick="takeGeneric ('<%= det.id %>','<%= det.codigo %>','<%= det.descripcion%>','concepto','<%=@id_cod%>','<%=@pformu%>')">
+						<td><%= det.codigo %></td>
+						<td><%= det.descripcion %></td>
+						<td><%= det.estatus %></td>
+					</tr>
+				<% end %>
+		<% end %>
+		
+	<% else %>
+		<% @modeldets.each do |det| %>
+			<tr onclick="takeGeneric('<%= det.id %>','<%= det.codigo %>','<%= det.nombre_cliente %>', 'cliente')">
+				<td><%= det.codigo %></td>
+				<td><%= det.nombre_cliente %></td>
+				<td><%= det.estatus %></td>
+			</tr>	
+		<% end %>
+	<% end %>
+</table>

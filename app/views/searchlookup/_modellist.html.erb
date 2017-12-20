@@ -1,0 +1,58 @@
+<% header = t(:seleccion_el_cliente) %>
+<% case @pfuncion %>
+	<% when 'ccvendedor' %>
+		<% header = t(:seleccione_el_vendedor) %>
+	<% when 'mopropietario' %>
+		<% header = t(:seleccione_el_propietario) %>
+	<% when 'busimcard' %>
+		<% header = t(:seleccione_el_simcard) %>
+	<% when 'bubanca' %>
+		<% header = t(:seleccione_la_banca) %>
+	<% when 'bub2anca' %>
+		<% header = t(:seleccione_la_banca) %>
+	<% when 'buequipo' %>
+		<% header = t(:seleccione_un_equipo) %>
+	<% when 'bugrupo' %>
+		<% header = t(:seleccion_el_grupo) %>
+	<% when 'busconcepto' %>
+		<% header = t(:seleccion_el_concepto) %>
+	<% when 'busconceptota' %>
+		<% header = t(:seleccion_el_concepto_taller) %>
+	<% else %>
+		<% header = t(:seleccione_el_cliente) %>
+<% end %>
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title"><%= header %></h4>
+			<div id = "row text-center">
+				<form>
+					<label class="radio-inline">
+						<input type="radio" name="optradio" id= "b_codigo" checked="checked" value='codigo'><%= t(:codigo) %>
+					</label>
+					<label class="radio-inline">
+						<%if @pfuncion=='busimcard'%>
+							<input type="radio" name="optradio" id= "b_nombre" value= 'nombre'><%= t(:numero) %>
+						<% else %>
+							<input type="radio" name="optradio" id= "b_nombre" value= 'nombre'><%= t(:nombre) %>
+						<% end %>
+					</label>					
+					<%if @informes == 'si' %>
+						<%= text_field_tag(:consultapornombre, "", :id => "consultapornombre", :size=>20, :maxLength => 20, :class=> 'form-control', :onkeyup => "searchbyname('informesconsultapor', 'nombre','"+ @buscarpor +"','"+ @controllerdocs +"')" )%>
+					<% else %>
+						<% if @buscarpor != nil and @controllerdocs != nil %>
+							<%= text_field_tag(:consultapornombre, "", :id => "consultapornombre", :size=>20, :maxLength => 20, :class=> 'form-control', :onkeyup => "searchbyname('consultapor', 'nombre','"+ @buscarpor +"')" )%>
+						<% end %>
+					<% end %>
+				</form>
+			</div>	
+		</div>
+		<div class="modal-body">
+			<span id = "tablita"></span>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
+    </div>
+</div>

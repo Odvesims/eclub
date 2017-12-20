@@ -1,0 +1,20 @@
+<% xcn = 0 %>
+<%if @of_defaults == nil %>
+   <%=  ' ' %>
+<%  else %>
+  <table><thead>
+  <tr>
+  <td><b><%= t(:ordena_por)%></b></td>
+  <% @of_defaults.each do |df|  %>
+	  <% xcn += 1 %>
+	  <% if xcn > 1 %>
+	    </tr><tr><td></td>
+	  <% end %>
+	  <% ordfield = "arrfield[#{xcn}]ordfield" %> 
+	  <% ascdescfield = "arrfield[#{xcn}]ascdesc" %>
+	  <td><%= select_tag ordfield, options_for_select(@of_options, df )%></td>
+	  <td><%= select_tag ascdescfield, options_for_select([['Asc','asc'],['Desc','desc']],@of_ascdes[xcn-1] )%></td>
+  <%  end %>
+  </tr>
+  </thead></table>
+<%  end %>

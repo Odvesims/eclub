@@ -1,0 +1,8 @@
+<%= render 'form' %>
+	<div style= "margin-left: 55px">
+		<button id="button" onclick="window.location = '<%= usersdefaults_path %>';" class="ui-state-default ui-corner-all" title="Volver a Buscar"><span class="ui-icon ui-icon-circle-zoomout"></button> 
+		<button id="button" onclick="window.location = '<%= edit_usersdefault_path(@userconf,:donde => 'prev') %>';" class="ui-state-default ui-corner-all" title="Anterior"><span class="ui-icon ui-icon-seek-prev"></button> 
+		<button id="button" onclick="window.location = '<%= edit_usersdefault_path(@userconf,:donde => 'next')%>';" class="ui-state-default ui-corner-all" title="Siguiente"><span class="ui-icon ui-icon-seek-next"></button> 
+		<script>	 $( "button" ).button(); </script>
+	</div>
+<!-- %= link_to "<button>Add</button>".html_safe, usersdefaults_path, :id=>"open-contacts-dialog-btn", :class=>"inbox-sf-add-btn tip" % -->

@@ -1,0 +1,169 @@
+<%if @pfuncion != 'consultapor' and @pfuncion != 'informesconsultapor' %>	
+		<%if @pfuncion == 'ccclienteinforme'%>
+			<% if @pcontroller == 'repcclistdocs' %>
+				<%if @grupo == "" %>
+					 $("<%= escape_javascript(render "modellist") %>").appendTo("#myModal");
+						$( "#midivdialog" ).dialog({
+							modal: true,
+							height: 400,
+							width: 550,
+							buttons: {
+								Cancel: function() {
+								$( this ).dialog( "close" );
+								}
+					    }});
+					    $("#tablita").html("");
+						$("<%= escape_javascript(render "tabla") %>").appendTo("#tablita");			
+
+				<% else %>
+						$("<%= escape_javascript(render "modellist") %>").appendTo("#midivdialog");
+						$( "#midivdialog" ).dialog({
+							modal: true,
+							height: 400,
+							width: 550,
+							buttons: {
+								Cancel: function() {
+								$( this ).dialog( "close" );
+								}
+					    }});
+					    $("#tablita").html("");
+						$("<%= escape_javascript(render "tabla") %>").appendTo("#tablita");
+				<% end %>
+			<% else %>
+				<%if @grupo == "" and @modeldets == nil %>
+					errorDialog("Advertencia","<%= merror(1,9) %>"); 
+				<%else%>
+					<%if @familia == "" and @modeldets == nil %>
+						errorDialog("Advertencia","<%= merror(1,10) %>"); 
+					<%else%>
+						$("<%= escape_javascript(render "modellist") %>").appendTo("#midivdialog");
+						$( "#midivdialog" ).dialog({
+							modal: true,
+							height: 400,
+							width: 550,
+							buttons: {
+								Cancel: function() {
+								$( this ).dialog( "close" );
+								}
+					    }});
+					    $("#tablita").html("");
+						$("<%= escape_javascript(render "tabla") %>").appendTo("#tablita");
+					<%end%>	
+				<%end%>
+			<% end %>
+		<%else%>
+			document.getElementById('myModal').innerHTML= "<%= escape_javascript(render "modellist") %>";
+			document.getElementById('tablita').innerHTML= "";
+			document.getElementById('tablita').innerHTML+= "<%= escape_javascript(render "tabla") %>";
+		<%end%>
+<% else %>
+	$("#tablita").html("");
+	$("<%= escape_javascript(render "tabla") %>").appendTo("#tablita");
+<% end %>
+	  
+    <% if @pformu=="recibo" %>
+        v_vari='recibo_divem_id'
+        vnocampo='recibo_monto_recibo'
+    <%else%> 
+        <% if @pformu=="prestamoscab" %>
+           v_vari='prestamoscab_divem_id'
+	       vnocampo='prestamoscab_monto_prestamo'
+        <%end%>
+		
+        <% if @pformu=="cctransascab" %>
+           v_vari='cctransascab_divem_id'
+	       vnocampo='cctransascab_monto_documento'
+        <%end%>
+		
+       <% if @pformu=="motranscab" %>
+           v_vari='motranscab_divem_id'
+	       vnocampo='motranscab_monto_documento'
+        <%end%>
+		
+		<% if @pformu=="sctranscab" %>
+           v_vari='sctranscab_divem_id'
+	       vnocampo='sctranscab_monto_documento'
+        <%end%>
+
+       <% if @pformu=="banca" %>
+           v_vari='banca_divem_id'
+	       vnocampo='banca_nombre'
+        <%end%>
+		
+       <% if @pformu=="servicio" %>
+           v_vari='servicio_divem_id'
+	       vnocampo='servicio_monto_documento'
+        <%end%>
+		
+       <% if @pformu=="scservicio" %>
+           v_vari='scservicio_divem_id'
+	       vnocampo='scservicio_monto_documento'
+        <%end%>
+		
+		<% if @pformu=="facturascab_facturasdet" %>
+           v_vari='facturascab_divem_id'
+	       vnocampo='facturascab_monto_documento'
+        <%end%>
+		
+	<%end%> 
+
+ 	function changefield() {
+		alert("He Cambiado  en show");
+	};
+	
+	function validare(vthis,vprecio){
+		alert(vprecio);
+		document.getElementById('[motranscab][motransdet_attributes][1][monto_neto]').value="999.99";
+	};
+	
+	
+	
+<% case @pfuncion%>
+	<% when "validapre" %>
+		$( "#midivdialog" ).on( "dialogclose", function( event, ui ) {
+	       	dataString = 'execfunction=validaprec' +
+						 '&divem_id='+document.getElementById(v_vari).value +	                            
+						 '&variable='+vnocampo; 
+												 
+	                     $.ajax({  
+                         type: "GET",  
+                         url: "/ccgenerics/show",  
+                         data: dataString  
+                         }); 
+		} );
+   
+	<% when "ccbalanceclte" %>
+		$( "#midivdialog" ).on( "dialogclose", function( event, ui ) {
+           	dataString = 'execfunction=ccbalanceclte&cliente_id='+document.getElementById('cliente_id').value +
+						 '&divem_id='+"<%=current_user.default_divem%>" +	                            
+						 '&fecha='+document.getElementById('datepicker').value +
+						 '&variable='+vnocampo; 
+												 
+	                     $.ajax({  
+                         type: "GET",  
+                         url: "/ccgenerics/show",  
+                         data: dataString  
+                         }); 
+		});
+		
+	<% when "ccvendedor" %>
+    
+	<% when "busclientex" %>	 
+		$( "#midivdialog" ).on( "dialogclose", function( event, ui ) {
+        } );
+    <% when "ccbuscaclte" %>	   
+	    $( "#midivdialog" ).on( "dialogclose", function( event, ui ) {
+           	dataString = 'execfunction=ccbuscaclte&cliente_id='+document.getElementById('cliente_id').value+
+						 '&divem_id='+document.getElementById(v_vari).value+	                            
+						 '&fecha='+document.getElementById('datepicker').value+
+						 '&variable='+vnocampo; 
+												 
+	                     $.ajax({  
+                         type: "GET",  
+                         url: "/ccgenerics/show",  
+                         data: dataString  
+                         }); 
+		} );
+	  
+
+<%end%>	

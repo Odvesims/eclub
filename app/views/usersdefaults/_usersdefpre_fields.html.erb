@@ -1,0 +1,50 @@
+<div class = "nested-fields"> 
+	<table>
+		<tr>
+			<td><%= f.label :divem_id%></td>
+			<td><%= f.collection_select(:divem_id, @divems_prestamos, :id, :descripcion) %></td>
+		</tr>
+		<tr>
+			<td><%= f.label :cantidad_pagos%></td>
+			<td><%= f.text_field :cantidad_pagos, {:tabindex => 3} %></td>
+		</tr>
+	
+		<tr>
+			<td><%= f.label :cantidad_dias%></td>
+			<td><%= f.text_field :cantidad_dias, {:tabindex => 3} %></td>
+		</tr>
+	
+		<tr>
+			<td><%= f.label :tasa_interes%></td>
+			<td><%= f.text_field :tasa_interes, {:tabindex => 3} %></td>
+		</tr>
+	
+		<tr>
+			<td><%= f.label :tipo_tasa%></td>
+			<td><%= f.select(:tipo_tasa, [['Mensual','M'],['Anual','A']])%></td>
+		</tr>
+		
+		<tr>
+			<td><%= f.label :tipo_interes%></td>
+			<td><%= f.select(:tipo_interes, [['Fijo','F'],['Amortizable','A']])%></td>
+		</tr>
+
+		<tr>	
+			<td><%= f.label :imprime%></td>
+			<td><%= f.check_box :imprime,options = {:tabindex =>7}, checked_value = "S", unchecked_value = "N"%></td>
+		</tr>
+	
+		<tr>
+			<td><%= f.label :lee_fecha%></td>
+			<td><%= f.check_box :lee_fecha,options = {:tabindex =>7}, checked_value = "S", unchecked_value = "N"%></td>
+		</tr>
+	
+		<tr>
+			<td><%= f.label :lee_numero%></td>
+			<td><%= f.check_box :lee_numero,options = {:tabindex =>7}, checked_value = "S", unchecked_value = "N"%></td>
+		</tr>
+		
+		<%@eliminar=  '<span class="ui-icon ui-icon-closethick" title="Eliminar" >Eliminar'.html_safe %>
+		<td style= padding-left: 27px ><%= link_to_remove_association @eliminar, f %></td>
+  	</table>
+</div>

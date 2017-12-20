@@ -1,0 +1,19 @@
+<% if @vendedor_existe == nil %>
+	<div class = "form-inline">
+		<div class = "form-check form-check-inline">	
+			<%= text_field_tag(:vendedor_cod, "", :id => "vendedor_cod", :size=> 5, :class=> "form-control", :onchange=>"validacodven(this)") %>
+			<button type="button" class="btn btn-info glyphicon glyphicon-search" data-toggle="modal" data-target="#myModal" onclick="selectModel('vendedor','ccvendedor')"></button>
+			<%= hidden_field_tag(:vendedor_id, "", :id => "vendedor_id", :size => 10, :onchange=>"validacodven(this)") %>
+			<span id="divvenenom"></span>
+		</div>
+	</div>
+<% else %>
+	<div class = "form-inline">
+		<div class = "form-check form-check-inline">	
+			<%= text_field_tag(:vendedor_cod, @vendedor_existe.codigo, :id => "vendedor_cod", :size=> 5, :class=> "form-control", :onchange=>"validacodven(this)") %>
+			<button type="button" class="btn btn-info glyphicon glyphicon-search" data-toggle="modal" data-target="#myModal" onclick="selectModel('vendedor','ccvendedor')"></button>
+			<%= hidden_field_tag(:vendedor_id, @vendedor_existe.id, :id => "vendedor_id", :size => 10, :onchange=>"validacodven(this)") %>
+			<span id="divvenenom"><%= @vendedor_existe.nombre %></span>
+		</div>
+	</div>
+<%end%> 

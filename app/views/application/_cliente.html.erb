@@ -1,0 +1,21 @@
+<% if @cliente_existe == nil %>
+	<span class = "form-inline">
+		<span class = "form-check form-check-inline">
+			<%= text_field_tag(:cliente_cod, "", :id => "cliente_cod", :size=> 5, :class=> "form-control", :onchange=>"validacodcte(this,'" + action_name+ "','" + controller_name + "')") %>
+			<button type="button" class="btn btn-info glyphicon glyphicon-search" data-toggle="modal" data-target="#myModal" onclick="selectModel('cliente','cccliente','<%= controller_name%>')"></button>
+			<span id='divcltenom'></span>
+		</span>
+	</span>
+	<%= hidden_field_tag(:cliente_id, "", :id => "cliente_id") %>
+<% else %>
+	<span class = "form-inline">
+		<span class = "form-check form-check-inline">
+			<%= text_field_tag(:cliente_cod, @cliente_existe.codigo, :id => "cliente_cod", :size=> 5, :class=> "form-control", :onchange=>"validacodcte(this,'" + action_name+ "','" + controller_name + "')") %>
+			<button type="button" class="btn btn-info glyphicon glyphicon-search" data-toggle="modal" data-target="#myModal" onclick="selectModel('cliente','cccliente','<%= controller_name%>')"></button>
+			<span id='divcltenom'><b><%= @cliente_existe.nombre_cliente %></b></span>
+		</span>
+	</span>
+	<%= hidden_field_tag(:cliente_id, @cliente_existe.id, :id => "cliente_id") %>
+<%end%>
+
+					

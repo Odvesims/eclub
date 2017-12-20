@@ -1,0 +1,12 @@
+<div class = "nested-fields"> 
+	<table>
+		<tr>
+			<% @tipodocumentos = Tipodocumento.where("divem_id = #{current_user.default_divem} AND afecta_caja = 'S' AND tipo_bal = 'D'").all %>
+			<td><b><%= t(:documento) %> : </td>  
+			<%= f.hidden_field :divem_id, {:value=> current_user.default_divem} %>
+			<td><%= f.collection_select(:tipodocumento_id, @tipodocumentos, :id, :descripcion) %></td>
+			<% @eliminar= '<span class="ui-icon ui-icon-closethick" title="Eliminar">'.html_safe %>
+			<td style="padding-left: 27px"><%= link_to_remove_association @eliminar, f %></td>
+		</tr>
+	</table>
+</div>

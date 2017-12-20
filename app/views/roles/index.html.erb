@@ -1,0 +1,46 @@
+<script>
+	$(function() 
+	{
+		$( "#tabs" ).tabs();
+	});
+	$(function() 
+	{
+		$( "buttona" ).button(
+		{
+			icons: 
+			{
+				primary: "ui-icon-plus"
+			},
+		});
+	});
+	function nuevo()
+	{
+		window.location = '<%= new_rol_path() %>';
+	};
+</script>
+
+<div id="tabs" class = "ui-widget ui-widget-content",  style = "margin-top: 1em;border: 0px;width: 95%; font-size: 14px; margin-right: 3px">
+	<ul>
+		<li><a href="#tabs-a">Listado de Roles</a></li>
+	</ul>
+	<div id="tabs-a">
+		<buttona style = "font-size: 12px", onclick="nuevo()"><%= t(:nuevo) %></buttona>	
+		<table border = 0 id="tableindex">
+			<tr class = "ui-widget-header", style "border: 1px solid #CCCCCC;">
+				<th style = "width: 20%">Nombre Rol</th>
+				<th style = "width: 40%">Descripcion</th>
+				<th style = "width: 40%">Comentario</th>			
+			</tr> 
+			<% @roles.each do |rol| %>
+				<tr>
+					<td><%= link_to rol.nombre_rol, edit_rol_path(rol) %></td>
+					<td><%= rol.descripcion %></td>
+					<td><%= rol.comentario %></td>
+					<%@eliminar=  '<span class="ui-icon ui-icon-closethick">Eliminar'.html_safe %>
+					<td><%= link_to @eliminar, rol, method: :delete, data: { confirm: 'Esta seguro que desea eliminar?' } %></td>
+				</tr>
+			<% end %>														
+		</table>			
+	</div>
+</div>
+<script>//$("tr:odd").css("background-color", "#DEDBDB");</script>
