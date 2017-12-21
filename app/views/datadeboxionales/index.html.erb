@@ -1,7 +1,7 @@
 <script>
 	function nuevo()
 	{
-		window.location = '<%= new_datadeboxional_path() %>';
+		window.location = '<%= new_datadeboxionale_path() %>';
 	};
 </script>
 <div class= "tab-content">
@@ -32,7 +32,7 @@
 							<tr>
 								<td><%= deboxional.anio %></td>
 								<td><%= deboxional.fecha_dia %></td>
-								<td><%= link_to deboxional.titulo, edit_datadeboxional_path(deboxional)%></td>
+								<td><%= link_to deboxional.titulo, edit_datadeboxionale_path(deboxional)%></td>
 								<td><%= deboxional.autor %></td>
 								<td><%= link_to '<i class="glyphicon glyphicon-remove"></i>'.html_safe, deboxional, method: :delete, data: { confirm: 'Está seguro?' } %></td>
 							</tr>	
