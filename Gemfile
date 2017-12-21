@@ -1,6 +1,7 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 gem 'rails', '3.2.21'
+gem 'rake', '11.1.1'
 
 gem 'mysql2'
 
@@ -16,7 +17,7 @@ gem 'prawn-table', '~> 0.1.2'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'pg'
+gem 'pg', '0.18.4'
 gem 'will_paginate'
 
 # Gems used only for assets and not required
@@ -28,7 +29,7 @@ group :assets do
 end
 
 group :production do
-  gem 'pg'
+  gem 'pg', '0.18.4'
   gem 'rails_12factor'
   gem 'uglifier'
 end
