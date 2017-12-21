@@ -1,7 +1,0 @@
-
-<td><%=  "Divem:" %></td>
-<% if @divem_existe == nil %>	
-	<td colspan=2 ><%=select_tag :divem_id, options_from_collection_for_select(@divem, :id, :descripcion), {:include_blank => true, :onchange =>"cambiaDivem(this.value)", :id=> "divem_id"}%></td>							
-<% else %>
-	<td style = "width: 25%"><%= @divem_existe.descripcion %></td>
-<% end %>

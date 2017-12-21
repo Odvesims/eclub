@@ -1,7 +1,0 @@
-
-<td><%=  "Documento:" %></td>
-<% if @documento_existe == nil %>
-	<td><div id= "select_doc"><%= select_tag :tipodocumento_id, options_from_collection_for_select(@tipodocumento, :id, :descripcion, 5), { :include_blank => true, :onchange=>"changesec()", :id=> "tipo_documento"} %> </div></td>
-<% else %>
-	<td style = "width: 25%"><%= @documento_existe.tipo_doc %> - <%= @documento_existe.descripcion %></td>
-<% end %>
