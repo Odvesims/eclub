@@ -23,17 +23,17 @@
 							<% deboxional = Datadeboxionale.where("anio = '2018'").first %>
 							<tr>
 								<td><%= deboxional.anio %></td>
-								<td><%= link_to '<button class="btn btn-primary">Diagramar</button>'.html_safe, edit_diagramacion_path(deboxional)%></td>
+								<td><%= link_to '<button class="btn btn-primary">Diagramar</button>'.html_safe, edit_diagramacione_path(deboxional)%></td>
 							</tr>	
 							<% deboxional = Datadeboxionale.where("anio = '2017'").first %>
 							<tr>
 								<td><%= deboxional.anio %></td>
-								<td><%= link_to '<button class="btn btn-primary">Diagramar</button>'.html_safe, edit_diagramacion_path(deboxional)%></td>
+								<td><%= link_to '<button class="btn btn-primary">Diagramar</button>'.html_safe, edit_diagramacione_path(deboxional)%></td>
 							</tr>	
 							<% deboxional = Datadeboxionale.where("anio = '2016'").first %>
 							<tr>
 								<td><%= deboxional.anio %></td>
-								<td><%= link_to '<button class="btn btn-primary">Diagramar</button>'.html_safe, edit_diagramacion_path(deboxional)%></td>
+								<td><%= link_to '<button class="btn btn-primary">Diagramar</button>'.html_safe, edit_diagramacione_path(deboxional)%></td>
 							</tr>	
 						<%# end %>
 					</tbody>
