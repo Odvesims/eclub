@@ -3,7 +3,7 @@ class DatadeboxionalesController < ApplicationController
 	def index
 		xuser = current_user
 		if signed_granted?(xuser.id, 'users', 'I')
-			@deboxionals = Datadeboxionale.where("idioma= 'es'").paginate(page: params[:page], :per_page => 30).order("fecha DESC, dia DESC")
+			@deboxionals = Datadeboxionale.where("idioma= 'es' and anio = 2018").paginate(page: params[:page], :per_page => 30).order("fecha DESC, dia DESC")
 			respond_to do |format|
 				format.html # index.html.erb
 				format.json { render json: @deboxionals }
