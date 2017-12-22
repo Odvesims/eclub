@@ -3,7 +3,7 @@ class PdfdiagramaciondeboxionalPdf < Prawn::Document
 	include ActionView::Helpers::NumberHelper
 	include ActionView::Helpers::TranslationHelper
 	def initialize(coleccion)
-		super(:page_size => [550,650], :top_margin => 45, :bottom_margin => 25, :page_layout => :portrait)
+		super(:page_size => [528,816], :top_margin => 45, :bottom_margin => 25, :page_layout => :portrait)
 		#@deboxionales = Deboxionale.where("anio = '2018' AND idioma= 'es'").first
 		#header(@deboxionales)	
 		coleccion.each do |deboxional|
@@ -28,18 +28,18 @@ class PdfdiagramaciondeboxionalPdf < Prawn::Document
 		text deboxional.autor, size: 10, align: :left
 		font Rails.root.join("app/assets/fonts/CaviarDreams_Bold.ttf")
 		fechaDia = deboxional.fecha_dia.split(",")
-		text_box(fechaDia[0], {size: 15, overflow: 'truncate', width: 130, align: :center, at: [340,565]})
-		text_box(fechaDia[1], {size: 20, overflow: 'truncate', width: 130, align: :center, at: [340,550]})
+		text_box(fechaDia[0], {size: 15, overflow: 'truncate', width: 130, align: :center, at: [340,735]})
+		text_box(fechaDia[1], {size: 20, overflow: 'truncate', width: 130, align: :center, at: [340,720]})
 		font Rails.root.join("app/assets/fonts/CaviarDreams_Italic.ttf")
-		text_box(deboxional.versiculo + ' ' + deboxional.cita, {size: 10, overflow: 'truncate', width: 130, align: :left, at: [340,510]})
+		text_box(deboxional.versiculo + ' ' + deboxional.cita, {size: 11, overflow: 'truncate', width: 130, align: :left, at: [340,680]})
 		font Rails.root.join("app/assets/fonts/Century-Gothic.ttf")
-		text_box(deboxional.cuerpo, {size: 11, overflow: 'truncate', width: 330, align: :justify, at: [1,510]})
-		#text deboxional.versiculo, size: 10, align: :right
+		text_box(deboxional.cuerpo, {size: 13, overflow: 'truncate', width: 330, align: :justify, at: [1,680]})
 		font Rails.root.join("app/assets/fonts/Century-Gothic.ttf")
-		#text deboxional.cuerpo, size: 11, align: :justify
 		text "\n", size: 11, align: :center
 		font Rails.root.join("app/assets/fonts/Century-Gothic-Bold.ttf")
-		text_box(deboxional.dia.to_s, {size: 40, overflow: 'truncate', width: 130, align: :center, at: [355,40]})
+		text_box(deboxional.dia.to_s, {size: 40, overflow: 'truncate', width: 130, align: :center, at: [355,80]})
+		font Rails.root.join("app/assets/fonts/CaviarDreams.ttf")
+		text_box("Deboxional " + deboxional.anio.to_s, {size: 10, overflow: 'truncate', width: 130, align: :center, at: [355,50]})
 		start_new_page
 =begin		vemp = Empresa.where("id = 1").first
 		vtelemp = Empresastelefono.where("empresa_id = #{vemp.id}").first
