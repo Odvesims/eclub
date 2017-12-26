@@ -16,6 +16,7 @@ class PdfdiagramaciondeboxionalPdf < Prawn::Document
 		text "Deboxional 2018", size: 50, align: :left	
 		font Rails.root.join("app/assets/fonts/CaviarDreams.ttf")
 		text "by theboxion", size: 20, align: :left	
+		start_new_page
 	end
 	
 	def thanksgiving()
@@ -37,7 +38,7 @@ class PdfdiagramaciondeboxionalPdf < Prawn::Document
 		#move_cursor_to 582
 		text "\n", size: 11, align: :center
 		font Rails.root.join("app/assets/fonts/Century-Gothic-Bold.ttf")
-		text deboxional.titulo, size: 20, align: :left
+		text deboxional.titulo, size: 18, align: :left
 		font Rails.root.join("app/assets/fonts/Century-Gothic.ttf")
 		text deboxional.autor, size: 10, align: :left
 		font Rails.root.join("app/assets/fonts/CaviarDreams_Bold.ttf")
