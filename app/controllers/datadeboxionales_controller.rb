@@ -171,17 +171,14 @@ class DatadeboxionalesController < ApplicationController
 	def update
 		xuser = current_user
 		if signed_granted?(xuser.id, 'datadeboxionales', 'N')
-			@user= User.find(params[:id])	
-		
-			@roles = Rol.all
+			@deboxional= Datadeboxionale.find(params[:id])	
 			respond_to do |format|
-				if @user.update_attributes(params[:user])
-					#UserMailer.welcome_email(@user).deliver
-					format.html { redirect_to edit_user_path, notice: 'User was successfully updated.' }
+				if @deboxional.update_attributes(params[:datadeboxionale])
+					format.html { redirect_to :action => :edit, :id=>@deboxional.id }
 					format.json { head :no_content }
 				else
 					format.html { render action: "edit" }
-					format.json { render json: @user.errors, status: :unprocessable_entity }
+					format.json { render json: @deboxional.errors, status: :unprocessable_entity }
 				end
 			end
 		end

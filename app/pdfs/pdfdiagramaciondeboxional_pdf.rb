@@ -53,7 +53,7 @@ class PdfdiagramaciondeboxionalPdf < Prawn::Document
 		font Rails.root.join("app/assets/fonts/Century-Gothic-Bold.ttf")
 		text_box(deboxional.dia.to_s, {size: 40, overflow: 'truncate', width: 130, align: :center, at: [355,80]})
 		font Rails.root.join("app/assets/fonts/CaviarDreams.ttf")
-		text_box("Deboxional " + deboxional.anio.to_s, {size: 10, overflow: 'truncate', width: 130, align: :center, at: [355,45]})
+		text_box("Deboxional " + deboxional.anio.to_s, {size: 10, overflow: 'truncate', width: 130, align: :center, at: [355,40]})
 		#text_box("theboxion", {size: 10, overflow: 'truncate', width: 130, align: :center, at: [-40,45]})
 		start_new_page
 =begin		vemp = Empresa.where("id = 1").first
