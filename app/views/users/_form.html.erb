@@ -49,11 +49,11 @@
 							<%= f.password_field :password_confirmation, {:tabindex => 4, :class=> "form-control"} %>
 						</div>
 					</div> 			
-					<%= link_to_add_association t(:agregar), f, :usersrol, class: 'btn btn-primary', 'data-association-insertion-node' => "#rolesagregar", 'data-association-insertion-method' => "append" %>
+					<%#= link_to_add_association t(:agregar), f, :usersrol, class: 'btn btn-primary', 'data-association-insertion-node' => "#rolesagregar", 'data-association-insertion-method' => "append" %>
 					<div>
-						<%= f.fields_for :usersrol do |fc| %>
+						<%#= f.fields_for :usersrol do |fc| %>
 							<%= render 'usersrol_fields', :f => fc %>		
-						<% end %>
+						<%# end %>
 						<div id  = "rolesagregar"></div>
 					</div>
 					<%= f.hidden_field :menu_cod, :value=> "DEBOXIONALMENU" %>
