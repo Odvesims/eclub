@@ -2,7 +2,7 @@ class DatadeboxionalesController < ApplicationController
 	before_filter :signed_in_user
 	def index
 		xuser = current_user
-		if signed_granted?(xuser.id, 'users', 'I')
+		if signed_granted?(xuser.id, 'datadeboxionales', 'I')
 			@datadeboxionales = Datadeboxionale.where("idioma= 'es' and anio = '2018'").paginate(page: params[:page], :per_page => 30).order("fecha DESC, dia DESC")
 			respond_to do |format|
 				format.html # index.html.erb
@@ -15,7 +15,7 @@ class DatadeboxionalesController < ApplicationController
   # GET /userdefaults/1.json
 	def show
 		xuser = current_user
-		if signed_granted?(xuser.id, 'users', 'I')
+		if signed_granted?(xuser.id, 'datadeboxionales', 'I')
 			@user= User.find(params[:id])	
 			@usersroles = Usersrol.all
 			respond_to do |format|
