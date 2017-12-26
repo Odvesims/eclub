@@ -54,7 +54,12 @@ class PdfdiagramaciondeboxionalPdf < Prawn::Document
 		font Rails.root.join("app/assets/fonts/CaviarDreams_Italic.ttf")
 		text_box(deboxional.versiculo + ' ' + deboxional.cita, {size: 11, overflow: 'truncate', width: 130, align: :left, at: [340,680]})
 		font Rails.root.join("app/assets/fonts/Century-Gothic.ttf")
-		text_box(deboxional.cuerpo.length.to_s + ": " + deboxional.cuerpo, {size: 12, overflow: 'truncate', width: 330, align: :justify, at: [1,680]})
+		if deboxional.cuerpo.length > 2000
+			text_box(deboxional.cuerpo, {size: 11, overflow: 'truncate', width: 330, align: :justify, at: [1,680]})
+		
+		else
+			text_box(deboxional.cuerpo, {size: 12, overflow: 'truncate', width: 330, align: :justify, at: [1,680]})
+		end
 		font Rails.root.join("app/assets/fonts/Century-Gothic.ttf")
 		text "\n", size: 11, align: :center
 		font Rails.root.join("app/assets/fonts/Century-Gothic-Bold.ttf")
