@@ -15,6 +15,9 @@ class PdfdiagramaciondeboxionalPdf < Prawn::Document
 		text "\n", size: 20, align: :center		
 		text "\n", size: 20, align: :center	
 		text "\n", size: 20, align: :center	
+		text "\n", size: 20, align: :center		
+		text "\n", size: 20, align: :center	
+		text "\n", size: 20, align: :center	
 		font Rails.root.join("app/assets/fonts/CaviarDreams_Bold.ttf")
 		text "Deboxional 2018", size: 50, align: :center	
 		font Rails.root.join("app/assets/fonts/CaviarDreams.ttf")
