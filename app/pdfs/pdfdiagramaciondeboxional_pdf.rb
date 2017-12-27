@@ -67,7 +67,8 @@ class PdfdiagramaciondeboxionalPdf < Prawn::Document
 		font Rails.root.join("app/assets/fonts/Century-Gothic.ttf")
 		text "\n", size: 11, align: :center
 		font Rails.root.join("app/assets/fonts/Century-Gothic-Bold.ttf")
-		text_box(index + deboxional.dia.to_s, {size: 40, overflow: 'truncate', width: 130, align: :center, at: [355,80]})
+		index += deboxional.dia
+		text_box(index.to_s, {size: 40, overflow: 'truncate', width: 130, align: :center, at: [355,80]})
 		font Rails.root.join("app/assets/fonts/CaviarDreams.ttf")
 		text_box("Deboxional " + deboxional.anio.to_s, {size: 10, overflow: 'truncate', width: 130, align: :center, at: [355,40]})
 		#text_box("theboxion", {size: 10, overflow: 'truncate', width: 130, align: :center, at: [-40,45]})
