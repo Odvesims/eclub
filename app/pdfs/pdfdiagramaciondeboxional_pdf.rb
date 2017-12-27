@@ -8,10 +8,13 @@ class PdfdiagramaciondeboxionalPdf < Prawn::Document
 		#header(@deboxionales)
 		frontPage
 		coleccion.each do |deboxional|
-			deboxionales(deboxional)	
+			deboxionales(deboxional, 2)	
 		end
 	end
 	def frontPage()
+		start_new_page
+		text "\n", size: 20, align: :center	
+		text "\n", size: 20, align: :center	
 		text "\n", size: 20, align: :center		
 		text "\n", size: 20, align: :center	
 		text "\n", size: 20, align: :center	
@@ -32,7 +35,7 @@ class PdfdiagramaciondeboxionalPdf < Prawn::Document
 	def backPage()
 	
 	end
-	def deboxionales(deboxional)
+	def deboxionales(deboxional, index)
 		#font "Myriad Pro"
 		#font Rails.root.join("app/assets/fonts/CaviarDreams.ttf")
 		#text deboxional.fecha_dia, size: 12, align: :left
@@ -53,7 +56,7 @@ class PdfdiagramaciondeboxionalPdf < Prawn::Document
 		text_box(fechaDia[1], {size: 20, overflow: 'truncate', width: 130, align: :center, at: [340,720]})
 		font Rails.root.join("app/assets/fonts/CaviarDreams_Italic.ttf")
 		text_box(deboxional.versiculo + ' ' + deboxional.cita, {size: 11, overflow: 'truncate', width: 130, align: :left, at: [340,680]})
-		image "app/assets/images/perfil.png", :at => [340,300], :width => 100
+		image "app/assets/images/perfil.png", :at => [340,300], align: :center, :width => 75
 		font Rails.root.join("app/assets/fonts/Century-Gothic.ttf")
 		if deboxional.cuerpo.length > 2000
 			text_box(deboxional.cuerpo, {size: 10, overflow: 'truncate', width: 330, align: :justify, at: [1,680]})
@@ -64,7 +67,7 @@ class PdfdiagramaciondeboxionalPdf < Prawn::Document
 		font Rails.root.join("app/assets/fonts/Century-Gothic.ttf")
 		text "\n", size: 11, align: :center
 		font Rails.root.join("app/assets/fonts/Century-Gothic-Bold.ttf")
-		text_box(deboxional.dia.to_s, {size: 40, overflow: 'truncate', width: 130, align: :center, at: [355,80]})
+		text_box(index + deboxional.dia.to_s, {size: 40, overflow: 'truncate', width: 130, align: :center, at: [355,80]})
 		font Rails.root.join("app/assets/fonts/CaviarDreams.ttf")
 		text_box("Deboxional " + deboxional.anio.to_s, {size: 10, overflow: 'truncate', width: 130, align: :center, at: [355,40]})
 		#text_box("theboxion", {size: 10, overflow: 'truncate', width: 130, align: :center, at: [-40,45]})
