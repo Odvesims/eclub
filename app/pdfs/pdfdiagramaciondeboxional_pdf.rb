@@ -50,9 +50,9 @@ class PdfdiagramaciondeboxionalPdf < Prawn::Document
 		text deboxional.titulo, size: 18, align: :left
 		font Rails.root.join("app/assets/fonts/Century-Gothic.ttf")
 		text deboxional.autor, size: 10, align: :left
-		image "app/assets/images/perfil.png", :at => [1,736], align: :center, :width => 25, :height => 25
+		image "app/assets/images/perfil.png", :at => [1,710], align: :center, :width => 25, :height => 25
 		font Rails.root.join("app/assets/fonts/CaviarDreams_Bold.ttf")
-		text_box(deboxional.autor, {size: 10, overflow: 'truncate', width: 130, align: :center, at: [30,736]})
+		text_box(deboxional.autor, {size: 10, overflow: 'truncate', width: 300, align: :center, at: [20,710]})
 		fechaDia = deboxional.fecha_dia.split(",")
 		text_box(fechaDia[0], {size: 14, overflow: 'truncate', width: 130, align: :center, at: [340,735]})
 		text_box(fechaDia[1], {size: 18, overflow: 'truncate', width: 130, align: :center, at: [340,720]})
