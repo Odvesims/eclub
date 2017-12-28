@@ -1,3 +1,14 @@
+<div class= "row text-center">
+	<% if not @deboxional.new_record? %>
+		<button type= "button" id= "previo"    onclick= "window.location = '<%= edit_datadeboxionale_path(@deboxional,:donde => 'prev') %>';" class="btn btn-primary"><span class = "glyphicon glyphicon-chevron-left"></span></button>
+	<% end %>	
+	<button type= "button" id= "buscar" onclick="window.location = '<%= datadeboxionales_path %>';" class="btn btn-primary"><span class = "glyphicon glyphicon-search"></span></button>
+	<% if not @deboxional.new_record? %>
+		<button type= "button" id= "nuevo"     onclick= "window.location = '<%= new_datadeboxionale_path %>';" class="btn btn-primary">                            <span class = "glyphicon glyphicon-plus"></span></button>
+		<button type= "button" id= "siguiente" onclick= "window.location = '<%= edit_datadeboxionale_path(@deboxional,:donde => 'next') %>';" class="btn btn-primary"><span class = "glyphicon glyphicon-chevron-right"></span></button>
+	<% end %>
+	<br>
+</div>
 <div><%= render 'form' %></div>
 <div class= "row text-center">
 	<% if not @deboxional.new_record? %>
