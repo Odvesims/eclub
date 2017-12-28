@@ -48,7 +48,21 @@ class PdfdiagramaciondeboxionalPdf < Prawn::Document
 		text "\n", size: 11, align: :center
 		font Rails.root.join("app/assets/fonts/Century-Gothic-Bold.ttf")
 		text deboxional.titulo, size: 18, align: :left
-		image "app/assets/images/perfil.png", :at => [1,710], align: :center, :width => 25, :height => 25
+		if deboxional.autor.include? 'Adonay'	
+			image "app/assets/images/adonay.jpg", :at => [1,710], align: :center, :width => 25, :height => 25	
+		elsif deboxional.autor.include? 'Andelson'	
+			image "app/assets/images/andelson.jpg", :at => [1,710], align: :center, :width => 25, :height => 25	
+		elsif deboxional.autor.include? 'Andy'	
+			image "app/assets/images/andy.jpg", :at => [1,710], align: :center, :width => 25, :height => 25	
+		elsif deboxional.autor.include? 'Carolyn'
+			image "app/assets/images/carolyn.jpg", :at => [1,710], align: :center, :width => 25, :height => 25		
+		elsif deboxional.autor.include? 'Christopher'
+			image "app/assets/images/christopher.jpg", :at => [1,710], align: :center, :width => 25, :height => 25
+		elsif deboxional.autor.include? 'Cindy Rodr'
+			image "app/assets/images/cindyr.jpg", :at => [1,710], align: :center, :width => 25, :height => 25
+		else
+			image "app/assets/images/perfil.png", :at => [1,710], align: :center, :width => 25, :height => 25
+		end
 		font Rails.root.join("app/assets/fonts/Century-Gothic.ttf")
 		text_box(deboxional.autor, {size: 10, overflow: 'truncate', width: 300, align: :left, at: [27,695]})
 		font Rails.root.join("app/assets/fonts/CaviarDreams_Bold.ttf")
