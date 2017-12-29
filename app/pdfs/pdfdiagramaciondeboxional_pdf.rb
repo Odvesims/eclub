@@ -3,12 +3,16 @@ class PdfdiagramaciondeboxionalPdf < Prawn::Document
 	include ActionView::Helpers::NumberHelper
 	include ActionView::Helpers::TranslationHelper
 	def initialize(coleccion)
-		super(:page_size => [528,816], :top_margin => 45, :bottom_margin => 25, :page_layout => :portrait)
+		super(:page_size => [624,816], :top_margin => 45, :bottom_margin => 25, :page_layout => :portrait)
 		#@deboxionales = Deboxionale.where("anio = '2018' AND idioma= 'es'").first
 		#header(@deboxionales)
 		frontPage
+		a = 1
 		coleccion.each do |deboxional|
-			deboxionales(deboxional, 2)	
+			#if a < 30 then
+				deboxionales(deboxional, 2)	
+			#end
+			#a+= 1
 		end
 	end
 	def frontPage()
@@ -36,100 +40,102 @@ class PdfdiagramaciondeboxionalPdf < Prawn::Document
 	
 	end
 	def deboxionales(deboxional, index)
-		#font "Myriad Pro"
-		#font Rails.root.join("app/assets/fonts/CaviarDreams.ttf")
-		#text deboxional.fecha_dia, size: 12, align: :left
-		#move_cursor_to 600
-		#text "Deboxional " + deboxional.anio, size: 12, align: :right
-		#move_cursor_to 600
-		#line [0,588], [480,588]
-		#stroke
-		#move_cursor_to 582
+		case deboxional.dia
+			when 21
+				image "app/assets/images/1.jpeg", :at => [0,816], align: :left, :width => 555, :height => 845
+				start_new_page
+				image "app/assets/images/2.jpeg", :at => [0,816], align: :left, :width => 555, :height => 845
+				start_new_page
+		end
+		if deboxional.dia > 20
+			index+= 2
+		end
 		text "\n", size: 11, align: :center
 		font Rails.root.join("app/assets/fonts/Century-Gothic-Bold.ttf")
-		text deboxional.titulo, size: 18, align: :left
-		if deboxional.autor.include? 'Adonay'	
-			image "app/assets/images/adonay.png", :at => [1,710], align: :center, :width => 25, :height => 25	
-		elsif deboxional.autor.include? 'Andelson'	
-			image "app/assets/images/andelson.png", :at => [1,710], align: :center, :width => 25, :height => 25	
-		elsif deboxional.autor.include? 'Andy'	
-			image "app/assets/images/andy.png", :at => [1,710], align: :center, :width => 25, :height => 25	
-		elsif deboxional.autor.include? 'Carolyn'
-			image "app/assets/images/carolyn.png", :at => [1,710], align: :center, :width => 25, :height => 25		
-		elsif deboxional.autor.include? 'Christopher'
-			image "app/assets/images/christopher.png", :at => [1,710], align: :center, :width => 25, :height => 25
-		elsif deboxional.autor.include? 'Cindy Rodr'
-			image "app/assets/images/cindyr.png", :at => [1,710], align: :center, :width => 25, :height => 25
-		elsif deboxional.autor.include? 'Cristian'
-			image "app/assets/images/cristian.png", :at => [1,710], align: :center, :width => 25, :height => 25
-		elsif deboxional.autor.include? 'Daysi'
-			image "app/assets/images/daysi.png", :at => [1,710], align: :center, :width => 25, :height => 25
-		elsif deboxional.autor.include? 'nyeris'
-			image "app/assets/images/dinanyeris.png", :at => [1,710], align: :center, :width => 25, :height => 25
-		elsif deboxional.autor.include? 'Elar'
-			image "app/assets/images/elar.png", :at => [1,710], align: :center, :width => 25, :height => 25
-		elsif deboxional.autor.include? 'Esther'
-			image "app/assets/images/esther.png", :at => [1,710], align: :center, :width => 25, :height => 25
-		elsif deboxional.autor.include? 'Flordalisa'
-			image "app/assets/images/flordalisa.png", :at => [1,710], align: :center, :width => 25, :height => 25
-		elsif deboxional.autor.include? 'Jaalix'
-			image "app/assets/images/jaalix.png", :at => [1,710], align: :center, :width => 25, :height => 25
-		elsif deboxional.autor.include? 'Jahdiel'
-			image "app/assets/images/jahdiel.png", :at => [1,710], align: :center, :width => 25, :height => 25
-		elsif deboxional.autor.include? 'Josu'
-			image "app/assets/images/josue.png", :at => [1,710], align: :center, :width => 25, :height => 25
-		elsif deboxional.autor.include? 'Karina'
-			image "app/assets/images/karina.png", :at => [1,710], align: :center, :width => 25, :height => 25
-		elsif deboxional.autor.include? 'Michel'
-			image "app/assets/images/michel.png", :at => [1,710], align: :center, :width => 25, :height => 25
-		elsif deboxional.autor.include? 'Natasha'
-			image "app/assets/images/natasha.png", :at => [1,710], align: :center, :width => 25, :height => 25
-		elsif deboxional.autor.include? 'Noem'
-			image "app/assets/images/noemi.png", :at => [1,710], align: :center, :width => 25, :height => 25
-		elsif deboxional.autor.include? 'Odelsa'
-			image "app/assets/images/odelsa.png", :at => [1,710], align: :center, :width => 25, :height => 25
-		elsif deboxional.autor.include? 'Rafael'
-			image "app/assets/images/rafael.png", :at => [1,710], align: :center, :width => 25, :height => 25
-		elsif deboxional.autor.include? 'Richard'
-			image "app/assets/images/richard.png", :at => [1,710], align: :center, :width => 25, :height => 25
-		elsif deboxional.autor.include? 'Mella J'
-			image "app/assets/images/rocio.png", :at => [1,710], align: :center, :width => 25, :height => 25
-		elsif deboxional.autor.include? 'Rosaura'
-			image "app/assets/images/rosaura.png", :at => [1,710], align: :center, :width => 25, :height => 25
-		elsif deboxional.autor.include? 'Rosmery'
-			image "app/assets/images/rosmery.png", :at => [1,710], align: :center, :width => 25, :height => 25
-		elsif deboxional.autor.include? 'Ruth'
-			image "app/assets/images/ruth.png", :at => [1,710], align: :center, :width => 25, :height => 25
-		elsif deboxional.autor.include? 'Sarah'
-			image "app/assets/images/sarah.png", :at => [1,710], align: :center, :width => 25, :height => 25
-		elsif deboxional.autor.include? 'Yadira'
-			image "app/assets/images/yadira.png", :at => [1,710], align: :center, :width => 25, :height => 25
-		elsif deboxional.autor.include? 'Yonatan '
-			image "app/assets/images/yonatan.png", :at => [1,710], align: :center, :width => 25, :height => 25
-		else
-			image "app/assets/images/perfil.png", :at => [1,710], align: :center, :width => 25, :height => 25
-		end
-		font Rails.root.join("app/assets/fonts/Century-Gothic.ttf")
-		text_box(deboxional.autor, {size: 10, overflow: 'truncate', width: 300, align: :left, at: [27,695]})
+		text deboxional.titulo, size: 20, align: :left
 		font Rails.root.join("app/assets/fonts/CaviarDreams_Bold.ttf")
 		fechaDia = deboxional.fecha_dia.split(",")
-		text_box(fechaDia[0], {size: 14, overflow: 'truncate', width: 130, align: :center, at: [340,735]})
-		text_box(fechaDia[1], {size: 16, overflow: 'truncate', width: 130, align: :center, at: [340,720]})
+		text_box(fechaDia[0], {size: 13, overflow: 'truncate', width: 130, align: :center, at: [430,735]})
+		text_box(fechaDia[1], {size: 15, overflow: 'truncate', width: 170, align: :center, at: [410,720]})
 		font Rails.root.join("app/assets/fonts/CaviarDreams_Italic.ttf")
-		text_box(deboxional.versiculo + ' ' + deboxional.cita, {size: 11, overflow: 'truncate', width: 130, align: :left, at: [340,675]})
+		text_box(deboxional.versiculo + ' ' + deboxional.cita, {size: 11, overflow: 'truncate', width: 130, align: :left, at: [440,704]})
 		font Rails.root.join("app/assets/fonts/Century-Gothic.ttf")
 		if deboxional.cuerpo.length > 2400
-			text_box(deboxional.cuerpo, {size: 10, overflow: 'truncate', width: 330, align: :justify, at: [1,675]})
+			text_box(deboxional.cuerpo, {size: 12, overflow: 'truncate', width: 430, align: :justify, at: [1,704]})
 		else
-			text_box(deboxional.cuerpo, {size: 12, overflow: 'truncate', width: 330, align: :justify, at: [1,675]})
+			text_box(deboxional.cuerpo, {size: 13, overflow: 'truncate', width: 430, align: :justify, at: [1,704]})
 		end
+		
+		if deboxional.autor.include? 'Adonay'	
+			image "app/assets/images/adonay.png", :at => [1,80], align: :center, :width => 50, :height => 50	
+		elsif deboxional.autor.include? 'Andelson'	
+			image "app/assets/images/andelson.png", :at => [1,80], align: :center, :width => 50, :height => 50	
+		elsif deboxional.autor.include? 'Andy'	
+			image "app/assets/images/andy.png", :at => [1,80], align: :center, :width => 50, :height => 50	
+		elsif deboxional.autor.include? 'Carolyn'
+			image "app/assets/images/carolyn.png", :at => [1,80], align: :center, :width => 50, :height => 50		
+		elsif deboxional.autor.include? 'Christopher'
+			image "app/assets/images/christopher.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Cindy Rodr'
+			image "app/assets/images/cindyr.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Cristian'
+			image "app/assets/images/cristian.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Daysi'
+			image "app/assets/images/daysi.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'nyeris'
+			image "app/assets/images/dinanyeris.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Elar'
+			image "app/assets/images/elar.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Esther'
+			image "app/assets/images/esther.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Flordalisa'
+			image "app/assets/images/flordalisa.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Jaalix'
+			image "app/assets/images/jaalix.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Jahdiel'
+			image "app/assets/images/jahdiel.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Josu'
+			image "app/assets/images/josue.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Karina'
+			image "app/assets/images/karina.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Michel'
+			image "app/assets/images/michel.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Natasha'
+			image "app/assets/images/natasha.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Noem'
+			image "app/assets/images/noemi.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Odelsa'
+			image "app/assets/images/odelsa.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Rafael'
+			image "app/assets/images/rafael.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Richard'
+			image "app/assets/images/richard.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Mella J'
+			image "app/assets/images/rocio.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Rosaura'
+			image "app/assets/images/rosaura.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Rosmery'
+			image "app/assets/images/rosmery.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Ruth'
+			image "app/assets/images/ruth.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Sarah'
+			image "app/assets/images/sarah.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Yadira'
+			image "app/assets/images/yadira.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Yonatan '
+			image "app/assets/images/yonatan.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		else
+			image "app/assets/images/perfil.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		end
+		font Rails.root.join("app/assets/fonts/Century-Gothic.ttf")
+		text_box(deboxional.autor, {size: 10, overflow: 'truncate', width: 300, align: :left, at: [54,40]})
 		font Rails.root.join("app/assets/fonts/Century-Gothic.ttf")
 		text "\n", size: 11, align: :center
 		font Rails.root.join("app/assets/fonts/Century-Gothic-Bold.ttf")
 		index += deboxional.dia
-		text_box(index.to_s, {size: 40, overflow: 'truncate', width: 130, align: :center, at: [355,80]})
+		text_box(index.to_s, {size: 40, overflow: 'truncate', width: 130, align: :center, at: [455,80]})
 		font Rails.root.join("app/assets/fonts/CaviarDreams.ttf")
-		text_box("Deboxional " + deboxional.anio.to_s, {size: 10, overflow: 'truncate', width: 130, align: :center, at: [355,40]})
+		text_box("Deboxional " + deboxional.anio.to_s, {size: 10, overflow: 'truncate', width: 130, align: :center, at: [455,40]})
 		#text_box("theboxion", {size: 10, overflow: 'truncate', width: 130, align: :center, at: [-40,45]})
 		start_new_page
 =begin		vemp = Empresa.where("id = 1").first
