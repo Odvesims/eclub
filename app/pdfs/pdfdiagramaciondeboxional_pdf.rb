@@ -95,7 +95,7 @@ class PdfdiagramaciondeboxionalPdf < Prawn::Document
 		elsif deboxional.autor.include? 'Mella J'
 			image "app/assets/images/rocio.png", :at => [1,710], align: :center, :width => 25, :height => 25
 		elsif deboxional.autor.include? 'Rosaura'
-			image "app/assets/images/rosarua.png", :at => [1,710], align: :center, :width => 25, :height => 25
+			image "app/assets/images/rosaura.png", :at => [1,710], align: :center, :width => 25, :height => 25
 		elsif deboxional.autor.include? 'Rosmery'
 			image "app/assets/images/rosmery.png", :at => [1,710], align: :center, :width => 25, :height => 25
 		elsif deboxional.autor.include? 'Ruth'
