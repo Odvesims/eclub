@@ -46,9 +46,16 @@ class PdfdiagramaciondeboxionalPdf < Prawn::Document
 				start_new_page
 				image "app/assets/images/2.jpeg", :at => [0,816], align: :left, :width => 555, :height => 845
 				start_new_page
+			when 41
+				image "app/assets/images/3.jpeg", :at => [0,816], align: :left, :width => 555, :height => 845
+				start_new_page
+				image "app/assets/images/4.jpeg", :at => [0,816], align: :left, :width => 555, :height => 845
+				start_new_page
 		end
 		if deboxional.dia > 20
 			index+= 2
+		elsif deboxional.dia > 40
+			index+= 4
 		end
 		text "\n", size: 11, align: :center
 		font Rails.root.join("app/assets/fonts/Century-Gothic-Bold.ttf")
@@ -66,7 +73,9 @@ class PdfdiagramaciondeboxionalPdf < Prawn::Document
 			text_box(deboxional.cuerpo, {size: 13, overflow: 'truncate', width: 430, align: :justify, at: [1,704]})
 		end
 		
-		if deboxional.autor.include? 'Adonay'	
+		if deboxional.autor.include? 'Ana'	
+			image "app/assets/images/ana.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Adonay'	
 			image "app/assets/images/adonay.png", :at => [1,80], align: :center, :width => 50, :height => 50	
 		elsif deboxional.autor.include? 'Andelson'	
 			image "app/assets/images/andelson.png", :at => [1,80], align: :center, :width => 50, :height => 50	
@@ -76,16 +85,24 @@ class PdfdiagramaciondeboxionalPdf < Prawn::Document
 			image "app/assets/images/carolyn.png", :at => [1,80], align: :center, :width => 50, :height => 50		
 		elsif deboxional.autor.include? 'Christopher'
 			image "app/assets/images/christopher.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Cindy D'
+			image "app/assets/images/cindyd.png", :at => [1,80], align: :center, :width => 50, :height => 50
 		elsif deboxional.autor.include? 'Cindy Rodr'
 			image "app/assets/images/cindyr.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Clara'
+			image "app/assets/images/clara.png", :at => [1,80], align: :center, :width => 50, :height => 50
 		elsif deboxional.autor.include? 'Cristian'
-			image "app/assets/images/cristian.png", :at => [1,80], align: :center, :width => 50, :height => 50
+			image "app/assets/images/cristian.png", :at => [1,80], align: :center, :width => 50, :height => 50	
 		elsif deboxional.autor.include? 'Daysi'
 			image "app/assets/images/daysi.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Deyanira'
+			image "app/assets/images/deyanira.png", :at => [1,80], align: :center, :width => 50, :height => 50
 		elsif deboxional.autor.include? 'nyeris'
 			image "app/assets/images/dinanyeris.png", :at => [1,80], align: :center, :width => 50, :height => 50
 		elsif deboxional.autor.include? 'Elar'
 			image "app/assets/images/elar.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Emmanuel'
+			image "app/assets/images/emmanuel.png", :at => [1,80], align: :center, :width => 50, :height => 50
 		elsif deboxional.autor.include? 'Esther'
 			image "app/assets/images/esther.png", :at => [1,80], align: :center, :width => 50, :height => 50
 		elsif deboxional.autor.include? 'Flordalisa'
@@ -94,10 +111,18 @@ class PdfdiagramaciondeboxionalPdf < Prawn::Document
 			image "app/assets/images/jaalix.png", :at => [1,80], align: :center, :width => 50, :height => 50
 		elsif deboxional.autor.include? 'Jahdiel'
 			image "app/assets/images/jahdiel.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Jairo'
+			image "app/assets/images/jairo.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Jarlin'
+			image "app/assets/images/jarlin.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Jorge'
+			image "app/assets/images/jorge.png", :at => [1,80], align: :center, :width => 50, :height => 50
 		elsif deboxional.autor.include? 'Josu'
 			image "app/assets/images/josue.png", :at => [1,80], align: :center, :width => 50, :height => 50
 		elsif deboxional.autor.include? 'Karina'
 			image "app/assets/images/karina.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Lizardo'
+			image "app/assets/images/lizardo.png", :at => [1,80], align: :center, :width => 50, :height => 50
 		elsif deboxional.autor.include? 'Michel'
 			image "app/assets/images/michel.png", :at => [1,80], align: :center, :width => 50, :height => 50
 		elsif deboxional.autor.include? 'Natasha'
@@ -124,6 +149,8 @@ class PdfdiagramaciondeboxionalPdf < Prawn::Document
 			image "app/assets/images/yadira.png", :at => [1,80], align: :center, :width => 50, :height => 50
 		elsif deboxional.autor.include? 'Yonatan '
 			image "app/assets/images/yonatan.png", :at => [1,80], align: :center, :width => 50, :height => 50
+		elsif deboxional.autor.include? 'Yosanna'
+			image "app/assets/images/yosanna.png", :at => [1,80], align: :center, :width => 50, :height => 50
 		else
 			image "app/assets/images/perfil.png", :at => [1,80], align: :center, :width => 50, :height => 50
 		end
