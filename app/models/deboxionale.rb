@@ -1,5 +1,5 @@
 class Deboxionale < ActiveRecord::Base
-	default_scope order: 'id'   
+	default_scope order: 'dia'   
 	attr_accessible :id, :fecha, :fecha_dia, :titulo, :versiculo, :cuerpo, :autor, :dia, :anio, :cita, :idioma
 	self.table_name = "deboxionales"  
 		
