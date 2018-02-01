@@ -1,6 +1,6 @@
 class Aplicadeboxionale < ActiveRecord::Base
 	default_scope order: 'id'   
-	attr_accessible :id, :titulo, :versiculo, :cuerpo, :autor, :contacto, :email
+	attr_accessible :id, :titulo, :versiculo, :cuerpo, :autor, :contacto, :email, :iglesia
 	validates :titulo, presence: {message:"no puede quedar en blanco"}, :on => :create
 	validates :versiculo, presence: {message:"no puede quedar en blanco"}, :on => :create
 	validates :cuerpo, :length => {
@@ -11,6 +11,7 @@ class Aplicadeboxionale < ActiveRecord::Base
 		:too_long  => "no puede exceder las %{count} palabras."
 	  }, :on => :create
 	validates :autor, presence: {message:"no puede quedar en blanco"}, :on => :create
+	validates :iglesia, presence: {message:"no puede quedar en blanco"}, :on => :create
 	validates :contacto, presence: {message:"no puede quedar en blanco"}, :on => :create
 	
 	self.table_name = "aplica_deboxionales"  
