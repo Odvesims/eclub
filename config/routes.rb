@@ -9,6 +9,7 @@ DeboxionApp::Application.routes.draw do
   resources :deboxionales
   resources :diagramaciones
   resources :dataversion
+  resources :aplicadeboxionales
 
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete

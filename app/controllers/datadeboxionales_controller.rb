@@ -11,8 +11,8 @@ class DatadeboxionalesController < ApplicationController
 		end	
 	end
 
-  # GET /userdefaults/1
-  # GET /userdefaults/1.json
+    #GET /userdefaults/1
+    #GET /userdefaults/1.json
 	def show
 		xuser = current_user
 		if signed_granted?(xuser.id, 'datadeboxionales', 'I')

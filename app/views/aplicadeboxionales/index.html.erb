@@ -1,0 +1,85 @@
+<% if  @signedIn == false %>
+	<script>
+		function nuevo()
+		{
+			window.location = '<%= new_aplicadeboxionale_path() %>';
+		};
+	</script>
+	<div class= "tab-content">
+		<div id="tabs-a">
+			<br>
+			<center>
+				<h1>Deboxional 2019</h1>
+				<br>
+				A continuación presentamos las pautas a seguir para participar de la convocatoria para Deboxional 2019. Por favor <b>lee atentamente</b>.
+			</center>
+			<div style = "margin-left: 3em;">
+				<br><br>
+				<b>Consideraciones generales</b>
+				<br>
+				<br>•	Reflexiones para todo público, que puedan leerlas personas no cristianas y recibir un mensaje de salvación, con una sana doctrina.
+				<br>•	Mensajes claros, precisos y motivadores.
+				<br>•	Todo lo que aparezca en cada escrito debe ser inédito o incluir referencia. (Debemos cuidarnos del plagio).
+				<br>•	Evitar historias trilladas y basar tu Deboxional, más en la Biblia que en una historia. 
+				<br><br>
+				<b>Formato de la reflexión</b>
+				<br>
+				<br>•	Tu escrito debe contener los siguientes elementos
+				<br>•	Título (corto).
+				<br>•	Verso bíblico relacionado con el mensaje de la reflexión.
+				<br>•	Cuerpo o desarrollo del tema. 
+				<br>•	Mensaje final o llamado.
+				<br>•	Nombre del autor.
+				<br>•	Buena ortografía, gramática y sintaxis. 
+				<br>•	La reflexión debe tener 300 palabras. No más, no menos.
+			</div>
+			<br>
+			<center>
+				<input type = "checkbox" id= "elCheck" onchange="checkAcepto()"><b>Comprendo y acepto lo antes establecido</input> 
+				<br>
+				<br>
+				<button class = "btn btn-info" id = "elBoton" disabled= "true" type = "button" onclick= "nuevo()">Continuar</button>
+			</center>
+		</div>
+	</div>
+	<script>
+		function checkAcepto(){
+			if(document.getElementById("elCheck").checked==true){
+				document.getElementById("elBoton").disabled=false;
+			} else{
+				document.getElementById("elBoton").disabled=true;
+			}
+		}
+	</script>
+<% else %>
+	<div class= "tab-content">
+		<ul class="nav nav-tabs">
+			<li><h3><%= t(:deboxionales) %></h3></li>
+		</ul>
+		<div id="tabs-a">		
+			<br>
+			<%= will_paginate %>				
+			<div class = "table-responsive">		
+				<table class= "table-striped table-hover" width="100%">
+						<tr>
+							<th>Título</th>
+							<th>Autor</th>
+							<th>Teléfono</th>
+							<th>Email</th>
+							<th></th>
+						</tr>	  
+						<tbody>
+							<% @aplicadeboxionales.each do |deboxional| %>
+								<tr>
+									<td><%= link_to deboxional.titulo, edit_aplicadeboxionale_path(deboxional)%></td>
+									<td><%= deboxional.autor %></td>
+									<td><%= deboxional.contacto %></td>
+									<td><%= deboxional.email %></td>
+								</tr>	
+							<% end %>
+						</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+<% end %>

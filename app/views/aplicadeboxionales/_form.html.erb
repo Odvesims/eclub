@@ -1,0 +1,61 @@
+<%= form_for @deboxional, :html => {:class=> "form-horizontal" } do |f| %>
+	<%= hidden_field_tag(:formu_controller, "aplicadeboxionals", :id=> "formu_controller") %>
+	<% if @deboxional.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@deboxional.errors.count, "errore") %>: No se pudo guardar</h2>
+			<ul>
+				<% @deboxional.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %> 
+	<div class= "tab-content">
+		<center>
+			<h2><%= t(:deboxional) %></h2></legend>
+			<br>
+			<div class="col-md-2 text-right"></div>
+			<div class="col-md-8 text-center">
+				<%= label_tag :ltitulo, "Título" %>
+				<%= f.text_field :titulo, {:tabindex => 1, :class=> "form-control"} %>
+				<%= label_tag :lversiculo, "Versículo" %>
+				<%= f.text_area :versiculo, rows: 4, class:"form-control", tabindex: 2, placeholder: "''En el principio creó Dios los cielos y la tierra''. (Génesis 1:1)" %>
+				<%= label_tag :lcuerpo, t(:cuerpo) %>
+				<%= f.text_area :cuerpo, rows: 30, class:"form-control", tabindex: 3, :id=> "cuerpo", :onkeyup=> "validateWords(this)" %>
+				Total de palabras: <b><span id = "totalPalabras">0</span></b>
+				<br><br>
+				<%= label_tag :lautor, t(:autor) %>
+				<%= f.text_field :autor, {:tabindex => 4, :class=> "form-control"} %>
+				<%= label_tag :lcontacto, "Teléfono" %>
+				<%= f.text_field :contacto, {:tabindex => 5, :class=> "form-control"} %>
+				<%= label_tag :lemail, t(:email) %>
+				<%= f.text_field :email, {:tabindex => 6, :class=> "form-control"} %>
+				<br>
+				<% if @deboxional.new_record? %>
+					<div class = "row text-center"><%= submit_tag t(:guardar), :class=> "btn btn-lg btn-success", :disabled=> true, :id=> "elBoton" %></div>
+				<% else %>
+					<div class = "row text-center"><button type = "button", class= "btn btn-lg btn-info", id= "elBoton" onclick= "volver()">Volver</button></div>
+				<% end %>
+			</div>
+		</center>
+	</div>
+<% end %>
+<br>	
+<script>
+	function volver()
+	{
+		window.location = '<%= aplicadeboxionales_path() %>';
+	};
+	$(validateWords(document.getElementById("cuerpo")));
+	function validateWords(cuerpoElement){
+		var words = cuerpoElement.value.match(/\S+/g).length;
+		if(words != 300){
+			document.getElementById("totalPalabras").style.color="red";
+			document.getElementById("elBoton").disabled= true;
+		} else{
+			document.getElementById("totalPalabras").style.color="black";
+			document.getElementById("elBoton").disabled= false;
+		}
+		document.getElementById("totalPalabras").innerHTML = words;
+	}
+</script>
