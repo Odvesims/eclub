@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-before_filter :signed_in_user
+#before_filter :signed_in_user
   def index
      @menuitem = params[:itemnode]
 	 #puts "mi item", @menuitem
@@ -7,5 +7,6 @@ before_filter :signed_in_user
 	 if (@menuitem == nil) || (@menuitem.rstrip == '')
 	   @menuitem = '00'
 	 end
+	 redirect_to :aplicadeboxionales
   end
 end
