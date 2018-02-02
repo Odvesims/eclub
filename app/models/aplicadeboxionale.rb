@@ -3,13 +3,7 @@ class Aplicadeboxionale < ActiveRecord::Base
 	attr_accessible :id, :titulo, :versiculo, :cuerpo, :autor, :contacto, :email, :iglesia
 	validates :titulo, presence: {message:"no puede quedar en blanco"}, :on => :create
 	validates :versiculo, presence: {message:"no puede quedar en blanco"}, :on => :create
-	validates :cuerpo, :length => {
-		:minimum   => 300,
-		:maximum   => 300,
-		:tokenizer => lambda { |str| str.scan(/\p{Space}+|$/) },
-		:too_short => "debe tener al menos %{count} palabras.",
-		:too_long  => "no puede exceder las %{count} palabras."
-	  }, :on => :create
+	validates :cuerpo, presence: {message:"no puede quedar en blanco"}, :on => :create
 	validates :autor, presence: {message:"no puede quedar en blanco"}, :on => :create
 	validates :iglesia, presence: {message:"no puede quedar en blanco"}, :on => :create
 	validates :contacto, presence: {message:"no puede quedar en blanco"}, :on => :create

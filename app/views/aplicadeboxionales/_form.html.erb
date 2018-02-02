@@ -2,7 +2,11 @@
 	<%= hidden_field_tag(:formu_controller, "aplicadeboxionals", :id=> "formu_controller") %>
 	<% if @deboxional.errors.any? %>
 		<div id="error_explanation">
-			<h2><%= pluralize(@deboxional.errors.count, "errore") %>: No se pudo guardar</h2>
+			<% if @deboxional.errors.count > 1 %>
+				<h2><%= pluralize(@deboxional.errors.count, "errores") %>: No se pudo guardar</h2>
+			<% else %>
+				<h2><%= pluralize(@deboxional.errors.count, "error") %>: No se pudo guardar</h2>
+			<% end %>
 			<ul>
 				<% @deboxional.errors.full_messages.each do |msg| %>
 					<li><%= msg %></li>
