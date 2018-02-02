@@ -6,7 +6,7 @@ class Aplicadeboxionale < ActiveRecord::Base
 	validates :cuerpo, :length => {
 		:minimum   => 300,
 		:maximum   => 300,
-		:tokenizer => lambda { |str| str.scan(/\w+/) },
+		:tokenizer => lambda { |str| str.scan(/\p{Space}+|$/) },
 		:too_short => "debe tener al menos %{count} palabras.",
 		:too_long  => "no puede exceder las %{count} palabras."
 	  }, :on => :create
