@@ -55,7 +55,7 @@
 	$(validateWords(document.getElementById("cuerpo")));
 	function validateWords(cuerpoElement){
 		var words = cuerpoElement.value.match(/\S+/g).length;
-		if(words != 300){
+		if((words < 290) || (words > 300)){
 			document.getElementById("totalPalabras").style.color="red";
 			document.getElementById("elBoton").disabled= true;
 		} else{
