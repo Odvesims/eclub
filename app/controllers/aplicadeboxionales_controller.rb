@@ -22,7 +22,7 @@ class AplicadeboxionalesController < ApplicationController
     #GET /userdefaults/1
     #GET /userdefaults/1.json
 	def show
-		@user= User.find(params[:id])	
+		@user= User.first
 		@usersroles = Usersrol.all
 		respond_to do |format|
 			format.html # show.html.erb
