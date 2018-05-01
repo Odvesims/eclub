@@ -1,0 +1,97 @@
+<ul class="nav nav-tabs">
+	<li class="active"><a data-toggle="tab" href="#home"><h3>Camporee Evento</h3></a></li>
+</ul>
+<%= form_for(@camporeesevento) do |f| %>
+	<div class="tab-content">
+		<% if @camporeesevento.errors.any? %>
+			<div id="error_explanation">
+				<h2><%= pluralize(@camporeesevento.errors.count, "errore") %>: No se pudo guardar</h2>
+					<ul>
+						<% @camporeesevento.errors.full_messages.each do |msg| %>
+							<li><%= msg %></li>
+						<% end %>
+					</ul>
+			</div>
+		<% end %>
+		<br>
+		<div class="form-group">
+			<label for="camporee_id">Camporee: </label>
+			<%= f.select :camporee_id, options_from_collection_for_select(@camporees, 'id', 'nombre', @camporeesevento.camporee_id), :class=> "form-control" %>
+		</div>
+		<div class="form-group">
+			<label for="camporeesrenglone_id">Renglón: </label>
+			<%= f.select :camporeesrenglone_id, options_from_collection_for_select(@camporeesrenglones, 'id', 'nombre', @camporeesevento.camporeesrenglone_id), :class=> "form-control" %>
+		</div>
+		<div class="form-group">
+			<label for="nombre">Nombre: </label>
+			<%= f.text_field :nombre, :class=> "form-control" %>
+		</div>
+		<div class="form-group">
+			<label for="descripcion">Descripcion: </label>
+			<%= f.text_area :descripcion, :class=> "form-control col-md-5" %>
+		</div>
+		<div class="form-group">
+			<label for="participantes">Participantes: </label>
+			<%= f.text_field :participantes, :class=> "form-control" %>
+		</div>
+		<div class="form-group">
+			<label for="tiempo">Tiempo: </label>
+			<%= f.text_field :tiempo, :class=> "form-control" %>
+		</div>
+		<div class="form-group">
+			<label for="total_puntos">Puntos: </label>
+			<%= f.number_field :total_puntos, :class=> "form-control" %>		
+		</div>	
+	</div>	
+	<fieldset>
+		<fieldset>
+			<legend>Detalles <a href="javascript:;" id="addNewCab", class="btn btn-info">Agregar Criterio</a></legend>			
+			<% if !@camporeesevento.new_record? %>
+				<% @camporeeseventocriterios_cab.each do |cab| %>
+					<fieldset>
+						<legend>Criterio</legend>
+						<div class="skillsForm col-md-5">
+							<%= label_tag 'Nombre' %>
+							<%= text_field_tag 'nombre[]', cab.nombre, :class=> "form-control" %>
+							<%= label_tag 'Puntos' %>
+							<%= text_field_tag 'total_puntos[]', cab.total_puntos, :class=> "form-control" %>
+						</div>
+						<% @camporeeseventocriterios_det = Camporeeseventoscriteriosdet.where("camporeeseventoscriterioscab_id = #{cab.id}").all %>
+						<fieldset>
+							<legend>Detalles</legend>
+							<div class="skillsForm2 col-md-12">
+								<table>
+									<% @camporeeseventocriterios_det.each do |det| %>
+										<script>$(document.getElementById("i").value += 1)</script>
+										<tr>
+											<td><%= label_tag 'Nombre' %></td>
+											<td><%= text_field_tag 'nombre_detalle[]', det.nombre, :class=> "form-control" %></td>
+											<td><%= label_tag 'Puntos' %></td>
+											<td><%= text_field_tag 'puntos_detalle[]', det.puntos, :class=> "form-control" %></td>
+										</tr>
+									<% end %>
+								</table>	
+							</div>
+						</fieldset>
+					</fieldset>				
+				<% end %>
+			<% end %>
+			<div id="skillSetCabs">
+			<%= hidden_field_tag :i, 0, :id=> "i" %>
+			</div>
+		</fieldset>
+		<div class="hide" id="new_skills_form_cab">
+			<%= render partial: "camporeeseventoscriterioscab_fields", locals: {skilldet: true} %>
+		</div>			
+		<br>
+		<hr>
+		<script>
+			$("#addNewCab").click(function(){
+				valI = document.getElementById("i").value;
+				document.getElementById("i").value = valI + 1;
+				$("#skillSetCabs").append($("#new_skills_form_cab").html());
+			});
+		</script>
+	</fieldset>	
+	<button type="submit" class="btn btn-success">Submit</button>
+<% end %>

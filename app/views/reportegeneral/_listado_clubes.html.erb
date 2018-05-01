@@ -1,0 +1,56 @@
+<table class = "table table-bordered" style = "width: 100%">
+	<% if @clubespuntos != nil %>
+	<tr>
+		<td text-align: left><button type="button" class="btn btn-primary" onclick="window.open('<%= edit_reportegeneral_path(:id=> 1) %>', '_blank')">Imprimir</button></td>
+	</tr>
+	<tr>
+		<td colspan = 5, style = "text-align: center;">
+			<% camporee = Camporee.find(@clubespuntos[0].camporee_id) %>
+			<span style = "width: 100%; font-size: 24px; text-align: center"><%#= @campo.nombre %></span><br>
+			<span colspan = 5, style = "width: 100%; font-size: 18px; text-align: center"><%= camporee.nombre %></span><br>
+			<span colspan = 5, style = "width: 100%; font-size: 16px; text-align: center">Reporte General</span>
+		</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td style = "width: 7%"; text-align: right"><b>Zona</td>
+		<td style = "width: 30%;"><b>Club</td>
+		<td style = "width: 30%;"><b>Iglesia</td>
+		<td style = "width: 8%; text-align: right"><b>Puntuación</td>
+		<td style = "width: 25%;"><b>Categoría</td>
+	</tr>
+		<% total_club = 0 %>
+		<% @clubespuntos.each do |c| %>
+			<% cab = Camporeespuntuacionescab.where("iglesiasclube_id = #{c.iglesiasclube_id}").first %>
+			<% if c.total_puntos >= 1000 %>
+				<tr style = "background-color: green; color: white">
+			<% end %>
+			<% if c.total_puntos >= 900 && c.total_puntos < 1000 %>
+				<tr style = "background-color: yellow;">
+			<% end %>
+			<% if c.total_puntos >= 800 && c.total_puntos < 900 %>
+				<tr style = "background-color: orange;">
+			<% end %>
+			<% if c.total_puntos < 800 %>
+				<tr style = "background-color: red;"> 
+			<% end %>
+				<td style = "width: 8%;"><%= cab.zona_id %></td>
+				<td style = "width: 25%;"><%= c.club_nombre %></td>
+				<td style = "width: 35%;"><%= c.iglesia_nombre %></td>
+				<td style = "width: 8%; text-align: right;"><%= c.total_puntos %></td>
+				<% if c.total_puntos >= 1000 %>
+					<td style = "width: 15%; text-align: left;">Excelencia</td>
+				<% end %>
+				<% if c.total_puntos >= 900 && c.total_puntos < 1000 %>
+					<td style = "width: 15%; text-align: left;">Honorable</td>
+				<% end %>
+				<% if c.total_puntos >= 800 && c.total_puntos < 900 %>
+					<td style = "width: 15%; text-align: left;">Destacado</td>
+				<% end %>
+				<% if c.total_puntos < 800 %>
+					<td style = "width: 15%; text-align: left;">Participación</td>
+				<% end %>
+			</tr>
+		<% end %>
+	<% end %>
+</table>

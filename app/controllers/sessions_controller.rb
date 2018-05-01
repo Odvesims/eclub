@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
 		if user && user.authenticate(params[:session][:password]) 
 			sign_in user
 			#buscar nombre del consorcio
-			cookies[:central_name] = 'deboxional_api'
+			cookies[:central_name] = 'eclub_api'
 			redirect_to root_url
 			#redirect_back_or user
 		else

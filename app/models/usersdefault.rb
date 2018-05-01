@@ -1,13 +1,8 @@
 class Usersdefault < ActiveRecord::Base
-  default_scope order: 'id'
-  belongs_to :userconf, foreign_key: "user_id"
-  
-  attr_accessible :setma_id, :divem_id, :caja_id
-
+  default_scope order: 'id'  
+  belongs_to :users, foreign_key: "user_id"
+  attr_accessible :user_id, :campo_id, :camporee_id, :zona_id, :distrito_id, :iglesia_id, :iglesiasclube_id, :access_level, :access_id
   self.table_name="users_defaults"
-  validates :setma_id, :presence => true
-  validates :divem_id, :presence => true  
-  validates :caja_id, :presence => true 
                    
 def next(id)
     fila = Usersdefault.where("id > ? ", id).first

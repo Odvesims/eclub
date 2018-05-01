@@ -1,0 +1,26 @@
+<table>
+	<tr>
+		<td><h3>Buscar Por:</td>
+		<td></td>
+	</tr>
+	<% if @clubes != nil %>
+		<tr>
+			<td><b>Club</td>
+			<td><%= select_tag 'Club', options_from_collection_for_select(@clubes, 'id', 'nombre', @club), :id=> 'filterClub', :class => 'form-control', prompt: '', :onchange=> "filtroReportes()" %></td>
+		</tr>
+	<% end %>
+</table>
+<script>
+	function filtroReportes(){
+		var nombre_controller = '<%= controller_name %>';
+		var club = document.getElementById('filterClub').value;
+		dataString = 'option=filtraEventos+&club='+club;
+		$.ajax(
+		{  
+			type: "GET",  
+			url: "/reporteporclubes/show",  
+			data: dataString  
+		}); 
+	
+	}
+</script>

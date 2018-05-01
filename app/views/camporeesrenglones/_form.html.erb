@@ -1,0 +1,31 @@
+<ul class="nav nav-tabs">
+	<li class="active"><a data-toggle="tab" href="#home"><h3>Camporees Renglón</h3></a></li>
+</ul>
+<div class="tab-content">
+	<%= form_for(@camporeesrenglon) do |f| %>
+		<% if @camporeesrenglon.errors.any? %>
+			<div id="error_explanation">
+				<h2><%= pluralize(@camporeesrenglon.errors.count, "errore") %>: No se pudo guardar</h2>
+					<ul>
+						<% @camporeesrenglon.errors.full_messages.each do |msg| %>
+							<li><%= msg %></li>
+						<% end %>
+					</ul>
+			</div>
+		<% end %>
+		<br>
+		<div class="form-group">
+			<label for="camporee_id">Camporee: </label>
+			<%= f.select :camporee_id, options_from_collection_for_select(@camporees, 'id', 'nombre', @camporeesrenglon.camporee_id), :class=> "form-control" %>
+		</div>
+		<div class="form-group">
+			<label for="nombre">Nombre: </label>
+			<%= f.text_field :nombre, :class=> "form-control" %>
+		</div>
+		<div class="form-group">
+			<label for="total_puntos">Total Puntos: </label>
+			<%= f.number_field :total_puntos, :class=> "form-control" %>
+		</div>
+  		<button type="submit" class="btn btn-success">Submit</button>
+	<% end %>
+</div>

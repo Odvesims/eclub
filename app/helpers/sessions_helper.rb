@@ -347,7 +347,7 @@ end
    if pcontroller == 'home'
 		return
    else
-	   logmodel = Logdeboxionalapi.new
+	   logmodel = Logeclubapi.new
 	   logmodel.login = puser.login
 	   logmodel.username = puser.name
 	   logmodel.log_option = pcontroller
@@ -387,10 +387,6 @@ end
 	  system("alzip -a #{pfilename} #{archwin}")
 	  return path + '\\' + ruta + '.zip'
 	end  
-  end
-  
-  def current_divem_name(pcons)
-   cookies[:central_name]
   end
  
   #Valida si esta autorizado a ejecutar este controler via remota 
@@ -449,6 +445,8 @@ end
 				else
 					strbegin += '<li>'+'<a href="/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">'+mdescr+'<b class="caret"></b></a>'
 				end
+			when 'B'
+				strbegin += '</ul></li>'
 			else
 				if menuitem.menu_level > nivel_ant
 					strbegin += '<ul class="dropdown-menu">'
@@ -463,6 +461,18 @@ end
 		end
 		strbegin += '</li></ul>'
 		strbegin.html_safe
+	end
+	
+	def getCamporeeCategoria(camporee_id, total_puntos)
+		categorias = Camporeescategoria.where("camporee_id = #{camporee_id}").all.sort_by(&:min_puntos)
+		categoria = ""
+		categorias.each do |c|
+			if total_puntos <= c.max_puntos
+				categoria = c.nombre
+				break
+			end
+		end
+		return categoria
 	end
 end
   

@@ -1,0 +1,31 @@
+<ul class="nav nav-tabs">
+	<li class="active"><a data-toggle="tab" href="#home"><h3>Zona</h3></a></li>
+</ul>
+<div class="tab-content">
+	<%= form_for(@zona) do |f| %>
+		<% if @zona.errors.any? %>
+			<div id="error_explanation">
+				<h2><%= pluralize(@zona.errors.count, "errore") %>: No se pudo guardar</h2>
+					<ul>
+						<% @zona.errors.full_messages.each do |msg| %>
+							<li><%= msg %></li>
+						<% end %>
+					</ul>
+			</div>
+		<% end %>
+		<br>
+		<div class="form-group">
+			<label for="campo_id">Campo: </label>
+			<%= f.select :campo_id, options_from_collection_for_select(@campos, 'id', 'nombre', @zona.campo_id), :class=> "form-control" %>
+		</div>
+		<div class="form-group">
+			<label for="zona">Zona: </label>
+			<%= f.text_field :zona_id, :class=> "form-control" %>
+		</div>
+		<div class="form-group">
+			<label for="nombre">Nombre: </label>
+			<%= f.text_field :nombre, :class=> "form-control" %>
+		</div>
+  		<button type="submit" class="btn btn-success">Submit</button>
+	<% end %>
+</div>

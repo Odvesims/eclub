@@ -1,18 +1,24 @@
 <!DOCTYPE html>
-<%= favicon_link_tag 'http://theboxion.org/wp-content/uploads/2017/08/cropped-cropped-cropped-mini-logo1.png' %>
+<%= javascript_include_tag "application" %>
+<%= stylesheet_link_tag "bootstrap.min" %>
+<%= javascript_include_tag "bootstrap.min" %>
+<%= stylesheet_link_tag "navbar-static-top" %>
+<%= stylesheet_link_tag "bootstrap-glyphicons" %>
+<%= stylesheet_link_tag "sticky-footer" %>
+<%= stylesheet_link_tag "w3" %>
+<%= stylesheet_link_tag "w3-theme-light-blue" %>
+<%= csrf_meta_tags %>
+<!-- include jQuery -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+<!-- include BlockUI -->
+<%= javascript_include_tag "blockuiJS" %>
+<script>
+	$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+</script>
+<%= render 'layouts/header' %>
 <html>
 	<head>
-	  <title>Deboxional Manager</title>
-		<%= javascript_include_tag "application" %>
-		<%= stylesheet_link_tag "bootstrap.min" %>
-		<%= javascript_include_tag "bootstrap.min" %>
-		<%= stylesheet_link_tag "navbar-static-top" %>
-		<%= stylesheet_link_tag "bootstrap-glyphicons" %>
-		<%= stylesheet_link_tag "sticky-footer" %>
-		<%= stylesheet_link_tag "w3" %>
-		<%= stylesheet_link_tag "w3-theme-light-blue" %>
-		<%= csrf_meta_tags %>
-		<%= render 'layouts/header' %>
+	  <title>eClub</title>
 	</head>
 	<body>
 		<%= yield %>

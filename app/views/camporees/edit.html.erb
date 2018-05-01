@@ -1,0 +1,15 @@
+<%= render 'form' %>
+<br>
+<table>
+	<tr>
+		<td><button type="button" class="btn btn-primary" onclick="window.location = '<%= new_camporee_path %>';">Nuevo</button></td>
+		<td><button type="button" class="btn btn-info"    onclick="window.location = '<%= edit_camporee_path(@camporee, :donde => 'prev')%>';"><span class="glyphicon glyphicon-arrow-left"></span> Anterior</button></td>
+		<td><button type="button" class="btn btn-warning" onclick="window.location = '<%= edit_camporee_path(@camporee, :donde => 'next')%>';" >Siguiente <span class="glyphicon glyphicon-arrow-right"></span></button></td>
+		<td><%= button_to 'Delete',  @camporee, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %></td>
+	</tr>
+</table>
+
+
+
+
+

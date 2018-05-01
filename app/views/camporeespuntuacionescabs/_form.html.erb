@@ -1,0 +1,71 @@
+<ul class="nav nav-tabs">
+	<li class="active"><a data-toggle="tab" href="#home"><h3>Camporee Evento</h3></a></li>
+</ul>
+<div class="tab-content">
+	<%= nested_form_for(@camporeesevento) do |f| %>
+		<% if @camporeesevento.errors.any? %>
+			<div id="error_explanation">
+				<h2><%= pluralize(@camporeesevento.errors.count, "errore") %>: No se pudo guardar</h2>
+					<ul>
+						<% @camporeesevento.errors.full_messages.each do |msg| %>
+							<li><%= msg %></li>
+						<% end %>
+					</ul>
+			</div>
+		<% end %>
+		<br>
+		<div class="form-group">
+			<label for="camporee_id">Camporee: </label>
+			<%= f.select :camporee_id, options_from_collection_for_select(@camporees, 'id', 'nombre', @camporeesevento.camporee_id), :class=> "form-control" %>
+		</div>
+		<div class="form-group">
+			<label for="camporeesrenglone_id">Renglón: </label>
+			<%= f.select :camporeesrenglone_id, options_from_collection_for_select(@camporeesrenglones, 'id', 'nombre', @camporeesevento.camporeesrenglone_id), :class=> "form-control" %>
+		</div>
+		<div class="form-group">
+			<label for="nombre">Nombre: </label>
+			<%= f.text_field :nombre, :class=> "form-control" %>
+		</div>
+		<div class="form-group">
+			<label for="descripcion">Descripcion: </label>
+			<%= f.text_area :descripcion, :class=> "form-control" %>
+		</div>
+		<div class="form-group">
+			<label for="participantes">Participantes: </label>
+			<%= f.text_field :participantes, :class=> "form-control" %>
+		</div>
+		<div class="form-group">
+			<label for="tiempo">Tiempo: </label>
+			<%= f.text_field :tiempo, :class=> "form-control" %>
+		</div>
+		<div class="form-group">
+			<label for="total_puntos">Puntos: </label>
+			<%= f.number_field :total_puntos, :class=> "form-control" %>		
+		</div>
+		<% if not @camporeesevento.new_record? %>
+			<fieldset style = "width: 50%">
+				<legend>Criterios</legend>
+				<% @camporeeseventoscriterioscab = Camporeeseventoscriterioscab.where("camporeesevento_id = #{params[:id]}").all %>			
+				<% @camporeeseventoscriterioscab.each do |c| %>
+					<div style = "background-color: #16B9DA">
+						<h2><%= c.nombre %> &nbsp&nbsp&nbsp <%= c.total_puntos %></h2>
+						<fieldset style = "background-color: #16DA74">
+							<legend>Detalles</legend>
+							<% @camporeeseventoscriteriosdet = Camporeeseventoscriteriosdet.where("camporeeseventoscriterioscab_id = #{c.id}").all %>
+							<table>
+								<% @camporeeseventoscriteriosdet.each do |d| %>
+									<tr>
+										<td style = "width: 50%"><%= d.nombre %></td>
+										<td style = "width: 50%; text-align: right"><%= d.puntos %></td>
+									</tr>
+								<% end %>
+							</table>
+						</fieldset>
+					</div>
+				<% end %>
+			</fieldset>	
+			<hr>
+		<% end %>
+		<button type="submit" id="submit_btn" class="btn btn-success">Submit</button>
+	<% end %>
+</div>

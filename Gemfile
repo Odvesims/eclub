@@ -19,6 +19,7 @@ gem 'prawn-table', '~> 0.1.2'
 
 gem 'pg', '0.18.4'
 gem 'will_paginate'
+gem 'cocoon'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -1,0 +1,35 @@
+<ul class="nav nav-tabs">
+	<li class="active"><a data-toggle="tab" href="#home"><h3>Camporee</h3></a></li>
+</ul>
+<div class="tab-content">
+	<%= form_for(@camporee) do |f| %>
+		<% if @camporee.errors.any? %>
+			<div id="error_explanation">
+				<h2><%= pluralize(@camporee.errors.count, "errore") %>: No se pudo guardar</h2>
+					<ul>
+						<% @camporee.errors.full_messages.each do |msg| %>
+							<li><%= msg %></li>
+						<% end %>
+					</ul>
+			</div>
+		<% end %>
+		<br>
+		<div class="form-group">
+			<label for="campo_id">Campo: </label>
+			<%= f.select :campo_id, options_from_collection_for_select(@campos, 'id', 'nombre', @camporee.campo_id), :class=> "form-control" %>
+		</div>
+		<div class="form-group">
+			<label for="clubestipo_id">Tipo: </label>
+			<%= f.select :clubestipo_id, options_from_collection_for_select(@clubestipos, 'id', 'nombre', @camporee.clubestipo_id), :class=> "form-control" %>
+		</div>
+		<div class="form-group">
+			<label for="nombre">Nombre: </label>
+			<%= f.text_field :nombre, :class=> "form-control" %>
+		</div>
+		<div class="form-group">
+			<label for="fecha">Fecha: </label>
+			<%= f.date_field :fecha, :class=> "form-control" %>
+		</div>
+  		<button type="submit" class="btn btn-success">Submit</button>
+	<% end %>
+</div>

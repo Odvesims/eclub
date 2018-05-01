@@ -1,0 +1,25 @@
+<fieldset id = "hello">
+	<legend>Criterio</legend>
+	<div class="skillsForm col-md-5">
+		<%= label_tag 'Nombre' %>
+		<%= text_field_tag 'nombre[]', "", :class=> "form-control" %>
+		<%= label_tag 'Puntos' %>
+		<%= text_field_tag 'total_puntos[]', "", :class=> "form-control" %>
+	</div>
+	<fieldset>
+		<legend>Detalles <a href="javascript:;" id="addNewDet", class="btn btn-info">Agregar Detalle</a></legend>
+		<div id="skillSetDets">
+		</div>
+	</fieldset>
+</fieldset>
+<div class="hide" id="new_skills_form_det">
+	<%= render partial: "camporeeseventoscriteriosdet_fields", locals: {skilldet: true} %>
+</div>
+	
+<br>
+<hr>
+<script>
+	$("#addNewDet").click(function(){
+		$("#skillSetDets").append($("#new_skills_form_det").html());
+	});
+</script>

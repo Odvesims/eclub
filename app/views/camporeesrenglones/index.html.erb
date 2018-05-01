@@ -1,0 +1,26 @@
+<ul class="nav nav-tabs">
+	<li class="active"><a data-toggle="tab" href="#home"><h3>Camporees Renglones</h3></a></li>
+</ul>
+<div class="tab-content">
+	<button type="button" class="btn btn-primary" onclick="window.location = '<%= new_camporeesrenglone_path %>'">Nuevo</button>
+	<table class="table table-striped">
+		<thead>
+		  <tr>
+			<th>ID</th>
+			<th>Nombre</th>
+			<th>Total Puntos</th>
+			<th>Camporee</th>
+		  </tr>
+		</thead>
+		<tbody>
+			<% @camporeesrenglones.each do |c| %>
+				<tr>
+					<td><%= c.id %></td>
+					<td><%= link_to c.nombre, edit_camporeesrenglone_path(c.id) %></td>
+					<td><%= c.total_puntos %></td>
+					<td><%= c.camporee_nombre %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>

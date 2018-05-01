@@ -1,22 +1,27 @@
-<style>
-#tabsrol{
-border: 3;
-border-color: #d6d5d4;
-}
-</style> 
-<div style = "width: 90%; z-index: 100">
-	<%= form_for(@rol, :id=> "form_role", :html=>{:id=>"form_role"}) do |f| %>
-		<% if @rol.errors.any? %>
-			<div id="error_explanation">
-				<h2><%= pluralize(@rol.errors.count, "error") %>: No se pudo guardar:</h2>
-				<ul>
-					<% @rol.errors.full_messages.each do |msg| %>
-						<li><%= msg %></li>
-					<% end %>
-				</ul>
-			</div>
-		<% end %>
-	  
+<%= form_for(@rol, :id=> "form_role", :html=>{:id=>"form_role"}) do |f| %>
+	<% if @rol.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@rol.errors.count, "error") %>: No se pudo guardar:</h2>
+			<ul>
+				<% @rol.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<h2><%= t(:user) %></h2></legend>
+	<ul class="nav nav-tabs">
+		<li class="active"><a data-toggle="tab" href="#menu1"><%= t(:roles det) %></a></li>
+	</ul>	
+	<div class= "tab-content">
+		<div id="menu1" class="tab-pane fade in active">
+		<br>
+			<div class = "form-group">
+				<div class="col-md-12 text-left">
+					<div class = "form-group">
+						<%= label_tag :llogin, t(:login), :class=> "control-label col-sm-1" %>
+						<div class="col-sm-2">
+<% end %>  
 
 	<fieldset class = "ui-widget ui-widget-content", style= "width: 40em">
 		<legend><h2>Registro de Roles</h2></legend>

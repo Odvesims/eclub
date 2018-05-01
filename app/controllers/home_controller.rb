@@ -7,6 +7,5 @@ class HomeController < ApplicationController
 	 if (@menuitem == nil) || (@menuitem.rstrip == '')
 	   @menuitem = '00'
 	 end
-	 redirect_to :aplicadeboxionales
   end
 end

@@ -1,0 +1,52 @@
+<table class = "table table-bordered" style = "width: 100%">
+	<% if @clubespuntos != nil %>
+		<% if @clubespuntos[0] != nil %>
+			<tr>
+				<td text-align: left><button type="button" class="btn btn-primary" onclick="window.open('<%= edit_reporteporclube_path(:id=> 1, :club=> @club) %>', '_blank')">Imprimir</button></td>
+			</tr>
+			<tr>
+				<td colspan = 4, style = "text-align: center;">
+					<span style = "width: 100%; font-size: 24px; text-align: center"><%= @campo.nombre %></span><br>
+					<% camporee = Camporee.find(@clubespuntos[0].camporee_id) %>
+					<span colspan = 4, style = "width: 100%; font-size: 18px; text-align: center"><%= camporee.nombre %></span><br>
+					<span colspan = 4, style = "width: 100%; font-size: 16px; text-align: center">Resumen Resultados por Club</span>
+				</td>
+			</tr>
+			<tr>
+				<td style = "width: 25%; text-align: center"><b>Zona: </b><%= @zona.nombre %></td>
+				<td style = "width: 35%; text-align: center"><b>Iglesia: </b> <%= @iglesia.nombre %></td>
+				<td style = "width: 25%; text-align: center"><b>Club: </b> <%= @club.nombre %></td>
+			</tr>
+			<tr>
+				<td style = "width: 25%;"><b>Renglón</td>
+				<td style = "width: 35%;"><b>Evento</td>
+				<td style = "width: 25%; text-align: right"><b>Puntuación</td>
+			</tr>
+			<% total_club = 0 %>
+			<% @clubespuntos.each do |c| %>
+				<% if c.camporeerenglone_id == 5 %>
+					<tr style = "background-color: #9AE2F2">
+				<% end %>
+				<% if c.camporeerenglone_id == 6 %>
+					<tr style = "background-color: #F8CD67">
+				<% end %>
+				<% if c.camporeerenglone_id == 8 %>
+					<tr style = "background-color: #A9FAB0">
+				<% end %>
+				<% if c.camporeerenglone_id == 9 %>
+					<tr style = "background-color: #ECA9FA">
+				<% end %>
+					<td style = "width: 25%;"><%= c.renglon_nombre %></td>
+					<td style = "width: 35%;"><%= c.evento_nombre %></td>
+					<td style = "width: 25%; text-align: right;"><%= c.total_puntos %></td>
+				</tr>
+				<% total_club += c.total_puntos.to_f %>
+			<% end %>
+		<% end %>
+	<% end %>
+	<tr>
+		<td style = ""></td>
+		<td style = "text-align: right;"></td>
+		<td style = "text-align: right;"><b><%= total_club.to_s %></td>
+	</tr>
+</table>

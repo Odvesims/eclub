@@ -1,0 +1,72 @@
+<% if @clubespuntos != nil %>
+	<% if @clubespuntos[0] != nil %>
+		<table class = "table table-bordered" style = "width: 100%">
+			<tr>
+				<td text-align: left><button type="button" class="btn btn-primary" onclick="window.open('<%= edit_detallesporclube_path(:id=> 1, :club=> @club) %>', '_blank')">Imprimir</button></td>
+			</tr>
+			<tr>
+				<td colspan = 4, style = "text-align: center;">
+					<span style = "width: 100%; font-size: 24px; text-align: center"><%= @campo.nombre %></span><br>
+					<% camporee = Camporee.find(@clubespuntos[0].camporee_id) %>
+					<span colspan = 4, style = "width: 100%; font-size: 18px; text-align: center"><%= camporee.nombre %></span><br>
+					<span colspan = 4, style = "width: 100%; font-size: 16px; text-align: center">Detalle Resultados por Club</span>
+				</td>
+			</tr>
+			<tr>
+				<td style = "width: 25%; text-align: center"><b>Zona: </b><%= @zona.nombre %></td>
+				<td style = "width: 35%; text-align: center"><b>Iglesia: </b> <%= @iglesia.nombre %></td>
+				<td style = "width: 25%; text-align: center"><b>Club: </b> <%= @club.nombre %></td>
+			</tr>
+		</table>
+		<% total_club = 0 %>
+		<% total_eventos = 0 %>
+		<% @clubespuntos.each do |c| %>
+			<% total_eventos += 1%>
+			<table class = "table table-bordered" style = "width: 100%">
+				<tr>
+					<td style = "width: 25%;"><b>Renglón</td>
+					<td style = "width: 35%;"><b>Evento</td>
+					<td style = "width: 25%; text-align: right"><b>Puntuación</td>
+				</tr>
+				<% renglon = Camporeesrenglone.find(c.camporeerenglone_id) %>
+				<tr style = "background-color: #<%= renglon.color %>" >
+					<td style = "width: 25%;"><%= c.renglon_nombre %></td>
+					<td colspan = 2 style = "width: 35%;"><%= c.evento_nombre %></td>
+				</tr>
+				<% @cabezeras = Camporeespuntuacionescab.where("camporee_id = #{current_user.default_camporee} AND iglesiasclube_id = #{params[:club]} AND camporeesevento_id = #{c.camporeesevento_id}").all %>
+				<% @cabezeras.each do |cab| %>
+					<% @detalles = Camporeespuntuacionesdet.where("camporeespuntuacionescab_id = #{cab.id}").all %>
+					<tr>
+						<td colspan = "3" style = "background-color: #FFFFCC; text-align: center;"><%= cab.criteriocab_nombre %></td>
+					</tr>
+					<% puntos_evento = 0 %>
+					<% @detalles.each do |det| %>
+						<tr>
+							<td></td>
+							<td><%= det.nombre_criterio %></td>
+							<td style = "text-align: right"><%= det.puntos %></td>
+							<% puntos_evento += det.puntos %>
+						</tr>
+					<% end %>
+					<tr colspan>
+						<td></td>
+						<td style = "text-align: right"><b>Total Evento</td>
+						<td style = "text-align: right"><b><%= puntos_evento %></td>
+					</tr>
+				<% end %>
+				<% total_club += c.total_puntos.to_f %>
+			</table>
+			<br>
+		<% end %>
+		<table class = "table table-bordered" style = "width: 100%">
+			<tr>
+				<td style = "width: 12.5%"><b>Total Eventos:</td>
+				<td style = "width: 12.5%; text-align: right;"><%= total_eventos %></td>
+				<td style = "width: 12.5%"><b>Categoría: </td>
+				<td style = "width: 12.5%"><%= getCamporeeCategoria(current_user.default_camporee, total_club) %></td>
+				<td style = "width: 12.5%"><b>Puntuación</td>
+				<td style = "width: 12.5%; text-align: right;"><%= total_club %></td>
+			</tr>
+		</table>
+	<% end %>
+<% end %>

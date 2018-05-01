@@ -1,0 +1,27 @@
+<ul class="nav nav-tabs">
+	<li class="active"><a data-toggle="tab" href="#home"><h3>Iglesia</h3></a></li>
+</ul>
+<div class="tab-content">
+	<%= form_for(@iglesia) do |f| %>
+		<% if @iglesia.errors.any? %>
+			<div id="error_explanation">
+				<h2><%= pluralize(@iglesia.errors.count, "errore") %>: No se pudo guardar</h2>
+					<ul>
+						<% @iglesia.errors.full_messages.each do |msg| %>
+							<li><%= msg %></li>
+						<% end %>
+					</ul>
+			</div>
+		<% end %>
+		<br>
+		<div class="form-group">
+			<label for="distrito_id">Distrito: </label>
+			<%= f.select :distrito_id, options_from_collection_for_select(@distritos, 'id', 'nombre', @iglesia.distrito_id), :class=> "form-control" %>
+		</div>
+		<div class="form-group">
+			<label for="nombre">Nombre: </label>
+			<%= f.text_field :nombre, :class=> "form-control" %>
+		</div>
+  		<button type="submit" class="btn btn-success">Submit</button>
+	<% end %>
+</div>

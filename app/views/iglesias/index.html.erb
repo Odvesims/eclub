@@ -1,0 +1,24 @@
+<ul class="nav nav-tabs">
+	<li class="active"><a data-toggle="tab" href="#home"><h3>Iglesias</h3></a></li>
+</ul>
+<div class="tab-content">
+	<button type="button" class="btn btn-primary" onclick="window.location = '<%= new_iglesia_path %>'">Nuevo</button>
+	<table class="table table-striped">
+		<thead>
+		  <tr>
+			<th>Zona</th>
+			<th>Nombre</th>
+			<th>Distrito</th>
+		  </tr>
+		</thead>
+		<tbody>
+			<% @iglesias.each do |c| %>
+				<tr>
+					<td><%= c.zonaId %></td>
+					<td><%= link_to c.nombre, edit_iglesia_path(c.id) %></td>
+					<td><%= c.distrito_nombre %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>

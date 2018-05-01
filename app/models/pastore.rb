@@ -1,0 +1,2 @@
+class Pastore < ApplicationRecord
+end

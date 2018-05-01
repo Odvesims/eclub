@@ -1,0 +1,22 @@
+<table>
+	<tr>
+		<td><h3>Filtrar Por:</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td><b>Club</td>
+		<td><%= select_tag 'Club', options_from_collection_for_select(@clubes, 'id', 'nombre', @club), :id=> 'filterClub', :class => 'form-control', prompt: '', :onchange=> "filtraPuntos()" %></td>
+	</tr>
+	<tr>
+		<td><b>Renglón</td>
+		<td><%= select_tag 'Renglón', options_from_collection_for_select(@renglones, 'id', 'nombre', @renglon), :id=> 'filterRenglon', :class => 'form-control', prompt: '', :onchange=> "filtraPuntos()" %></td>
+	</tr>
+	<tr>
+		<td><b>Evento</td>
+		<td><%= select_tag 'Evento', options_from_collection_for_select(@eventos, 'id', 'nombre', @evento), :id=> 'filterEvento', :class => 'form-control', prompt: '', :onchange=> "filtraPuntos()" %></td>
+	</tr>
+	<tr>
+		<td><b>Iglesia</td>
+		<td><%= select_tag 'Iglesia', options_from_collection_for_select(@iglesias, 'id', 'nombre', @iglesia), :id=> 'filterIglesia', :class => 'form-control', prompt: '', :onchange=> "filtraPuntos()" %></td>
+	</tr>
+</table>

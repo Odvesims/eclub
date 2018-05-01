@@ -1,0 +1,12 @@
+<table>
+	<tr>
+		<td><h3>Filtrar Por:</td>
+		<td></td>
+	</tr>
+	<% if @clubes != nil %>
+		<tr>
+			<td><b>Club</td>
+			<td><%= select_tag 'Club', options_from_collection_for_select(@clubes, 'id', 'nombre', @club), :id=> 'filterClub', :class => 'form-control', prompt: '', :onchange=> "filtroReportes()" %></td>
+		</tr>
+	<% end %>
+</table>

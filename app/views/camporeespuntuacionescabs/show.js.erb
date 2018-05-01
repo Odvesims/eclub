@@ -1,0 +1,27 @@
+<% if @control_js == 1 %>
+	$(document.getElementById('puntuaciones').innerHTML=" ");
+	$(document.getElementById('filtros').innerHTML=" ");
+	$("<%= escape_javascript(render "puntuaciones_fields") %>").appendTo("#puntuaciones");
+	$("<%= escape_javascript(render "filtros_fields") %>").appendTo("#filtros");
+<% end %>
+<% if @control_js == 2 %>
+	<% if @club != '' && @club != ' ' %>
+		<% if @criterios_cab != nil %>
+			<% if @evento_registrado %>
+				alert("Ya existe un registro para este Club en este evento")
+				$(document.getElementById('evento_criterios').innerHTML=" ");
+				$("<%= escape_javascript(render "criterios_fields") %>").appendTo("#evento_criterios");
+			<% else %>
+				$(document.getElementById('evento_criterios').innerHTML=" ");
+				$("<%= escape_javascript(render "criterios_fields") %>").appendTo("#evento_criterios");
+			<% end %>
+		<% else %>
+			alert('Evento no puede ser nulo)
+		<% end %>
+	<% else %>
+		alert('Debe seleccionar un club');
+		var element = document.getElementById('filterEvento');
+		element.value = 0;
+		document.getElementById("filterClub").focus();
+	<% end %>
+<% end %>

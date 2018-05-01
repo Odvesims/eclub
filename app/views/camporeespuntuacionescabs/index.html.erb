@@ -1,0 +1,24 @@
+<ul class="nav nav-tabs">
+	<li class="active"><a data-toggle="tab" href="#home"><h3>Puntuaciones</h3></a></li>
+</ul>
+<div class="tab-content">
+	<a href="/camporeespuntuacionescabs/nuevo" class = "btn btn-primary">Nuevo</a>
+	<div id = "filtros"><%= render 'filtros_fields' %></div>	
+	<div id = "puntuaciones"><%= render 'puntuaciones_fields' %></div>
+</div>
+<script>
+	function filtraPuntos(){
+		var evento = document.getElementById('filterEvento').value;
+		var renglon = document.getElementById('filterRenglon').value;
+		var club = document.getElementById('filterClub').value;
+		var iglesia = document.getElementById('filterIglesia').value;
+		var dataString;
+		dataString = 'option=filtraPuntos+&evento='+evento+'&renglon='+renglon+'&club='+club+'&iglesia='+iglesia;
+		$.ajax(
+		{  
+			type: "GET",  
+			url: "/camporeespuntuacionescabs/show",  
+			data: dataString  
+		}); 
+	}
+</script>

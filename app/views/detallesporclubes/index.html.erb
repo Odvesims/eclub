@@ -1,0 +1,36 @@
+<style>
+	@media print{
+		#headerMenu{
+			display: none;
+		}
+		#filtros-reporte{
+			display: none;
+		}
+		#tabHead{
+			display: none;
+		}
+		#tabMain{
+			display: none;
+		}
+		#lineBreak{
+			display: none;
+		}
+		table {
+			border-collapse: collapse;
+		}
+
+		table, th, td {
+			border: 1px solid black;
+		}
+	}
+</style>
+
+<%= hidden_field_tag 'nombreController', controller_name, :id=> 'nombreController' %>
+<ul class="nav nav-tabs" id = "tabMain">
+	<li class="active"><a id = "tabHead", data-toggle="tab" href="#home"><h3>Detalle de Resultados por Club</h3></a></li>
+</ul>
+<div class="tab-content">
+	<div id = "filtros-reporte"><%= render 'filtros_reportes' %></div>
+	<hr id = "lineBreak">
+	<div id = "clubes"><%= render 'listado_clubes' %></div>
+</div>

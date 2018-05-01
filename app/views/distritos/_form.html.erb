@@ -1,0 +1,31 @@
+<ul class="nav nav-tabs">
+	<li class="active"><a data-toggle="tab" href="#home"><h3>Distrito</h3></a></li>
+</ul>
+<div class="tab-content">
+	<%= form_for(@distrito) do |f| %>
+		<% if @distrito.errors.any? %>
+			<div id="error_explanation">
+				<h2><%= pluralize(@distrito.errors.count, "errore") %>: No se pudo guardar</h2>
+					<ul>
+						<% @distrito.errors.full_messages.each do |msg| %>
+							<li><%= msg %></li>
+						<% end %>
+					</ul>
+			</div>
+		<% end %>
+		<br>
+		<div class="form-group">
+			<label for="campo_id">Campo: </label>
+			<%= f.select :campo_id, options_from_collection_for_select(@campos, 'id', 'nombre', @distrito.campo_id), :class=> "form-control" %>
+		</div>
+		<div class="form-group">
+			<label for="zona_id">Zona: </label>
+			<%= f.select :zona_id, options_from_collection_for_select(@zonas, 'id', 'nombre', @distrito.zona_id), :class=> "form-control" %>
+		</div>
+		<div class="form-group">
+			<label for="nombre">Nombre: </label>
+			<%= f.text_field :nombre, :class=> "form-control" %>
+		</div>
+  		<button type="submit" class="btn btn-success">Submit</button>
+	<% end %>
+</div>

@@ -1,0 +1,23 @@
+<table class="table table-striped">
+	<thead>
+	  <tr>
+		<th>Iglesia</th>
+		<th>Club</th>
+		<th>Renglón</th>
+		<th>Evento</th>
+		<th>Puntuación</th>
+	  </tr>
+	</thead>
+	<tbody>
+		<% @camporeespuntuacionescabs.each do |c| %>
+			<% cab = Camporeespuntuacionescab.where("iglesiasclube_id = #{c.iglesiasclube_id} AND camporeesevento_id = #{c.camporeesevento_id}").first %>
+			<tr>
+				<td><%= cab.iglesia_nombre %></td>
+				<td><%= link_to c.club_nombre, edit_camporeespuntuacionescab_path(cab.id, :club_id => c.iglesiasclube_id, :evento_id => c.camporeesevento_id) %></td>
+				<td><%= cab.renglon_nombre %></td>
+				<td><%= link_to cab.evento_nombre, edit_camporeespuntuacionescab_path(cab.id, :club_id => c.iglesiasclube_id, :evento_id => c.camporeesevento_id) %></td>
+				<td><%= c.total_puntos %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

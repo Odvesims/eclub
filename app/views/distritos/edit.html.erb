@@ -1,0 +1,16 @@
+<%= render 'form' %>
+<br>
+<table>
+	<tr>
+		<td><button type="button" class="btn btn-primary" onclick="window.location = '<%= new_distrito_path %>';">Nuevo</button></td>
+		<td><button type="button" class="btn btn-info"    onclick="window.location = '<%= edit_distrito_path(@distrito, :donde => 'prev')%>';"><span class="glyphicon glyphicon-arrow-left"></span> Anterior</button></td>
+		<td><button type="button" class="btn btn-warning" onclick="window.location = '<%= edit_distrito_path(@distrito, :donde => 'next')%>';" >Siguiente <span class="glyphicon glyphicon-arrow-right"></span></button></td>
+		<td><button type="button" class="btn btn-primary" onclick="window.location = '<%= distritos_path %>'">Indice</button></td>
+		<td><%= button_to 'Delete',  @distrito, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %></td>
+	</tr>
+</table>
+
+
+
+
+

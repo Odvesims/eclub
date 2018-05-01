@@ -1,0 +1,45 @@
+<a href="/camporeespuntuacionescabs" class = "btn btn-info">Regresar</a>
+<%= form_tag('/camporeespuntuacionescabs', remote: true) %>	
+	<fieldset style = "width: 75%">
+		<%= hidden_field_tag 'elEvento', @evento %>
+		<%= hidden_field_tag 'elClub', @club %>
+		<%= hidden_field_tag 'edita_nuevo', @edita_nuevo %>
+		<% i = 0 %>
+		<% e = 0 %>
+		<% @criterios_cab.each do |c| %>
+			<%= hidden_field_tag 'idCab', c.id, :name=> "criterio_cabeza"+"["+"tmpcabeza"+"]"+"["+i.to_s+"]"+"camporeeseventoscriterioscab_id", :class => 'cabeza' %>
+			<div style = "background-color: #16B9DA">
+				<h2><%= c.nombre %> &nbsp&nbsp&nbsp <%= c.total_puntos %></h2>
+				<fieldset style = "background-color: #16DA74">
+					<% criterios_det = Camporeeseventoscriteriosdet.where("camporeeseventoscriterioscab_id = #{c.id}").all %>
+					<table>
+						<tr>
+							<td></td>
+							<td></td>
+						</tr>
+						<% criterios_det.each do |d| %>
+							<% @puntos = nil %>
+							<% if @camporeespuntuacionescab != nil %>
+								<% camporeesdet_puntos = Camporeespuntuacionesdet.where("camporeespuntuacionescab_id = #{@camporeespuntuacionescab.id} AND camporeeseventoscriteriosdet_id = #{d.id}").first %>
+								<% if camporeesdet_puntos != nil %>
+									<% @puntos  = camporeesdet_puntos.puntos %>
+								<% end %>
+							<% end %>
+							<%= hidden_field_tag 'idDet', d.id, :name=> "criterio_detalles"+"["+"tmpdetalles"+"]"+"["+e.to_s+"]"+"camporeeseventoscriteriosdet_id", :class => 'detalle' %>
+							<tr>
+								<td><%= d.nombre %></td>							 
+								<td>( <%= d.puntos %> ) <%= number_field_tag 'puntos', @puntos , mix: 0, max: d.puntos.to_i, :name=> "criterio_detalles_puntos"+"["+"tmpdetallespuntos"+"]"+"["+e.to_s+"]"+"puntos", :class => 'detalle' %></td>
+								<%= hidden_field_tag 'elCriterio', d.camporeeseventoscriterioscab_id, :name=>  "criterio_detalles_puntos"+"["+"tmpdetallespuntos"+"]"+"["+e.to_s+"]"+"criteriocabeza_id" %>
+								<%= hidden_field_tag 'elCriterio', d.id, :name=>  "criterio_detalles_puntos"+"["+"tmpdetallespuntos"+"]"+"["+e.to_s+"]"+"camporeeseventoscriteriosdet_id" %>
+							</tr>
+							<% e += 1 %>
+						<% end %>
+					</table>			
+				</fieldset>
+			</div>
+			<% i += 1%>
+		<% end %>
+		<%= hidden_field_tag 'valueI', i.to_s %>
+		<%= hidden_field_tag 'valueE', e.to_s %>
+		<button type = "submit" class = "btn btn-success" data-disable-with="Espere...">Agregar</button>
+	</fieldset>

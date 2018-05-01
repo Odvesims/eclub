@@ -1,0 +1,29 @@
+<table>
+	<tr>
+		<td><h3>Filtrar Por:</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td><b>Zona</td>
+		<td><%= select_tag 'Zona', options_from_collection_for_select(@zonas, 'id', 'nombre', @zona), :id=> 'filterZona', :class => 'form-control', prompt: '', :onchange=> "filtroReportes()" %></td>
+	</tr>
+	<tr>
+		<td><b>Distrito</td>
+		<td><%= select_tag 'Distrito', options_from_collection_for_select(@distritos, 'id', 'nombre', @distrito), :id=> 'filterDistrito', :class => 'form-control', prompt: '', :onchange=> "filtroReportes()" %></td>
+	</tr>
+</table>
+<script>
+	function filtroReportes(){
+		var nombre_controller = '<%= controller_name %>';	
+		var zona = document.getElementById('filterZona').value;
+		var distrito = document.getElementById('filterDistrito').value;
+		var  dataString = 'option=filtraReportes+&zona='+zona+'&distrito='+distrito;
+		$.ajax(
+		{  
+			type: "GET",  
+			url: "/"+nombre_controller+"/show",  
+			data: dataString  
+		}); 
+	
+	}
+</script>

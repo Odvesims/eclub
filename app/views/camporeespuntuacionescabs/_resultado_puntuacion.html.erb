@@ -1,0 +1,75 @@
+<a href="/camporeespuntuacionescabs" id = "btn-return" class = "btn btn-info">Regresar</a>
+<div style = "width: 100%; border: solid thin #000000">
+	<% total_dets_evento = 0 %>
+	<% @puntuaciones.each do |c| %>
+		<% if c == @puntuaciones[0] %>
+			<div style = "border: solid thin #00000">
+				<div style = "text-align: center; font-size: 25px"><%= c.campo_nombre %></div>
+				<div style = "text-align: center; font-size: 20px">Comisión de Aventureros</div>
+				<div style = "text-align: center; font-size: 18px">Camporee de Aventureros <%= c.camporee_nombre %><div>
+				<div style = "text-align: center; font-size: 18px"><%= c.zona_nombre %></div>
+				<div style = "text-align: center; font-size: 22px"><%= c.club_nombre %></div>
+			</div>			
+			<div style = "font-size: 22px; text-align: left">&nbsp&nbsp&nbsp&nbsp Detalles</div>
+		<% end %>
+		<% if c == @puntuaciones[0] %>
+			<table style = "width: 100%; border: solid thin #000000">
+				<tr>
+					<td><b>Renglón: </td>
+					<td style = "text-align: left"><%= c.renglon_nombre %></td>
+					<td><b>Evento: </td>
+					<td style = "text-align: left"><%= c.evento_nombre %></td>
+				</tr>
+			</table>
+		<% end %>
+		<% puntuaciones_det = Camporeespuntuacionesdet.where("camporeespuntuacionescab_id = #{c.id}").all %>
+		<% total_dets_renglon = 0 %>
+		<% if puntuaciones_det != nil %>
+			<% if puntuaciones_det.count > 0 %>
+				<div style = " font-size: 22px;"><%= c.criteriocab_nombre %></div>
+			<% end %>
+			<% z = 0 %>
+			<% puntuaciones_det.each do |d| %>
+				<% if z > 0 %>
+					<% if c[z].id != c[z - 1].camporeespuntuacionescab_id %>
+					<% end %>	
+				<% end %>
+				<table style = "width: 100%; text-align: left; border: solid thin #000000">
+					<tr>
+						<td style = "width: 80%; font-size: 18px; text-align: left"><b><%= d.nombre_criterio %></td>
+						<td style = "width: 10%; font-size: 18px; text-align: right"><%= d.puntos %></td>
+						<td style = "width: 10%"></td>
+					</tr>
+				</table>
+				<% total_dets_evento += d.puntos.to_f %>
+				<% total_dets_renglon += d.puntos.to_f %>
+			<% end %>
+		<% end %>	
+		<% if puntuaciones_det.count > 0 %>			
+			<table style = "width: 100%; text-align: left; border: solid thin #000000">
+				<tr>
+					<td style = "width: 80%; font-size: 18px; text-align: right">Total Criterio:</td>
+					<td style = "width: 10%; font-size: 18px; text-align: right"><%= total_dets_renglon.to_s %></td>
+					<td style = "width: 10%; text-align: right"></td>
+				</tr>
+			</table>
+		<% end %>
+	<% end %>	
+	<table style = "width: 100%; text-align: left; border: solid thin #000000">
+		<tr>
+			<td style = "width: 80%; font-size: 20px; text-align: right"><b>Total Evento:</td>
+			<td style = "width: 10%; font-size: 20px; text-align: right"><b><%= total_dets_evento.to_s %></td>
+			<td style = "width: 10%; text-align: right"></td>
+		</tr>
+	</table>
+</div>
+<style>
+	@media print{
+		#headerMenu{
+			display: none;
+		}
+		#btn-return{
+			display: none;
+		}
+	}
+</style>

@@ -5,13 +5,12 @@
 #   gem 'sqlite3' rubygems.org
 
 development:
-  adapter: postgresql  
-  database: d93qqiu8kd0d0k
-  pool: 5
-  timeout: 5000
-  host: ec2-23-23-215-150.compute-1.amazonaws.com
-  username: clsszvwngsmmpa
-  password: uXAvZQ73xnit76HkElqRg5suAI
+  adapter: postgresql
+  database: ddfkk6af39ecko
+  host: ec2-107-22-173-160.compute-1.amazonaws.com 
+  port: 5432  
+  username: vszuwtcwblkszi
+  password: 3100796abea9c27137d8c14af4a24824ad9787a7c679e1d750119fba0edab960 
 
 
 # Warning: The database defined as "test" will be erased and

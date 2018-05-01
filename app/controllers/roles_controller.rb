@@ -1,9 +1,10 @@
 class RolesController < ApplicationController
+	before_filter :signed_in_user
 before_filter :signed_in_user 
   def index
   	xuser = current_user 
 	if signed_granted?(xuser.id, 'roles', 'I')
-		@roles = Rol.where("menu_cod = '#{$menugral}' OR trim(menu_cod) = '' or menu_cod is null ").paginate(page: params[:page])
+		@roles = Rol.all
 		respond_to do |format|
 		  format.html # index.html.erb
 		  format.json { render json: @roles }
