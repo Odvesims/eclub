@@ -5,7 +5,7 @@ class ListadoclubesController < ApplicationController
 			@zonas = Zona.all
 			@distritos = Distrito.all
 			@iglesias = Iglesia.all
-			@clubes = Iglesiasclube.all.sort_by(&:zonaId)
+			@clubes = Iglesiasclube.where("participa_camporee = '#{true}'").all.sort_by(&:zonaId)
 			@zona = 0
 			@distrito = 0
 			@iglesia = 0	
@@ -25,8 +25,9 @@ class ListadoclubesController < ApplicationController
 				if @zona != '' && @zona != ' ' 
 					sql+= " AND"
 				end
-				slq+= " distrito_id = #{@distrito}"
+				sql+= " distrito_id = #{@distrito}"
 			end
+			sql += " AND participa_camporee = '#{TRUE}'"
 			@clubes = Iglesiasclube.where(sql).all.sort_by(&:zonaId)
 			respond_to do |format|
 				format.js
@@ -48,7 +49,8 @@ class ListadoclubesController < ApplicationController
 				end
 				sql+= " distrito_id = #{@distrito}"
 			end
-			@clubes = Iglesiasclube.where(sql).all.sort_by(&:zonaId)
+			sql += " AND participa_camporee = '#{TRUE}'"
+			@clubes = Iglesiasclube.where("participa_camporee = '#{TRUE}'").all.sort_by{|t| [t.zonaId, t.nombre]}
 			pdf = PdflistadoclubesPdf.new(@clubes, current_user.default_camporee)
 			name = 'listadoclubes.pdf'
 			pdf.render_file File.join(Rails.root, "public/pdfs", name)

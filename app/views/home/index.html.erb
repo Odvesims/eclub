@@ -1,10 +1,43 @@
-<% if signed_in? %>
-	<span style = "border-width: 1px;">
-		<%#= menu_landscape(@user.menu_cod, @user.id, @user.admin, @menuitem) %>
-	</span>
-<% else %>
-    <%= link_to "Iniciar Sesion", signin_path, class: "btn btn-large btn-primary" %>
-<% end %>	
+<style>
 
+	.wrapper {
+	  display: grid;
+	  grid-template-columns: 8em 8em 8em;
+	  grid-gap: 0.5em;
+	  background-color: #fff;
+	  color: #444;
+	}
 
+	.box {
+	  background-color: #dfe4ea;
+	  text-color: #000000
+	  color: #fff;
+	  border-radius: 5px;
+	  padding: 0.5em;
+	  text-align: center;
+	  cursor: pointer;
+	}
+	.box:hover{
+	  background-color: #ced6e0;
+	}
+	@media screen and (min-width: 1200px){
+		#gridReportes{
+			visibility: hidden;
+		}
+	}
+	@media screen and (max-width: 1200px){
+		#gridReportes{
+			visibility: visible;
+		}
+	}		
+</style>
+<center>
+	<div id = "gridReportes" class="wrapper" style = "text-align: center;">
+		<div class="box a" onclick="window.location = '/listadoclubes'">Listado de Clubes</div>
+		<div class="box b" onclick="window.location = '/reportegeneral'">Reporte General</div>
+		<div class="box c" onclick="window.location = '/reporteporclubes'">Resumen x Club</div>
+		<div class="box d" onclick="window.location = '/detalleporclubes'">Detalle x Club</div>
+		<div class="box e" onclick="window.location = '/reporteporzonas'">Reporte x Zona</div>
+	</div>
+</center>
 

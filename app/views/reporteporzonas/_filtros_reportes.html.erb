@@ -1,0 +1,26 @@
+<table>
+	<tr>
+		<td><h3>Buscar Por:</td>
+		<td></td>
+	</tr>
+	<% if @zonas != nil %>
+		<tr>
+			<td><b>Zona</td>
+			<td><%= select_tag 'Zona', options_from_collection_for_select(@zonas, 'id', 'nombre', @zona), :id=> 'filterZona', :class => 'form-control', prompt: '', :onchange=> "filtroReportes()" %></td>
+		</tr>
+	<% end %>
+</table>
+<script>
+	function filtroReportes(){
+		var nombre_controller = '<%= controller_name %>';
+		var zona = document.getElementById('filterZona').value;
+		dataString = 'option=filtraEventos+&zona='+zona;
+		$.ajax(
+		{  
+			type: "GET",  
+			url: "/reporteporzonas/show",  
+			data: dataString  
+		}); 
+	
+	}
+</script>

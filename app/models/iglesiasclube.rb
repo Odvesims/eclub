@@ -1,5 +1,5 @@
 class Iglesiasclube < ActiveRecord::Base
-	default_scope order: 'campo_id, zona_id, distrito_id, iglesia_id, clubestipo_id'
+	default_scope order: 'campo_id, zona_id, distrito_id, iglesia_id, clubestipo_id, nombre'
 	attr_accessible :campo_id, :zona_id, :distrito_id, :iglesia_id, :clubestipo_id, :nombre
 	self.table_name = "iglesiasclubes"  
 

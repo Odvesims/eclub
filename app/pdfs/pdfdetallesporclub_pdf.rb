@@ -9,6 +9,7 @@ class PdfdetallesporclubPdf < Prawn::Document
 		#@deboxionales = Deboxionale.where("anio = '2018' AND idioma= 'es'").first
 		#header(@deboxionales)
 		camporee = Camporee.find(coleccion[0].camporee_id)
+		@pdfdefaults = getPdfDefaults(5)
 		header(camporee, zona, iglesia, club)
 		clubes(coleccion, club, iglesia, zona)	
 	end
@@ -16,14 +17,14 @@ class PdfdetallesporclubPdf < Prawn::Document
 	def header(camporee, zona_nombre, iglesia_nombre, club_nombre)
 		table_colors = Array.new
 		table_colors.push("996666")
-		text "Asociación Dominicana del Sureste", size: 20, align: :center
-		text "Comisión de Aventureros", size: 16, align: :center
-		text "Camporee de Aventureros: " + camporee.nombre, size: 14, align: :center
-		text "\n", size: 14, align: :center
-		text "Detalle de Resultados por Club", align: :center
-		text "\n", size: 12, align: :center
+		text @pdfdefaults[0][0], size: @pdfdefaults[1][0].to_i, align: :center
+		text @pdfdefaults[0][0], size: @pdfdefaults[1][1].to_i, align: :center
+		text @pdfdefaults[0][0] + ": " + camporee.nombre, size: @pdfdefaults[1][2].to_i, align: :center
+		text "\n", size: @pdfdefaults[1][3].to_i, align: :center
+		text @pdfdefaults[0][0], align: :center
+		text "\n", size: @pdfdefaults[1][4].to_i, align: :center
 		table_data = [["Zona: #{zona_nombre.nombre}", "Iglesia: #{iglesia_nombre.nombre}", "Club: #{club_nombre.nombre}"]]
-		table(table_data, :column_widths => [170, 170, 170], :row_colors => table_colors)	
+		table(table_data, :column_widths => [@pdfdefaults[2][0].to_i, @pdfdefaults[2][0].to_i, @pdfdefaults[2][0].to_i], :row_colors => table_colors)	
 	end
 	
 	def clubes(clubes, club, iglesia, zona)
@@ -31,7 +32,7 @@ class PdfdetallesporclubPdf < Prawn::Document
 		total_puntos = 0
 		table_data = ""	
 		table_data = [[{:content => "", :colspan => 3, :border_color=> "FFFFFF"}]] 
-		table(table_data, :column_widths => [170, 170, 180])	
+		table(table_data, :column_widths => [@pdfdefaults[2][0].to_i, @pdfdefaults[2][0].to_i, @pdfdefaults[2][1].to_i])	
 		table_colors = Array.new
 		clubes.each do |club|
 			i += 1			
@@ -40,7 +41,7 @@ class PdfdetallesporclubPdf < Prawn::Document
 			total_puntos += club.total_puntos
 			table_data += [["<b>#{club.renglon_nombre}</b>", {:content => "<b>#{club.evento_nombre}</b>", :colspan => 2}]]
 			renglon = Camporeesrenglone.find(club.camporeerenglone_id)
-			table(table_data, :column_widths => [170, 170, 170], :row_colors => ["##{renglon.color}", nil, nil], :cell_style => { :inline_format => true })
+			table(table_data, :column_widths => [@pdfdefaults[2][0].to_i, @pdfdefaults[2][0].to_i, @pdfdefaults[2][0].to_i], :row_colors => ["##{renglon.color}", nil, nil], :cell_style => { :inline_format => true })
 			@cabezeras = Camporeespuntuacionescab.where("camporee_id = #{club.camporee_id} AND iglesiasclube_id = #{club.iglesiasclube_id} AND camporeesevento_id = #{club.camporeesevento_id}").all
 			table_data = []
 			@cabezeras.each do |cab| 
@@ -56,10 +57,10 @@ class PdfdetallesporclubPdf < Prawn::Document
 				table_data += [[{:content => "Total Criterio", :colspan => 2, :align=> :right}, puntos_evento]]  
 				table_data += [[{:content => "", :colspan => 3, :border_color=> "FFFFFF"}]]  
 			end 
-			table(table_data, :column_widths => [170, 170, 170], :row_colors => ["FFFFFF", nil, nil], :cell_style => { :inline_format => true })
+			table(table_data, :column_widths => [@pdfdefaults[2][0].to_i, @pdfdefaults[2][0].to_i, @pdfdefaults[2][0].to_i], :row_colors => ["FFFFFF", nil, nil], :cell_style => { :inline_format => true })
 		end	
 		table_data = [["Cantidad Eventos: #{i.to_s}", "Categoría: #{getCamporeeCategoria(clubes[0].camporee_id, total_puntos)}" , "Total Puntos: #{total_puntos.to_s}"]]	
-		table(table_data, :column_widths => [170, 170, 170], :row_colors => ["996600", nil, nil])
+		table(table_data, :column_widths => [@pdfdefaults[2][0].to_i, @pdfdefaults[2][0].to_i, @pdfdefaults[2][0].to_i], :row_colors => ["996600", nil, nil])
 	end  
 	
 	def getCamporeeCategoria(camporee_id, total_puntos)

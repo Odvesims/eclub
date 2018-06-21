@@ -1,3 +1,6 @@
+<script>
+	//$('.datepicker').datepicker();
+</script>
 <ul class="nav nav-tabs">
 	<li class="active"><a data-toggle="tab" href="#home"><h3>Camporee</h3></a></li>
 </ul>
@@ -28,7 +31,12 @@
 		</div>
 		<div class="form-group">
 			<label for="fecha">Fecha: </label>
-			<%= f.date_field :fecha, :class=> "form-control" %>
+			<div class="input-group date" data-provide="datepicker">
+				<input type="text" class="form-control" name = "fecha">
+				<div class="input-group-addon">
+					<span class="glyphicon glyphicon-th"></span>
+				</div>
+			</div>
 		</div>
   		<button type="submit" class="btn btn-success">Submit</button>
 	<% end %>

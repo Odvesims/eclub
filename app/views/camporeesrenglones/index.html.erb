@@ -13,14 +13,22 @@
 		  </tr>
 		</thead>
 		<tbody>
+			<% total_puntos = 0 %>
 			<% @camporeesrenglones.each do |c| %>
 				<tr>
 					<td><%= c.id %></td>
 					<td><%= link_to c.nombre, edit_camporeesrenglone_path(c.id) %></td>
 					<td><%= c.total_puntos %></td>
 					<td><%= c.camporee_nombre %></td>
+					<% total_puntos += c.total_puntos %>
 				</tr>
 			<% end %>
+			<tr>
+				<td></td>
+				<td style = "text-align: right;"><b>Total:</td>
+				<td><b><%= total_puntos %></td>
+				<td></td>
+			</tr>
 		</tbody>
 	</table>
 </div>

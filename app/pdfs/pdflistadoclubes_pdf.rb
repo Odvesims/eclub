@@ -7,32 +7,33 @@ class PdflistadoclubesPdf < Prawn::Document
 	def initialize(coleccion, camporee_id)
 		super(:page_size => 'LETTER')
 		camporee = Camporee.find(camporee_id)
+		@pdfdefaults = getPdfDefaults(3)
 		header(camporee)
 		clubes(coleccion)	
 	end
 	
 	def header(camporee)	
-		text "Asociación Dominicana del Sureste", size: 20, align: :center
-		text "Comisión de Aventureros", size: 16, align: :center
-		text "Camporee de Aventureros: " + camporee.nombre, size: 14, align: :center
-		text "\n", size: 14, align: :center
-		text "Listado Clubes Presente", align: :center
+		text @pdfdefaults[0][0], size: @pdfdefaults[1][0].to_i, align: :center
+		text @pdfdefaults[0][1], size: @pdfdefaults[1][1].to_i, align: :center
+		text @pdfdefaults[0][2]": " + camporee.nombre, size: @pdfdefaults[1][2].to_i, align: :center
+		text "\n", size: @pdfdefaults[1][3].to_i, align: :center
+		text @pdfdefaults[0][3], align: :center
 	end
 	
 	def clubes(clubes)
 		categoria = ""
-		table_data = [["Zona", "Club", "Distrito", "Iglesia"]]	
+		table_data = [["Zona", "Club", "Participó en Evento"]]	
 		table_colors = Array.new
 		table_colors.push("FCFCFC")
 		i = 0
 		total_puntos = 0
 		clubes.each do |club|
 			i += 1
-			table_data += [[club.zonaId, club.nombre, club.distrito_nombre, club.iglesia_nombre]]
+			table_data += [[club.zonaId, club.nombre, ""]]
 			table_colors.push("FFFFFF")
 		end
 		table_data += [[""]]	
 		table_data += [["","Cantidad Clubes: #{i.to_s}"]]	
-		table(table_data, :column_widths => [50, 170, 140, 140], :row_colors => table_colors)
+		table(table_data, :column_widths => [@pdfdefaults[2][0].to_i, @pdfdefaults[2][1].to_i, @pdfdefaults[2][2].to_i], :row_colors => table_colors)
 	end  	
 end

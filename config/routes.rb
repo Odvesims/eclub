@@ -7,6 +7,7 @@ DeboxionApp::Application.routes.draw do
 	resources :usersperfil
 	resources :userspasswd
 	resources :roles
+	resources :home
 	
 	#Mantenimientos
 	resources :campos
@@ -17,6 +18,7 @@ DeboxionApp::Application.routes.draw do
 	
 	#Camporees
 	resources :camporees
+	resources :camporeesarchivos
 	resources :camporeesrenglones
 	resources :camporeeseventos
 	resources :camporeeseventoscriterios
@@ -27,6 +29,15 @@ DeboxionApp::Application.routes.draw do
 	resources :reporteporclubes
 	resources :reportegeneral
 	resources :detallesporclubes
+	resources :reporteporzonas
+	resources :hojasevaluaciones
+	
+	#Clubes
+	resources :clubesarchivos, only: [:index, :new, :create, :destroy]
+	root :to=> "clubesarchivos#index"
+	resources :clubesformularios
+	resources :formsegurocabs
+	resources :formmatriculacabs
 
 	match '/',  to: 'sessions#new'
 	match '/signin',  to: 'sessions#new'

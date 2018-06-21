@@ -1,0 +1,35 @@
+<table>
+	<tr>
+		<td><h3>Buscar Por:</td>
+		<td></td>
+	</tr>
+	<% if @eventos != nil %>
+		<tr>
+			<td><b>Evento</td>
+			<%= hidden_field_tag :evento, @evento, :id=> "evento_id" %>
+			<td><%= select_tag 'evento', options_from_collection_for_select(@eventos, 'id', 'nombre', @evento), :id=> 'filterEvento', :class => 'form-control', :onchange=> "filtroReportes()" %></td>
+		</tr>
+		<tr><td><br></td></tr>
+		<tr>
+			<td></td>
+			<td text-align: left><button type="button" class="btn btn-primary" onclick="printHoja()">Imprimir</button></td>
+		</tr>
+	<% end %>
+</table>
+<script>
+	function printHoja(){
+		window.open("hojasevaluaciones/1/edit?evento=".concat(document.getElementById('evento_id').value), "_blank");
+	}
+	function filtroReportes(){
+		var nombre_controller = '<%= controller_name %>';
+		var evento = document.getElementById('filterEvento').value;
+		dataString = 'option=filtraEventos+&evento='+evento;
+		$.ajax(
+		{  
+			type: "GET",  
+			url: "/hojasevaluaciones/show",  
+			data: dataString  
+		}); 
+	
+	}
+</script>

@@ -22,13 +22,16 @@
 		<% total_club = 0 %>
 		<% @clubespuntos.each do |c| %>
 			<% cab = Camporeespuntuacionescab.where("iglesiasclube_id = #{c.iglesiasclube_id}").first %>
-			<% if c.total_puntos >= 1000 %>
-				<tr style = "background-color: green; color: white">
+			<% if c.total_puntos >= 1800 %>
+				<tr style = "background-color: blue; color: white">
 			<% end %>
-			<% if c.total_puntos >= 900 && c.total_puntos < 1000 %>
+			<% if c.total_puntos >= 1600 && c.total_puntos < 1800 %>
+				<tr style = "background-color: green;">
+			<% end %>
+			<% if c.total_puntos >= 1400 && c.total_puntos < 1600 %>
 				<tr style = "background-color: yellow;">
 			<% end %>
-			<% if c.total_puntos >= 800 && c.total_puntos < 900 %>
+			<% if c.total_puntos >= 800 && c.total_puntos < 1400 %>
 				<tr style = "background-color: orange;">
 			<% end %>
 			<% if c.total_puntos < 800 %>

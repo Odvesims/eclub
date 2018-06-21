@@ -1,0 +1,221 @@
+<%= hidden_field_tag :indexLines, 0, :id=> "indexLines" %>
+<ul class="nav nav-tabs">
+	<li class="active"><a data-toggle="tab" href="#home"><h3><%= @camporeesarchivo.nombre %></h3></a></li>
+</ul>
+<div class="tab-content">
+	<%= form_for(@clubesformulario) do |f| %>
+		<% if @clubesformulario.errors.any? %>
+			<div id="error_explanation">
+				<h2><%= pluralize(@clubesformulario.errors.count, "errore") %>: No se pudo guardar</h2>
+					<ul>
+						<% @clubesformulario.errors.full_messages.each do |msg| %>
+							<li><%= msg %></li>
+						<% end %>
+					</ul>
+			</div>
+		<% end %>
+		<%= hidden_field_tag :doc_id, params[:doc_id], :id=> "doc_id" %>
+		<br>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="form-horizontal">
+					<% @clubesformulario.attributes.keys.each do |a| %>
+						<% if a != "id" %>
+							<% fieldType = fieldType(a) %>
+							<% @fieldVal = fieldType[3] %>
+							<% if @fieldVal != "" %>
+								<% if @fieldVal.include? "#" %>
+									<% @fieldVal.gsub! "#", "@" %>
+									<% @fieldVal = instance_variable_get(@fieldVal) %>
+								<% else %>
+									<% @fieldVal = instance_variable_get(@fieldVal) %>
+									<% @realVal = fieldValue(@fieldVal, 'id') %>
+									<% @fieldVal = fieldValue(@fieldVal, fieldType[4]) %>
+								<% end %>
+							<% end %>
+							<div class="form-group">
+								<% if fieldType[5] != nil %>
+									<% fieldClass = fieldType[5] %>
+								<% else %>
+									<% fieldClass = "" %>
+								<% end %>
+								<% if fieldType[0] == 0 %>
+									<%= hidden_field_tag a, @fieldVal, :class=> "form-control" %>
+								<% elsif fieldType[0] == 1 %>
+									<label class = "col-sm-2 control-label" for=<%= a %>><%= fieldType[2] %>: </label>
+									<div class = <%= fieldClass %> >
+										<%= text_field_tag a, @fieldVal, :class=> "form-control", :disabled=> true?(fieldType[1]) %>
+										<% if true?(fieldType[1]) %>
+											<%= hidden_field_tag a, @realVal, :class=> "form-control" %>
+										<% end %>
+									</div>
+								<% elsif fieldType[0] == 2 %>
+									<label class = "col-sm-2 control-label" for=<%= a %>><%= fieldType[2] %>: </label>
+										<% fieldClass = "input-group date " + fieldClass %>
+										<%= hidden_field_tag a, @fieldVal, :class=> "form-control" %>
+										<div class='<%= fieldClass %>' data-provide="datepicker">
+											<%= text_field_tag a, @fieldVal, :class=> "form-control", :disabled=> true?(fieldType[1]) %>
+											<div class="input-group-addon">
+												<span class="glyphicon glyphicon-th"></span>
+											</div>
+										</div>
+								<% elsif fieldType[0] == 3 %>
+									<label for=<%= a %>><%= fieldType[2] %>: </label>
+									<%#= select_tag :a, @iglesia.nombre, :class=> "form-control", :disabled=> "'#{fieldType[1]}'" %>
+								<% end %>
+							</div>
+						<% end %>
+					<% end %>
+				</div>
+			</div>
+			<div class="panel-body bg-light">
+				<button type = "button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span> Agregar Líneas</button>
+				<center><h2>Detalles</h2></center>
+				<table class="table table-bordered" width="100%" id = "tableDets">
+					<tr>		
+						<td style = "width: 1%">No.</td>
+						<% @formulariodets.attributes.keys.each do |d| %>
+							<% if d != "id" %>
+								<% detArr = detLabel(d) %>
+								<% if detArr != nil %>
+									<% tdSize = "width: #{detArr[1]}" %>
+									<td style = '<%= tdSize %>'><%= detArr[0] %></td>
+								<% end %>
+							<% end %>
+						<% end %>
+						<td style = "width: 2%"><span class="glyphicon glyphicon-remove" /></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<center>
+			 <input type="checkbox" name="confirmation" value="confirma" onclick="validateConfirm(this)">Confirmo que deseo registrar este formulario</input><br>
+			<button type="submit" id="submit_btn" class="btn btn-success" disabled="true">Guardar</button>
+		</center>
+	<% end %>
+</div>
+<div id="myModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Detalle del Formulario</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-horizontal">
+					<div class = "form-group">
+						<label class = "col-sm-8 control-label">Cuántas personas desea agregar?</label>
+						<div class = "col-sm-3">
+							<%= number_field_tag :linesForm, 0, :class=> "form-control", :id=> "linesForm" %>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-success" onclick = "addLines(document.getElementById('linesForm').value)" data-dismiss="modal">Agregar</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	function addLines(lines){
+		var i = 0;
+		var z = parseInt(document.getElementById('indexLines').value);
+		var table = document.getElementById('tableDets');
+		while(i < lines){
+			var x = z + 1;
+			if(x < 10){
+				x = "0".concat(x);
+			}
+			var tr = document.createElement("tr");
+			tr.id =  "detailTr" + z;
+			var td = document.createElement("td");
+			td.id = "numberTd" + z;
+			var num = document.createTextNode(x);
+			td.appendChild(num);
+			tr.appendChild(td);
+			<% @formulariodets.attributes.keys.each do |d| %>
+				<% if d != "id" %>
+					<% detArr = detLabel(d) %>
+					<% if detArr != nil %>
+						var td = document.createElement("td");
+						<% fieldType = fieldType(d) %>
+						<% if fieldType == nil %>
+							<% fieldType = [1] %>
+						<% end %>
+						<% if fieldType[0] == 3 %>
+							var input = document.createElement("select");
+							<% if d == 'tipopersona_id' %>
+								<% @tiposPersonas.each do |p| %>
+									input.innerHTML+= "<option value = <%= p.id %> > <%= p.nombre %></option>" 
+								<% end %>
+							<% elsif d == 'sexo' %>
+									input.innerHTML+= "<option value = <%= 1 %> > Masc.</option>" 
+									input.innerHTML+= "<option value = <%= 2 %> > Fem.</option>" 
+							<% end %>
+						<% else %>
+							var input = document.createElement("input");						
+						<% end %>
+						input.setAttribute("class", "form-control");
+						input.name = "form_lines[tmpformlines][]" + '<%= d %>';
+						td.appendChild(input);
+						tr.appendChild(td);
+					<% end %>
+				<% end %>
+			<% end %>
+			var span = document.createElement("span");
+			span.setAttribute("class", "glyphicon glyphicon-remove");
+			span.onclick = function removeLine(){
+				var indexLine = $(this).parent().parent().attr('id');
+				var r = 0;
+				var p = 1;
+				document.getElementById(indexLine).innerHTML = "";
+				while(r < z){
+					if(document.getElementById("detailTr" + r) != null){
+						if(document.getElementById("detailTr" + r).childNodes[0] != null){
+							numLine = p;
+							if(numLine < 10){
+								numLine = "0".concat(numLine);
+							}
+							document.getElementById("detailTr" + r).childNodes[0].innerHTML = numLine;
+							p++;
+						}
+					}
+					r++;
+				}
+				table.removeChild(document.getElementById(indexLine));
+			};
+			var td = document.createElement("td");
+			td.appendChild(span);
+			tr.appendChild(td);
+			table.appendChild(tr);
+			z++;
+			i++;
+		}
+		document.getElementById("indexLines").value = z;
+		i = 0;
+		p = 1;
+		while(i < z){
+			if(document.getElementById("detailTr" + i) != null){
+				if(document.getElementById("detailTr" + i).childNodes[0] != null){
+					numLine = p;
+					if(numLine < 10){
+						numLine = "0".concat(numLine);
+					}
+					document.getElementById("detailTr" + i).childNodes[0].innerHTML = numLine;
+					p+= 1;
+				}
+			}
+			i++;
+		}
+	}
+	function validateConfirm(checkBox){
+		submit_btn = document.getElementById('submit_btn');
+		if(checkBox.checked == true){
+			submit_btn.disabled = false;
+		} else{
+			submit_btn.disabled = true;
+		}
+	}
+</script>

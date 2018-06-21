@@ -22,6 +22,14 @@ module SessionsHelper
 	loggin_opc(user,controller_name,action_name, "User Login")	
   end
   
+	def mobile_device
+		if session[:mobile_param]
+			return session[:mobile_param] == "1"
+		else
+			return request.user_agent =~ /Mobile|webOS/
+		end
+	end
+  
   def signed_in?
     !current_user.nil?
   end

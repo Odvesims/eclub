@@ -1,0 +1,23 @@
+<ul class="nav nav-tabs">
+	<li class="active"><a data-toggle="tab" href="#home"><h3>Archivos</h3></a></li>
+</ul>
+<div class="tab-content">
+	<button type="button" class="btn btn-primary" onclick="window.location = '<%= new_camporeesarchivo_path %>'">Nuevo</button>
+	<table class="table table-striped">
+		<thead>
+		  <tr>
+			<th>Nombre</th>
+			<th>Fecha Límite</th>
+		  </tr>
+		</thead>
+		<tbody>
+			<% total_puntos = 0 %>
+			<% @camporeesarchivos.each do |c| %>
+				<tr>
+					<td><%= link_to c.nombre, edit_camporeesarchivo_path(c.id) %></td>
+					<td><%= c.fecha_limit %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>

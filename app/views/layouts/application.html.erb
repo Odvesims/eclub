@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<%= javascript_include_tag "application" %>
+<%#= javascript_include_tag "application" %>
+<%= javascript_include_tag "jquery" %>
 <%= stylesheet_link_tag "bootstrap.min" %>
 <%= javascript_include_tag "bootstrap.min" %>
+<%= javascript_include_tag "bootstrap-tabcollapse" %>
 <%= stylesheet_link_tag "navbar-static-top" %>
 <%= stylesheet_link_tag "bootstrap-glyphicons" %>
 <%= stylesheet_link_tag "sticky-footer" %>
@@ -9,13 +11,23 @@
 <%= stylesheet_link_tag "w3-theme-light-blue" %>
 <%= csrf_meta_tags %>
 <!-- include jQuery -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
 <!-- include BlockUI -->
 <%= javascript_include_tag "blockuiJS" %>
 <script>
-	$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+	$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);	
+	$('#myTab').tabCollapse({
+		tabsClass: 'hidden-sm hidden-xs',
+		accordionClass: 'visible-sm visible-xs'
+	});
 </script>
+<style>
+	.gi-2x{font-size: 2em;}
+	.gi-3x{font-size: 3em;}
+	.gi-4x{font-size: 4em;}
+	.gi-5x{font-size: 5em;}
+</style>
 <%= render 'layouts/header' %>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <html>
 	<head>
 	  <title>eClub</title>
@@ -37,10 +49,6 @@
 			data: dataString  
 		});
 	}
-	$('.datepicker').datepicker({
-		format: 'mm/dd/yyyy',
-		startDate: '-3d'
-	});
 </script>
 <div id="myModal" class="modal fade" role="dialog"></div>
 <div class="modal fade" id = "myModal2" role="dialog">

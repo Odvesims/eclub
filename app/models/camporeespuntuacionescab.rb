@@ -9,7 +9,7 @@ class Camporeespuntuacionescab < ActiveRecord::Base
 	end
 	
 	def zona_nombre
-		zona = Zona.where("zona_id = #{self.zona_id}").first
+		zona = Zona.where("id = #{self.zona_id}").first
 		zona_nombre = zona.nombre
 	end
 	

@@ -17,6 +17,7 @@ class CamporeesController < ApplicationController
 	def create
 		if signed_granted?(current_user.id, 'camporees', 'N')
 			camporee = Camporee.new(params[:camporee])
+			camporee.fecha = params[:fecha]
 			if camporee.save
 				redirect_to action: 'edit', id: camporee.id
 				return
@@ -44,6 +45,8 @@ class CamporeesController < ApplicationController
 		if signed_granted?(current_user.id, 'camporees', 'E')
 			camporee = Camporee.find(params[:id]) 
 			if camporee.update_attributes(params[:camporee])
+				camporee.fecha = params[:fecha]
+				camporee.save
 				redirect_to action: 'edit', id: camporee.id
 				return
 			end

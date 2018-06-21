@@ -2,8 +2,10 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.2.21'
 gem 'rake', '11.1.1'
-
-gem 'mysql2'
+gem 'carrierwave'
+gem 'bcrypt-ruby', '3.0.0'
+gem 'rack-cache', '1.2'
+#gem 'mysql2', '0.1'
 
 #gem 'activerecord-mysql2-adapter'
 
@@ -36,9 +38,8 @@ group :production do
 end
 
 gem 'jquery-rails'
-
-# To use ActiveModel has_secure_password
-gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'browser', '1.0.0'
+gem 'active_device'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

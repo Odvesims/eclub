@@ -1,0 +1,40 @@
+<ul class="nav nav-tabs">
+	<li class="active"><a data-toggle="tab" href="#home"><h3>Camporee Archivo</h3></a></li>
+</ul>
+<%= form_for(@camporeesarchivo) do |f| %>
+	<div class="tab-content">
+		<% if @camporeesarchivo.errors.any? %>
+			<div id="error_explanation">
+				<h2><%= pluralize(@camporeesarchivo.errors.count, "errore") %>: No se pudo guardar</h2>
+					<ul>
+						<% @camporeesarchivo.errors.full_messages.each do |msg| %>
+							<li><%= msg %></li>
+						<% end %>
+					</ul>
+			</div>
+		<% end %>
+		<br>
+		<div class="form-group">
+			<label for="camporee_id">Camporee: </label>
+			<%= f.select :camporee_id, options_from_collection_for_select(@camporees, 'id', 'nombre', @camporeesarchivo.camporee_id), :class=> "form-control" %>
+		</div>
+		<div class="form-group">
+			<label for="nombre">Nombre: </label>
+			<%= f.text_field :nombre, :class=> "form-control" %>
+		</div>
+		<div class="form-group">
+			<label for="fecha">Fecha Límite: </label>
+			<div class="input-group date" data-provide="datepicker">
+				<input type="text" class="form-control" id="camporeesarchivo_fecha_limit" name="camporeesarchivo[fecha_limit]">
+				<div class="input-group-addon">
+					<span class="glyphicon glyphicon-th"></span>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="nombre">Formulario: </label>
+			<%= f.file_field :attachment, :class=> "form-control" %>
+		</div>
+	</div>	
+	<button type="submit" class="btn btn-success">Submit</button>
+<% end %>
