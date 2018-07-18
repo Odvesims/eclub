@@ -54,5 +54,5 @@ gem 'active_device'
 # gem 'debugger'
 
 gem 'minitest'
-
+gem 'sprockets'
 
