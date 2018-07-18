@@ -15,7 +15,7 @@ class PdflistadoclubesPdf < Prawn::Document
 	def header(camporee)	
 		text @pdfdefaults[0][0], size: @pdfdefaults[1][0].to_i, align: :center
 		text @pdfdefaults[0][1], size: @pdfdefaults[1][1].to_i, align: :center
-		text @pdfdefaults[0][2]": " + camporee.nombre, size: @pdfdefaults[1][2].to_i, align: :center
+		text @pdfdefaults[0][2] + ": " + camporee.nombre, size: @pdfdefaults[1][2].to_i, align: :center
 		text "\n", size: @pdfdefaults[1][3].to_i, align: :center
 		text @pdfdefaults[0][3], align: :center
 	end
