@@ -53,4 +53,6 @@ gem 'active_device'
 # To use debugger
 # gem 'debugger'
 
+gem 'minitest'
+
 
