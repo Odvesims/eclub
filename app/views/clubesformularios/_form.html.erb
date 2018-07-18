@@ -154,6 +154,9 @@
 									input.innerHTML+= "<option value = <%= 1 %> > Masc.</option>" 
 									input.innerHTML+= "<option value = <%= 2 %> > Fem.</option>" 
 							<% end %>
+						<% elsif fieldType[0] == 2 %>
+							var input = document.createElement("input");	
+							input.type = "date";
 						<% else %>
 							var input = document.createElement("input");						
 						<% end %>

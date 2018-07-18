@@ -35,6 +35,8 @@ module EclubHelper
 				return [2, "true", "Fecha Hasta", "#fecha", "", "col-sm-2"]
 			when 'fecha'
 				return [2, "true", "Fecha", "#fecha", "", "col-sm-2"]
+			when 'fecha_nacimiento'
+				return [2, "true", "Fecha de Nacimiento", "#fecha_nacimiento", "", "col-sm-2"]
 			when 'nombre_director'
 				return [1, "false", "Nombre Director", "", "", "col-sm-5"]
 			when 'sexo'

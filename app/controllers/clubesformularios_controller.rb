@@ -8,9 +8,9 @@ class ClubesformulariosController < ApplicationController
 		formulariodets = @camporeesarchivo.ruta_detalles.camelize.constantize 
 		@formulariodets = formulariodets.new 
 		@tiposPersonas = Tipopersona.where("categoria = 3").all
-		@distrito = Distrito.find(19)
-		@iglesia = Iglesia.where("distrito_id = #{@distrito.id}").first
-		@club = Iglesiasclube.where("iglesia_id = #{@iglesia.id}").first
+		@club = Iglesiasclube.find(current_user.access_id)
+		@iglesia = Iglesia.find(@club.iglesia_id)		
+		@distrito = Distrito.find(@iglesia.distrito_id)
 		@fecha = Date.today.strftime("%m/%d/%Y")
 	end
 	
@@ -25,10 +25,12 @@ class ClubesformulariosController < ApplicationController
 	def edit
 		@camporeesarchivo = Camporeesarchivo.find(params[:tipo_doc])
 		formulario = @camporeesarchivo.ruta_formulario.camelize.constantize
-		@clubesformulario = formulario.where("id = #{params[:id]}").first
+		clubesarchivo = Clubesarchivo.where("id = #{params[:id]}").first
+		@clubesformulario = formulario.where("id = #{clubesarchivo.formularion_id}").first
 		formulariodets = @camporeesarchivo.ruta_detalles.camelize.constantize 
-		@formulariodets = formulariodets.where("#{formulariodets.campo_union.camelize.constantize} = #{@clubesformulario.id}").all
-		pdf = PdfformularioClubPdf.new(@camporeesarchivo, @formulariodets)
+		@formulariodets = formulariodets.where("#{@camporeesarchivo.campo_union} = #{@clubesformulario.id}").all
+		puts @camporeesarchivo
+		pdf = PdfformularioclubPdf.new(@camporeesarchivo, @formulariodets)
 		name = 'formularioclub.pdf'
 		pdf.render_file File.join(Rails.root, "public/pdfs", name)
 		send_data pdf.render , :filename => name , :type => "application/pdf", :disposition=> 'inline', :target => '_blank' 

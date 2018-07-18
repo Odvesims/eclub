@@ -4,45 +4,47 @@ class PdfformularioclubPdf < Prawn::Document
 	require 'action_view'
 	include ActionView::Helpers::NumberHelper
 	include ActionView::Helpers::TranslationHelper
-	def initialize(cabezera, detalles, font1, font2, font3, columnwidth[])
+	include ActionView::Helpers::TranslationHelper
+	include EclubHelper
+	def initialize(cabezera, detalles)
 		super(:page_size => 'LETTER')
-		camporee = Camporee.find(coleccion[0].camporee_id)
+		camporee = Camporee.find(cabezera.camporee_id)
+		@pdfdefaults = getPdfDefaults(1)
 		header(camporee)
-		clubes(coleccion, zona)	
+		detalles(cabezera, detalles)	
 	end
 	
 	def header(camporee)	
-		text "Asociación Dominicana del Sureste", size: font1, align: :center
-		text "Comisión de Aventureros", size: font2, align: :center
-		text "Camporee de Aventureros: " + camporee.nombre, size: font3, align: :center
-		text "\n", size: font3, align: :center
-		text "Reporte de Resultados por Zona", align: :center
+		text @pdfdefaults[0][0], size: @pdfdefaults[1][0].to_i, align: :center
+		text @pdfdefaults[0][1], size: @pdfdefaults[1][1].to_i, align: :center
+		text @pdfdefaults[0][2] + ": " + camporee.nombre, size: @pdfdefaults[1][2].to_i, align: :center
 	end
 	
-	def clubes(clubes, zona)
+	def detalles(cabezera, detalles)
 		categoria = ""
-		table_data = [["Zona: #{zona.nombre}"]]	
-		table_data += [["Club", "Evento", "Puntuación"]]	
-		table_colors = Array.new
-		i = 0
-		a = 0
-		total_puntos = 0
-		clubes.each do |club|
-			if i > 0
-				if club.camporeesevento_id != clubes[i - 1].camporeesevento_id
-					table_data += [["Clubes Participantes:", a.to_s]]
-					table_data += [["Club", "Evento", "Puntuación"]]
-					a = 0
-				end
-			end
-			total_puntos += club.total_puntos
-			clubCurrent = Iglesiasclube.find(club.iglesiasclube_id)
-			table_data += [[clubCurrent._nombre, club.evento_nombre, club.total_puntos]]
-			table_colors.push("FFFFFF")
-			i += 1
-			a += 1
+		case cabezera.campo_union
+			when 'formmatriculacab_id'
+				text "Formulario de Matriculación", size: @pdfdefaults[1][3].to_i, align: :center
+				cab = Formmatriculacab.find(detalles[0].formmatriculacab_id)
+				text "Club: " + cab.clubNombre + " | " + "Iglesia: " + cab.iglesiaNombre, size: @pdfdefaults[1][3].to_i, align: :center
+				table_data = [["Tipo", "Nombre", "Sexo", "Edad", "Fecha Nacimiento"]]	
+			when 'formsegurocab_id'
 		end
-		table_data += [["Clubes Participantes:", a]]
-		table(table_data, :column_widths => [columnwidth[0], columnwidth[0], columnwidth[0]], :row_colors => table_colors)
-	end  	
+		text "\n", size: @pdfdefaults[1][3].to_i, align: :center
+		table_colors = Array.new
+		table_colors.push("FCFCFF")
+		i = 0
+		total_puntos = 0
+		detalles.each do |detalle|
+			i += 1
+			table_data += [[detalle.tipo_persona, detalle.nombre, detalle.sexo, detalle.edad, detalle.fecha_nacimiento]]
+			table_colors.push("FFFFFF")
+		end	
+		case cabezera.campo_union
+			when 'formmatriculacab_id'
+				table(table_data, :column_widths => [@pdfdefaults[2][0].to_i, @pdfdefaults[2][1].to_i, @pdfdefaults[2][2].to_i, @pdfdefaults[2][3].to_i, @pdfdefaults[2][4].to_i], :row_colors => table_colors)	
+			when 'formsegurocab_id'
+				table(table_data, :column_widths => [@pdfdefaults[2][0].to_i, @pdfdefaults[2][1].to_i, @pdfdefaults[2][2].to_i], :row_colors => table_colors)
+		end
+	end
 end

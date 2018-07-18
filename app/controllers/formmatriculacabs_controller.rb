@@ -2,7 +2,7 @@ class FormmatriculacabsController < ApplicationController
 	before_filter :signed_in_user
 	def index
 		if signed_granted?(current_user.id, 'clubesarchivos', 'I')
-			@clubesarchivos = Clubesarchivo.where("camporee_id = #{current_user.default_camporee} AND iglesiasclubes_id = 1").all
+			@clubesarchivos = Clubesarchivo.where("camporee_id = #{current_user.default_camporee} AND iglesiasclubes_id = #{current_user.access_id}").all
 			@camporeesarchivos = Camporeesarchivo.where("camporee_id = #{current_user.default_camporee}").all
 		end
 	end
@@ -19,15 +19,18 @@ class FormmatriculacabsController < ApplicationController
 		if signed_granted?(current_user.id, 'clubesarchivos', 'N')
 			club = Iglesiasclube.where("id = #{params[:iglesiasclube_id]}").first
 			formulario = Formmatriculacab.new
-				formulario.union_id = 1
-				formulario.campo_id = club.campo_id 
-				formulario.zona_id = club.zona_id 
-				formulario.distrito_id = club.distrito_id 
-				formulario.iglesia_id = club.iglesia_id 
-				formulario.iglesiasclube_id = club.id
-				formulario.nombre_pastor = params[:nombre_pastor]
-				formulario.nombre_director = params[:nombre_pastor]
-				formulario.fecha = params[:fecha]
+			formulario.union_id = 1
+			formulario.campo_id = club.campo_id 
+			formulario.zona_id = club.zona_id 
+			formulario.distrito_id = club.distrito_id 
+			formulario.iglesia_id = club.iglesia_id 
+			formulario.iglesiasclube_id = club.id
+			formulario.nombre_pastor = params[:nombre_pastor]
+			formulario.nombre_director = params[:nombre_pastor]
+			newDate = params[:fecha].split("/")
+			params[:fecha] = newDate[2] + "-" + newDate[0] + "-" + newDate[1]
+			puts params[:fecha]
+			formulario.fecha = params[:fecha]
 			if formulario.save
 				if params[:form_lines] && params[:form_lines]["tmpformlines"]
 					detsForm = params[:form_lines]["tmpformlines"]
@@ -52,7 +55,7 @@ class FormmatriculacabsController < ApplicationController
 								clubesarchivo = Clubesarchivo.new
 								clubesarchivo.camporee_id = current_user.default_camporee
 								clubesarchivo.camporeesarchivos_id = params[:doc_id]
-								clubesarchivo.iglesiasclubes_id = club.iglesia_id 
+								clubesarchivo.iglesiasclubes_id = club.iglesia_id  
 								clubesarchivo.user_id = current_user.name
 								clubesarchivo.fecha_enviado = Time.now
 								clubesarchivo.attachment = "N/A"
@@ -61,6 +64,7 @@ class FormmatriculacabsController < ApplicationController
 						end
 					end
 				end
+				redirect_to :controller => 'clubesarchivos', :action => 'index' 
 			end
 		end
 	end
