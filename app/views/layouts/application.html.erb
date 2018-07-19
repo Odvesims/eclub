@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<%#= javascript_include_tag "application" %>
 <%= javascript_include_tag "jquery" %>
 <%= stylesheet_link_tag "bootstrap.min" %>
 <%= javascript_include_tag "bootstrap.min" %>
@@ -10,8 +9,6 @@
 <%= stylesheet_link_tag "w3" %>
 <%= stylesheet_link_tag "w3-theme-light-blue" %>
 <%= csrf_meta_tags %>
-<!-- include jQuery -->
-<!-- include BlockUI -->
 <%= javascript_include_tag "blockuiJS" %>
 <script>
 	$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);	
