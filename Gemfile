@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.21'
+gem 'rails', '5.1.6'
 gem 'rake', '11.1.1'
 gem 'carrierwave'
 gem 'bcrypt-ruby', '3.0.0'
@@ -54,5 +54,5 @@ gem 'active_device'
 # gem 'debugger'
 
 gem 'minitest'
-gem 'sprockets'
+gem 'sprockets', '3.7.2'
 
