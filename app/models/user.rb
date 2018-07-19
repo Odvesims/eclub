@@ -3,8 +3,7 @@ class User < ActiveRecord::Base
 	has_one :usersdefault
 	accepts_nested_attributes_for :usersrol, :reject_if => :all_blank, :allow_destroy => true
 	accepts_nested_attributes_for :usersdefault, :reject_if => :all_blank, :allow_destroy => true
-	attr_accessible :usersrol_attributes, :login, :name, :email, :password, :password_confirmation, :menu_cod, 
-					:idioma_isocod2, :idioma_id, :estatus, :timeout_limit
+	attr_accessible :usersrol_attributes, :login, :name, :email, :password, :password_confirmation, :menu_cod, :idioma_isocod2, :idioma_id, :estatus, :timeout_limit
 	has_secure_password
 	self.table_name = "users"
 	before_save { |user| user.email = email.downcase }
@@ -28,12 +27,8 @@ class User < ActiveRecord::Base
 		self.usersdefault.camporee_id
 	end
 	
-	def access_id
-		return self.usersdefault.access_id
-	end
-	
-	def clubType
-		return self.usersdefault.club_type
+	def club_type
+		self.usersdefault.club_type
 	end
 	
 	def default_level(controller)

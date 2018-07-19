@@ -2,20 +2,21 @@ class IglesiasclubesController < ApplicationController
 	before_filter :signed_in_user
 	def index
 		if signed_granted?(current_user.id, 'iglesiasclubes', 'I')
-		@iglesiasclubes = Iglesiasclube.where("#{current_user.default_level('iglesiasclubes')}").all.sort_by{|c|[c.zonaId, c.distrito_id, c.iglesia_id]}
+			@iglesiasclubes = Iglesiasclube.where("#{current_user.default_level('iglesiasclubes')} AND clubestipo_id = #{current_user.club_type}").all.sort_by{|c|[c.zonaId, c.distrito_id, c.iglesia_id]}
 		end
 	end
 	
 	def new
 		if signed_granted?(current_user.id, 'iglesiasclubes', 'N')
-			@iglesias = Iglesia.where("NOT EXISTS (SELECT 1 FROM iglesiasclubes WHERE iglesiasclubes.iglesia_id = iglesias.id AND iglesiasclubes.clubestipo_id = 2)").all
+			@clubType = current_user.club_type
+			@iglesias = Iglesia.where("NOT EXISTS (SELECT 1 FROM iglesiasclubes WHERE iglesiasclubes.iglesia_id = iglesias.id AND iglesiasclubes.clubestipo_id = #{current_user.club_type})").all
 			@clubestipos = Clubestipo.all
 			@iglesiasclube = Iglesiasclube.new
 		end
 	end
 	
 	def show
-		@iglesias = ActiveRecord::Base.connection.execute("SELECT id, nombre FROM iglesias i WHERE NOT EXISTS (SELECT 1 FROM iglesiasclubes c WHERE  i.id = c.iglesia_id AND c.clubestipo_id = 1)")
+		@iglesias = ActiveRecord::Base.connection.execute("SELECT id, nombre FROM iglesias i WHERE NOT EXISTS (SELECT 1 FROM iglesiasclubes c WHERE  i.id = c.iglesia_id AND c.clubestipo_id = #{current_user.club_type})")
 	end
 	
 	def create
