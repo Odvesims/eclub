@@ -25,7 +25,7 @@ class ClubesformulariosController < ApplicationController
 	def edit
 		@camporeesarchivo = Camporeesarchivo.find(params[:tipo_doc])
 		formulario = @camporeesarchivo.ruta_formulario.camelize.constantize
-		clubesarchivo = Clubesarchivo.where("id = #{params[:id]}").first
+		clubesarchivo = Clubesarchivo.where("id = #{params[:id]} AND iglesiasclubes_id = #{current_user.accesId}").first
 		@clubesformulario = formulario.where("id = #{clubesarchivo.formularion_id}").first
 		formulariodets = @camporeesarchivo.ruta_detalles.camelize.constantize 
 		@formulariodets = formulariodets.where("#{@camporeesarchivo.campo_union} = #{@clubesformulario.id}").all

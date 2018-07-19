@@ -2,7 +2,7 @@ class ClubesarchivosController < ApplicationController
 	before_filter :signed_in_user
 	def index
 		if signed_granted?(current_user.id, 'clubesarchivos', 'I')
-			@clubesarchivos = Clubesarchivo.where("camporee_id = #{current_user.default_camporee} AND iglesiasclubes_id = 1").all
+			@clubesarchivos = Clubesarchivo.where("camporee_id = #{current_user.default_camporee} AND iglesiasclubes_id = #{current_user.accesId}").all
 			@camporeesarchivos = Camporeesarchivo.where("camporee_id = #{current_user.default_camporee}").all
 		end
 	end
@@ -30,14 +30,16 @@ class ClubesarchivosController < ApplicationController
 			@camporees = Camporee.where("id = #{current_user.default_camporee}").all
 			@clubestipos = Clubestipo.all
 			@clubesarchivo = Clubesarchivo.find(params[:id]) 
-			if params[:donde] == 'next'
-				@clubesarchivo = Clubesarchivo.find(params[:id])
-				@clubesarchivo = @clubesarchivo.next(@clubesarchivo.id)
-			else if params[:donde] == 'prev'
-				@clubesarchivo = Clubesarchivo.find(params[:id])
-				@clubesarchivo = @clubesarchivo.prev(@clubesarchivo.id)
+			if @clubesarchivo.iglesiasclubes_id = current_user.accesId
+				if params[:donde] == 'next'
+					@clubesarchivo = Clubesarchivo.find(params[:id])
+					@clubesarchivo = @clubesarchivo.next(@clubesarchivo.id)
+				else if params[:donde] == 'prev'
+					@clubesarchivo = Clubesarchivo.find(params[:id])
+					@clubesarchivo = @clubesarchivo.prev(@clubesarchivo.id)
+				end
+				end	
 			end
-			end	
 		end
 	end
 	

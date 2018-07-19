@@ -31,6 +31,10 @@ class User < ActiveRecord::Base
 		self.usersdefault.club_type
 	end
 	
+	def accesId
+		return self.usersdefault.access_id
+	end
+	
 	def default_level(controller)
 		access_level = self.usersdefault.access_level
 		access_id = self.usersdefault.access_id
