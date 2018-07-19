@@ -79,7 +79,7 @@ class User < ActiveRecord::Base
 						return_string = "campo_id = #{self.default_conference} AND zona_id = #{iglesia.zona_id} AND distrito_id = #{iglesia.distrito_id} AND iglesia_id = #{access_id}"
 				end
 			when 'LC'
-				iglesiaclub = Iglesiaclube.find(access_id)
+				iglesiaclub = Iglesiasclube.find(access_id)
 				case controller
 					when 'campos'
 						return_string = "id = #{self.default_conference}"

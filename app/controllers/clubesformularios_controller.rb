@@ -8,7 +8,7 @@ class ClubesformulariosController < ApplicationController
 		formulariodets = @camporeesarchivo.ruta_detalles.camelize.constantize 
 		@formulariodets = formulariodets.new 
 		@tiposPersonas = Tipopersona.where("categoria = 3").all
-		@club = Iglesiasclube.find(current_user.access_id)
+		@club = Iglesiasclube.find(current_user.accesId)
 		@iglesia = Iglesia.find(@club.iglesia_id)		
 		@distrito = Distrito.find(@iglesia.distrito_id)
 		@fecha = Date.today.strftime("%m/%d/%Y")
