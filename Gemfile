@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '5.1.6'
+gem 'rails', '3.2.21'
 gem 'rake', '11.1.1'
 gem 'carrierwave'
 gem 'bcrypt-ruby', '3.0.0'
@@ -32,7 +32,6 @@ group :assets do
 end
 
 group :production do
-  gem 'pg', '0.18.4'
   gem 'rails_12factor'
   gem 'uglifier'
 end
@@ -54,5 +53,5 @@ gem 'active_device'
 # gem 'debugger'
 
 gem 'minitest'
-gem 'sprockets', '3.7.2'
+gem 'sprockets'
 
