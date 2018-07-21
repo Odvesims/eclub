@@ -37,7 +37,7 @@
 				<table style = "width: 100%; text-align: left; border: solid thin #000000">
 					<tr>
 						<td style = "width: 80%; font-size: 18px; text-align: left"><b><%= d.nombre_criterio %></td>
-						<td style = "width: 10%; font-size: 18px; text-align: right"><%= d.puntos %></td>
+						<td style = "width: 10%; font-size: 18px; text-align: right"><%= d.puntos.to_d %></td>
 						<td style = "width: 10%"></td>
 					</tr>
 				</table>
@@ -49,7 +49,7 @@
 			<table style = "width: 100%; text-align: left; border: solid thin #000000">
 				<tr>
 					<td style = "width: 80%; font-size: 18px; text-align: right">Total Criterio:</td>
-					<td style = "width: 10%; font-size: 18px; text-align: right"><%= total_dets_renglon.to_s %></td>
+					<td style = "width: 10%; font-size: 18px; text-align: right"><%= total_dets_renglon.to_d.to_s %></td>
 					<td style = "width: 10%; text-align: right"></td>
 				</tr>
 			</table>
@@ -58,7 +58,7 @@
 	<table style = "width: 100%; text-align: left; border: solid thin #000000">
 		<tr>
 			<td style = "width: 80%; font-size: 20px; text-align: right"><b>Total Evento:</td>
-			<td style = "width: 10%; font-size: 20px; text-align: right"><b><%= total_dets_evento.to_s %></td>
+			<td style = "width: 10%; font-size: 20px; text-align: right"><b><%= total_dets_evento.to_d.to_s %></td>
 			<td style = "width: 10%; text-align: right"></td>
 		</tr>
 	</table>

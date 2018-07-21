@@ -56,7 +56,7 @@
 								<% @camporeeseventoscriteriosdet.each do |d| %>
 									<tr>
 										<td style = "width: 50%"><%= d.nombre %></td>
-										<td style = "width: 50%; text-align: right"><%= d.puntos %></td>
+										<td style = "width: 50%; text-align: right"><%= d.puntos.to_d %></td>
 									</tr>
 								<% end %>
 							</table>

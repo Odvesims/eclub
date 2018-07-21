@@ -54,7 +54,7 @@
 							<%= label_tag 'Nombre' %>
 							<%= text_field_tag 'nombre[]', cab.nombre, :class=> "form-control" %>
 							<%= label_tag 'Puntos' %>
-							<%= text_field_tag 'total_puntos[]', cab.total_puntos, :class=> "form-control" %>
+							<%= number_field_tag 'total_puntos[]', cab.total_puntos, :class=> "form-control" %>
 						</div>
 						<% @camporeeseventocriterios_det = Camporeeseventoscriteriosdet.where("camporeeseventoscriterioscab_id = #{cab.id}").all %>
 						<fieldset>
@@ -67,7 +67,7 @@
 											<td><%= label_tag 'Nombre' %></td>
 											<td><%= text_field_tag 'nombre_detalle[]', det.nombre, :class=> "form-control" %></td>
 											<td><%= label_tag 'Puntos' %></td>
-											<td><%= text_field_tag 'puntos_detalle[]', det.puntos, :class=> "form-control" %></td>
+											<td><%= number_field_tag 'puntos_detalle[]', det.puntos, :class=> "form-control" %></td>
 										</tr>
 									<% end %>
 								</table>	
