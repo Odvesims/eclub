@@ -1,5 +1,4 @@
 class CamporeeseventosController < ApplicationController
-	before_filter :signed_in_user
 	def index
 		if signed_granted?(current_user.id, 'camporeeseventos', 'I')
 			@camporeeseventos = Camporeesevento.where("camporee_id = #{current_user.default_camporee}").all
@@ -16,7 +15,7 @@ class CamporeeseventosController < ApplicationController
 	
 	def create
 		if signed_granted?(current_user.id, 'camporeeseventos', 'N')
-			camporeesevento = Camporeesevento.new(params[:camporeesevento])
+			camporeesevento = Camporeesevento.new(params[:camporeesevento].to_enum.to_h)
 			if camporeesevento.save!
 				camporeesevento.errors.full_messages
 				if params[:nombre] && params[:total_puntos]
@@ -74,7 +73,8 @@ class CamporeeseventosController < ApplicationController
 	def update
 		if signed_granted?(current_user.id, 'camporeeseventos', 'E')
 			camporeesevento = Camporeesevento.find(params[:id]) 
-			if camporeesevento.update_attributes(params[:camporeesevento])
+			camporeesevento.update(params[:camporeesevento].to_enum.to_h)
+			if camporeesevento.save
 				if params[:nombre] && params[:total_puntos]
 					x = 0
 					params[:nombre].each do |cab|

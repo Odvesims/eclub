@@ -1,6 +1,4 @@
 class Camporeeseventoscriterioscab < ActiveRecord::Base
-	default_scope order: 'camporeesevento_id, id'
-	attr_accessible :camporeesevento_id, :nombre, :total_puntos
 	self.table_name = "camporeeseventoscriterioscabs" 
 	belongs_to :camporeesevento
 	has_many :camporeeseventoscriteriosdets

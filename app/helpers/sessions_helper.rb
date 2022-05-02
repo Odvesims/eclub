@@ -6,14 +6,15 @@ module SessionsHelper
 	px=Hash.new
 	px=[["loterias"=>"CRUD"],["monitorsrch"=>"R"]]
 	cookies[:browser_px]=px
-    self.current_user = user
+  self.current_user = user
 	vidioma = user.idioma_isocod2
-    $idioma = ''
+  $idioma = 'es'
 	unless vidioma.empty?
 		I18n.locale = vidioma
 		$idioma = vidioma
 	end
-	$menugral = user.menu_cod
+	
+	$menugral = 'ECLUBMENU'
 	
 	#jfb $nivel_control = user.nivel_control
 	#jfb $nivelid = user.nivelid
@@ -362,7 +363,7 @@ end
 	   logmodel.log_action = paction[0..9]
 	   logmodel.log_comment = pcomment
 	   logmodel.origin = 'W'  #origen web
-	   logmodel.save
+	   #logmodel.save
    end
  end
  
@@ -422,48 +423,49 @@ end
 		end
 		menustbl = Gemenutbl.where("menu_cod = '#{menuname}'"+sql).all()
 		menustbl.each do |menuitem|
-		mcontroller = menuitem.menu_controller
-		vdescr = I18n.t('menu.'+mcontroller)
-		if vdescr.empty?  
-			mdescr = menuitem.menu_descr
-		else   
-			if vdescr['missing'] == 'missing'  
+		  mcontroller = menuitem.menu_controller
+		  vdescr = I18n.t('menu.'+mcontroller)
+			Rails.logger.debug("vdescr #{vdescr}")
+			if vdescr.empty?  
 				mdescr = menuitem.menu_descr
-			else
-				mdescr = vdescr
-			end
-		end
-		case menuitem.item_type 
-			when 'R' 
-				nivel_ant = menuitem.menu_level
-			when 'N' 
-				if menuitem.menu_level == nivel_ant 
-					strbegin += '</li>'
-				end
-				if menuitem.menu_level < nivel_ant  
-					strbegin +='</ul></li>'
-				end
-				if menuitem.menu_level > nivel_ant  
-					if nivel_ant != 0
-						strbegin +='<ul class="dropdown-menu">'
-					end
-				end 
-				if menuitem.menu_level > 1 
-					strbegin += '<li class="dropdown-submenu">'+'<a href="/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">'+mdescr+'</a>'
+			else   
+				if vdescr['missing'] == 'missing'  
+					mdescr = menuitem.menu_descr
 				else
-					strbegin += '<li>'+'<a href="/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">'+mdescr+'<b class="caret"></b></a>'
+					mdescr = vdescr
 				end
-			when 'B'
-				strbegin += '</ul></li>'
-			else
-				if menuitem.menu_level > nivel_ant
-					strbegin += '<ul class="dropdown-menu">'
-				end
-				if menuitem.menu_level < nivel_ant
-					strbegin += '</ul>'
-				end       	      	
-				strbegin += '<li><a href="/'+menuitem.menu_controller+'" >'+mdescr+'</a></li>'
 			end
+			case menuitem.item_type 
+				when 'R' 
+					nivel_ant = menuitem.menu_level
+				when 'N' 
+					if menuitem.menu_level == nivel_ant 
+						strbegin += '</li>'
+					end
+					if menuitem.menu_level < nivel_ant  
+						strbegin +='</ul></li>'
+					end
+					if menuitem.menu_level > nivel_ant  
+						if nivel_ant != 0
+							strbegin +='<ul class="dropdown-menu">'
+						end
+					end 
+					if menuitem.menu_level > 1 
+						strbegin += '<li class="dropdown-submenu">'+'<a href="/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">'+mdescr+'</a>'
+					else
+						strbegin += '<li>'+'<a href="/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">'+mdescr+'<b class="caret"></b></a>'
+					end
+				when 'B'
+					strbegin += '</ul></li>'
+				else
+					if menuitem.menu_level > nivel_ant
+						strbegin += '<ul class="dropdown-menu">'
+					end
+					if menuitem.menu_level < nivel_ant
+						strbegin += '</ul>'
+					end       	      	
+					strbegin += '<li><a href="/'+menuitem.menu_controller+'" >'+mdescr+'</a></li>'
+			end		
 			nivel_ant = menuitem.menu_level
 			tipo_ant = menuitem.item_type
 		end

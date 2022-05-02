@@ -1,5 +1,4 @@
 class ZonasController < ApplicationController
-	before_filter :signed_in_user
 	def index
 		if signed_granted?(current_user.id, 'zonas', 'I')
 			@zonas = Zona.where("#{current_user.default_level('zonas')}").all
@@ -15,7 +14,7 @@ class ZonasController < ApplicationController
 	
 	def create
 		if signed_granted?(current_user.id, 'zonas', 'N')
-			zona = Zona.new(params[:zona])
+			zona = Zona.new(params[:zona].to_enum.to_h)
 			if zona.save
 				redirect_to action: 'edit', id: zona.id
 				return
@@ -41,8 +40,9 @@ class ZonasController < ApplicationController
 	def update
 		if signed_granted?(current_user.id, 'zonas', 'E')
 			zona = Zona.find(params[:id]) 
-			if zona.update_attributes(params[:zona])
-				redirect_to action: 'edit', id: zona.id
+			zona.update(params[:zona].to_enum.to_h)
+			if zona.save
+					redirect_to action: 'edit', id: zona.id
 				return
 			end
 		end

@@ -1,9 +1,9 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.21'
+gem 'rails'
 gem 'rake', '11.1.1'
 gem 'carrierwave'
-gem 'bcrypt-ruby', '3.0.0'
+gem 'bcrypt-ruby'
 gem 'rack-cache', '1.2'
 #gem 'mysql2', '0.1'
 
@@ -19,7 +19,8 @@ gem 'prawn-table', '~> 0.1.2'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'pg', '0.18.4'
+gem 'pg'
+gem 'activerecord-postgresql-adapter'
 gem 'will_paginate'
 gem 'cocoon'
 
@@ -37,7 +38,7 @@ group :production do
 end
 
 gem 'jquery-rails'
-gem 'browser', '1.0.0'
+gem 'browser'
 gem 'active_device'
 
 # To use Jbuilder templates for JSON

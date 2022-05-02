@@ -1,5 +1,4 @@
 class IglesiasController < ApplicationController
-	before_filter :signed_in_user
 	def index
 		if signed_granted?(current_user.id, 'iglesias', 'I')
 			@iglesias = Iglesia.where("#{current_user.default_level('iglesias')}").all.sort_by{|i|[i.zonaId, i.distrito_id, i.id]}
@@ -15,7 +14,7 @@ class IglesiasController < ApplicationController
 	
 	def create
 		if signed_granted?(current_user.id, 'iglesias', 'N')
-			iglesia = Iglesia.new(params[:iglesia])
+			iglesia = Iglesia.new(params[:iglesia].to_enum.to_h)
 			distrito = Distrito.find(params[:iglesia][:distrito_id])
 			iglesia.campo_id = distrito.campo_id
 			iglesia.zona_id = distrito.zona_id
@@ -44,7 +43,8 @@ class IglesiasController < ApplicationController
 	def update
 		if signed_granted?(current_user.id, 'iglesias', 'E')
 			iglesia = Iglesia.find(params[:id]) 
-			if iglesia.update_attributes(params[:iglesia])
+			iglesia.update(params[:iglesia].to_enum.to_h)
+			if iglesia.save
 				redirect_to action: 'edit', id: iglesia.id
 				return
 			end

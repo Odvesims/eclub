@@ -1,6 +1,6 @@
 class Sessionsopen < ActiveRecord::Base
 
-  attr_accessible :remember_token, :login, :device, :timeout_limit, :created_at, :updated_at, :msgerror
+  attr_accessor :remember_token, :login, :device, :timeout_limit, :created_at, :updated_at, :msgerror
   attr_accessor :msgerror
 
   self.table_name = "sessions_open"

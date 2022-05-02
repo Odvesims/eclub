@@ -1,6 +1,4 @@
 class CamporeespuntuacionescabsController < ApplicationController
-	before_filter :signed_in_user
-	protect_from_forgery with: :null_session
 	def index
 		if signed_granted?(current_user.id, 'camporeespuntuacionescabs', 'I')
 			@iglesias = Iglesia.where("#{current_user.default_level('iglesias')}").all

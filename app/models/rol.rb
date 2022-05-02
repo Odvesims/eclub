@@ -1,6 +1,6 @@
 class Rol < ActiveRecord::Base
   has_many :roldet
-  attr_accessible :roldet_attributes, :nombre_rol, :descripcion, :comentario, :created_by, :updated_by, :created_at, :updated_at
+  attr_accessor :roldet_attributes, :nombre_rol, :descripcion, :comentario, :created_by, :updated_by, :created_at, :updated_at
   self.table_name = "roles" 
   validates :nombre_rol, :presence => true
   validates :descripcion, :presence => true,  

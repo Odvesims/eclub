@@ -31,6 +31,7 @@ DeboxionApp::Application.routes.draw do
 	resources :detallesporclubes
 	resources :reporteporzonas
 	resources :hojasevaluaciones
+	resources :reporteparticipacionporeventos
 	
 	#Clubes
 	resources :clubesarchivos, only: [:index, :new, :create, :destroy]
@@ -38,13 +39,13 @@ DeboxionApp::Application.routes.draw do
 	resources :formsegurocabs
 	resources :formmatriculacabs
 
-	match '/',  to: 'sessions#new'
-	match '/signin',  to: 'sessions#new'
-	match '/signout', to: 'sessions#destroy'
-	match '/help',    to: 'static_pages#help'
-	match '/about',   to: 'static_pages#about'
-	match '/contact', to: 'static_pages#contact'
-	match '/taskusers', to: 'static_pages#taskusers'
-	match '/noautorizado', to: 'static_pages#noautorizado'
+	get '/',  to: 'sessions#new'
+	get '/signin',  to: 'sessions#new'
+	get '/signout', to: 'sessions#destroy'
+	get '/help',    to: 'static_pages#help'
+	get '/about',   to: 'static_pages#about'
+	get '/contact', to: 'static_pages#contact'
+	get '/taskusers', to: 'static_pages#taskusers'
+	get '/noautorizado', to: 'static_pages#noautorizado'
 	root :to => "home#index"
 end

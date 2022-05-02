@@ -1,6 +1,4 @@
 class Iglesia < ActiveRecord::Base
-	default_scope order: 'campo_id'
-	attr_accessible :campo_id, :zona_id, :distrito_id, :nombre
 	self.table_name = "iglesias"  
 
 	def distrito_nombre

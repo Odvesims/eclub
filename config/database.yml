@@ -1,17 +1,16 @@
 # SQLite version 3.x
-#   gem install sqlite3  
+#   gem install sqlite3
 #
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3' rubygems.org
 
 development:
   adapter: postgresql
-  database: ddfkk6af39ecko
-  host: ec2-107-22-173-160.compute-1.amazonaws.com 
-  port: 5432  
-  username: vszuwtcwblkszi
-  password: 3100796abea9c27137d8c14af4a24824ad9787a7c679e1d750119fba0edab960 
-
+  database: dd0rsfb0psbpje
+  host: ec2-3-217-113-25.compute-1.amazonaws.com
+  port: 5432
+  username: nxqcwuedwrvaya
+  password: 8a9e9517a93b786ae79066530d77f7184754165eabce921828877a92482fa585
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

@@ -1,5 +1,4 @@
 class ReportegeneralController < ApplicationController
-	before_filter :signed_in_user
 	def index
 		if signed_granted?(current_user.id, 'reportegeneral', 'E')
 			@clubes = Iglesiasclube.where("#{current_user.default_level('iglesiasclubes')}").all
@@ -11,7 +10,7 @@ class ReportegeneralController < ApplicationController
 	def show
 		if signed_granted?(current_user.id, 'reportegeneral', 'I')
 			@control_js = 1		
-			@clubespuntos = Camporeespuntuacionescab.where("camporee_id = #{current_user.default_camporee}").select("camporee_id, iglesiasclube_id, sum(total_puntos) as total_puntos").group("camporee_id, iglesiasclube_id").order("total_puntos DESC, iglesiasclube_id").sort_by(&:zonaId)
+			@clubespuntos = Camporeespuntuacionescab.where("camporee_id = #{current_user.default_camporee}").select("camporee_id, zona_id, iglesiasclube_id, sum(total_puntos) as total_puntos").group("camporee_id, zona_id, iglesiasclube_id").order("total_puntos DESC, iglesiasclube_id").sort_by(&:zonaId)
 			respond_to do |format|
 				format.js
 			end

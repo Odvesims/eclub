@@ -1,8 +1,7 @@
 class DistritosController < ApplicationController
-	before_filter :signed_in_user
 	def index
 		if signed_granted?(current_user.id, 'distritos', 'I')
-			@distritos = Distrito.where("#{current_user.default_level('distritos')}").all.sort_by(&:zonaId)
+			@distritos = Distrito.all.sort_by(&:zonaId)
 		end
 	end
 	
@@ -16,7 +15,7 @@ class DistritosController < ApplicationController
 	
 	def create
 		if signed_granted?(current_user.id, 'distritos', 'N')
-			distrito = Distrito.new(params[:distrito])
+			distrito = Distrito.new(params[:distrito].to_enum.to_h)
 			if distrito.save
 				redirect_to action: 'edit', id: distrito.id
 				return
@@ -43,7 +42,8 @@ class DistritosController < ApplicationController
 	def update
 		if signed_granted?(current_user.id, 'distritos', 'E')
 			distrito = Distrito.find(params[:id]) 
-			if distrito.update_attributes(params[:distrito])
+			distrito.update(params[:distrito].to_enum.to_h)
+			if distrito.save
 				redirect_to action: 'edit', id: distrito.id
 				return
 			end

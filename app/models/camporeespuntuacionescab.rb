@@ -1,6 +1,4 @@
 class Camporeespuntuacionescab < ActiveRecord::Base
-	attr_accessible :campo_id, :zona_id, :distrito_id, :iglesia_id, :iglesiasclube_id, :camporee_id, :camporeerenglone_id, 
-				    :camporeesevento_id, :puntos_evento, :total_puntos, :camporeeseventoscriterioscab_id
 	self.table_name = "camporeespuntuacionescabs"  
 
 	def campo_nombre

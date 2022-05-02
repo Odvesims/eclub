@@ -1,5 +1,4 @@
 class ListadoclubesController < ApplicationController
-	before_filter :signed_in_user
 	def index
 		if signed_granted?(current_user.id, 'listadoclubes', 'I')
 			@zonas = Zona.all

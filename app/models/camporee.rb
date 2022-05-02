@@ -1,6 +1,4 @@
 class Camporee < ActiveRecord::Base
-	default_scope order: 'campo_id, fecha'
-	attr_accessible :campo_id, :clubestipo_id, :fecha, :nombre
 	self.table_name = "camporees"  
 
 	def campo_nombre

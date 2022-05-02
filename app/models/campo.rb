@@ -1,5 +1,4 @@
 class Campo < ActiveRecord::Base
-	attr_accessible :nombre, :siglas,  :pais_id
 	self.table_name = "campos"  
 	
 	def next(id) 

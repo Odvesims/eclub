@@ -1,6 +1,4 @@
 class Camporeesevento < ActiveRecord::Base
-	default_scope order: 'camporee_id, camporeesrenglone_id, id'
-	attr_accessible :camporee_id, :camporeesrenglone_id, :nombre, :descripcion, :total_puntos, :participantes, :tiempo
 	self.table_name = "camporeeseventos"  
 	has_many :camporeeseventoscriterioscabs
 	has_many :camporeeseventoscriteriosdets, :through => :camporeeseventoscriterioscabs

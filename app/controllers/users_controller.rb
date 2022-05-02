@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
-	before_filter :signed_in_user
 	def index
 		xuser = current_user
 		if signed_granted?(xuser.id, 'users', 'I')
-			@users= User.all(:order => 'name')
+			@users= User.all.order('name ASC')
 			@usersroles = Usersrol.all
 			@roles = Rol.all
 			respond_to do |format|
@@ -63,7 +62,7 @@ class UsersController < ApplicationController
 	def create
 		xuser = current_user
 		if signed_granted?(xuser.id, 'users', 'N')
-			@user= User.new(params[:user])
+			@user= User.new(params[:user].to_enum.to_h)
 			@usersroles = Usersrol.all
 			@roles = Rol.all		
 			respond_to do |format|
@@ -85,7 +84,8 @@ class UsersController < ApplicationController
 		
 			@roles = Rol.all
 			respond_to do |format|
-				if @user.update_attributes(params[:user])
+				@user.update(params[:user].to_enum.to_h)
+				if @user.save
 					#UserMailer.welcome_email(@user).deliver
 					format.html { redirect_to edit_user_path, notice: 'User was successfully updated.' }
 					format.json { head :no_content }

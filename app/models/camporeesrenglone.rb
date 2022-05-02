@@ -1,6 +1,4 @@
 class Camporeesrenglone < ActiveRecord::Base
-	default_scope order: 'camporee_id, id'
-	attr_accessible :camporee_id, :total_puntos, :nombre, :color
 	self.table_name = "camporeesrenglones"  
 
 	def camporee_nombre

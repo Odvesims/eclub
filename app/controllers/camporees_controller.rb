@@ -1,5 +1,5 @@
 class CamporeesController < ApplicationController
-	before_filter :signed_in_user
+	
 	def index
 		if signed_granted?(current_user.id, 'camporees', 'I')
 			@camporees = Camporee.where("id = #{current_user.default_camporee}").all
@@ -16,7 +16,7 @@ class CamporeesController < ApplicationController
 	
 	def create
 		if signed_granted?(current_user.id, 'camporees', 'N')
-			camporee = Camporee.new(params[:camporee])
+			camporee = Camporee.new(params[:camporee].to_enum.to_h)
 			camporee.fecha = params[:fecha]
 			if camporee.save
 				redirect_to action: 'edit', id: camporee.id
@@ -44,7 +44,8 @@ class CamporeesController < ApplicationController
 	def update
 		if signed_granted?(current_user.id, 'camporees', 'E')
 			camporee = Camporee.find(params[:id]) 
-			if camporee.update_attributes(params[:camporee])
+			camporee.update(params[:camporee].to_enum.to_h)
+			if camporee.save
 				camporee.fecha = params[:fecha]
 				camporee.save
 				redirect_to action: 'edit', id: camporee.id
