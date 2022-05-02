@@ -5,6 +5,9 @@ gem 'rake'
 gem 'carrierwave'
 gem 'bcrypt-ruby'
 gem 'rack-cache', '1.2'
+
+gem 'thin'
+gem 'webrick'
 #gem 'mysql2', '0.1'
 
 #gem 'activerecord-mysql2-adapter'
