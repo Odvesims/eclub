@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails'
-gem 'rake', '11.1.1'
+gem 'rake'
 gem 'carrierwave'
 gem 'bcrypt-ruby'
 gem 'rack-cache', '1.2'
