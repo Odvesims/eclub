@@ -1,5 +1,4 @@
 class CamporeesarchivosController < ApplicationController
-	before_filter :signed_in_user
 	def index
 		if signed_granted?(current_user.id, 'camporeesarchivos', 'I')
 			@camporeesarchivos = Camporeesarchivo.where("camporee_id = #{current_user.default_camporee}").all

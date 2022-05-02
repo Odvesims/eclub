@@ -1,0 +1,23 @@
+<style>
+#header, #nav, #barra .noprint
+{
+display: none;
+}
+.noprint
+{
+display: none;
+}
+.datos
+{
+display: block;
+font-size: 10px;
+}
+.nombreempresa
+{
+font-size: 14px;
+}
+.cabezera
+{
+font-size: 12px;
+}
+</style>

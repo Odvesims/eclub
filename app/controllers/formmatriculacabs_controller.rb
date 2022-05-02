@@ -1,5 +1,4 @@
 class FormmatriculacabsController < ApplicationController
-	before_filter :signed_in_user
 	def index
 		if signed_granted?(current_user.id, 'clubesarchivos', 'I')
 			@clubesarchivos = Clubesarchivo.where("camporee_id = #{current_user.default_camporee} AND iglesiasclubes_id = #{current_user.access_id}").all

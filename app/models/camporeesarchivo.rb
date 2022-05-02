@@ -1,6 +1,4 @@
 class Camporeesarchivo < ActiveRecord::Base
-	default_scope order: 'camporee_id, id'
-	attr_accessor :camporee_id, :nombre, :fecha_limit, :tipo_archivo
 	self.table_name = "camporeesarchivos"  
 
 	def camporee_nombre

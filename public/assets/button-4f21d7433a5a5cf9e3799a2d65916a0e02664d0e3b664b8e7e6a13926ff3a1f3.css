@@ -1,0 +1,72 @@
+.cancelButton{
+	background: rgba(227,16,44,1);
+	background: -moz-linear-gradient(top, rgba(227,16,44,1) 0%, rgba(250,5,5,1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(227,16,44,1)), color-stop(100%, rgba(250,5,5,1)));
+	background: -webkit-linear-gradient(top, rgba(227,16,44,1) 0%, rgba(250,5,5,1) 100%);
+	background: -o-linear-gradient(top, rgba(227,16,44,1) 0%, rgba(250,5,5,1) 100%);
+	background: -ms-linear-gradient(top, rgba(227,16,44,1) 0%, rgba(250,5,5,1) 100%);
+	background: linear-gradient(to bottom, rgba(227,16,44,1) 0%, rgba(250,5,5,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e3102c', endColorstr='#fa0505', GradientType=0 );
+	font-size: 14px;
+	text-align: center;
+	font-weight: bold;
+	border: 1px solid;
+	border-color: #e3102c;
+	border-radius: 5px;
+	color: #000000;
+	padding: 5px 12px;
+}
+.cancelButton:hover{
+	background: rgba(240,40,67,1);
+	background: -moz-linear-gradient(top, rgba(240,40,67,1) 0%, rgba(251,45,45,1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(240,40,67,1)), color-stop(100%, rgba(251,45,45,1)));
+	background: -webkit-linear-gradient(top, rgba(240,40,67,1) 0%, rgba(251,45,45,1) 100%);
+	background: -o-linear-gradient(top, rgba(240,40,67,1) 0%, rgba(251,45,45,1) 100%);
+	background: -ms-linear-gradient(top, rgba(240,40,67,1) 0%, rgba(251,45,45,1) 100%);
+	background: linear-gradient(to bottom, rgba(240,40,67,1) 0%, rgba(251,45,45,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f02843', endColorstr='#fb2d2d', GradientType=0 );
+	font-size: 14px;
+	cursor: pointer; 
+	font-weight: bold;
+	border: 1px solid;
+	border-color: #e3102c;
+	border-radius: 5px;
+	color: #000000;
+	padding: 5px 12px;
+}
+.aceptarButton{
+	background: rgba(220,242,250,1);
+	background: -moz-linear-gradient(top, rgba(220,242,250,1) 0%, rgba(210,238,245,1) 37%, rgba(223,239,252,1) 52%, rgba(239,246,253,1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(220,242,250,1)), color-stop(37%, rgba(210,238,245,1)), color-stop(52%, rgba(223,239,252,1)), color-stop(100%, rgba(239,246,253,1)));
+	background: -webkit-linear-gradient(top, rgba(220,242,250,1) 0%, rgba(210,238,245,1) 37%, rgba(223,239,252,1) 52%, rgba(239,246,253,1) 100%);
+	background: -o-linear-gradient(top, rgba(220,242,250,1) 0%, rgba(210,238,245,1) 37%, rgba(223,239,252,1) 52%, rgba(239,246,253,1) 100%);
+	background: -ms-linear-gradient(top, rgba(220,242,250,1) 0%, rgba(210,238,245,1) 37%, rgba(223,239,252,1) 52%, rgba(239,246,253,1) 100%);
+	background: linear-gradient(to bottom, rgba(220,242,250,1) 0%, rgba(210,238,245,1) 37%, rgba(223,239,252,1) 52%, rgba(239,246,253,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dcf2fa', endColorstr='#eff6fd', GradientType=0 );
+	font-size: 14px;
+	text-align: center;
+	font-weight: bold;
+	border: 1px solid;
+	border-color: #C5DBEC;
+	border-radius: 5px;
+	color: #2E6E9E;
+	padding: 5px 12px;
+}
+.aceptarButton:hover{
+	background: rgba(230,243,247,1);
+	background: -moz-linear-gradient(top, rgba(230,243,247,1) 0%, rgba(197,224,252,1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(230,243,247,1)), color-stop(100%, rgba(197,224,252,1)));
+	background: -webkit-linear-gradient(top, rgba(230,243,247,1) 0%, rgba(197,224,252,1) 100%);
+	background: -o-linear-gradient(top, rgba(230,243,247,1) 0%, rgba(197,224,252,1) 100%);
+	background: -ms-linear-gradient(top, rgba(230,243,247,1) 0%, rgba(197,224,252,1) 100%);
+	background: linear-gradient(to bottom, rgba(230,243,247,1) 0%, rgba(197,224,252,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6f3f7', endColorstr='#c5e0fc', GradientType=0 );
+	font-size: 14px;
+	cursor: pointer;
+	font-weight: bold;
+	border: 1px solid;
+	border-color: #C5DBEC;
+	border-radius: 5px;
+	color: #2E6E9E;
+	padding: 5px 12px;
+}

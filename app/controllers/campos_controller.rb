@@ -1,5 +1,4 @@
 class CamposController < ApplicationController
-	before_filter :signed_in_user
 	def index
 		if signed_granted?(current_user.id, 'campos', 'I')
 			@campos = Campo.where("#{current_user.default_level('campos')}").all

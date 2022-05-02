@@ -1,6 +1,4 @@
 class RolesController < ApplicationController
-	before_filter :signed_in_user
-before_filter :signed_in_user 
   def index
   	xuser = current_user 
 	if signed_granted?(xuser.id, 'roles', 'I')

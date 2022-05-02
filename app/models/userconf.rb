@@ -11,7 +11,6 @@ class Userconf < ActiveRecord::Base
   accepts_nested_attributes_for :usersdefault, :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :userstipodocu, :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :usersdefpre, :reject_if => :all_blank, :allow_destroy => true
-  attr_accessor :usersdivem_attributes, :userssetma_attributes, :usersdefault_attributes, :userstipodocu_attributes, :usersdefpre_attributes, :login, :name, :email
  
   self.table_name = "users"
  

@@ -1,5 +1,4 @@
 class HojasevaluacionesController < ApplicationController
-	before_filter :signed_in_user
 	def index
 		if signed_granted?(current_user.id, 'hojasevaluaciones', 'E')
 			@eventos = Camporeesevento.where("camporee_id = #{current_user.default_camporee}").all

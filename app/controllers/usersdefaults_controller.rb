@@ -1,5 +1,4 @@
 class UsersdefaultsController < ApplicationController
-	before_filter :signed_in_user
 	# GET /userdefaults
 	# GET /userdefaults.json
 	require 'json'

@@ -1,7 +1,4 @@
 class Clubesarchivo < ActiveRecord::Base
-	default_scope order: 'iglesiasclubes_id, camporee_id'
-	mount_uploader :attachment, AttachmentUploader
-	attr_accessor :camporee_id, :camporeesarchivos_id, :iglesiasclubes_id, :user_id, :fecha_enviado, :attachment
 	self.table_name = "clubesarchivos"  
 
 	def camporee_nombre
