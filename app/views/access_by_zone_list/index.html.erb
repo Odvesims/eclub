@@ -1,0 +1,19 @@
+<ul class="nav nav-tabs">
+	<li class="active"><a data-toggle="tab" href="#home"><h3>Accesos Clubes x Zona</h3></a></li>
+</ul>
+<%= select_tag :zone_id, options_from_collection_for_select(@zonas, :id, :nombre), { include_blank: true, class: "selectpicker form-control", onchange: "filterClubUsers(this.value)" } %>
+<div class="tab-content" id = "club_users">
+  <%= render "club_users_list" %>
+</div>
+
+<script>
+  function filterClubUsers(zone_id){
+    data_object = { zone_id };
+		$.ajax({
+			type: "GET",
+			url: "/access_by_zone_list/show",
+			data: data_object,
+			success: (res) => {}
+		});
+  }
+</script>

@@ -1,5 +1,7 @@
 class Zona < ActiveRecord::Base
 	self.table_name = "zonas"  
+	has_many :iglesiasclubes
+
 	def next(id) 
 		fila = Zona.where("id > #{id}").first
 		if fila == nil

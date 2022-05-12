@@ -1,225 +1,194 @@
-<%= form_for(@rol, :id=> "form_role", :html=>{:id=>"form_role"}) do |f| %>
-	<% if @rol.errors.any? %>
-		<div id="error_explanation">
-			<h2><%= pluralize(@rol.errors.count, "error") %>: No se pudo guardar:</h2>
-			<ul>
-				<% @rol.errors.full_messages.each do |msg| %>
-					<li><%= msg %></li>
-				<% end %>
-			</ul>
-		</div>
-	<% end %>
-	<h2><%= t(:user) %></h2></legend>
-	<ul class="nav nav-tabs">
-		<li class="active"><a data-toggle="tab" href="#menu1"><%= t(:roles det) %></a></li>
-	</ul>	
-	<div class= "tab-content">
-		<div id="menu1" class="tab-pane fade in active">
-		<br>
-			<div class = "form-group">
-				<div class="col-md-12 text-left">
-					<div class = "form-group">
-						<%= label_tag :llogin, t(:login), :class=> "control-label col-sm-1" %>
-						<div class="col-sm-2">
-<% end %>  
-
-	<fieldset class = "ui-widget ui-widget-content", style= "width: 40em">
-		<legend><h2>Registro de Roles</h2></legend>
-  
-		<% @idrol = @rol.id %>
+<div class = "container-fluid">
+	<%= form_for(@rol, :id=> "form_role", :html=>{:id=>"form_role"}) do |f| %>
+		<% if @rol.errors.any? %>
+			<div id="error_explanation">
+				<h2><%= pluralize(@rol.errors.count, "error") %>: No se pudo guardar:</h2>
+				<ul>
+					<% @rol.errors.full_messages.each do |msg| %>
+						<li><%= msg %></li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+  	<% @idrol = @rol.id %>
 		<% if @rol.new_record? %>
 			<% @idrol = 0 %>
 		<% end %>
-	
-		<div id="tabs" class = "ui-widget ui-widget-content", style = "font-size: 14px; margin-right: 3px; border: 0px">
-			<ul>
-				<li><a href="#tabs-a">Informacion de Roles</a></li>
-			</ul>
-			<div id="tabs-a">
-				<br>
-				<table>
-					<thead>	
-						<tr valign=top>
-							<td><%= f.label :nombre_rol%></td>
-							<td><%= f.text_field :nombre_rol, {:size => 15} %></td>
-							<td><%= f.label :descripcion %></td>
-							<td><%= f.text_field :descripcion%></td>
-							<td><%= f.label :comentario %></td>
-							<td><%= f.text_area :comentario, {:rows=> 5, :cols => 25} %></td>
-						</tr>  
-					</thead> 
-				</table>
-				<div id="tabsrol", style = "font-size: 14px; margin-right: 3px">
-					<ul>
-						<li><a href="#tabsrol-1">Nivel</a></li>
-					</ul>
-					<div id="tabsrol-1">
-						<table>
-							<% @menustbl= Gemenutbl.where("menu_cod = '#{$menugral}'").all %>
-							<% conteo = 0 %>
-							<% indice = 1 %>
-							<% @menustbl.each do |menuitem| %>
-								<% @nivel_ant = menuitem.nivel %>
-								<tr>
-									<% case menuitem.item_tipo %>
-										<% when 'R' %>
-										<% when 'N' %>
-											<% if menuitem.nivel == 1%>
-												<thead><td colspan = "9", class = "ui-widget-header", style = "text-align: center;"><b><%= menuitem.menu_descr %></td></thead>
-											</tr>
-												<tr>
-													<thead>
-														<td style = "width: 300px"><b>Opcion</td>
-														<td><b>Activo?</td> 
-														<td style="width: 10px"></td>
-														<td style="width: 40px; text-align: center"><b>Todos</td>
-														<td style="width: 40px; text-align: center"><b>Acceder</td> 
-														<td style="width: 40px; text-align: center"><b>Crear</td>
-														<td style="width: 40px; text-align: center"><b>Consultar</td>
-														<td style="width: 40px; text-align: center"><b>Actualizar</td>
-														<td style="width: 60px; text-align: center"><b>Eliminar</td>
-													</thead>
-												</tr>
-											<% elsif menuitem.nivel == 2 && menuitem.menu_item.length == 6 %>
-												<tr>
-													<thead>
-														<thead><td colspan = "2", class = "ui-widget-content", style = "text-align: center;"><b><%= menuitem.menu_descr %></td></thead>
-													</thead>
-												</tr>
-											<% end %>
+		<div class = "row">
+			<div class = "col-2">
+				<%= f.label :nombre_rol %>
+				<%= f.text_field :nombre_rol, class: "form-control" %>
+			</div>
+			<div class = "col-3">
+				<%= f.label :descripcion %>
+				<%= f.text_field :descripcion, class: "form-control" %>
+			</div>
+			<div class = "col-3">
+				<%= f.label :comentario %>
+				<%= f.text_area :comentario, class: "form-control" %>
+			</div>
+		</div>
+		<% @menustbl= Gemenutbl.where("menu_cod = '#{$menugral}'").all %>
+		<% conteo = 0 %>
+		<% indice = 1 %>
+		<% @menustbl.each do |menuitem| %>
+			<% @nivel_ant = menuitem.menu_level %>
+			<% case menuitem.item_type %>
+				<% when 'R' %>
+				<% when 'N' %>
+					<% if menuitem.menu_level == 1%>
+						<div class = "row">
+							<div class = "h4"><%= menuitem.menu_descr %></div>
+						</div>
+						<div class = "row col-12">
+							<div class = "col-1">Opcion</div>
+							<div class = "col-1">Activo?</div> 
+							<div class = "col"></div>
+							<div class = "col">Todos</div>
+							<div class = "col">Acceder</div> 
+							<div class = "col">Crear</div>
+							<div class = "col">Consultar</div>
+							<div class = "col">Actualizar</div>
+							<div class = "col">Eliminar</div>
+						</div>
+						<% elsif menuitem.menu_level == 2 && menuitem.menu_item.length == 6 %>
+							<div class = "row">
+								<div class = "col-2"<b><%= menuitem.menu_descr %></div>
+							</div>
+						<% end %>
+					<% else %>
+						<% if not menuitem.menu_descr.include? "------------------------" %>
+							<tr>
+								<% roldet = Roldet.where("rol_id = #{@idrol} AND controller= '#{menuitem.menu_controller}'").first %>
+								<%if roldet != nil %>
+									<% if roldet.controller == menuitem.menu_controller %>
+										<% if menuitem.menu_level == 3%>															
+											<td id = "colController<%= menuitem.id %>", style = "width: 300px;text-align: left; font-weight: bold; color: #00ff00;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<%= menuitem.menu_descr %></td>
 										<% else %>
-											<% if not menuitem.menu_descr.include? "------------------------" %>
-												<tr>
-													<% roldet = Roldet.where("rol_id = #{@idrol} AND controller= '#{menuitem.menu_controller}'").first %>
-													<%if roldet != nil %>
-														<% if roldet.controller == menuitem.menu_controller %>
-															<% if menuitem.nivel == 3%>															
-																<td id = "colController<%= menuitem.id %>", style = "width: 300px;text-align: left; font-weight: bold; color: #00ff00;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<%= menuitem.menu_descr %></td>
-															<% else %>
-																<td id = "colController<%= menuitem.id %>", style = "width: 300px;font-weight: bold; color: #00ff00;"><%= menuitem.menu_descr %></td>
-															<% end %>
-															<td id = "colActivaDesactiva<%= menuitem.id %>", style="width: 10px; text-align: center"></td>
-															<td style = "visibility: hidden", id="colControler<%= menuitem.id %>">menuitem.menu_controller</td>
-															<td id = "colTodos<%= menuitem.id %>", style = "text-align:center;"></td>
-															<td id = "colAcceder<%= menuitem.id %>", style = "text-align:center;"></td>
-															<td id = "colCrear<%= menuitem.id %>", style = "text-align:center;"></td>
-															<td id = "colConsultar<%= menuitem.id %>", style = "text-align:center;"></td>
-															<td id = "colActualizar<%= menuitem.id %>", style = "text-align:center;"></td>
-															<td id = "colEliminar<%= menuitem.id %>", style = "text-align:center;"></td>
-															<script>
-															{
-																$(i = <%= menuitem.id %>);
-																var elCheckActivadoDesactivado = document.createElement('input');
-																$(elCheckActivadoDesactivado.type = 'checkbox');
-																elCheckActivadoDesactivado.name= "rol_cabeza"+"["+"tmprolesdet"+"]"+"["+i+"]"+"activo_desactivado"
-																elCheckActivadoDesactivado.checked = true;
-																$(elCheckActivadoDesactivado.id = "elCheckActivadoDesactivado" + i);
-																elCheckActivadoDesactivado.addEventListener("click", function() 
-																													{
-																														borra_preferencias("elCheckActivadoDesactivado" + <%= menuitem.id %>, <%= menuitem.id %>);
-																													});												
-																var elController = document.createElement('input');
-																elController.type='hidden';
-																elController.name= "rol_cabeza"+"["+"tmprolesdet"+"]"+"["+i+"]"+"controller"
-																elController.value= "<%= menuitem.menu_controller %>";
-																var elCheckAcceder = document.createElement('input');
-																$(elCheckAcceder.type = 'checkbox');
-																$(elCheckAcceder.id = "elCheckAcceder" + i);
-																elCheckAcceder.name= "rol_cabeza"+"["+"tmprolesdet"+"]"+"["+i+"]"+"acceder"
-																<% if roldet.acceder == '1' %>
-																	elCheckAcceder.checked = true; 
-																<% else %>
-																	elCheckAcceder.checked = false; 
-																<% end %>
-																var elCheckConsultar = document.createElement('input');
-																$(elCheckConsultar.type = 'checkbox');
-																$(elCheckConsultar.id = "elCheckConsultar" + i);
-																elCheckConsultar.name= "rol_cabeza"+"["+"tmprolesdet"+"]"+"["+i+"]"+"consultar"
-																<% if roldet.consultar == '1' %>
-																	elCheckConsultar.checked = true; 
-																<% else %>
-																	elCheckConsultar.checked = false; 
-																<% end %>
-																var elCheckCrear = document.createElement('input');
-																$(elCheckCrear.type = 'checkbox');
-																$(elCheckCrear.id = "elCheckCrear" + i);
-																elCheckCrear.name= "rol_cabeza"+"["+"tmprolesdet"+"]"+"["+i+"]"+"crear"
-																<% if roldet.crear == '1' %>
-																	elCheckCrear.checked = true; 
-																<% else %>
-																	elCheckCrear.checked = false; 
-																<% end %>
-																var elCheckActualizar = document.createElement('input');
-																$(elCheckActualizar.type = 'checkbox');
-																$(elCheckActualizar.id = "elCheckActualizar" + i);
-																elCheckActualizar.name= "rol_cabeza"+"["+"tmprolesdet"+"]"+"["+i+"]"+"actualizar"
-																<% if roldet.actualizar == '1' %>
-																	elCheckActualizar.checked = true; 
-																<% else %>
-																	elCheckActualizar.checked = false; 
-																<% end %>
-																var elCheckEliminar = document.createElement('input');
-																$(elCheckEliminar.type = 'checkbox');
-																$(elCheckEliminar.id = "elCheckEliminar" + i);
-																elCheckEliminar.name= "rol_cabeza"+"["+"tmprolesdet"+"]"+"["+i+"]"+"eliminar"
-																<% if roldet.eliminar == '1' %>
-																	elCheckEliminar.checked = true; 
-																<% else %>
-																	elCheckEliminar.checked = false; 
-																<% end %>
-																var elCheckTodos = document.createElement('input');
-																$(elCheckTodos.type = 'checkbox');
-																elCheckTodos.checked = false;
-																$(elCheckTodos.id = "elCheckTodos" + i);
-																elCheckTodos.addEventListener("click", function() 
-																							{
-																								if(document.getElementById("elCheckTodos" + <%= menuitem.id %>).checked == true)
-																								{
-																									document.getElementById("elCheckAcceder" + <%= menuitem.id %>).checked = true;
-																									document.getElementById("elCheckCrear" + <%= menuitem.id %>).checked = true;
-																									document.getElementById("elCheckConsultar" + <%= menuitem.id %>).checked = true;
-																									document.getElementById("elCheckActualizar" + <%= menuitem.id %>).checked = true;
-																									document.getElementById("elCheckEliminar" + <%= menuitem.id %>).checked = true;
-																								}
-																								else
-																								{
-																									document.getElementById("elCheckAcceder" + <%= menuitem.id %>).checked = false;
-																									document.getElementById("elCheckCrear" + <%= menuitem.id %>).checked = false;
-																									document.getElementById("elCheckConsultar" + <%= menuitem.id %>).checked = false;
-																									document.getElementById("elCheckActualizar" + <%= menuitem.id %>).checked = false;
-																									document.getElementById("elCheckEliminar" + <%= menuitem.id %>).checked = false;
-																								}
-																							});	
-																$(document.getElementById("colAcceder" + i).appendChild(elController));
-																$(document.getElementById("colTodos" + i).appendChild(elCheckTodos));
-																$(document.getElementById("colAcceder" + i).appendChild(elCheckAcceder));
-																$(document.getElementById("colCrear" + i).appendChild(elCheckCrear));
-																$(document.getElementById("colConsultar" + i).appendChild(elCheckConsultar));
-																$(document.getElementById("colActualizar" + i).appendChild(elCheckActualizar));
-																$(document.getElementById("colEliminar" + i).appendChild(elCheckEliminar));
-																$(document.getElementById("colActivaDesactiva" + i).appendChild(elCheckActivadoDesactivado));
-															}
-															</script>
-														<% end %>
-													<% else %>
-														<% if menuitem.nivel == 3%>	
-															<td id = "colController<%= menuitem.id %>", style = "width: 300px;text-align: left; font-weight: bold; color: red;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<%= menuitem.menu_descr %></td>
-														<% else %>
-															<td id = "colController<%= menuitem.id %>", style = "width: 300px;font-weight: bold; color: red;"><%= menuitem.menu_descr %></td>
-														<% end %>
-														<td style="width: 15px; text-align: center"><%= check_box_tag :acceder, menuitem.menu_controller + '|' + menuitem.id.to_s, false, :onclick=> "activa_desactiva(this)", :id=>"elcheckActiva#{menuitem.id}" %></td>
-														<td><%= hidden_field_tag(:controller, menuitem.menu_controller, :id=>"menu_controllernew") %></td>
-														<td id = "colTodos<%= menuitem.id %>", style = "text-align:center;"></td>
-														<td id = "colAcceder<%= menuitem.id %>", style = "text-align:center;"></td>
-														<td id = "colCrear<%= menuitem.id %>", style = "text-align:center;"></td>
-														<td id = "colConsultar<%= menuitem.id %>", style = "text-align:center;"></td>
-														<td id = "colActualizar<%= menuitem.id %>", style = "text-align:center;"></td>
-														<td id = "colEliminar<%= menuitem.id %>", style = "text-align:center;"></td>
-														<td id = "colActivaDesactiva<%= menuitem.id %>", style="width: 5px; text-align: center; visibility: hidden"></td>
-													<% end %>
-												</tr>
-											<% end %>
+											<td id = "colController<%= menuitem.id %>", style = "width: 300px;font-weight: bold; color: #00ff00;"><%= menuitem.menu_descr %></td>
 										<% end %>
+										<td id = "colActivaDesactiva<%= menuitem.id %>", style="width: 10px; text-align: center"></td>
+										<td style = "visibility: hidden", id="colControler<%= menuitem.id %>">menuitem.menu_controller</td>
+										<td id = "colTodos<%= menuitem.id %>", style = "text-align:center;"></td>
+										<td id = "colAcceder<%= menuitem.id %>", style = "text-align:center;"></td>
+										<td id = "colCrear<%= menuitem.id %>", style = "text-align:center;"></td>
+										<td id = "colConsultar<%= menuitem.id %>", style = "text-align:center;"></td>
+										<td id = "colActualizar<%= menuitem.id %>", style = "text-align:center;"></td>
+										<td id = "colEliminar<%= menuitem.id %>", style = "text-align:center;"></td>
+										<script>
+										{
+											$(i = <%= menuitem.id %>);
+											var elCheckActivadoDesactivado = document.createElement('input');
+											$(elCheckActivadoDesactivado.type = 'checkbox');
+											elCheckActivadoDesactivado.name= "rol_cabeza"+"["+"tmprolesdet"+"]"+"["+i+"]"+"activo_desactivado"
+											elCheckActivadoDesactivado.checked = true;
+											$(elCheckActivadoDesactivado.id = "elCheckActivadoDesactivado" + i);
+											elCheckActivadoDesactivado.addEventListener("click", function() 
+																								{
+																									borra_preferencias("elCheckActivadoDesactivado" + <%= menuitem.id %>, <%= menuitem.id %>);
+																								});												
+											var elController = document.createElement('input');
+											elController.type='hidden';
+											elController.name= "rol_cabeza"+"["+"tmprolesdet"+"]"+"["+i+"]"+"controller"
+											elController.value= "<%= menuitem.menu_controller %>";
+											var elCheckAcceder = document.createElement('input');
+											$(elCheckAcceder.type = 'checkbox');
+											$(elCheckAcceder.id = "elCheckAcceder" + i);
+											elCheckAcceder.name= "rol_cabeza"+"["+"tmprolesdet"+"]"+"["+i+"]"+"acceder"
+											<% if roldet.acceder == '1' %>
+												elCheckAcceder.checked = true; 
+											<% else %>
+												elCheckAcceder.checked = false; 
+											<% end %>
+											var elCheckConsultar = document.createElement('input');
+											$(elCheckConsultar.type = 'checkbox');
+											$(elCheckConsultar.id = "elCheckConsultar" + i);
+											elCheckConsultar.name= "rol_cabeza"+"["+"tmprolesdet"+"]"+"["+i+"]"+"consultar"
+											<% if roldet.consultar == '1' %>
+												elCheckConsultar.checked = true; 
+											<% else %>
+												elCheckConsultar.checked = false; 
+											<% end %>
+											var elCheckCrear = document.createElement('input');
+											$(elCheckCrear.type = 'checkbox');
+											$(elCheckCrear.id = "elCheckCrear" + i);
+											elCheckCrear.name= "rol_cabeza"+"["+"tmprolesdet"+"]"+"["+i+"]"+"crear"
+											<% if roldet.crear == '1' %>
+												elCheckCrear.checked = true; 
+											<% else %>
+												elCheckCrear.checked = false; 
+											<% end %>
+											var elCheckActualizar = document.createElement('input');
+											$(elCheckActualizar.type = 'checkbox');
+											$(elCheckActualizar.id = "elCheckActualizar" + i);
+											elCheckActualizar.name= "rol_cabeza"+"["+"tmprolesdet"+"]"+"["+i+"]"+"actualizar"
+											<% if roldet.actualizar == '1' %>
+												elCheckActualizar.checked = true; 
+											<% else %>
+												elCheckActualizar.checked = false; 
+											<% end %>
+											var elCheckEliminar = document.createElement('input');
+											$(elCheckEliminar.type = 'checkbox');
+											$(elCheckEliminar.id = "elCheckEliminar" + i);
+											elCheckEliminar.name= "rol_cabeza"+"["+"tmprolesdet"+"]"+"["+i+"]"+"eliminar"
+											<% if roldet.eliminar == '1' %>
+												elCheckEliminar.checked = true; 
+											<% else %>
+												elCheckEliminar.checked = false; 
+											<% end %>
+											var elCheckTodos = document.createElement('input');
+											$(elCheckTodos.type = 'checkbox');
+											elCheckTodos.checked = false;
+											$(elCheckTodos.id = "elCheckTodos" + i);
+											elCheckTodos.addEventListener("click", function() 
+																		{
+																			if(document.getElementById("elCheckTodos" + <%= menuitem.id %>).checked == true)
+																			{
+																				document.getElementById("elCheckAcceder" + <%= menuitem.id %>).checked = true;
+																				document.getElementById("elCheckCrear" + <%= menuitem.id %>).checked = true;
+																				document.getElementById("elCheckConsultar" + <%= menuitem.id %>).checked = true;
+																				document.getElementById("elCheckActualizar" + <%= menuitem.id %>).checked = true;
+																				document.getElementById("elCheckEliminar" + <%= menuitem.id %>).checked = true;
+																			}
+																			else
+																			{
+																				document.getElementById("elCheckAcceder" + <%= menuitem.id %>).checked = false;
+																				document.getElementById("elCheckCrear" + <%= menuitem.id %>).checked = false;
+																				document.getElementById("elCheckConsultar" + <%= menuitem.id %>).checked = false;
+																				document.getElementById("elCheckActualizar" + <%= menuitem.id %>).checked = false;
+																				document.getElementById("elCheckEliminar" + <%= menuitem.id %>).checked = false;
+																			}
+																		});	
+											$(document.getElementById("colAcceder" + i).appendChild(elController));
+											$(document.getElementById("colTodos" + i).appendChild(elCheckTodos));
+											$(document.getElementById("colAcceder" + i).appendChild(elCheckAcceder));
+											$(document.getElementById("colCrear" + i).appendChild(elCheckCrear));
+											$(document.getElementById("colConsultar" + i).appendChild(elCheckConsultar));
+											$(document.getElementById("colActualizar" + i).appendChild(elCheckActualizar));
+											$(document.getElementById("colEliminar" + i).appendChild(elCheckEliminar));
+											$(document.getElementById("colActivaDesactiva" + i).appendChild(elCheckActivadoDesactivado));
+										}
+										</script>
+									<% end %>
+								<% else %>
+									<% if menuitem.menu_level == 3%>	
+										<td id = "colController<%= menuitem.id %>", style = "width: 300px;text-align: left; font-weight: bold; color: red;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<%= menuitem.menu_descr %></td>
+									<% else %>
+										<td id = "colController<%= menuitem.id %>", style = "width: 300px;font-weight: bold; color: red;"><%= menuitem.menu_descr %></td>
+									<% end %>
+									<td style="width: 15px; text-align: center"><%= check_box_tag :acceder, menuitem.menu_controller + '|' + menuitem.id.to_s, false, :onclick=> "activa_desactiva(this)", :id=>"elcheckActiva#{menuitem.id}" %></td>
+									<td><%= hidden_field_tag(:controller, menuitem.menu_controller, :id=>"menu_controllernew") %></td>
+									<td id = "colTodos<%= menuitem.id %>", style = "text-align:center;"></td>
+									<td id = "colAcceder<%= menuitem.id %>", style = "text-align:center;"></td>
+									<td id = "colCrear<%= menuitem.id %>", style = "text-align:center;"></td>
+									<td id = "colConsultar<%= menuitem.id %>", style = "text-align:center;"></td>
+									<td id = "colActualizar<%= menuitem.id %>", style = "text-align:center;"></td>
+									<td id = "colEliminar<%= menuitem.id %>", style = "text-align:center;"></td>
+									<td id = "colActivaDesactiva<%= menuitem.id %>", style="width: 5px; text-align: center; visibility: hidden"></td>
+								<% end %>
+							</tr>
+						<% end %>
+					<% end %>
 								</tr>
 							<% end %>
 						</table>
@@ -235,7 +204,6 @@
 				<button id="btnguardar", type="button", onclick="guardar()", style="visibility: visible"><%= t(:guardar) %></button>
 			</div>
 		</div>
-	</fieldset>
 	<% end %>
 	<%= hidden_field_tag(:valor_e, "500", :value=> 500, :id=> "valor_e") %>
 	<script>
@@ -426,13 +394,14 @@
 
 <div id="midivdialog" title="Seleccione el controller"></div>
  
-<script>
-	$( "buttonback" ).button(); 
-	$(function() {
-		$( "#tabs" ).tabs();
-			$( "#tabsrol" ).tabs();
-	});
-</script>
+	<script>
+		$( "buttonback" ).button(); 
+		$(function() {
+			$( "#tabs" ).tabs();
+				$( "#tabsrol" ).tabs();
+		});
+	</script>
+
 	 <script>
 	  function selectModel(pmodel, elObj) 
 	   {
@@ -467,4 +436,6 @@
 		return false;
 	  };
 	</script>
+
+	
 

@@ -6,21 +6,49 @@
 	<table class="table table-striped">
 		<thead>
 		  <tr>
+			<th>#</th>
 			<th>Nombre</th>
 			<th>Zona ID</th>
 			<th>Tipo Club</th>
 			<th>Iglesia</th>
+			<th>User Info</th>
 		  </tr>
 		</thead>
 		<tbody>
-			<% @iglesiasclubes.each do |c| %>
+			<% @iglesiasclubes.each_with_index do |c, i| %>
 				<tr>
+					<td><%= i + 1 %></td>
 					<td><%= link_to c.nombre, edit_iglesiasclube_path(c.id) %></td>
 					<td><%= c.zonaId %></td>
 					<td><%= c.tipo_nombre %></td>
 					<td><%= c.iglesia_nombre %></td>
+					<td><%= c.accessUser %></td>
 				</tr>
 			<% end %>
 		</tbody>
 	</table>
 </div>
+<script>
+	function generateClubUser(btn, club_id){
+		data_object = { service: 'GenerateClubUser', club_id: club_id };
+		$.ajax({
+			type: "GET",
+			url: "/services_broker/show",
+			data: data_object,
+			success: (res) => {
+				if(res.valid){
+					$(btn).removeClass("btn-secondary");
+					$(btn).addClass("btn-success");
+					$(btn).html('Ver Usuario')
+					alert("Usuario Generado");
+				} else {
+					alert(res.message)
+				}
+			}
+		});
+	}
+
+	function viewUser(user, password){
+		alert(`login: ${user} \npassword: ${password}`)
+	}
+</script>

@@ -5,7 +5,8 @@ class CamporeespuntuacionescabsController < ApplicationController
 			@eventos = Camporeesevento.where("camporee_id = #{current_user.default_camporee}").all
 			@renglones = Camporeesrenglone.where("camporee_id = #{current_user.default_camporee}").all
 			@clubes = Iglesiasclube.where("#{current_user.default_level('iglesiasclubes')}").all
-			@camporeespuntuacionescabs = Camporeespuntuacionescab.where("camporee_id = #{current_user.default_camporee}").select("iglesiasclube_id, camporeerenglone_id, camporeesevento_id, sum(total_puntos) as total_puntos").group("iglesiasclube_id, camporeerenglone_id, camporeesevento_id")
+			@camporeespuntuacionescabs = Camporeespuntuacionescab.where("id = 0").all
+			#@camporeespuntuacionescabs = Camporeespuntuacionescab.where("camporee_id = #{current_user.default_camporee}").select("iglesiasclube_id, camporeerenglone_id, camporeesevento_id, sum(total_puntos) as total_puntos").group("iglesiasclube_id, camporeerenglone_id, camporeesevento_id")
 			@club = 0
 			@renglon = 0
 			@evento = 0
@@ -16,6 +17,7 @@ class CamporeespuntuacionescabsController < ApplicationController
 	def show
 		if signed_granted?(current_user.id, 'camporeespuntuacionescabs', 'I')
 			if params[:id] == 'nuevo'
+				@zonas = Zona.where("zona_id > 0 AND campo_id = #{current_user.default_conference}").all.order("zona_id ASC")
 				@eventos = Camporeesevento.where("camporee_id = #{current_user.default_camporee}").all
 				@clubes = Iglesiasclube.where("#{current_user.default_level('iglesiasclubes')}").all
 				@evento = 0

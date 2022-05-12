@@ -14,9 +14,11 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
 	validates :login, presence:   true,
                     uniqueness: { case_sensitive: false }					
-	validates :password, presence: true, length: { minimum: 6 }, :on => :create
-	validates :password_confirmation, presence: true, :on => :create
-	after_validation { self.errors.messages.delete(:password_digest) }
+	#validates :password, presence: true, length: { minimum: 6 }, :on => :create
+	#validates :password_confirmation, presence: true, :on => :create
+	#after_validation { self.errors.messages.delete(:password_digest) }
+
+	scope :order_by_zone, -> { joins(:usersdefault).order("users_defaults.zona_id ASC") }
 
 	def default_conference
 		self.usersdefault.campo_id
@@ -89,7 +91,7 @@ class User < ActiveRecord::Base
 					when 'iglesias' 
 						return_string = "campo_id = #{self.default_conference} AND zona_id = #{iglesiaclub.zona_id} AND distrito_id = #{iglesiaclub.distrito_id} AND iglesia_id = #{iglesiaclub.iglesia_id}"
 					else 
-						return_string = "campo_id = #{self.default_conference} AND zona_id = #{iglesiaclub.zona_id} AND distrito_id = #{iglesiaclub.distrito_id} AND iglesia_id = #{iglesiaclub.iglesia_id} AND iglesiasclube_id = #{access_id}"
+						return_string = "campo_id = #{self.default_conference} AND zona_id = #{iglesiaclub.zona_id} AND distrito_id = #{iglesiaclub.distrito_id} AND iglesia_id = #{iglesiaclub.iglesia_id} AND id = #{access_id}"
 				end
 		end
 		return return_string
