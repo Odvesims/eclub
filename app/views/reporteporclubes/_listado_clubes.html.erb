@@ -2,9 +2,6 @@
 	<% if @clubespuntos != nil %>
 		<% if @clubespuntos[0] != nil %>
 			<tr>
-				<td text-align: left><button type="button" class="btn btn-primary" onclick="window.open('<%= edit_reporteporclube_path(:id=> 1, :club=> @club) %>', '_blank')">Imprimir</button></td>
-			</tr>
-			<tr>
 				<td colspan = 4, style = "text-align: center;">
 					<span style = "width: 100%; font-size: 24px; text-align: center"><%= @campo.nombre %></span><br>
 					<% camporee = Camporee.find(@clubespuntos[0].camporee_id) %>
