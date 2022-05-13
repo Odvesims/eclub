@@ -73,7 +73,7 @@ class GenerateClubUserService
 				user_defaults.club_type = club_type
 				user_defaults.is_bicamporee = false
 				user_defaults.access_all_events = false
-				user_defaults.rol_id = 3
+				user_defaults.rol_id = 4
 				user_defaults.zone_id = zone_id
 				user_defaults.save!
 			end

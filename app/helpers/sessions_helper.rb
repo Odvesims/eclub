@@ -1,26 +1,21 @@
 module SessionsHelper
 
-   def sign_in(user)
+  def sign_in(user)
     # si fuera permanente cookies.permanent[:remember_token] = user.remember_token
-	cookies[:remember_token] = user.remember_token
-	px=Hash.new
-	px=[["loterias"=>"CRUD"],["monitorsrch"=>"R"]]
-	cookies[:browser_px]=px
-  self.current_user = user
-	vidioma = user.idioma_isocod2
-  $idioma = 'es'
-	unless vidioma.empty?
-		I18n.locale = vidioma
-		$idioma = vidioma
-	end
-	
-	$menugral = 'ECLUBMENU'
-	
-	#jfb $nivel_control = user.nivel_control
-	#jfb $nivelid = user.nivelid
-	#jfb $default_consorcio = user.default_consorcio
-	$controller_keyd = ''   #contiene un nombre de controller actual si este conlleva clave especial
-	loggin_opc(user,controller_name,action_name, "User Login")	
+	  cookies[:remember_token] = user.remember_token
+	  px=Hash.new
+	  px=[["loterias"=>"CRUD"],["monitorsrch"=>"R"]]
+	  cookies[:browser_px]=px
+    self.current_user = user
+	  vidioma = user.idioma_isocod2
+    $idioma = 'es'
+	  unless vidioma.empty?
+		  I18n.locale = vidioma
+		  $idioma = vidioma
+	  end
+	  $menugral = 'ECLUBMENU'
+		$controller_keyd = ''   #contiene un nombre de controller actual si este conlleva clave especial
+		loggin_opc(user,controller_name,action_name, "User Login")	
   end
   
 	def mobile_device
@@ -40,7 +35,14 @@ module SessionsHelper
   end
 
   def current_user
-    @current_user ||= User.find_by_remember_token(cookies[:remember_token])
+		if cookies[:remember_token] != nil
+			@current_user ||= User.find_by_remember_token(cookies[:remember_token])
+			if not @current_user
+				sign_out
+			else
+				@current_user
+			end
+		end
   end
   
   def current_user?(user)
@@ -93,7 +95,6 @@ module SessionsHelper
   end
  
 	def sign_out
-		loggin_opc(self.current_user,controller_name,action_name, "User Logout")
 		self.current_user = nil
 		cookies.delete(:remember_token)
 		cookies.delete(:central_name)
@@ -425,7 +426,6 @@ end
 		menustbl.each do |menuitem|
 		  mcontroller = menuitem.menu_controller
 		  vdescr = I18n.t('menu.'+mcontroller)
-			Rails.logger.debug("vdescr #{vdescr}")
 			if vdescr.empty?  
 				mdescr = menuitem.menu_descr
 			else   
@@ -483,6 +483,10 @@ end
 			end
 		end
 		return categoria
+	end
+
+	def console_log(title, message)
+		Rails.logger.debug("#{title}, #{message}")
 	end
 
 end

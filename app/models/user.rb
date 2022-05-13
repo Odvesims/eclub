@@ -48,6 +48,13 @@ class User < ActiveRecord::Base
 					else
 						return_string = "campo_id = #{self.default_conference}"
 				end
+			when 'CP'
+				case controller
+					when 'campos'
+						return_string = "id = #{access_id}"
+					else
+						return_string = "campo_id = #{self.default_conference}"
+				end
 			when 'CF'
 				return_string = "campo_id = #{access_id}"
 			when 'ZN'
