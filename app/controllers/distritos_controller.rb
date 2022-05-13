@@ -44,6 +44,17 @@ class DistritosController < ApplicationController
 			distrito = Distrito.find(params[:id]) 
 			distrito.update(params[:distrito].to_enum.to_h)
 			if distrito.save
+				iglesias = Iglesia.where("distrito_id = #{distrito.id}").all
+				iglesias.each do |iglesia|
+					iglesia.zona_id = distrito.zona_id
+					if iglesia.save
+						clubes = Iglesiasclube.where("iglesia_id = #{iglesia.id}").all
+						clubes.each do |club|
+							club.zona_id = distrito.zona_id
+							club.save
+						end
+					end
+				end
 				redirect_to action: 'edit', id: distrito.id
 				return
 			end

@@ -45,6 +45,11 @@ class IglesiasController < ApplicationController
 			iglesia = Iglesia.find(params[:id]) 
 			iglesia.update(params[:iglesia].to_enum.to_h)
 			if iglesia.save
+				clubes = Iglesiasclube.where("iglesia_id = #{iglesia.id}").all
+				clubes.each do |club|
+					club.zona_id = distrito.zona_id
+					club.save
+				end
 				redirect_to action: 'edit', id: iglesia.id
 				return
 			end

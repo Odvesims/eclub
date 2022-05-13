@@ -1,7 +1,7 @@
 <table class = "table">
   <% @club_users.each_with_index do |user, i| %>
     <% if i == 0 %>
-      <tr><td colspan = "4"><b><%= "Zona #{user.usersdefault.zona_id}" %></b></td></tr>
+      <tr><td colspan = "4"><b><%= "#{user.usersdefault.zone_name}" %></b></td></tr>
       <tr class = "bg-dark text-light">
         <td>Nombre</td>
         <td>Usuario</td>
@@ -10,7 +10,7 @@
     <% else %>
       <% if @club_users[i-1].usersdefault.zona_id != user.usersdefault.zona_id %>
       <tr><td colspan = "4"></td></tr>
-        <tr><td colspan = "4"><b><%= "Zona #{user.usersdefault.zona_id}" %></b></td></tr>
+        <tr><td colspan = "4"><b><%= "#{user.usersdefault.zone_name}" %></b></td></tr>
         <tr class = "bg-dark text-light">
           <td>Nombre</td>
           <td>Usuario</td>
