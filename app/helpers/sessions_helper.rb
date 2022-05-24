@@ -90,7 +90,14 @@ module SessionsHelper
 			redirect_to noautorizado_url, notice: "No esta autorizado a entrar a esta opcion"
 			false
 		else
-			true
+			access_control = AccessControl.first
+			user_role = current_user.usersdefault.rol_id
+			if user_role > access_control.minimum_level && controler != 'access_control'
+				redirect_to access_restricted_url, notice: "El acceso está restringido para su nivel de usuario. Intente más tarde."
+				false
+			else
+				true
+			end
 		end
   end
  
@@ -483,6 +490,11 @@ end
 			end
 		end
 		return categoria
+	end
+	
+	def getCamporeeCategory(camporee_id, total_puntos)
+		category = Camporeescategoria.where("camporee_id = #{camporee_id} AND #{total_puntos} BETWEEN min_puntos AND max_puntos").first
+		return category
 	end
 
 	def console_log(title, message)

@@ -1,0 +1,21 @@
+<% access_control = AccessControl.first %>
+<ul class="nav nav-tabs" id = "tabMain">
+	<li class="active"><a id = "tabHead", data-toggle="tab" href="#home"><h3>Control de Acceso</h3></a></li>
+</ul>
+<div class="tab-content">
+  <div class = "row mt-2 ml-3">
+    <div class = "col-md-4"><h5>Permitir Acceso para usuarios del nivel</h5></div>
+    <div class = "col-md-2"><%= select_tag :nivel_control, options_for_select([['Todos', 4], ['Coordinadores de Zona y Superior', 3], ['Cómputo y Superior', 2], ['Solo Administrador', 1]], access_control.minimum_level), { id: "minimum_level"} %></div>
+  </div>
+  <div class = "row mt-2 ml-3"><div class "col-md"><button class = "btn btn-primary" type = "button" onClick="restrictAccess()">Ejecutar</div>
+</div>
+<script>
+  function restrictAccess(){
+    $.ajax(
+		{  
+			type: "GET",  
+			url: "/access_control/show",  
+			data: { restricted_access: true, minimum_level: document.getElementById("minimum_level").value }  
+		}); 
+  }
+</script>

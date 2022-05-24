@@ -1,7 +1,7 @@
 <script>
 	function nuevo()
 	{
-		window.location = '<%= new_role_path() %>';
+		window.location = '<%= new_rol_path() %>';
 	};
 </script>
 
@@ -26,7 +26,7 @@
 				</tr> 
 				<% @roles.each do |rol| %>
 					<tr>
-						<td><%= link_to rol.nombre_rol, edit_role_path(rol) %></td>
+						<td><%= link_to rol.nombre_rol, edit_rol_path(rol) %></td>
 						<td><%= rol.descripcion %></td>
 						<td><%= rol.comentario %></td>
 					</tr>

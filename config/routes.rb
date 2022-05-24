@@ -40,6 +40,7 @@ DeboxionApp::Application.routes.draw do
 	resources :formmatriculacabs
 	resources :services_broker
 	resources :access_by_zone_list
+	resources :access_control
 
 	get '/',  to: 'sessions#new'
 	get '/signin',  to: 'sessions#new'
@@ -49,6 +50,7 @@ DeboxionApp::Application.routes.draw do
 	get '/contact', to: 'static_pages#contact'
 	get '/taskusers', to: 'static_pages#taskusers'
 	get '/noautorizado', to: 'static_pages#noautorizado'
+	get '/access_restricted', to: 'static_pages#accessrestricted'
 	
 	root :to => "home#index"
 end

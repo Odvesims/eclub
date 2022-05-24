@@ -1,0 +1,26 @@
+<table>
+	<tr>
+		<td><b>&nbsp&nbsp&nbsp&nbspEvento&nbsp</td>
+		<td><%= select_tag 'Evento', options_from_collection_for_select(@eventos, 'id', 'nombre', @evento), :id=> 'filterEvento', :class => 'form-control', prompt: '', :onchange=> "filtroReportes()" %></td>
+	</tr>
+	<tr><td><span>&nbsp</span></td></tr>
+	<tr>
+		<td>&nbsp&nbsp&nbsp&nbsp<b>Zona&nbsp</td>
+		<td><%= select_tag 'Evento', options_from_collection_for_select(@zonas, 'id', 'nombre', @zona), :id=> 'filterZona', :class => 'form-control', prompt: '', :onchange=> "filtroReportes()" %></td>
+	</tr>
+</table>
+<script>
+	function filtroReportes(){
+		var nombre_controller = '<%= controller_name %>';
+		var evento = document.getElementById('filterEvento').value;
+		var zona = document.getElementById('filterZona').value;
+		dataString = 'option=filtraEventos+&evento='+evento+"&zona="+zona;
+		$.ajax(
+		{  
+			type: "GET",  
+			url: "/reporteparticipacionporeventos/show",  
+			data: dataString  
+		}); 
+	
+	}
+</script>

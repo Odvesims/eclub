@@ -24,30 +24,13 @@
 		}
 	}
 </style>
-<script>
-	function filtroReportes(){
-		var nombre_controller = '<%= controller_name %>';
-		dataString = 'option=orderClubs';
-		points = document.getElementById('filterPoints').value;
-		order = document.getElementById('filterOrderBy').value;
-		dataString += `&score_order=${points}`
-		dataString += `&order_by=${order}`
-		$.ajax(
-		{  
-			type: "GET",  
-			url: "/reportegeneral/show",  
-			data: dataString  
-		}); 
-	
-	}
-</script>
+
 <%= hidden_field_tag 'nombreController', controller_name, :id=> 'nombreController' %>
 <ul class="nav nav-tabs" id = "tabMain">
-	<li class="active"><a id = "tabHead", data-toggle="tab" href="#home"><h3>Reporte General</h3></a></li>
+	<li class="active"><a id = "tabHead", data-toggle="tab" href="#home"><h3>Reporte de Participación por Eventos</h3></a></li>
 </ul>
 <div class="tab-content">
 	<div id = "filtros-reporte"><%= render 'filtros_reportes' %></div>
 	<hr id = "lineBreak">
 	<div id = "clubes"><%= render 'listado_clubes' %></div>
 </div>
-<script>$(filtroReportes)</script>

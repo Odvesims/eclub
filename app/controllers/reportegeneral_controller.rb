@@ -10,7 +10,7 @@ class ReportegeneralController < ApplicationController
 	def show
 		if signed_granted?(current_user.id, 'reportegeneral', 'I')
 			@control_js = 1		
-			@clubespuntos = Camporeespuntuacionescab.where("camporee_id = #{current_user.default_camporee}").select("camporee_id, zona_id, iglesiasclube_id, sum(total_puntos) as total_puntos").group("camporee_id, zona_id, iglesiasclube_id").order("total_puntos DESC, iglesiasclube_id").sort_by(&:zonaId)
+			@clubespuntos = Camporeespuntuacionescab.where("camporee_id = #{current_user.default_camporee}").select("camporee_id, zona_id, iglesiasclube_id, sum(total_puntos) as total_puntos").group("camporee_id, zona_id, iglesiasclube_id").order("#{params[:order_by]} #{params[:score_order]}, iglesiasclube_id")
 			respond_to do |format|
 				format.js
 			end
