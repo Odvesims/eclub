@@ -7,8 +7,12 @@ class Iglesiasclube < ActiveRecord::Base
 	end
 	
 	def iglesia_nombre
+		begin
 		iglesia = Iglesia.find(self.iglesia_id)
 		iglesia_nombre = iglesia.nombre
+		rescue
+			""
+		end
 	end
 	
 	def distrito_nombre
