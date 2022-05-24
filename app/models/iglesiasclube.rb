@@ -48,6 +48,11 @@ class Iglesiasclube < ActiveRecord::Base
 		return zona.nombre
 	end
 
+	def zonaSigla
+		zona = Zona.find(self.zona_id)
+		return zona.zona_siglas
+	end
+
 	def accessUser
 		user = User.where("id IN (SELECT user_id FROM users_defaults WHERE access_level = 'LC' AND access_id = #{self.id})").first
 		if user == nil
