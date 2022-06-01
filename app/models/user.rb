@@ -61,6 +61,8 @@ class User < ActiveRecord::Base
 				case controller
 					when 'campos'
 						return_string = "id = #{self.default_conference}"
+					when 'reporteporzonas'
+						return_string = "campo_id = #{self.default_conference} AND id = #{access_id}"
 					else 
 						return_string = "campo_id = #{self.default_conference} AND zona_id = #{access_id}"
 				end

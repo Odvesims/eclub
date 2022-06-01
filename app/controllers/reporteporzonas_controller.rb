@@ -1,7 +1,7 @@
 class ReporteporzonasController < ApplicationController
 	def index
 		if signed_granted?(current_user.id, 'reporteporzonas', 'I')
-			@zonas = Zona.where("#{current_user.default_level('zonas')}").all
+			@zonas = Zona.where("#{current_user.default_level('reporteporzonas')}").all
 			@clubespuntos = nil 
 			@club = 0
 		end
