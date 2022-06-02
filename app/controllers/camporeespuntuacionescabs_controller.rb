@@ -30,7 +30,9 @@ class CamporeespuntuacionescabsController < ApplicationController
 					@club = params[:club].to_s
 					@evento_registrado = false
 					@edita_nuevo = "nuevo"
-					if @evento != '' && @evento != ' '
+					event = Camporeesevento.find(@evento)
+					@zone_event = event.evento_zonal
+					if @evento != '' && @evento != ' ' && @club != '' && @club != ' ' 
 						@criterios_cab = Camporeeseventoscriterioscab.where("camporeesevento_id = #{@evento}").all
 						@camporeespuntuacionescab = Camporeespuntuacionescab.where("camporee_id = #{current_user.default_camporee} AND camporeesevento_id = #{params[:evento]} AND iglesiasclube_id = #{params[:club]}").first
 						if @camporeespuntuacionescab != nil
@@ -108,6 +110,11 @@ class CamporeespuntuacionescabsController < ApplicationController
 			@clubes = Iglesiasclube.where("id = #{club}").all
 			if params[:modo_registro].to_i == 2
 				@clubes = Iglesiasclube.all
+			end
+			event = Camporeesevento.find(evento)
+			if event.evento_zonal
+				club = Iglesiasclube.find(club)
+				@clubes = Iglesiasclube.where("zona_id = #{club.zona_id}").all
 			end
 			@clubes.each do |c|
 				club = c.id
