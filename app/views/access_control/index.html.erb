@@ -4,6 +4,10 @@
 </ul>
 <div class="tab-content">
   <div class = "row mt-2 ml-3">
+    <div class = "col-md-4"><h5>Acceso Controlado?</h5></div>
+    <div class = "col-md-2"><%= select_tag :acceso_controlado, options_for_select([['Activo', true], ['Desactivado', false]], access_control.status), { id: "status"} %></div>
+  </div>
+  <div class = "row mt-2 ml-3">
     <div class = "col-md-4"><h5>Permitir Acceso para usuarios del nivel</h5></div>
     <div class = "col-md-2"><%= select_tag :nivel_control, options_for_select([['Todos', 4], ['Coordinadores de Zona y Superior', 3], ['Cómputo y Superior', 2], ['Solo Administrador', 1]], access_control.minimum_level), { id: "minimum_level"} %></div>
   </div>
@@ -15,7 +19,7 @@
 		{  
 			type: "GET",  
 			url: "/access_control/show",  
-			data: { restricted_access: true, minimum_level: document.getElementById("minimum_level").value }  
+			data: { restricted_access: document.getElementById("status").value, minimum_level: document.getElementById("minimum_level").value }  
 		}); 
   }
 </script>

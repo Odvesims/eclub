@@ -9,6 +9,11 @@ class AccessControlController < ApplicationController
 		if signed_granted?(current_user.id, 'access_control', 'I')
       minimum_level = params[:minimum_level].to_i
       access_control = AccessControl.first
+      status = true
+      if params[:restricted_access].to_s == "false"
+        status = false
+      end
+      access_control.status = status
       access_control.minimum_level = minimum_level
       access_control.save!
       #ActiveRecord::Base.connection.execute("UPDATE access_restricted set estatus = true, minimum_level = #{minimum_level}")
