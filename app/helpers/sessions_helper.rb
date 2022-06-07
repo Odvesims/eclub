@@ -515,11 +515,11 @@ end
 	def available_clubs_symbol
 		case current_user.usersdefault.club_type
 			when 1
-				:adventurers_club
+				:available_adventurers_club
 			when 2
-				:pathfinders_clubs
+				:available_pathfinders_clubs
 			when 3
-				:master_guides_clubs
+				:available_master_guides_clubs
 		end
 	end
 

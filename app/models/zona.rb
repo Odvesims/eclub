@@ -33,15 +33,15 @@ class Zona < ActiveRecord::Base
 	  filtered_clubs(3)
 	end
 
-	def availble_adventurers_club
+	def vailable_adventurers_club
 	  available_churches(1)
 	end
 
-	def availble_pathfinders_clubs
+	def available_pathfinders_clubs
 	  available_churches(2)
 	end
 
-	def availble_master_guides_clubs
+	def vailable_master_guides_clubs
 	  available_churches(3)
 	end
 
@@ -50,6 +50,6 @@ class Zona < ActiveRecord::Base
 	end
 
 	def available_churches(club_type)
-		Iglesia.where("iglesias.zona_id = #{self.id} AND id NOT IN (SELECT id FROM iglesiasclubes WHERE clubestipo_id = #{club_type})").all
+		Iglesia.where("iglesias.zona_id = #{self.id} AND id NOT IN (SELECT iglesia_id FROM iglesiasclubes WHERE clubestipo_id = #{club_type})").all
 	end
 end
