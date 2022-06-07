@@ -15,10 +15,10 @@ class ReporteparticipacionporeventosController < ApplicationController
 			@clubes_faltantes = []
 			whereZona = ""
 			if params[:zona] != ""
-				whereZona = "zona_id = #{params[:zona]}"
+				whereZona = "AND zona_id = #{params[:zona]}"
 			end
 			if params[:evento] != ""
-				@clubes = Iglesiasclube.where("#{whereZona}").all.order("zona_id ASC")
+				@clubes = Iglesiasclube.where("clubestipo_id = #{current_user.usersdefault.club_type} #{whereZona}").all.order("zona_id ASC")
 				@clubes.each do |club|
 					club_grade = Camporeespuntuacionescab.where("camporee_id = #{current_user.default_camporee} AND camporeesevento_id = #{params[:evento]} AND iglesiasclube_id = #{club.id}").first
 					if not club_grade == nil

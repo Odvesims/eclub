@@ -1,10 +1,8 @@
 class ListadoclubesController < ApplicationController
 	def index
 		if signed_granted?(current_user.id, 'listadoclubes', 'I')
-			@zonas = Zona.all
-			@distritos = Distrito.all
-			@iglesias = Iglesia.all
-			@clubes = Iglesiasclube.where("participa_camporee = '#{true}'").all.sort_by(&:zonaId)
+			@zonas = Zona.where("zona_id > 0 AND campo_id = #{current_user.default_conference}").all.order("zona_id ASC")
+			#@clubes = Iglesiasclube.where("clubestipo_id = #{current_user.usersdefault.club_type} AND participa_camporee = '#{true}'").all.sort_by(&:zonaId)
 			@zona = 0
 			@distrito = 0
 			@iglesia = 0	
