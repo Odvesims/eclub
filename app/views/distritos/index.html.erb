@@ -1,19 +1,18 @@
 <ul class="nav nav-tabs">
 	<li class="active"><a data-toggle="tab" href="#home"><h3>Distritos</h3></a></li>
 </ul>
-<div class="tab-content">
+<div class="tab-content ml-2">
 	<button type="button" class="btn btn-primary" onclick="window.location = '<%= new_distrito_path %>'">Nuevo</button>
 	<table class="table table-striped">
-		<thead>
-		  <tr>
-			<th>Zona</th>
-			<th>Nombre</th>
-		  </tr>
-		</thead>
-		<tbody>
-			<% @distritos.each do |c| %>
+	  <tbody>
+			<% @distritos.each_with_index do |c, index| %>
+			<% if (index == 0) or (index > 0 and @distritos[index - 1].zona_id != c.zona_id) %>
+				<% zona = Zona.find(c.zona_id) %>
+				<tr><td colspan = "2" class = "mt-2"></td></tr>
+				<tr><td colspan = "2"><b><%= zona.nombre %></b></td></tr>
+				<tr><td colspan = "2" class = "mb-2"></td></tr>
+			<% end %>
 				<tr>
-					<td><%= c.zonaId %></td>
 					<td><%= link_to c.nombre, edit_distrito_path(c.id) %></td>
 				</tr>
 			<% end %>

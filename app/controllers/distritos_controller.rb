@@ -1,7 +1,8 @@
 class DistritosController < ApplicationController
 	def index
 		if signed_granted?(current_user.id, 'distritos', 'I')
-			@distritos = Distrito.all.sort_by(&:zonaId)
+			@distritos = Distrito.all.sort_by {|x| [x.zona_id, x.nombre] }
+			
 		end
 	end
 	
@@ -44,17 +45,7 @@ class DistritosController < ApplicationController
 			distrito = Distrito.find(params[:id]) 
 			distrito.update(params[:distrito].to_enum.to_h)
 			if distrito.save
-				iglesias = Iglesia.where("distrito_id = #{distrito.id}").all
-				iglesias.each do |iglesia|
-					iglesia.zona_id = distrito.zona_id
-					if iglesia.save
-						clubes = Iglesiasclube.where("iglesia_id = #{iglesia.id}").all
-						clubes.each do |club|
-							club.zona_id = distrito.zona_id
-							club.save
-						end
-					end
-				end
+				UpdateZoneIdService.new({level: 'DS', id: distrito.id, zone_id: distrito.zona_id}).execute
 				redirect_to action: 'edit', id: distrito.id
 				return
 			end

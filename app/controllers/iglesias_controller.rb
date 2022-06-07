@@ -1,7 +1,7 @@
 class IglesiasController < ApplicationController
 	def index
 		if signed_granted?(current_user.id, 'iglesias', 'I')
-			@iglesias = Iglesia.where("#{current_user.default_level('iglesias')}").all.sort_by{|i|[i.zonaId, i.distrito_id, i.id]}
+			@iglesias = Iglesia.where("#{current_user.default_level('iglesias')}").all.sort_by{|i|[i.zona_id, i.distrito_id, i.nombre]}
 		end
 	end
 	
@@ -45,11 +45,7 @@ class IglesiasController < ApplicationController
 			iglesia = Iglesia.find(params[:id]) 
 			iglesia.update(params[:iglesia].to_enum.to_h)
 			if iglesia.save
-				clubes = Iglesiasclube.where("iglesia_id = #{iglesia.id}").all
-				clubes.each do |club|
-					club.zona_id = distrito.zona_id
-					club.save
-				end
+				UpdateZoneIdService.new('CH', iglesia.id, iglesia.zona_id).execute
 				redirect_to action: 'edit', id: iglesia.id
 				return
 			end

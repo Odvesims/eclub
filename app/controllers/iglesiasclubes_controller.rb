@@ -11,6 +11,7 @@ class IglesiasclubesController < ApplicationController
 			@iglesias = Iglesia.where("NOT EXISTS (SELECT 1 FROM iglesiasclubes WHERE iglesiasclubes.iglesia_id = iglesias.id AND iglesiasclubes.clubestipo_id = #{current_user.club_type})").all
 			@clubestipos = Clubestipo.all
 			@iglesiasclube = Iglesiasclube.new
+			@zonas = Zona.where("zona_id > 0 AND campo_id = #{current_user.default_conference}").all.order("zona_id ASC")
 		end
 	end
 	
@@ -21,6 +22,12 @@ class IglesiasclubesController < ApplicationController
 	def create
 		if signed_granted?(current_user.id, 'iglesiasclubes', 'N')
 			iglesiasclube = Iglesiasclube.new(params[:iglesiasclube].to_enum.to_h)
+			clubes = Iglesiasclube.where("clubestipo_id = #{current_user.club_type}").all
+			club_exists = clubes.where("iglesia_id = #{params[:iglesiasclube][:iglesia_id]}").first
+			if club_exists != nil
+				redirect_to action: 'new', message: 'La iglesia seleccionada ya tiene un club de este tipo registrado'
+				return
+			end
 			iglesia = Iglesia.find(params[:iglesiasclube][:iglesia_id])
 			iglesiasclube.campo_id = iglesia.campo_id
 			iglesiasclube.zona_id = iglesia.zona_id
@@ -53,6 +60,7 @@ class IglesiasclubesController < ApplicationController
 			iglesiasclube = Iglesiasclube.find(params[:id]) 
 			iglesiasclube.update(params[:iglesiasclube].to_enum.to_h)
 			if iglesiasclube.save
+				UpdateZoneIdService.new('CL', iglesiasclube.id, iglesiasclube.zona_id).execute
 				redirect_to action: 'edit', id: iglesiasclube.id
 				return
 			end

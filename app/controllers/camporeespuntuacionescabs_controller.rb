@@ -5,7 +5,7 @@ class CamporeespuntuacionescabsController < ApplicationController
 			@eventos = Camporeesevento.where("camporee_id = #{current_user.default_camporee}").all
 			@renglones = Camporeesrenglone.where("camporee_id = #{current_user.default_camporee}").all
 			@clubes = Iglesiasclube.where("#{current_user.default_level('iglesiasclubes')}").all
-			@camporeespuntuacionescabs = Camporeespuntuacionescab.where("id = 0").all
+			@camporeespuntuacionescabs = Camporeespuntuacionescab.where("id = 0").all 
 			#@camporeespuntuacionescabs = Camporeespuntuacionescab.where("camporee_id = #{current_user.default_camporee}").select("iglesiasclube_id, camporeerenglone_id, camporeesevento_id, sum(total_puntos) as total_puntos").group("iglesiasclube_id, camporeerenglone_id, camporeesevento_id")
 			@club = 0
 			@renglon = 0

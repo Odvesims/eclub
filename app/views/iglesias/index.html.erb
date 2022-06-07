@@ -6,17 +6,33 @@
 	<table class="table table-striped">
 		<thead>
 		  <tr>
-			<th>Zona</th>
 			<th>Nombre</th>
 			<th>Distrito</th>
 		  </tr>
 		</thead>
 		<tbody>
-			<% @iglesias.each do |c| %>
+			<% @iglesias.each_with_index do |c, index| %>
+				<% if (index == 0) or (index > 0 and @iglesias[index - 1].zona_id != c.zona_id) %>
+					<% zona = Zona.find(c.zona_id) %>
+					<tr><td colspan = "2" class = "mt-2"></td></tr>
+					<tr class = "bg-info text-white"><td colspan = "2"><h3><b><%= zona.nombre %></b></h3></td></tr>
+					<tr><td colspan = "2" class = "mb-2"></td></tr>
+				<% end %>
+				<% if (index == 0) or (index > 0 and @iglesias[index - 1].distrito_id != c.distrito_id) %>
+					<% begin %>
+						<% distrito = Distrito.find(c.distrito_id) %>
+						<tr><td colspan = "2" class = "mt-2"></td></tr>
+						<tr class = "bg-warning text-black"><td colspan = "2"><b><%= "Distrito: #{distrito.nombre}" %></b></td></tr>
+						<tr><td colspan = "2" class = "mb-2"></td></tr>
+					<% rescue %>
+					<% end %>
+				<% end %>
 				<tr>
-					<td><%= c.zonaId %></td>
 					<td><%= link_to c.nombre, edit_iglesia_path(c.id) %></td>
+					<% begin %>
 					<td><%= c.distrito_nombre %></td>
+					<% rescue %>
+					<% end %>
 				</tr>
 			<% end %>
 		</tbody>
