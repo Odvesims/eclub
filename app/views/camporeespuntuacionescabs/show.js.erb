@@ -24,8 +24,7 @@
 		<% end %>
 	<% else %>
 		alert('Debe seleccionar un club');
-		var element = document.getElementById('filterEvento');
-		element.value = 0;
+		$("#filterEvento option").prop("selected", false).trigger('change');
 		document.getElementById("filterClub").focus();
 	<% end %>
 <% end %>

@@ -1,5 +1,6 @@
 class Zona < ActiveRecord::Base
 	self.table_name = "zonas"
+	has_many :distritos
 	has_many :iglesias  
 	has_many :iglesiasclubes
 

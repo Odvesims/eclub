@@ -1,6 +1,8 @@
 class Camporeesrenglone < ActiveRecord::Base
 	self.table_name = "camporeesrenglones"  
 
+	has_many :camporeeseventos
+
 	def camporee_nombre
 		camporee = Camporee.find(self.camporee_id)
 		camporee_nombre = camporee.nombre

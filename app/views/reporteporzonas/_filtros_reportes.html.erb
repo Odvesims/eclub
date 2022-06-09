@@ -1,15 +1,10 @@
-<table>
-	<tr>
-		<td><h3>Buscar Por:</td>
-		<td></td>
-	</tr>
-	<% if @zonas != nil %>
-		<tr>
-			<td><b>Zona</td>
-			<td><%= select_tag 'Zona', options_from_collection_for_select(@zonas, 'id', 'nombre', @zona), :id=> 'filterZona', :class => 'form-control', prompt: '', :onchange=> "filtroReportes()" %></td>
-		</tr>
-	<% end %>
-</table>
+
+<% if @zonas != nil %>
+	<div class = "row col-12 mt-2 mb-2">
+		<div class = "col-1"><b>Zona</b></div>
+		<div class = "col-2"><%= select_tag 'Zona', options_from_collection_for_select(@zonas, 'id', 'nombre', @zona), :id=> 'filterZona', :class => 'form-control selectpicker', "data-live-search": "true", prompt: '', :onchange=> "filtroReportes()" %></div>
+	</div>
+<% end %>
 <script>
 	function filtroReportes(){
 		var nombre_controller = '<%= controller_name %>';

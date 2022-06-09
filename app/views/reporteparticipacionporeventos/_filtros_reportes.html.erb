@@ -1,14 +1,11 @@
-<table>
-	<tr>
-		<td><b>&nbsp&nbsp&nbsp&nbspEvento&nbsp</td>
-		<td><%= select_tag 'Evento', options_from_collection_for_select(@eventos, 'id', 'nombre', @evento), :id=> 'filterEvento', :class => 'form-control', prompt: '', :onchange=> "filtroReportes()" %></td>
-	</tr>
-	<tr><td><span>&nbsp</span></td></tr>
-	<tr>
-		<td>&nbsp&nbsp&nbsp&nbsp<b>Zona&nbsp</td>
-		<td><%= select_tag 'Evento', options_from_collection_for_select(@zonas, 'id', 'nombre', @zona), :id=> 'filterZona', :class => 'form-control', prompt: '', :onchange=> "filtroReportes()" %></td>
-	</tr>
-</table>
+<div class = "row col-12 mt-2">
+	<div class = "col-2"><b>Evento</b></div>
+	<div class = "col-4"><%= select_tag 'Evento', option_groups_from_collection_for_select(@renglones, :camporeeseventos, :nombre, :id, :nombre), {id: "filterEvento", include_blank: true, class: "form-control selectpicker", "data-live-search": "true", onchange: "filtroReportes()" } %></div>
+</div>
+<div class = "row col-12 mt-2">
+	<div class = "col-2"><b>Zona</b></div>
+	<div class = "col-4"><%= select_tag 'Evento', options_from_collection_for_select(@zonas, 'id', 'nombre', @zona), :id=> 'filterZona', :class => 'form-control selectpicker', prompt: '',  "data-live-search": "true", :onchange=> "filtroReportes()" %></div>
+</div>
 <script>
 	function filtroReportes(){
 		var nombre_controller = '<%= controller_name %>';

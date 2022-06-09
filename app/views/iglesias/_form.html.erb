@@ -1,7 +1,7 @@
 <ul class="nav nav-tabs">
 	<li class="active"><a data-toggle="tab" href="#home"><h3>Iglesia</h3></a></li>
 </ul>
-<div class="tab-content">
+<div class="tab-content ml-3 mr-3">
 	<%= form_for(@iglesia) do |f| %>
 		<% if @iglesia.errors.any? %>
 			<div id="error_explanation">
@@ -16,7 +16,7 @@
 		<br>
 		<div class="form-group">
 			<label for="distrito_id">Distrito: </label>
-			<%= f.select :distrito_id, options_from_collection_for_select(@distritos, 'id', 'nombre', @iglesia.distrito_id), :class=> "form-control selectpicker" %>
+			<%= f.select :distrito_id, option_groups_from_collection_for_select(@zonas, :distritos, :nombre, :id, :nombre), {}, :class=> "form-control selectpicker", "data-live-search": "true" %>
 		</div>
 		<div class="form-group">
 			<label for="nombre">Nombre: </label>

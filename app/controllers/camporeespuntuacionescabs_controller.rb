@@ -3,6 +3,7 @@ class CamporeespuntuacionescabsController < ApplicationController
 		if signed_granted?(current_user.id, 'camporeespuntuacionescabs', 'I')
 			@iglesias = Iglesia.where("#{current_user.default_level('iglesias')}").all
 			@eventos = Camporeesevento.where("camporee_id = #{current_user.default_camporee}").all
+			@renglones = Camporeesrenglone.where("camporee_id = #{current_user.default_camporee}").all.order("id ASC")
 			@renglones = Camporeesrenglone.where("camporee_id = #{current_user.default_camporee}").all
 			@clubes = Iglesiasclube.where("#{current_user.default_level('iglesiasclubes')}").all
 			@camporeespuntuacionescabs = Camporeespuntuacionescab.where("id = 0").all 
@@ -16,6 +17,7 @@ class CamporeespuntuacionescabsController < ApplicationController
 	
 	def show
 		if signed_granted?(current_user.id, 'camporeespuntuacionescabs', 'I')
+			@renglones = Camporeesrenglone.where("camporee_id = #{current_user.default_camporee}").all.order("id ASC")
 			if params[:id] == 'nuevo'
 				@zonas = Zona.where("zona_id > 0 AND campo_id = #{current_user.default_conference}").all.order("zona_id ASC")
 				@eventos = Camporeesevento.where("camporee_id = #{current_user.default_camporee}").all

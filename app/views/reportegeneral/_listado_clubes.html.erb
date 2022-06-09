@@ -1,4 +1,4 @@
-<table class = "table table-bordered" style = "width: 100%">
+<table class = "table table-bordered ml-3" style = "width: 98%">
 	<% if @club_grades != nil %>
 	<tr>
 		<td colspan = 5, style = "text-align: center;">
@@ -7,7 +7,6 @@
 			<span colspan = 5, style = "width: 100%; font-size: 18px; text-align: center"><%= camporee.nombre %></span><br>
 			<span colspan = 5, style = "width: 100%; font-size: 16px; text-align: center">Reporte General</span>
 		</td>
-		<td></td>
 	</tr>
 	<tr>
 		<td style = "width: 7%"; text-align: right"><b>Zona</td>
@@ -20,6 +19,9 @@
 		<% total_points = 0 %>
 		<% @club_grades.each_with_index do |c, index| %>
 			<% club = Iglesiasclube.find(c.club_id) %>
+			<% if club.clubestipo_id != current_user.club_type %>
+				<% next %>
+			<% end %>
 			<% category = getCamporeeCategory(c.camporee_id, c.total_points) %>
 			<tr style = "background-color: #<%= category.color %>">
 				<td><%= club.zonaSigla %></td>

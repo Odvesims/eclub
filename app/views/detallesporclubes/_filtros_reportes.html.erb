@@ -1,11 +1,7 @@
-<table>
-	<tr>
-		<td><h3>Buscar Por:</td>
-		<td></td>
-	</tr>
+<table class = "ml-2 mb-2 mt-2">
 	<% if @clubes != nil %>
 		<tr>
-			<td><b>Club</td>
+			<td><b>Club</b></td>
 			<td class = "col-md-10"><%= select_tag 'Club', option_groups_from_collection_for_select(@zonas, clubs_symbol(), :nombre, :id, :nombre), {id: "filterClub", include_blank: true, class: "form-control selectpicker col-md-5", "data-live-search": "true", onchange: "filtroReportes()" } %>
 		</tr>
 	<% end %>
