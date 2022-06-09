@@ -115,7 +115,7 @@ class CamporeespuntuacionescabsController < ApplicationController
 			event = Camporeesevento.find(evento)
 			if event.evento_zonal
 				club = Iglesiasclube.find(club)
-				@clubes = Iglesiasclube.where("zona_id = #{club.zona_id}").all
+				@clubes = Iglesiasclube.where("zona_id = #{club.zona_id} AND clubestipo_id = #{current_user.club_type}").all
 			end
 			@clubes.each do |c|
 				club = c.id
