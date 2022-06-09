@@ -34,7 +34,8 @@ class CamporeespuntuacionescabsController < ApplicationController
 					@zone_event = event.evento_zonal
 					if @evento != '' && @evento != ' ' && @club != '' && @club != ' ' 
 						@criterios_cab = Camporeeseventoscriterioscab.where("camporeesevento_id = #{@evento}").all
-						@camporeespuntuacionescab = Camporeespuntuacionescab.where("camporee_id = #{current_user.default_camporee} AND camporeesevento_id = #{params[:evento]} AND iglesiasclube_id = #{params[:club]}").first
+						#@camporeespuntuacionescab = Camporeespuntuacionescab.where("camporee_id = #{current_user.default_camporee} AND camporeesevento_id = #{params[:evento]} AND iglesiasclube_id = #{params[:club]}").first
+						@camporeespuntuacionescab = CamporeeClubGrade.where("camporee_id = #{current_user.default_camporee} AND event_id = #{params[:evento]} AND club_id = #{params[:club]}").first
 						if @camporeespuntuacionescab != nil
 							@evento_registrado = true
 							@edita_nuevo = "edita"						
@@ -121,39 +122,35 @@ class CamporeespuntuacionescabsController < ApplicationController
 				clube = Iglesiasclube.find(club)
 				iglesia = Iglesia.find(clube.iglesia_id)
 				event = Camporeesevento.find(evento)
-				criterios_cabezas= Camporeespuntuacionescab.where("camporee_id = #{current_user.default_camporee} AND camporeesevento_id = #{evento} AND iglesiasclube_id = #{club}").all	
-				criterios_cabezas.each do |c|
-					sql= ActiveRecord::Base.connection.execute("DELETE FROM camporeespuntuacionesdets WHERE camporeespuntuacionescab_id = #{c.id}")
-				end
-				sql= ActiveRecord::Base.connection.execute("DELETE FROM camporeespuntuacionescabs WHERE camporeesevento_id = #{evento} AND iglesiasclube_id = #{club}")
+				clearOldGrades(current_user.default_camporee, evento, club)
+				@club_grades = nil
 				i = 0
 				e = 0
-				total_puntos = 0
-				id_cab = 0
+				details_arr = []
+				total_points = 0
 				while i < params[:valueI].to_i
 					cab_id = params[:criterio_cabeza][:tmpcabeza][i.to_s][:camporeeseventoscriterioscab_id].to_s
-					sql= ActiveRecord::Base.connection.execute("INSERT INTO camporeespuntuacionescabs(campo_id, zona_id, distrito_id, iglesia_id, iglesiasclube_id, camporee_id, camporeerenglone_id, camporeesevento_id, puntos_evento, total_puntos, camporeeseventoscriterioscab_id) VALUES(#{iglesia.campo_id}, #{iglesia.zona_id}, #{iglesia.distrito_id}, #{iglesia.id}, #{club}, #{event.camporee_id}, #{event.camporeesrenglone_id}, #{evento}, #{event.total_puntos}, #{total_puntos}, #{cab_id})")
-					puntuacion_cab = Camporeespuntuacionescab.last
 					e = 0
 					while e < params[:valueE].to_i
 						if params[:criterio_detalles_puntos][:tmpdetallespuntos][e.to_s][:puntos].to_s != '' && params[:criterio_detalles_puntos][:tmpdetallespuntos][e.to_s][:puntos].to_s != ' '
 							puntos = params[:criterio_detalles_puntos][:tmpdetallespuntos][e.to_s][:puntos].to_s
 							criterio_cabeza_id = params[:criterio_detalles_puntos][:tmpdetallespuntos][e.to_s][:criteriocabeza_id].to_s
+							criterio_head = Camporeeseventoscriterioscab.find(criterio_cabeza_id)
 							camporeeseventoscriteriosdet_id = params[:criterio_detalles_puntos][:tmpdetallespuntos][e.to_s][:camporeeseventoscriteriosdet_id].to_i
+							criterio_det = Camporeeseventoscriteriosdet.find(camporeeseventoscriteriosdet_id)
+							detail = { points: puntos, event_head: { id: criterio_cabeza_id, name: criterio_head.nombre }, event_detail: { id: camporeeseventoscriteriosdet_id, name: criterio_det.nombre } }
+							total_points += puntos.to_f
 							if criterio_cabeza_id.to_i == cab_id.to_i
-								sql= ActiveRecord::Base.connection.execute("INSERT INTO camporeespuntuacionesdets(camporeespuntuacionescab_id, puntos, camporeeseventoscriteriosdet_id, camporeeseventoscriterioscab_id) VALUES(#{puntuacion_cab.id.to_i}, #{puntos}, #{camporeeseventoscriteriosdet_id}, #{cab_id})")
-								total_puntos += puntos.to_i
-								puntuacion_cab.total_puntos = puntuacion_cab.total_puntos + total_puntos
-								puntuacion_cab.save
-								total_puntos = 0
 							end
+							details_arr.push(detail)
 						end
 						e += 1
-					end			
+					end		
+					@club_grades = CamporeeClubGrade.create({ camporee_id: current_user.default_camporee, club_id: club, event_id: evento, total_points: total_points, zone_id: clube.zona_id, created_at: Time.now, updated_at: Time.now, created_by: current_user.login, updated_by: current_user.login, signed_by: '', notes: '', details: details_arr.to_json})	
 					i += 1
 				end
 			end
-			respond_to do |format|				
+			respond_to do |format|
 				@puntuaciones = Camporeespuntuacionescab.where("camporee_id = #{current_user.default_camporee} AND iglesiasclube_id = #{@clubes[0].id} AND camporeesevento_id = #{evento}").all
 				format.html { render "edit" }
 				format.js
@@ -185,4 +182,13 @@ class CamporeespuntuacionescabsController < ApplicationController
 			return
 		end
 	end	
+
+	private
+
+		def clearOldGrades(camporee_id, event_id, club_id)
+			grades = CamporeeClubGrade.where("camporee_id = #{camporee_id} AND event_id = #{event_id} AND club_id = #{club_id}").all
+			grades.each do |grade|
+				grade.destroy!
+			end
+		end
 end

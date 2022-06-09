@@ -1,9 +1,9 @@
 <ul class="nav nav-tabs">
 	<li class="active"><a data-toggle="tab" href="#home"><h3>Puntuación</h3></a></li>
 </ul>
-<div class="tab-content">
+<div class="tab-content ml-3">
 	<h3>Seleccione Club: </h3> <%= select_tag 'Club', option_groups_from_collection_for_select(@zonas, clubs_symbol(), :nombre, :id, :nombre), {id: "filterClub", include_blank: true, class: "form-control selectpicker col-md-5", "data-live-search": "true", onchange: "renderCriterios()" } %>
-	<h3>Seleccione Evento: </h3> <%= select_tag 'Club', options_from_collection_for_select(@eventos, 'id', 'nombre', @evento), :id=> 'filterEvento', :class => 'form-control', prompt: '', :onchange=> "renderCriterios()" %>
+	<h3>Seleccione Evento: </h3> <%= select_tag 'Evento', options_from_collection_for_select(@eventos, 'id', 'nombre', @evento), :id=> 'filterEvento', :class => 'form-control selectpicker col-md-5', prompt: '', :onchange=> "renderCriterios()" %>
 	<div id = "evento_criterios"></div>
 </div>
 <script>

@@ -9,6 +9,6 @@
 	</tr>
 	<tr class = "mt-2">
 		<td><b>Organizar Por</td>
-		<td><%= select_tag 'Orden', options_for_select([['Puntuación Global', 'total_puntos'], ['Puntuación por Zona', 'zona_id ASC, total_puntos']]), :id=> 'filterOrderBy', :class => 'form-control', :onchange=> "filtroReportes()" %></td>
+		<td><%= select_tag 'Orden', options_for_select([['Puntuación Global', 'total_points'], ['Puntuación por Zona', 'zone_id ASC, total_points']]), :id=> 'filterOrderBy', :class => 'form-control', :onchange=> "filtroReportes()" %></td>
 	</tr>
 </table>

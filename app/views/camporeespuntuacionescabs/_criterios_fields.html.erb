@@ -6,51 +6,75 @@
 	<% e = 0 %>
 	<% if current_user.usersdefault.massive_event_register %>
 		<div class = "row mt-4 mb-4">
-			<div class = "col-md">Modo Registro</div>
-			<div class = "col-md"><%= select_tag :modo_registro, options_for_select([['Normal', 1], ['Masivo', 2]]) %></div>
+			<div class = "col-1">Modo Registro</div>
+			<div class = "col-4"><%= select_tag :modo_registro, options_for_select([['Normal', 1], ['Masivo', 2]]), { class: "form-control selectpicker" } %></div>
 		</div>
 	<% end %>
 	<div class = "mt-2">
 		<% @criterios_cab.each do |c| %>
 			<%= hidden_field_tag 'idCab', c.id, :name=> "criterio_cabeza"+"["+"tmpcabeza"+"]"+"["+i.to_s+"]"+"camporeeseventoscriterioscab_id", :class => 'cabeza' %>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3><%= c.nombre %> &nbsp&nbsp&nbsp (<%= c.total_puntos %>)</h3>
-				</div>
-				<div class="panel-body bg-light">
-					<% criterios_det = Camporeeseventoscriteriosdet.where("camporeeseventoscriterioscab_id = #{c.id}").all %>
-					<table>
-						<tr>
-							<td></td>
-							<td></td>
-						</tr>
-						<% criterios_det.each do |d| %>
-							<% @puntos = nil %>
-							<% if @camporeespuntuacionescab != nil %>
-								<% camporeesdet_puntos = Camporeespuntuacionesdet.where("camporeespuntuacionescab_id = #{@camporeespuntuacionescab.id} AND camporeeseventoscriteriosdet_id = #{d.id}").first %>
-								<% if camporeesdet_puntos != nil %>
-									<% @puntos  = camporeesdet_puntos.puntos %>
+			<div class = "col-5">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3><%= c.nombre %> &nbsp&nbsp&nbsp (<%= c.total_puntos %>)</h3>
+					</div>
+					<div class="panel-body bg-light">
+						<% criterios_det = Camporeeseventoscriteriosdet.where("camporeeseventoscriterioscab_id = #{c.id}").all %>
+						<table class = "table">
+							<% criterios_det.each_with_index do |d, index| %>
+								<% @puntos = nil %>
+								<% if @camporeespuntuacionescab != nil %>
+									<% begin %>
+										<% grades_details = JSON.parse(@camporeespuntuacionescab.details) %>
+										<% if grades_details[index]['event_detail']['id'].to_i == d.id.to_i %>
+											<% @puntos = grades_details[index]['points'] %>
+										<% end %>
+									<% rescue Exception => z %>
+									<% end %>
 								<% end %>
+								<%= hidden_field_tag 'idDet', d.id, :name=> "criterio_detalles"+"["+"tmpdetalles"+"]"+"["+e.to_s+"]"+"camporeeseventoscriteriosdet_id", :class => 'detalle' %>
+								<% max_points = 0 %>
+								<% if d.puntos.to_i > 0 %>	
+									<% max_points = d.puntos.to_i %>
+								<% end %>
+								<tr>
+									<td><%= d.nombre %></td>						 
+									<td><%= number_field_tag 'puntos', @puntos , min: 0, max: max_points, :name=> "criterio_detalles_puntos"+"["+"tmpdetallespuntos"+"]"+"["+e.to_s+"]"+"puntos", :class => 'form-control detalle details', :placeholder=> d.puntos, step: :any, onchange: "updateGradesTotal()" %></td>
+									<%= hidden_field_tag 'elCriterio', d.camporeeseventoscriterioscab_id, :name=>  "criterio_detalles_puntos"+"["+"tmpdetallespuntos"+"]"+"["+e.to_s+"]"+"criteriocabeza_id" %>
+									<%= hidden_field_tag 'elCriterio', d.id, :name=>  "criterio_detalles_puntos"+"["+"tmpdetallespuntos"+"]"+"["+e.to_s+"]"+"camporeeseventoscriteriosdet_id" %>
+								</tr>
+								<% e += 1 %>
 							<% end %>
-							<%= hidden_field_tag 'idDet', d.id, :name=> "criterio_detalles"+"["+"tmpdetalles"+"]"+"["+e.to_s+"]"+"camporeeseventoscriteriosdet_id", :class => 'detalle' %>
-							<tr>
-								<td><%= d.nombre %></td>		
-								<% if d.puntos.to_i > 0 %>					 
-								<td><%= number_field_tag 'puntos', @puntos , min: 0, max: d.puntos.to_i, :name=> "criterio_detalles_puntos"+"["+"tmpdetallespuntos"+"]"+"["+e.to_s+"]"+"puntos", :class => 'form-control detalle', :placeholder=> d.puntos, step: :any %></td>
-								<% else %>
-								<td><%= number_field_tag 'puntos', @puntos , min: d.puntos.to_i, max: 0, :name=> "criterio_detalles_puntos"+"["+"tmpdetallespuntos"+"]"+"["+e.to_s+"]"+"puntos", :class => 'form-control detalle', :placeholder=> d.puntos, step: :any %></td>
-								<% end %>
-								<%= hidden_field_tag 'elCriterio', d.camporeeseventoscriterioscab_id, :name=>  "criterio_detalles_puntos"+"["+"tmpdetallespuntos"+"]"+"["+e.to_s+"]"+"criteriocabeza_id" %>
-								<%= hidden_field_tag 'elCriterio', d.id, :name=>  "criterio_detalles_puntos"+"["+"tmpdetallespuntos"+"]"+"["+e.to_s+"]"+"camporeeseventoscriteriosdet_id" %>
+							<tr class = "mt-3">
+								<td><h4>Total</h4></td>
+								<td id = "totalTd" style = "text-align: right"><h4>0</h4></td>
 							</tr>
-							<% e += 1 %>
-						<% end %>
-					</table>			
+						</table>			
+					</div>
+					<% i += 1%>
 				</div>
-				<% i += 1%>
 			</div>
 		<% end %>
 		<%= hidden_field_tag 'valueI', i.to_s %>
 		<%= hidden_field_tag 'valueE', e.to_s %>
 		<button type = "submit" class = "btn btn-success" data-disable-with="Espere...">Agregar</button>
 	</div>
+
+	<script>
+		function updateGradesTotal(){
+			total = 0;
+			details = document.getElementsByClassName("details");
+			for(let i = 0; i < details.length; i++){
+				try{
+					detail = details[i];
+					if(!isNaN(parseFloat(detail.value))){
+						total += parseFloat(detail.value)
+					}
+				} catch(e){
+					total += 0;
+				}
+			}
+			document.getElementById("totalTd").innerHTML = `<h4>${total}</h4>`;
+		}
+		$($(".selectpicker").selectpicker("render"));
+	</script>

@@ -18,40 +18,39 @@
 		<% total_club = 0 %>
 		<% total_eventos = 0 %>
 		<% @clubespuntos.each do |c| %>
+			<% details = JSON.parse(c['details']) %>
+			<% event = Camporeesevento.find(c.event_id) %>
 			<% total_eventos += 1%>
 			<table class = "table table-bordered" style = "width: 100%">
-				<tr>
-					<td style = "width: 25%;"><b>Renglón</td>
-					<td style = "width: 35%;"><b>Evento</td>
-					<td style = "width: 25%; text-align: right"><b>Puntuación</td>
+				<% renglon = Camporeesrenglone.find(event.camporeesrenglone_id) %>
+				<tr style = "background-color: #<%= renglon.color %>; color: #<%= renglon.text_color %>">
+					<td style = "width: 25%;"><b>Renglón:</b> <%= renglon.nombre %></td>
+					<td style = "width: 35%;"><b>Evento:</b> <%= event.nombre %></td>
+					<td>Puntuación</td>
 				</tr>
-				<% renglon = Camporeesrenglone.find(c.camporeerenglone_id) %>
-				<tr style = "background-color: #<%= renglon.color %>" >
-					<td style = "width: 25%;"><%= c.renglon_nombre %></td>
-					<td colspan = 2 style = "width: 35%;"><%= c.evento_nombre %></td>
-				</tr>
-				<% @cabezeras = Camporeespuntuacionescab.where("camporee_id = #{current_user.default_camporee} AND iglesiasclube_id = #{params[:club]} AND camporeesevento_id = #{c.camporeesevento_id}").all %>
-				<% @cabezeras.each do |cab| %>
-					<% @detalles = Camporeespuntuacionesdet.where("camporeespuntuacionescab_id = #{cab.id}").all %>
-					<tr>
-						<td colspan = "3" style = "background-color: #FFFFCC; text-align: center;"><%= cab.criteriocab_nombre %></td>
-					</tr>
-					<% puntos_evento = 0 %>
-					<% @detalles.each do |det| %>
+				<% puntos_evento = 0 %>
+				<% details.each_with_index do |det, index| %>
+					<% if index == 0 or (index > 0 and details[index - 1]['event_head']['id'] != det['event_head']['id']) %>
 						<tr>
-							<td></td>
-							<td><%= det.nombre_criterio %></td>
-							<td style = "text-align: right"><%= det.puntos %></td>
-							<% puntos_evento += det.puntos %>
+							<td colspan = "3" style = "background-color: #FFFFCC; text-align: center;"><%= det['event_head']['name'] %></td>
 						</tr>
 					<% end %>
-					<tr colspan>
+					<tr>
 						<td></td>
-						<td style = "text-align: right"><b>Total Evento</td>
-						<td style = "text-align: right"><b><%= puntos_evento %></td>
+						<td><%= det['event_detail']['name'] %></td>
+						<td style = "text-align: right"><%= number_to_currency(det['points'], unit: "") %></td>
+						<% puntos_evento += det['points'].to_f %>
 					</tr>
+					<% if index == details.length - 1 or (index > 0 and details[index - 1]['event_head']['id'] != det['event_head']['id']) %>
+						<tr colspan>
+							<td></td>
+							<td style = "text-align: right"><b>Total Criterio</td>
+							<td style = "text-align: right"><b><%= number_to_currency(puntos_evento, unit: "") %></td>
+						</tr>
+						<% puntos_evento = 0 %>
+					<% end %>
 				<% end %>
-				<% total_club += c.total_puntos.to_f %>
+				<% total_club += c.total_points.to_f %>
 			</table>
 			<br>
 		<% end %>
@@ -62,7 +61,7 @@
 				<td style = "width: 12.5%"><b>Categoría: </td>
 				<td style = "width: 12.5%"><%= getCamporeeCategoria(current_user.default_camporee, total_club) %></td>
 				<td style = "width: 12.5%"><b>Puntuación</td>
-				<td style = "width: 12.5%; text-align: right;"><%= total_club %></td>
+				<td style = "width: 12.5%; text-align: right;"><%= number_to_currency(total_club, unit: "") %></td>
 			</tr>
 		</table>
 	<% end %>

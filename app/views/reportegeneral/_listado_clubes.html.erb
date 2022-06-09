@@ -1,8 +1,8 @@
 <table class = "table table-bordered" style = "width: 100%">
-	<% if @clubespuntos != nil %>
+	<% if @club_grades != nil %>
 	<tr>
 		<td colspan = 5, style = "text-align: center;">
-			<% camporee = Camporee.find(@clubespuntos[0].camporee_id) %>
+			<% camporee = Camporee.find(@club_grades[0].camporee_id) %>
 			<span style = "width: 100%; font-size: 24px; text-align: center"><%#= @campo.nombre %></span><br>
 			<span colspan = 5, style = "width: 100%; font-size: 18px; text-align: center"><%= camporee.nombre %></span><br>
 			<span colspan = 5, style = "width: 100%; font-size: 16px; text-align: center">Reporte General</span>
@@ -16,22 +16,30 @@
 		<td style = "width: 8%; text-align: right"><b>Puntuación</td>
 		<td style = "width: 25%;"><b>Categoría</td>
 	</tr>
-		<% total_club = 0 %>
-		<% @clubespuntos.each do |c| %>
-			<% begin %>
-				<% club = Iglesiasclube.find(c.iglesiasclube_id) %>
-				<% category = getCamporeeCategory(c.camporee_id, c.total_puntos) %>
-				<% style = "background-color: ##{category.color}; color: ##{category.text_color}" %>
-				<tr style = '<%= style %>'>
-					<td style = "width: 10%;"><%= club.zonaSigla %></td>
-					<td style = "width: 25%;"><%= c.club_nombre %></td>
-					<td style = "width: 33%;"><%= c.iglesia_nombre %></td>
-					<td style = "width: 8%; text-align: right;"><%= c.total_puntos %></td>
-					<td style = "width: 15%; text-align: left;"><%= category.nombre %></td>
-				</tr>
-			<% rescue %>
-				<% next %>
-			<% end %>
+		<% reported_clubs = 0 %>
+		<% total_points = 0 %>
+		<% @club_grades.each_with_index do |c, index| %>
+			<% club = Iglesiasclube.find(c.club_id) %>
+			<% category = getCamporeeCategory(c.camporee_id, c.total_points) %>
+			<tr style = "background-color: #<%= category.color %>">
+				<td><%= club.zonaSigla %></td>
+				<td><%= c.club_name %></td>
+				<td><%= c.church_name %></td>
+				<td><%= number_to_currency(c.total_points, unit: "") %></td>
+				<td><%= category.nombre %></td>
+			</tr>
+			<% reported_clubs += 1 %>
+			<% total_points += c.total_points.to_f %>
 		<% end %>
+		<% average_points = total_points / reported_clubs %>
+		<% average_category = getCamporeeCategory(@club_grades[0].camporee_id, average_points) %>
+		<tr><td colspan = "5"></td></tr>
+		<tr>
+			<td><b>Total Clubes:</td>
+			<td><%= reported_clubs %></td>
+			<td><b>Promedio Puntuación</td>
+			<td><%= number_to_currency(average_points, unit: "") %></td>
+			<td style = "background-color: #<%= average_category.color %>"><%= average_category.nombre %></td>
+		</tr>
 	<% end %>
 </table>

@@ -1,7 +1,7 @@
 class IglesiasclubesController < ApplicationController
 	def index
 		if signed_granted?(current_user.id, 'iglesiasclubes', 'I')
-			@iglesiasclubes = Iglesiasclube.where("#{current_user.default_level('iglesiasclubes')} AND clubestipo_id = #{current_user.club_type}").all.sort_by{|c|[c.zonaId, c.distrito_id, c.iglesia_id]}
+			@iglesiasclubes = Iglesiasclube.where("#{current_user.default_level('iglesiasclubes')} AND clubestipo_id = #{current_user.club_type}").all.sort_by{|c|[c.zonaId, c.nombre]}
 		end
 	end
 	

@@ -11,7 +11,8 @@ class GenerateClubUserService
   def execute()
     user_defaults = Usersdefault.where("access_level = 'LC' AND access_id = #{club_id}").first
     if(user_defaults != nil)
-      return { valid: false, message: "Ya existe un usuario para este club" }
+			user = User.find(user_defaults.user_id)
+      return { valid: false, message: "Ya existe un usuario para este club", user: user.login, password: user.plain_text_initial_password }
     end
     club = Iglesiasclube.find(club_id)
     @club_pure_name = club.nombre

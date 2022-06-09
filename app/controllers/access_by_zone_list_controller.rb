@@ -33,6 +33,6 @@ class AccessByZoneListController < ApplicationController
 
 	private
 	  def getZoneClubsUsers(arrZones)
-			users = User.where("users.id IN (SELECT user_id FROM users_defaults WHERE access_level = 'LC' AND zona_id IN (#{arrZones.to_s.gsub("[", "").gsub("]", "")}) ORDER BY zona_id ASC) AND plain_text_initial_password != ''").all.order_by_zone
+			users = User.where("users.id IN (SELECT user_id FROM users_defaults WHERE club_type = #{current_user.club_type} AND access_level = 'LC' AND zona_id IN (#{arrZones.to_s.gsub("[", "").gsub("]", "")}) ORDER BY zona_id ASC) AND plain_text_initial_password != ''").all.order_by_zone
 		end
 end

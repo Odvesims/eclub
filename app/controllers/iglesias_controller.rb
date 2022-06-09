@@ -45,7 +45,7 @@ class IglesiasController < ApplicationController
 			iglesia = Iglesia.find(params[:id]) 
 			iglesia.update(params[:iglesia].to_enum.to_h)
 			if iglesia.save
-				UpdateZoneIdService.new('CH', iglesia.id, iglesia.zona_id).execute
+				UpdateZoneIdService.new( {level: 'CH', id: iglesia.id, zone_id: iglesia.zona_id} ).execute
 				redirect_to action: 'edit', id: iglesia.id
 				return
 			end

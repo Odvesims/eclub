@@ -14,7 +14,8 @@ class ReporteporclubesController < ApplicationController
 			if params[:club] == '' || params[:club] == 0
 				@clubespuntos = nil
 			else
-				@clubespuntos = Camporeespuntuacionescab.where("camporee_id = #{current_user.default_camporee} AND iglesiasclube_id = #{params[:club]}").select("camporee_id, iglesiasclube_id, camporeerenglone_id, camporeesevento_id, sum(total_puntos) as total_puntos").group("camporee_id, iglesiasclube_id, camporeerenglone_id, camporeesevento_id").order("camporeerenglone_id, camporeesevento_id")
+				@clubespuntos = CamporeeClubGrade.where("camporee_id = #{current_user.default_camporee} AND club_id = #{params[:club]}").order("event_id ASC")
+				#@clubespuntos = Camporeespuntuacionescab.where("camporee_id = #{current_user.default_camporee} AND iglesiasclube_id = #{params[:club]}").select("camporee_id, iglesiasclube_id, camporeerenglone_id, camporeesevento_id, sum(total_puntos) as total_puntos").group("camporee_id, iglesiasclube_id, camporeerenglone_id, camporeesevento_id").order("camporeerenglone_id, camporeesevento_id")
 				@club = Iglesiasclube.find(params[:club])
 				@iglesia = Iglesia.find(@club.iglesia_id)
 				@zona = Zona.where("id = #{@club.zona_id}").first

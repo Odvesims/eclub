@@ -16,7 +16,7 @@
 		<br>
 		<div class="form-group">
 			<label for="distrito_id">Distrito: </label>
-			<%= f.select :distrito_id, options_from_collection_for_select(@distritos, 'id', 'nombre', @iglesia.distrito_id), :class=> "form-control" %>
+			<%= f.select :distrito_id, options_from_collection_for_select(@distritos, 'id', 'nombre', @iglesia.distrito_id), :class=> "form-control selectpicker" %>
 		</div>
 		<div class="form-group">
 			<label for="nombre">Nombre: </label>
