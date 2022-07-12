@@ -1,7 +1,7 @@
 class ListadoclubesController < ApplicationController
 	def index
 		if signed_granted?(current_user.id, 'listadoclubes', 'I')
-			@zonas = Zona.all
+			@zonas = Zona.where("zona_id > 0 AND campo_id = #{current_user.default_conference}").all.order("zona_id ASC")
 			@distritos = Distrito.all
 			@iglesias = Iglesia.all
 			@clubes = Iglesiasclube.where("clubestipo_id = #{current_user.usersdefault.club_type} AND participa_camporee = '#{true}'").all.sort_by(&:zonaId)
@@ -16,18 +16,14 @@ class ListadoclubesController < ApplicationController
 		if signed_granted?(current_user.id, 'listadoclubes', 'I')	
 			@zona = params[:zona].to_s
 			@distrito = params[:distrito].to_s	
-			sql = ""			
+			sql = "participa_camporee = '#{TRUE}' AND clubestipo_id = #{current_user.club_type}"			
 			if @zona != '' && @zona != ' ' 
-				sql+= "zona_id = #{@zona}"
+				sql+= " AND zona_id = #{@zona}"
 			end
-			if @distrito != '' && @distrito != ' ' 
-				if @zona != '' && @zona != ' ' 
-					sql+= " AND"
-				end
-				sql+= " distrito_id = #{@distrito}"
+			if @distrito != '' && @distrito != ' '
+				sql+= " AND distrito_id = #{@distrito}"
 			end
-			sql += " AND participa_camporee = '#{TRUE}'"
-			@clubes = Iglesiasclube.where(sql).all.sort_by(&:zonaId)
+			@clubes = Iglesiasclube.where(sql).all.order("zona_id ASC, nombre ASC")
 			respond_to do |format|
 				format.js
 			end

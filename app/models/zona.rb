@@ -42,7 +42,7 @@ class Zona < ActiveRecord::Base
 	  available_churches(2)
 	end
 
-	def vailable_master_guides_clubs
+	def available_master_guides_clubs
 	  available_churches(3)
 	end
 

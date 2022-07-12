@@ -1,17 +1,14 @@
-<table>
-	<tr>
-		<td><h3>Filtrar Por:</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td><b>Zona</td>
-		<td><%= select_tag 'Zona', options_from_collection_for_select(@zonas, 'id', 'nombre', @zona), :id=> 'filterZona', :class => 'form-control', prompt: '', :onchange=> "filtroReportes()" %></td>
-	</tr>
-	<tr>
-		<td><b>Distrito</td>
-		<td><%= select_tag 'Distrito', options_from_collection_for_select(@distritos, 'id', 'nombre', @distrito), :id=> 'filterDistrito', :class => 'form-control', prompt: '', :onchange=> "filtroReportes()" %></td>
-	</tr>
-</table>
+<div class = "row">
+	<div class = "col-2"><h3>Filtrar Por:</h2></div>
+</div>
+<div class = "row mt-2">
+	<div class = "col-1"><b>Zona</b></div>
+	<div class = "col-2"><%= select_tag 'Zona', options_from_collection_for_select(@zonas, 'id', 'nombre', @zona), :id=> 'filterZona', :class => 'form-control selectpicker', prompt: '', :onchange=> "filtroReportes()" %></div>
+</div>
+<div class = "row mt-2">
+	<div class = "col-1"><b>Distrito</b></div>
+	<div class = "col-2"><%= select_tag 'Distrito', option_groups_from_collection_for_select(@zonas, :distritos, :nombre, :id, :nombre), :id=> 'filterDistrito', :class => 'form-control selectpicker', "date-live-search": "true", prompt: '', :onchange=> "filtroReportes()" %></div>
+</div>
 <script>
 	function filtroReportes(){
 		var nombre_controller = '<%= controller_name %>';	

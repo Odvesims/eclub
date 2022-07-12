@@ -1,14 +1,12 @@
 <%= render 'form' %>
 <br>
-<table>
-	<tr>
-		<td><button type="button" class="btn btn-primary" onclick="window.location = '<%= new_iglesiasclube_path %>';">Nuevo</button></td>
-		<td><button type="button" class="btn btn-info"    onclick="window.location = '<%= edit_iglesiasclube_path(@iglesiasclube, :donde => 'prev')%>';"><span class="glyphicon glyphicon-arrow-left"></span> Anterior</button></td>
-		<td><button type="button" class="btn btn-warning" onclick="window.location = '<%= edit_iglesiasclube_path(@iglesiasclube, :donde => 'next')%>';" >Siguiente <span class="glyphicon glyphicon-arrow-right"></span></button></td>
-		<td><button type="button" class="btn btn-primary" onclick="window.location = '<%= iglesiasclubes_path %>'">Indice</button></td>
-		<td><%= button_to 'Delete',  @iglesiasclube, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %></td>
-	</tr>
-</table>
+<div class = "row col-4">
+	<div class = "ml-1"><button type="button" class="btn btn-primary" onclick="window.location = '<%= new_iglesiasclube_path %>';">Nuevo</button></div>
+	<div class = "ml-1"><button type="button" class="btn btn-info"    onclick="window.location = '<%= edit_iglesiasclube_path(@iglesiasclube, :donde => 'prev')%>';"><span class="glyphicon glyphicon-arrow-left"></span> Anterior</button></div>
+	<div class = "ml-1"><button type="button" class="btn btn-warning" onclick="window.location = '<%= edit_iglesiasclube_path(@iglesiasclube, :donde => 'next')%>';" >Siguiente <span class="glyphicon glyphicon-arrow-right"></span></button></div>
+	<div class = "ml-1"><button type="button" class="btn btn-primary" onclick="window.location = '<%= iglesiasclubes_path %>'">Indice</button></div>
+	<div class = "ml-1"><%= button_to 'Delete',  @iglesiasclube, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %></div>
+</div>
 
 
 

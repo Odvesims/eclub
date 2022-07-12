@@ -16,7 +16,12 @@
 		<br>
 		<div class="form-group">
 			<label for="iglesia_id">Iglesia: </label>
-			<%= f.select :iglesia_id, option_groups_from_collection_for_select(@zonas, available_clubs_symbol(), :nombre, :id, :nombre, @iglesiasclube.iglesia_id), {}, include_blank: true, class: "form-control selectpicker col-md-5", "data-live-search": "true" %>
+			<% if @iglesiasclube.new_record? %>
+				<% options = option_groups_from_collection_for_select(@zonas, available_clubs_symbol(), :nombre, :id, :nombre, @iglesiasclube.iglesia_id.to_i) %>
+			<% else %>
+				<% options = option_groups_from_collection_for_select(@zonas, :iglesias, :nombre, :id, :nombre, @iglesiasclube.iglesia_id.to_i) %>
+			<% end %>
+			<%= f.select :iglesia_id, options, {}, class: "form-control selectpicker col-md-5", "data-live-search": "true", onchange: "setClubName(this)" %>
 		</div>
 		<div class="form-group">
 			<label for="clubestipos">Club: </label>
@@ -33,3 +38,11 @@
   		<button type="submit" class="btn btn-success">Submit</button>
 	<% end %>
 </div>
+
+<script>
+	function setClubName(selected){
+		$("#iglesiasclube_nombre").val(selected.options[selected.selectedIndex].text)
+	}
+	$('select[name=iglesiasclube_iglesia_id]').val(148);
+	$('.selectpicker').selectpicker('render')
+</script>

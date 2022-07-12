@@ -16,11 +16,13 @@ class IglesiasclubesController < ApplicationController
 	end
 	
 	def show
+		@zonas = Zona.where("zona_id > 0 AND campo_id = #{current_user.default_conference}").all.order("zona_id ASC")
 		@iglesias = ActiveRecord::Base.connection.execute("SELECT id, nombre FROM iglesias i WHERE NOT EXISTS (SELECT 1 FROM iglesiasclubes c WHERE  i.id = c.iglesia_id AND c.clubestipo_id = #{current_user.club_type})")
 	end
 	
 	def create
 		if signed_granted?(current_user.id, 'iglesiasclubes', 'N')
+			@zonas = Zona.where("zona_id > 0 AND campo_id = #{current_user.default_conference}").all.order("zona_id ASC")
 			iglesiasclube = Iglesiasclube.new(params[:iglesiasclube].to_enum.to_h)
 			clubes = Iglesiasclube.where("clubestipo_id = #{current_user.club_type}").all
 			club_exists = clubes.where("iglesia_id = #{params[:iglesiasclube][:iglesia_id]}").first
@@ -41,6 +43,7 @@ class IglesiasclubesController < ApplicationController
 	
 	def edit
 		if signed_granted?(current_user.id, 'iglesiasclubes', 'E')
+			@zonas = Zona.where("zona_id > 0 AND campo_id = #{current_user.default_conference}").all.order("zona_id ASC")
 			@iglesiasclube = Iglesiasclube.find(params[:id]) 
 			@iglesias = Iglesia.where("#{current_user.default_level('iglesiasclubes')}").all.sort_by(&:zonaId)
 			@clubestipos = Clubestipo.all
@@ -57,6 +60,7 @@ class IglesiasclubesController < ApplicationController
 	
 	def update
 		if signed_granted?(current_user.id, 'iglesiasclubes', 'E')
+			@zonas = Zona.where("zona_id > 0 AND campo_id = #{current_user.default_conference}").all.order("zona_id ASC")
 			iglesiasclube = Iglesiasclube.find(params[:id]) 
 			iglesiasclube.update(params[:iglesiasclube].to_enum.to_h)
 			if iglesiasclube.save
@@ -69,6 +73,7 @@ class IglesiasclubesController < ApplicationController
 	
 	def destroy
 		if signed_granted?(current_user.id, 'iglesiasclubes', 'D')
+			@zonas = Zona.where("zona_id > 0 AND campo_id = #{current_user.default_conference}").all.order("zona_id ASC")
 			@iglesiasclube = Iglesiasclube.find(params[:id]) 
 			@iglesiasclube.destroy
 			redirect_to action: 'index'

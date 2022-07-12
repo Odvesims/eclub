@@ -1,5 +1,5 @@
 <div class = "row ml-3"><h5>Clubes Participantes</h5></div>
-<table class = "table table-bordered ml-3" style = "width: 50%">
+<table class = "table ml-3" style = "width: 50%">
 	<tr class = "row">
 		<td class = "col">Club</td>
 		<td class = "col">Zona</td>
@@ -10,11 +10,11 @@
 			<td class = "col bg-success text-white"><%= "#{club.zonaNombre}" %></td>
 		</tr>
 	<% end %>
-	<tr class = "row"><td class = "col bg-success text-white"><%= "Total Participante : #{@clubes_participantes.count}" %></td></tr>
+	<tr class = "row"><td class = "col bg-info text-white"><%= "Total Participante : #{@clubes_participantes.count}" %></td></tr>
 </table>
 
 <div class = "row ml-3"><h5>Clubes Faltantes</h5></div>
-<table class = "table table-bordered ml-3" style = "width: 50%">
+<table class = "table ml-3" style = "width: 50%">
 	<tr class = "row">
 		<td class = "col">Club</td>
 		<td class = "col">Zona</td>
@@ -25,5 +25,5 @@
 			<td class = "col bg-danger text-white"><%= "#{club.zonaNombre}" %></td>
 		</tr>
 	<% end %>
-	<tr class = "row"><td class = "col bg-danger text-white"><%= "Total Faltante : #{@clubes_faltantes.count}" %></td></tr>
+	<tr class = "row"><td class = "col bg-info text-white"><%= "Total Faltante : #{@clubes_faltantes.count}" %></td></tr>
 </table>
