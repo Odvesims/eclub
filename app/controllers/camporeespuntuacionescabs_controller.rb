@@ -120,36 +120,39 @@ class CamporeespuntuacionescabsController < ApplicationController
 				@clubes = Iglesiasclube.where("zona_id = #{club.zona_id} AND clubestipo_id = #{current_user.club_type}").all
 			end
 			@clubes.each do |c|
-				club = c.id
-				clube = Iglesiasclube.find(club)
-				iglesia = Iglesia.find(clube.iglesia_id)
-				event = Camporeesevento.find(evento)
-				clearOldGrades(current_user.default_camporee, evento, club)
-				@club_grades = nil
-				i = 0
-				e = 0
-				details_arr = []
-				total_points = 0
-				while i < params[:valueI].to_i
-					cab_id = params[:criterio_cabeza][:tmpcabeza][i.to_s][:camporeeseventoscriterioscab_id].to_s
+				begin
+					club = c.id
+					clube = Iglesiasclube.find(club)
+					iglesia = Iglesia.find(clube.iglesia_id)
+					event = Camporeesevento.find(evento)
+					clearOldGrades(current_user.default_camporee, evento, club)
+					@club_grades = nil
+					i = 0
 					e = 0
-					while e < params[:valueE].to_i
-						if params[:criterio_detalles_puntos][:tmpdetallespuntos][e.to_s][:puntos].to_s != '' && params[:criterio_detalles_puntos][:tmpdetallespuntos][e.to_s][:puntos].to_s != ' '
-							puntos = params[:criterio_detalles_puntos][:tmpdetallespuntos][e.to_s][:puntos].to_s
-							criterio_cabeza_id = params[:criterio_detalles_puntos][:tmpdetallespuntos][e.to_s][:criteriocabeza_id].to_s
-							criterio_head = Camporeeseventoscriterioscab.find(criterio_cabeza_id)
-							camporeeseventoscriteriosdet_id = params[:criterio_detalles_puntos][:tmpdetallespuntos][e.to_s][:camporeeseventoscriteriosdet_id].to_i
-							criterio_det = Camporeeseventoscriteriosdet.find(camporeeseventoscriteriosdet_id)
-							detail = { points: puntos, event_head: { id: criterio_cabeza_id, name: criterio_head.nombre }, event_detail: { id: camporeeseventoscriteriosdet_id, name: criterio_det.nombre } }
-							total_points += puntos.to_f
-							if criterio_cabeza_id.to_i == cab_id.to_i
+					details_arr = []
+					total_points = 0
+					while i < params[:valueI].to_i
+						cab_id = params[:criterio_cabeza][:tmpcabeza][i.to_s][:camporeeseventoscriterioscab_id].to_s
+						e = 0
+						while e < params[:valueE].to_i
+							if params[:criterio_detalles_puntos][:tmpdetallespuntos][e.to_s][:puntos].to_s != '' && params[:criterio_detalles_puntos][:tmpdetallespuntos][e.to_s][:puntos].to_s != ' '
+								puntos = params[:criterio_detalles_puntos][:tmpdetallespuntos][e.to_s][:puntos].to_s
+								criterio_cabeza_id = params[:criterio_detalles_puntos][:tmpdetallespuntos][e.to_s][:criteriocabeza_id].to_s
+								criterio_head = Camporeeseventoscriterioscab.find(criterio_cabeza_id)
+								camporeeseventoscriteriosdet_id = params[:criterio_detalles_puntos][:tmpdetallespuntos][e.to_s][:camporeeseventoscriteriosdet_id].to_i
+								criterio_det = Camporeeseventoscriteriosdet.find(camporeeseventoscriteriosdet_id)
+								detail = { points: puntos, event_head: { id: criterio_cabeza_id, name: criterio_head.nombre }, event_detail: { id: camporeeseventoscriteriosdet_id, name: criterio_det.nombre } }
+								total_points += puntos.to_f
+								if criterio_cabeza_id.to_i == cab_id.to_i
+								end
+								details_arr.push(detail)
 							end
-							details_arr.push(detail)
-						end
-						e += 1
-					end		
-					@club_grades = CamporeeClubGrade.create({ camporee_id: current_user.default_camporee, club_id: club, event_id: evento, total_points: total_points, zone_id: clube.zona_id, created_at: Time.now, updated_at: Time.now, created_by: current_user.login, updated_by: current_user.login, signed_by: '', notes: '', details: details_arr.to_json})	
-					i += 1
+							e += 1
+						end		
+						@club_grades = CamporeeClubGrade.create({ camporee_id: current_user.default_camporee, club_id: club, event_id: evento, total_points: total_points, zone_id: clube.zona_id, created_at: Time.now, updated_at: Time.now, created_by: current_user.login, updated_by: current_user.login, signed_by: '', notes: '', details: details_arr.to_json})	
+						i += 1
+					end
+				rescue
 				end
 			end
 			respond_to do |format|
