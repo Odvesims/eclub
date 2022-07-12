@@ -64,7 +64,7 @@ class IglesiasclubesController < ApplicationController
 			iglesiasclube = Iglesiasclube.find(params[:id]) 
 			iglesiasclube.update(params[:iglesiasclube].to_enum.to_h)
 			if iglesiasclube.save
-				UpdateZoneIdService.new('CL', iglesiasclube.id, iglesiasclube.zona_id).execute
+				UpdateZoneIdService.new({ level: 'CL', id: iglesiasclube.id, zone_id: iglesiasclube.zona_id }).execute
 				redirect_to action: 'edit', id: iglesiasclube.id
 				return
 			end
