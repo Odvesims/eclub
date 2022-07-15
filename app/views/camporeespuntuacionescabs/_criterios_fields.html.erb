@@ -15,7 +15,7 @@
 	<div class = "col-6">
 		<div class = "row mt-3">
 			<div class = "col-2">Juez Evaluador</div>
-			<div class = "col-4"><%= select_tag :camporee_judge_id, options_from_collection_for_select(@judges, :id, :name), { class: "form-control selectpicker", prompt: '', "data-live-search": "true" } %></div>
+			<div class = "col-4"><%= select_tag :camporee_judge_id, options_from_collection_for_select(@judges, :id, :name), { required: true, class: "form-control selectpicker", prompt: '', "data-live-search": "true" } %></div>
 		</div>
 	</div>
 	<div class = "mt-2">
@@ -47,7 +47,7 @@
 								<% end %>
 								<tr>
 									<td><%= d.nombre %></td>						 
-									<td><%= number_field_tag 'puntos', @puntos , min: 0, max: max_points, :name=> "criterio_detalles_puntos"+"["+"tmpdetallespuntos"+"]"+"["+e.to_s+"]"+"puntos", :class => 'form-control detalle details', :placeholder=> d.puntos, step: :any, onchange: "updateGradesTotal()" %></td>
+									<td><%= number_field_tag 'puntos', @puntos , min: 0, max: max_points, :name=> "criterio_detalles_puntos"+"["+"tmpdetallespuntos"+"]"+"["+e.to_s+"]"+"puntos", :class => 'form-control detalle details', :required => true, :placeholder=> d.puntos, step: :any, onchange: "updateGradesTotal()" %></td>
 									<%= hidden_field_tag 'elCriterio', d.camporeeseventoscriterioscab_id, :name=>  "criterio_detalles_puntos"+"["+"tmpdetallespuntos"+"]"+"["+e.to_s+"]"+"criteriocabeza_id" %>
 									<%= hidden_field_tag 'elCriterio', d.id, :name=>  "criterio_detalles_puntos"+"["+"tmpdetallespuntos"+"]"+"["+e.to_s+"]"+"camporeeseventoscriteriosdet_id" %>
 								</tr>
