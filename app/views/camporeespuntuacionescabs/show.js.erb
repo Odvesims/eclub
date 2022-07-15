@@ -14,6 +14,8 @@
 				alert("Ya existe un registro para este Club en este evento")
 				$(document.getElementById('evento_criterios').innerHTML=" ");
 				$("<%= escape_javascript(render "criterios_fields") %>").appendTo("#evento_criterios");
+				$("#camporee_judge_id").val('<%= @judge %>')
+				$("#camporee_judge_id").selectpicker('refresh');
 				$(updateGradesTotal());
 			<% else %>
 				$(document.getElementById('evento_criterios').innerHTML=" ");

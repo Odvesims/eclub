@@ -43,6 +43,7 @@ class CamporeespuntuacionescabsController < ApplicationController
 						@camporeespuntuacionescab = CamporeeClubGrade.where("camporee_id = #{current_user.default_camporee} AND event_id = #{params[:evento]} AND club_id = #{params[:club]}").first
 						if @camporeespuntuacionescab != nil
 							@evento_registrado = true
+							@judge = @camporeespuntuacionescab.camporee_judge_id 
 							@edita_nuevo = "edita"						
 						end
 					else
