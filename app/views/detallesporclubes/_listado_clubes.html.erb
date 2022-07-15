@@ -56,9 +56,9 @@
 		<% end %>
 		<table class = "table table-bordered" style = "width: 100%">
 			<tr>
-				<td style = "width: 12.5%"><b>Total Eventos: <%= total_eventos %></td>
-				<td style = "width: 12.5%"><b>Categoría: <%= getCamporeeCategoria(current_user.default_camporee, total_club) %></td>
-				<td style = "width: 12.5%"><b>Puntuación <%= number_to_currency(total_club, unit: "") %></td>
+				<td style = "width: 12.5%"><b>Total Eventos</b>: <%= total_eventos %></td>
+				<td style = "width: 12.5%"><b>Categoría</b>: <%= getCamporeeCategoria(current_user.default_camporee, total_club) %></td>
+				<td style = "width: 12.5%"><b>Puntuación</b>: <%= number_to_currency(total_club, unit: "") %></td>
 			</tr>
 		</table>
 	<% end %>
