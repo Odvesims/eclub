@@ -2,7 +2,11 @@ class ReporteporclubesController < ApplicationController
 	def index
 		if signed_granted?(current_user.id, 'reporteporclubes', 'I')
 			@clubes = Iglesiasclube.where("#{current_user.default_level('iglesiasclubes')}").all
-			@zonas = Zona.where("#{current_user.default_level('reporteporzonas')}").all.order("zona_id ASC")
+			if current_user.accessLevel == 'LC'
+				@clubes = Iglesiasclube.where("id = #{current_user.accessId}").all
+			else
+			  @zonas = Zona.where("#{current_user.default_level('reporteporzona')}").all.order("zona_id ASC") 
+			end
 			@clubespuntos = nil 
 			@club = 0
 		end

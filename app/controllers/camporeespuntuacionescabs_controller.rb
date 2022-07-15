@@ -7,6 +7,7 @@ class CamporeespuntuacionescabsController < ApplicationController
 			@renglones = Camporeesrenglone.where("camporee_id = #{current_user.default_camporee}").all
 			@clubes = Iglesiasclube.where("#{current_user.default_level('iglesiasclubes')}").all
 			@camporeespuntuacionescabs = Camporeespuntuacionescab.where("id = 0").all 
+			@judges = CamporeeJudge.where("camporee_id = #{current_user.default_camporee}").all
 			#@camporeespuntuacionescabs = Camporeespuntuacionescab.where("camporee_id = #{current_user.default_camporee}").select("iglesiasclube_id, camporeerenglone_id, camporeesevento_id, sum(total_puntos) as total_puntos").group("iglesiasclube_id, camporeerenglone_id, camporeesevento_id")
 			@club = 0
 			@renglon = 0
@@ -22,11 +23,13 @@ class CamporeespuntuacionescabsController < ApplicationController
 				@zonas = Zona.where("zona_id > 0 AND campo_id = #{current_user.default_conference}").all.order("zona_id ASC")
 				@eventos = Camporeesevento.where("camporee_id = #{current_user.default_camporee}").all
 				@clubes = Iglesiasclube.where("#{current_user.default_level('iglesiasclubes')}").all
+				@judges = CamporeeJudge.where("camporee_id = #{current_user.default_camporee}").all.order("name ASC")
 				@evento = 0
 			else
 				if params[:option] == 'renderCriterios'
 					@eventos = Camporeesevento.where("camporee_id = #{current_user.default_camporee}").all
 					@clubes = Iglesiasclube.all	
+					@judges = CamporeeJudge.where("camporee_id = #{current_user.default_camporee}").all.order("name ASC")
 					@control_js = 2
 					@evento = params[:evento].to_s
 					@club = params[:club].to_s
@@ -55,6 +58,7 @@ class CamporeespuntuacionescabsController < ApplicationController
 					@club = params[:club].to_s
 					@iglesia = params[:iglesia].to_s
 					@iglesias = Iglesia.all
+					@judges = CamporeeJudge.where("camporee_id = #{current_user.default_camporee}").all.order("name ASC")
 					@eventos = Camporeesevento.where("camporee_id = #{current_user.default_camporee}").all
 					@renglones = Camporeesrenglone.where("camporee_id = #{current_user.default_camporee}").all
 					@clubes = Iglesiasclube.all
@@ -102,6 +106,7 @@ class CamporeespuntuacionescabsController < ApplicationController
 	def new
 		if signed_granted?(current_user.id, 'camporeespuntuacionescabs', 'N')
 			@campos = Campo.all
+			@judges = CamporeeJudge.where("camporee_id = #{current_user.default_camporee}").all.order("name ASC")
 			@clubestipos = Clubestipo.all
 		end
 	end
@@ -110,7 +115,9 @@ class CamporeespuntuacionescabsController < ApplicationController
 		if signed_granted?(current_user.id, 'camporeespuntuacionescabs', 'N')
 			evento = params[:elEvento]	
 			club = params[:elClub]	
+			camporee_judge_id = params[:camporee_judge_id]
 			@clubes = Iglesiasclube.where("id = #{club}").all
+			@judges = CamporeeJudge.where("camporee_id = #{current_user.default_camporee}").all.order("name ASC")
 			if params[:modo_registro].to_i == 2
 				@clubes = Iglesiasclube.all
 			end
@@ -149,7 +156,7 @@ class CamporeespuntuacionescabsController < ApplicationController
 							end
 							e += 1
 						end		
-						@club_grades = CamporeeClubGrade.create({ camporee_id: current_user.default_camporee, club_id: club, event_id: evento, total_points: total_points, zone_id: clube.zona_id, created_at: Time.now, updated_at: Time.now, created_by: current_user.login, updated_by: current_user.login, signed_by: '', notes: '', details: details_arr.to_json})	
+						@club_grades = CamporeeClubGrade.create({ camporee_id: current_user.default_camporee, club_id: club, event_id: evento, total_points: total_points, zone_id: clube.zona_id, created_at: Time.now, updated_at: Time.now, created_by: current_user.login, updated_by: current_user.login, camporee_judge_id: camporee_judge_id, signed_by: '', notes: '', details: details_arr.to_json})	
 						i += 1
 					end
 				rescue
@@ -165,6 +172,7 @@ class CamporeespuntuacionescabsController < ApplicationController
 	
 	def edit
 		if signed_granted?(current_user.id, 'camporeespuntuacionescabs', 'E')
+			@judges = CamporeeJudge.where("camporee_id = #{current_user.default_camporee}").all.order("name ASC")
 			@puntuaciones = Camporeespuntuacionescab.where("camporee_id = #{current_user.default_camporee} AND iglesiasclube_id = #{params[:club_id]} AND camporeesevento_id = #{params[:evento_id]}").all
 		end
 	end
@@ -172,6 +180,7 @@ class CamporeespuntuacionescabsController < ApplicationController
 	def update
 		if signed_granted?(current_user.id, 'camporeespuntuacionescabs', 'E')
 			camporee = Camporee.find(params[:id]) 
+			@judges = CamporeeJudge.where("camporee_id = #{current_user.default_camporee}").all.order("name ASC")
 			if camporee.update_attributes(camporees_params)
 				redirect_to action: 'edit', id: camporee.id
 				return

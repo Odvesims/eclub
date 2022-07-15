@@ -32,6 +32,14 @@ class User < ActiveRecord::Base
 		self.usersdefault.club_type
 	end
 	
+	def accessLevel
+		access_level = self.usersdefault.access_level
+	end
+	
+	def accessId
+		return self.usersdefault.access_id
+	end
+	
 	def accesId
 		return self.usersdefault.access_id
 	end
@@ -90,6 +98,7 @@ class User < ActiveRecord::Base
 				end
 			when 'LC'
 				iglesiaclub = Iglesiasclube.find(access_id)
+				Rails.logger.debug("controller: #{controller}")
 				case controller
 					when 'campos'
 						return_string = "id = #{self.default_conference}"
@@ -99,9 +108,11 @@ class User < ActiveRecord::Base
 						return_string = "campo_id = #{self.default_conference} AND zona_id = #{iglesiaclub.zona_id} AND distrito_id = #{iglesiaclub.distrito_id}"
 					when 'iglesias' 
 						return_string = "campo_id = #{self.default_conference} AND zona_id = #{iglesiaclub.zona_id} AND distrito_id = #{iglesiaclub.distrito_id} AND iglesia_id = #{iglesiaclub.iglesia_id}"
+					when 'reporteporclubes'
+						return_string = "campo_id = #{self.default_conference} AND zona_id = #{iglesiaclub.zona_id}"
 					else 
 						return_string = "campo_id = #{self.default_conference} AND zona_id = #{iglesiaclub.zona_id} AND distrito_id = #{iglesiaclub.distrito_id} AND iglesia_id = #{iglesiaclub.iglesia_id} AND id = #{access_id}"
-				end
+				end 
 		end
 		return return_string
 	end

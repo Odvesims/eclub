@@ -2,7 +2,11 @@ class ReporteparticipacionporeventosController < ApplicationController
 	def index
 		if signed_granted?(current_user.id, 'reporteparticipacionporeventos', 'I')
 			@renglones = Camporeesrenglone.where("camporee_id = #{current_user.default_camporee}").all.order("id ASC")
-			@zonas = Zona.where("zona_id != 0 AND #{current_user.default_level('zonas')}").all.order("zona_id ASC")
+			if current_user.accessLevel == 'LC'
+				@clubes = Iglesiasclube.where("id = #{current_user.accessId}").all
+			else
+			  @zonas = Zona.where("#{current_user.default_level('reporteporzona')}").all.order("zona_id ASC") 
+			end
 			@clubes_participantes = [] 
 			@clubes_faltantes = []
 			@club = 0

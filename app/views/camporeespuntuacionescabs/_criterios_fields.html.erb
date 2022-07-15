@@ -5,11 +5,19 @@
 	<% i = 0 %>
 	<% e = 0 %>
 	<% if current_user.usersdefault.massive_event_register %>
-		<div class = "row mt-4 mb-4">
-			<div class = "col-1">Modo Registro</div>
-			<div class = "col-4"><%= select_tag :modo_registro, options_for_select([['Normal', 1], ['Masivo', 2]]), { class: "form-control selectpicker" } %></div>
+		<div class = "col-6">
+			<div class = "row mt-4">
+				<div class = "col-2">Modo Registro</div>
+				<div class = "col-4"><%= select_tag :modo_registro, options_for_select([['Normal', 1], ['Masivo', 2]]), { class: "form-control selectpicker" } %></div>
+			</div>
 		</div>
 	<% end %>
+	<div class = "col-6">
+		<div class = "row mt-3">
+			<div class = "col-2">Juez Evaluador</div>
+			<div class = "col-4"><%= select_tag :camporee_judge_id, options_from_collection_for_select(@judges, :id, :name), { class: "form-control selectpicker", prompt: '', "data-live-search": "true" } %></div>
+		</div>
+	</div>
 	<div class = "mt-2">
 		<% @criterios_cab.each do |c| %>
 			<%= hidden_field_tag 'idCab', c.id, :name=> "criterio_cabeza"+"["+"tmpcabeza"+"]"+"["+i.to_s+"]"+"camporeeseventoscriterioscab_id", :class => 'cabeza' %>
@@ -63,9 +71,14 @@
 		</div>
 		<%= hidden_field_tag 'valueI', i.to_s %>
 		<%= hidden_field_tag 'valueE', e.to_s %>
-		<button type = "submit" class = "btn btn-success" data-disable-with="Espere...">Agregar</button>
+		<div class = "col-5">
+			<div class = "row mt-3 ml-2">
+				<div class = "col-1">
+					<button type = "submit" class = "btn btn-success" data-disable-with="Espere...">Agregar</button>
+				</div>
+			</div>
+		</div>
 	</div>
-
 	<script>
 		function updateGradesTotal(){
 			total = 0;

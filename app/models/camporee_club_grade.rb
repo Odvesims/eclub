@@ -39,4 +39,14 @@ class CamporeeClubGrade < ActiveRecord::Base
     category.nombre
   end
 
+  def judge_name
+    judge = CamporeeJudge.find(self.camporee_judge_id)
+    judge.name
+  end
+
+  def registered_by
+    user = User.where("login = '#{self.updated_by}'").first
+    user.name
+  end
+
 end

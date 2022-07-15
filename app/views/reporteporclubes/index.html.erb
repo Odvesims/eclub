@@ -34,3 +34,9 @@
 	<hr id = "lineBreak">
 	<div id = "clubes"><%= render 'listado_clubes' %></div>
 </div>
+
+<% if current_user.accessLevel == 'LC' %>
+	<script defer>
+		filtroReportes();
+	</script>
+<% end %>
