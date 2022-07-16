@@ -15,7 +15,10 @@
 				<% if (index == 0) or (index > 0 and @iglesias[index - 1].zona_id != c.zona_id) %>
 					<% zona = Zona.find(c.zona_id) %>
 					<tr><td colspan = "2" class = "mt-2"></td></tr>
-					<tr class = "bg-info text-white"><td colspan = "2"><h3><b><%= zona.nombre %></b></h3></td></tr>
+					<tr class = "bg-info text-white">
+						<td><h3><b><%= zona.nombre %></b></h3></td>
+						<td><%= zona.accessUser %></td>
+					</tr>
 					<tr><td colspan = "2" class = "mb-2"></td></tr>
 				<% end %>
 				<% if (index == 0) or (index > 0 and @iglesias[index - 1].distrito_id != c.distrito_id) %>
@@ -38,3 +41,29 @@
 		</tbody>
 	</table>
 </div>
+
+
+<script>
+	function generateZoneUser(btn, zone_id){
+		data_object = { service: 'GenerateZoneUser', zone_id: zone_id };
+		$.ajax({
+			type: "GET",
+			url: "/services_broker/show",
+			data: data_object,
+			success: (res) => {
+				if(res.valid){
+					$(btn).removeClass("btn-secondary");
+					$(btn).addClass("btn-success");
+					$(btn).html('Ver Usuario')
+					alert("Usuario Generado");
+				} else {
+					alert(`login: ${res.user} \npassword: ${res.password}`)
+				}
+			}
+		});
+	}
+
+	function viewUser(user, password){
+		alert(`login: ${user} \npassword: ${password}`)
+	}
+</script>

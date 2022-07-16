@@ -91,10 +91,14 @@ module SessionsHelper
 			false
 		else
 			access_control = AccessControl.first
-			user_role = current_user.usersdefault.rol_id
-			if user_role > access_control.minimum_level && controler != 'access_control'
-				redirect_to access_restricted_url, notice: "El acceso está restringido para su nivel de usuario. Intente más tarde."
-				false
+			if access_control.status == true
+				user_role = current_user.usersdefault.rol_id
+				if user_role > access_control.minimum_level && controler != 'access_control'
+					redirect_to access_restricted_url, notice: "El acceso está restringido para su nivel de usuario. Intente más tarde."
+					false
+				else
+					true
+				end
 			else
 				true
 			end

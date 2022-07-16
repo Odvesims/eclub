@@ -53,4 +53,14 @@ class Zona < ActiveRecord::Base
 	def available_churches(club_type)
 		Iglesia.where("iglesias.zona_id = #{self.id} AND id NOT IN (SELECT iglesia_id FROM iglesiasclubes WHERE clubestipo_id = #{club_type})").all
 	end
+
+	def accessUser
+		user = User.where("id IN (SELECT user_id FROM users_defaults WHERE access_level = 'ZN' AND access_id = #{self.id})").first
+		if user == nil
+			return "<button class = 'btn btn-secondary' type = 'button' onClick='generateZoneUser(this, #{self.id})'>Generar Usuario</button>".html_safe
+		else
+			return "<button class = 'btn btn-success' type = 'button' onClick='viewUser(`#{user.login}`, `#{user.plain_text_initial_password}`)'>Ver Usuario</button>".html_safe
+		end
+	end
+
 end
