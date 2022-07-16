@@ -77,6 +77,11 @@ class GenerateClubUserService
 				user_defaults.rol_id = 4
 				user_defaults.zone_id = zone_id
 				user_defaults.save!
+
+				user_role = Usersrol.new
+				user_role.user_id = new_user.id
+				user_role.rol_id = 4
+				user_role.save!
 			end
 		  { valid: true, message: "" }
 	  rescue Exception => e
