@@ -33,6 +33,11 @@ class GenerateClubUserService
 			else
 				login = club_pure_name.downcase.parameterize;
 			end
+			begin
+			  login = login.split("(")
+			  login = login[0]
+			rescue
+			end
 			user_exists = false
 			user = User.where("login = '#{login}'").first
 			if user != nil
