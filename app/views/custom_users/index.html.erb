@@ -1,0 +1,59 @@
+
+<% @roles = Rol.all.order("id ASC").all %>
+<% @zones = Zona.where("campo_id = #{current_user.default_conference}").order("zona_id ASC") %>
+<form id = "custom_user_form">
+  <ul class="nav nav-tabs" id = "tabMain">
+    <li class="active"><a id = "tabHead", data-toggle="tab" href="#home"><h3>Crear Usuario</h3></a></li>
+  </ul>
+  <div class="tab-content">
+    <div class = "row mt-2 ml-3">
+      <div class = "col-md-4"><h5>Nivel</h5></div>
+      <div class = "col-md-2"><%= select_tag :access_level, options_for_select([['Administrador', 'AD'], ['Departamento JA', 'PT'], ['Cómputo', 'CP']]), { id: "access_level", class: "form-control selectpicker"} %></div>
+    </div>
+    <div class = "row mt-2 ml-3">
+      <div class = "col-md-4"><h5>Nivel ID</h5></div>
+      <div class = "col-md-2"><%= number_field_tag :access_id, "", { id: "access_id", class: "form-control" } %></div>
+    </div>
+    <div class = "row mt-2 ml-3">
+      <div class = "col-md-4"><h5>Login</h5></div>
+      <div class = "col-md-2"><%= text_field_tag :login, "", { id: "login", class: "form-control"} %></div>
+    </div>
+    <div class = "row mt-2 ml-3">
+      <div class = "col-md-4"><h5>Password</h5></div>
+      <div class = "col-md-2"><%= text_field_tag :password, "", { id: "password", class: "form-control"} %></div>
+    </div>
+    <div class = "row mt-2 ml-3">
+      <div class = "col-md-4"><h5>Nombre</h5></div>
+      <div class = "col-md-2"><%= text_field_tag :name, "", { id: "name", class: "form-control"} %></div>
+    </div>
+    <div class = "row mt-2 ml-3">
+      <div class = "col-md-4"><h5>Rol Principal</h5></div>
+      <div class = "col-md-2"><%= select_tag :rol_id, options_from_collection_for_select(@roles, :id, :descripcion), { id: "rol_id", multiple: false, class: "form-control selectpicker" } %></div>
+    </div>
+    <div class = "row mt-2 ml-3">
+      <div class = "col-md-4"><h5>Roles Extras</h5></div>
+      <div class = "col-md-2"><%= select_tag :roles, options_from_collection_for_select(@roles, :id, :descripcion), { id: "roles", multiple: true, class: "form-control selectpicker" } %></div>
+    </div>
+    <div class = "row mt-2 ml-3">
+      <div class = "col-md-4"><h5>Zona</h5></div>
+      <div class = "col-md-2"><%= select_tag :zone_id, options_from_collection_for_select(@zones, :zona_id, :nombre), { id: "zone_id", multiple: false, class: "form-control selectpicker" } %></div>
+    </div>
+    <div class = "row mt-2 ml-3">
+      <div class = "col-md-4"><h5>Administrador?</h5></div>
+      <div class = "col-md-2"><%= select_tag :administrator, options_for_select([['No', false], ['Si', true]]), { id: "administrator", class: "form-control selectpicker"} %></div>
+    </div>
+    <div class = "row mt-2 ml-3"><div class "col-md"><button class = "btn btn-primary" type = "button" onClick="generateCustomUser()">Ejecutar</div>
+  </div>
+</form>
+<script>
+  function generateCustomUser(){
+    form = $("#custom_user_form");
+    data = form.serializeArray();
+    $.ajax(
+		{  
+			type: "GET",  
+			url: "/custom_users/show",  
+			data: data
+    }); 
+  }
+</script>

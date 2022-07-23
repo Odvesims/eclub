@@ -32,7 +32,7 @@
 				<% end %>
 				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reportes</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<% if current_user.usersdefault.access_level != 'LC' and current_user.usersdefault.access_level != 'ZN' and current_user.usersdefault.access_level != 'PT' %>
+						<% if current_user.usersdefault.access_level != 'LC' and current_user.usersdefault.access_level != 'ZN' %>
 							<a class="dropdown-item" href="/reportegeneral">Reporte General</a>
 							<a class="dropdown-item" href="/listadoclubes">Clubes en Camporee</a>
 							<a class="dropdown-item" href="/reporteparticipacionporeventos">Participación x Eventos</a>

@@ -41,6 +41,7 @@ DeboxionApp::Application.routes.draw do
 	resources :services_broker
 	resources :access_by_zone_list
 	resources :access_control
+	resources :custom_users
 
 	get '/',  to: 'sessions#new'
 	get '/signin',  to: 'sessions#new'
