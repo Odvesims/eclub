@@ -18,20 +18,23 @@
 		<% reported_clubs = 0 %>
 		<% total_points = 0 %>
 		<% @club_grades.each_with_index do |c, index| %>
-			<% club = Iglesiasclube.find(c.club_id) %>
-			<% if club.clubestipo_id != current_user.club_type %>
-				<% next %>
+			<% begin %>
+				<% club = Iglesiasclube.find(c.club_id) %>
+				<% if club.clubestipo_id != current_user.club_type %>
+					<% next %>
+				<% end %>
+				<% category = getCamporeeCategory(c.camporee_id, c.total_points) %>
+				<tr style = "background-color: #<%= category.color %>">
+					<td><%= club.zonaSigla %></td>
+					<td><%= c.club_name %></td>
+					<td><%= c.church_name %></td>
+					<td><%= number_to_currency(c.total_points, unit: "") %></td>
+					<td><%= category.nombre %></td>
+				</tr>
+				<% reported_clubs += 1 %>
+				<% total_points += c.total_points.to_f %>
+			<% rescue %>
 			<% end %>
-			<% category = getCamporeeCategory(c.camporee_id, c.total_points) %>
-			<tr style = "background-color: #<%= category.color %>">
-				<td><%= club.zonaSigla %></td>
-				<td><%= c.club_name %></td>
-				<td><%= c.church_name %></td>
-				<td><%= number_to_currency(c.total_points, unit: "") %></td>
-				<td><%= category.nombre %></td>
-			</tr>
-			<% reported_clubs += 1 %>
-			<% total_points += c.total_points.to_f %>
 		<% end %>
 		<% average_points = total_points / reported_clubs %>
 		<% average_category = getCamporeeCategory(@club_grades[0].camporee_id, average_points) %>

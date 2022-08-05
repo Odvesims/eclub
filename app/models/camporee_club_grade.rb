@@ -7,14 +7,22 @@ class CamporeeClubGrade < ActiveRecord::Base
   end
 
   def zone_name
+    begin
     club = Iglesiasclube.find(self.club_id)
     zone = Zona.find(club.zona_id)
     zone.nombre
+    rescue 
+      false
+    end
   end
 
   def club_name
+    begin
     club = Iglesiasclube.find(self.club_id)
     club.nombre
+    rescue
+      false
+    end
   end
 
   def conference_name

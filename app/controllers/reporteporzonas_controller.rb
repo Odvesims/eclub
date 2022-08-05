@@ -13,7 +13,7 @@ class ReporteporzonasController < ApplicationController
 			if params[:zona] == '' || params[:zona] == 0
 				@clubespuntos = nil
 			else
-				@clubespuntos = CamporeeClubGrade.where("camporee_id = #{current_user.default_camporee} AND zone_id = #{params[:zona]}").all.order("zone_id ASC, event_id ASC")			
+				@clubespuntos = CamporeeClubGrade.where("camporee_id = #{current_user.default_camporee} AND zone_id = #{params[:zona]} AND club_id IN (SELECT id FROM iglesiasclubes WHERE clubestipo_id = 2)").all.order("zone_id ASC, event_id ASC")			
 				#@clubespuntos = Camporeespuntuacionescab.where("camporee_id = #{current_user.default_camporee} AND zona_id = #{params[:zona]}").select("camporee_id, iglesiasclube_id, camporeerenglone_id, camporeesevento_id, sum(total_puntos) as total_puntos").group("camporee_id, iglesiasclube_id, camporeerenglone_id, camporeesevento_id").order("camporeerenglone_id, camporeesevento_id")
 				@zona = Zona.find(params[:zona])
 				@campo = Campo.find(@zona.campo_id)

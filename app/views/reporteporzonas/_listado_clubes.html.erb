@@ -20,35 +20,37 @@
 			<% i = 0 %>
 			<% a = 0 %>
 			<% @clubespuntos.each do |c| %>
-				<% if i > 0 %>
-					<% if c.event_id != @clubespuntos[i - 1].event_id %>
-						<tr style = "background-color: #F8CD67">
-							<td style = "text-align: right;"></td>
-							<td style = "text-align: left;"><b>Total Clubes Presentes en el Evento:</td>
-							<td style = "text-align: right;"><b><%= a %></td>
-							<% a = 0 %>
-						</tr>
-						<tr><td colspan = "3" style = "border: 0px"></td></tr>
-						<tr><td colspan = "3" style = "border: 0px"></td></tr>
-						<tr><td colspan = "3" style = "border: 0px"></td></tr>
-						<tr style = "background-color: #9AE2F2">
-							<td style = "width: 25%;"><b>Club</td>
-							<td style = "width: 35%;"><b>Evento: <%= c.event_name %></td>
-							<td style = "width: 25%; text-align: right"><b>Puntuación</td>
-						</tr>
-					<% end %>
-				<% end %>
 				<% begin %>
-					<tr>
-						<td style = "width: 25%;"><%= c.club_name %></td>
-						<td style = "width: 35%;"><%= c.event_name %></td>
-						<td style = "width: 25%; text-align: right;"><%= number_to_currency(c.total_points, unit: "")%></td>
-					</tr>
-					<% a += 1 %>
-					<% i += 1 %>
-					<% total_club += c.total_points.to_f %>
-				<% rescue %>
-				   <% next %>
+					<% if i > 0 %>
+						<% if c.event_id != @clubespuntos[i - 1].event_id %>
+							<% arr_clubs = [] %>
+							<tr style = "background-color: #F8CD67">
+								<td style = "text-align: right;"></td>
+								<td style = "text-align: left;"><b>Total Clubes Presentes en el Evento:</td>
+								<td style = "text-align: right;"><b><%= a %></td>
+								<% a = 0 %>
+							</tr>
+							<tr><td colspan = "3" style = "border: 0px"></td></tr>
+							<tr><td colspan = "3" style = "border: 0px"></td></tr>
+							<tr><td colspan = "3" style = "border: 0px"></td></tr>
+							<tr style = "background-color: #9AE2F2">
+								<td style = "width: 25%;"><b>Club</td>
+								<td style = "width: 35%;"><b>Evento: <%= c.event_name %></td>
+								<td style = "width: 25%; text-align: right"><b>Puntuación</td>
+							</tr>
+						<% end %>
+					<% end %>
+						<tr>
+							<td style = "width: 25%;"><%= c.club_name %></td>
+							<td style = "width: 35%;"><%= c.event_name %></td>
+							<td style = "width: 25%; text-align: right;"><%= number_to_currency(c.total_points, unit: "")%></td>
+						</tr>
+						<% a += 1 %>
+						<% i += 1 %>
+						<% total_club += c.total_points.to_f %>
+					<% rescue Exception => e %>
+						<% Rails.logger.debug("error #{e.message}")%>
+				  	<% next %>
 				<% end %>
 			<% end %>
 		<% end %>
