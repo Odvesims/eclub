@@ -42,8 +42,11 @@
 								<% end %>
 								<%= hidden_field_tag 'idDet', d.id, :name=> "criterio_detalles"+"["+"tmpdetalles"+"]"+"["+e.to_s+"]"+"camporeeseventoscriteriosdet_id", :class => 'detalle' %>
 								<% max_points = 0 %>
+								<% min_points = 0 %>
 								<% if d.puntos.to_i > 0 %>	
 									<% max_points = d.puntos.to_i %>
+								<% else %>
+									<% min_points = d.puntos.to_i %>
 								<% end %>
 								<tr>
 									<td><%= d.nombre %></td>						 
