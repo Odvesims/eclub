@@ -87,8 +87,10 @@ class GenerateClubUserService
 				user_role.user_id = new_user.id
 				user_role.rol_id = 4
 				user_role.save!
+				{ valid: true, message: "" }
+			else
+				user_exists = true
 			end
-		  { valid: true, message: "" }
 	  rescue Exception => e
       Rails.logger.debug("Error: #{e.message}")
 		  { valid: false, message: e.message }
