@@ -1,7 +1,7 @@
 class CamporeeseventosController < ApplicationController
 	def index
 		if signed_granted?(current_user.id, 'camporeeseventos', 'I')
-			@camporeeseventos = Camporeesevento.where("camporee_id = #{current_user.default_camporee}").all
+			@camporeeseventos = Camporeesevento.where("camporee_id = #{current_user.default_camporee}").order("camporeesrenglone_id ASC").all
 		end
 	end
 	

@@ -9,6 +9,9 @@
 		<% if @zone_event %>
 			alert("Este evento es zonal. Solo se requiere un registro por zona")
 		<% end %>
+		<% if @district_event %>
+			alert("Este evento es distrital. Solo se requiere un registro por distrito")
+		<% end %>
 		<% if @criterios_cab != nil %>
 			<% if @evento_registrado %>
 				alert("Ya existe un registro para este Club en este evento")
